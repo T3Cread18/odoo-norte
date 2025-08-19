@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista de formulario para configuración -->
+        <record id="view_smartolt_config_form" model="ir.ui.view">
+            <field name="name">smartolt.config.form</field>
+            <field name="model">smartolt.config</field>
+            <field name="arch" type="xml">
+                <form string="Configuración de SmartOLT">
+                    <header>
+                        <button name="action_test_connection" string="Probar Conexión" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Nombre de la Configuración"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Configuración de API" name="api_config">
+                                <field name="api_url" placeholder="https://api.smartolt.com"/>
+                                <field name="api_token" password="True" placeholder="Ingrese su token de API"/>
+                            </group>
+                            <group string="Configuración de Conexión" name="connection_config">
+                                <field name="timeout"/>
+                                <field name="max_retries"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Sincronización" name="sync_config">
+                                <field name="auto_sync_enabled"/>
+                                <field name="sync_interval" attrs="{'invisible': [('auto_sync_enabled', '=', False)]}"/>
+                            </group>
+                            <group string="Logging" name="logging_config">
+                                <field name="debug_mode"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Información de Ayuda">
+                                <div class="alert alert-info" role="alert">
+                                    <h4>Configuración de la API</h4>
+                                    <p><strong>URL de la API:</strong> Ingrese la URL base de la API de SmartOLT.</p>
+                                    <p><strong>Token de API:</strong> Ingrese su token de autenticación proporcionado por SmartOLT.</p>
+                                    <p><strong>Timeout:</strong> Tiempo máximo de espera para las peticiones HTTP (en segundos).</p>
+                                    <p><strong>Máximo de reintentos:</strong> Número de veces que se reintentará una petición fallida.</p>
+                                    <br/>
+                                    <h4>Ejemplo de URL válida:</h4>
+                                    <ul>
+                                        <li>https://api.smartolt.com</li>
+                                        <li>https://smartolt.example.com/api</li>
+                                        <li>http://192.168.1.100:8080</li>
+                                    </ul>
+                                    <br/>
+                                    <p><strong>Nota:</strong> Use el botón "Probar Conexión" para verificar que la configuración sea correcta.</p>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vista de árbol para configuración -->
+        <record id="view_smartolt_config_tree" model="ir.ui.view">
+            <field name="name">smartolt.config.tree</field>
+            <field name="model">smartolt.config</field>
+            <field name="arch" type="xml">
+                <tree string="Configuraciones de SmartOLT">
+                    <field name="name"/>
+                    <field name="api_url"/>
+                    <field name="timeout"/>
+                    <field name="auto_sync_enabled"/>
+                    <field name="debug_mode"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de búsqueda para configuración -->
+        <record id="view_smartolt_config_search" model="ir.ui.view">
+            <field name="name">smartolt.config.search</field>
+            <field name="model">smartolt.config</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Configuraciones">
+                    <field name="name"/>
+                    <field name="api_url"/>
+                    <filter string="Sincronización Automática" name="auto_sync" domain="[('auto_sync_enabled', '=', True)]"/>
+                    <filter string="Modo Debug" name="debug_mode" domain="[('debug_mode', '=', True)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción para configuración -->
+        <record id="action_smartolt_config" model="ir.actions.act_window">
+            <field name="name">Configuración de SmartOLT</field>
+            <field name="res_model">smartolt.config</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Configure la integración con SmartOLT
+                </p>
+                <p>
+                    Configure la URL de la API, token de autenticación y parámetros de conexión
+                    para integrar Odoo con SmartOLT.
+                </p>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

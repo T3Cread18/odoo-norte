@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de formulario para Wizard de Sincronización por Board -->
+    <record id="view_smartolt_sync_board_wizard_form" model="ir.ui.view">
+        <field name="name">smartolt.sync.board.wizard.form</field>
+        <field name="model">smartolt.sync.board.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sincronizar ONUs por Board">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="olt_id" readonly="1"/>
+                            <field name="olt_olt_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="board"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_sync_onus_by_board" string="Sincronizar ONUs" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

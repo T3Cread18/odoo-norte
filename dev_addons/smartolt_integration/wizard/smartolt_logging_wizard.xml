@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de formulario para Wizard de Configuración de Logging -->
+    <record id="view_smartolt_logging_wizard_form" model="ir.ui.view">
+        <field name="name">smartolt.logging.wizard.form</field>
+        <field name="model">smartolt.logging.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Configuración de Logging de SmartOLT">
+                <sheet>
+                    <group>
+                        <group string="Configuración General">
+                            <field name="log_level"/>
+                        </group>
+                        <group string="Destinos de Log">
+                            <field name="enable_console_logging"/>
+                            <field name="enable_file_logging"/>
+                        </group>
+                    </group>
+                    <group string="Configuración de Archivo" attrs="{'invisible': [('enable_file_logging', '=', False)]}">
+                        <field name="log_file_path"/>
+                    </group>
+                    <div class="alert alert-info" role="alert">
+                        <strong>Información:</strong> Los cambios en el logging se aplican inmediatamente.
+                        El nivel DEBUG proporciona información muy detallada para debugging.
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="action_test_logging" string="Probar Logging" type="object" class="btn-secondary"/>
+                    <button name="action_clear_logs" string="Limpiar Logs" type="object" class="btn-warning" 
+                            attrs="{'invisible': [('enable_file_logging', '=', False)]}"/>
+                    <button name="action_apply_logging_config" string="Aplicar Configuración" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

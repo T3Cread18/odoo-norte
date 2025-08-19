@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_account_payable_crm","accounts_payable_crm","model_accounts_payable_crm","base.group_user",1,0,0,0
+"account_payment_register_commission","account_payment_register_commission","model_account_payment_register_commission","base.group_user",1,1,1,1

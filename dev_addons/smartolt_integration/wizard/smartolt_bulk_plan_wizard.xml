@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Vista del wizard para gestión masiva de planes -->
+    <record id="view_smartolt_bulk_plan_wizard_form" model="ir.ui.view">
+        <field name="name">smartolt.bulk.plan.wizard.form</field>
+        <field name="model">smartolt.bulk.plan.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Gestión Masiva de Planes de Velocidad">
+                
+                <!-- Estado: Seleccionar ONUs -->
+                <div attrs="{'invisible': [('state', '!=', 'select')]}">
+                    <div class="oe_title">
+                        <h1>🔍 Seleccionar ONUs</h1>
+                        <p>Configure los filtros para seleccionar las ONUs que desea modificar.</p>
+                    </div>
+                    
+                    <group>
+                        <group string="Filtros de Selección">
+                            <field name="olt_id" options="{'no_create': True, 'no_edit': True}"/>
+                            <field name="zone_prefix" required="1"/>
+                            <field name="current_plan_filter" placeholder="ej: GUA-FTTH-RES-100M"/>
+                            <field name="current_plan_speed_mb" placeholder="ej: 100 (busca 100M en download)" string="Velocidad Descarga Actual (MB)"/>
+                        </group>
+                        <group string="Nuevo Plan">
+                            <field name="new_speed_mb" required="1" string="Nueva Velocidad DESCARGA (MB)"/>
+                            <field name="upload_speed_profile" readonly="1" string="Subida (Mitad Auto)"/>
+                            <field name="download_speed_profile" readonly="1" string="Bajada (Auto)"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Velocidades Personalizadas">
+                        <field name="enable_custom_speeds" string="Habilitar Personalización"/>
+                        <group attrs="{'invisible': [('enable_custom_speeds', '=', False)]}">
+                            <field name="custom_upload_speed" placeholder="ej: GUA-FTTH-RES-50M" string="Velocidad Subida Personalizada"/>
+                            <field name="custom_download_speed" placeholder="ej: GUA-FTTH-RES-100M" string="Velocidad Bajada Personalizada"/>
+                        </group>
+                    </group>
+                </div>
+                
+                <!-- Estado: Confirmar Cambios -->
+                <div attrs="{'invisible': [('state', '!=', 'confirm')]}">
+                    <div class="oe_title">
+                        <h1>✅ Confirmar Cambios</h1>
+                        <p>Revise las ONUs seleccionadas y confirme el cambio de plan.</p>
+                    </div>
+                    
+                    <group>
+                        <group string="Resumen de Cambios">
+                            <field name="onu_count" readonly="1"/>
+                            <field name="upload_speed_profile" readonly="1" string="Subida (Mitad)"/>
+                            <field name="download_speed_profile" readonly="1" string="Bajada (Completa)"/>
+                        </group>
+                        <group string="Velocidades Finales a Aplicar">
+                            <field name="custom_upload_speed" string="Subida Final"/>
+                            <field name="custom_download_speed" string="Bajada Final"/>
+                        </group>
+                    </group>
+                    
+                    <group string="ONUs Seleccionadas">
+                        <field name="onu_ids" readonly="1">
+                            <tree>
+                                <field name="external_id"/>
+                                <field name="serial_number"/>
+                                <field name="name"/>
+                                <field name="olt_id"/>
+                                <field name="service_port_upload_speed"/>
+                                <field name="service_port_download_speed"/>
+                            </tree>
+                        </field>
+                    </group>
+                </div>
+                
+                <!-- Estado: Completado -->
+                <div attrs="{'invisible': [('state', '!=', 'done')]}">
+                    <div class="oe_title">
+                        <h1>🎉 Proceso Completado</h1>
+                        <p>El cambio masivo de planes ha sido procesado.</p>
+                    </div>
+                    
+                    <group>
+                        <group string="Resultados">
+                            <field name="success_count" readonly="1"/>
+                            <field name="error_count" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Detalles">
+                        <field name="result_message" readonly="1" widget="text"/>
+                    </group>
+                </div>
+                
+                <!-- Campo state oculto -->
+                <field name="state" invisible="1"/>
+                
+                <footer>
+                    <!-- Botones para estado 'select' -->
+                    <div attrs="{'invisible': [('state', '!=', 'select')]}">
+                        <button string="🔍 Buscar ONUs" name="action_search_onus" type="object" class="btn-primary"/>
+                        <button string="🐛 Debug Velocidades" name="action_debug_speeds" type="object" class="btn-info"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </div>
+                    
+                    <!-- Botones para estado 'confirm' -->
+                    <div attrs="{'invisible': [('state', '!=', 'confirm')]}">
+                        <button string="🚀 Ejecutar Cambios" name="action_update_plans" type="object" class="btn-primary"/>
+                        <button string="← Volver" name="action_back_to_select" type="object" class="btn-secondary"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </div>
+                    
+                    <!-- Botones para estado 'done' -->
+                    <div attrs="{'invisible': [('state', '!=', 'done')]}">
+                        <button string="Cerrar" name="action_close" type="object" class="btn-primary"/>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Acción para el wizard -->
+    <record id="action_smartolt_bulk_plan_wizard" model="ir.actions.act_window">
+        <field name="name">Gestión Masiva de Planes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">smartolt.bulk.plan.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_smartolt_bulk_plan_wizard_form"/>
+    </record>
+    
+</odoo>

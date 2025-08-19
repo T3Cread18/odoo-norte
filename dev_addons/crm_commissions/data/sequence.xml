@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="seq_account_sale_order_payment" model="ir.sequence">
+        <field name="name">cobranza venta</field>
+        <field name="code">payment.sale.order</field>
+        <field name="prefix">PS</field>
+        <field name="padding">5</field>
+        <field eval="1" name="number_next" />
+        <field eval="1" name="number_increment" />
+        <field eval="True" name="use_date_range" />
+        <!-- <field name="company_id" eval="False"/> -->
+    </record>
+
+    <record id="seq_account_payment_commission" model="ir.sequence">
+        <field name="name">pago comiciones</field>
+        <field name="code">payment.commission</field>
+        <field name="prefix">PC</field>
+        <field name="padding">5</field>
+        <field eval="1" name="number_next" />
+        <field eval="1" name="number_increment" />
+        <field eval="True" name="use_date_range" />
+        <!-- <field name="company_id" eval="False"/> -->
+    </record>
+
+</odoo>

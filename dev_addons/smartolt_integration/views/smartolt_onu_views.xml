@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de formulario para ONUs -->
+    <record id="view_smartolt_onu_form" model="ir.ui.view">
+        <field name="name">smartolt.onu.form</field>
+        <field name="model">smartolt.onu</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- Botones de acción se agregarán cuando se implementen los métodos correspondientes -->
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre de la ONU"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Información Básica">
+                            <field name="external_id"/>
+                            <field name="serial_number"/>
+                            <field name="onu_type"/>
+                            <field name="pon_type"/>
+                            <field name="olt_id"/>
+                            <field name="zone_id"/>
+                            <field name="speed_profile_id"/>
+                        </group>
+                        <group string="Estado y Configuración">
+                            <field name="status"/>
+                            <field name="administrative_status"/>
+                            <field name="catv"/>
+                            <field name="auth_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Ubicación Física">
+                            <field name="board"/>
+                            <field name="port"/>
+                            <field name="allocated_onu"/>
+                            <field name="port_location"/>
+                            <field name="address"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                        <group string="ODB (Splitter)">
+                            <field name="odb_splitter"/>
+                            <field name="odb_port"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Señal y Distancia">
+                            <field name="signal"/>
+                            <field name="signal_1310"/>
+                            <field name="signal_1490"/>
+                            <field name="distance"/>
+                        </group>
+                        <group string="Configuración de Red">
+                            <field name="mode"/>
+                            <field name="wan_mode"/>
+                            <field name="ip_address"/>
+                            <field name="subnet_mask"/>
+                            <field name="default_gateway"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Servicios DNS">
+                            <field name="dns1"/>
+                            <field name="dns2"/>
+                        </group>
+                        <group string="Autenticación">
+                            <field name="username"/>
+                            <field name="password"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Puerto de Servicio">
+                            <field name="service_port"/>
+                            <field name="service_port_vlan"/>
+                            <field name="service_port_cvlan"/>
+                            <field name="service_port_svlan"/>
+                            <field name="service_port_tag_transform_mode"/>
+                        </group>
+                        <group string="Velocidades del Plan">
+                            <field name="service_port_download_speed"/>
+                            <field name="service_port_upload_speed"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Información de Contacto">
+                            <field name="contact"/>
+                        </group>
+                        <group string="Auditoría">
+                            <field name="last_sync_date"/>
+                            <field name="notes"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de lista para ONUs -->
+    <record id="view_smartolt_onu_tree" model="ir.ui.view">
+        <field name="name">smartolt.onu.tree</field>
+        <field name="model">smartolt.onu</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="external_id"/>
+                <field name="serial_number"/>
+                <field name="onu_type"/>
+                <field name="olt_id"/>
+                <field name="board"/>
+                <field name="port"/>
+                <field name="allocated_onu"/>
+                <field name="port_location"/>
+                <field name="status"/>
+                <field name="signal"/>
+                <field name="signal_1310"/>
+                <field name="signal_1490"/>
+                <field name="distance"/>
+                <field name="service_port_download_speed"/>
+                <field name="service_port_upload_speed"/>
+                <field name="last_sync_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de búsqueda para ONUs -->
+    <record id="view_smartolt_onu_search" model="ir.ui.view">
+        <field name="name">smartolt.onu.search</field>
+        <field name="model">smartolt.onu</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="external_id"/>
+                <field name="serial_number"/>
+                <field name="onu_type"/>
+                <field name="olt_id"/>
+                <field name="zone_id"/>
+                <field name="status"/>
+                <field name="signal"/>
+                <field name="address"/>
+                <field name="service_port_download_speed"/>
+                <field name="service_port_upload_speed"/>
+                <filter string="Online" name="online" domain="[('status', '=', 'Online')]"/>
+                <filter string="Offline" name="offline" domain="[('status', '=', 'Offline')]"/>
+                <filter string="LOS" name="los" domain="[('status', '=', 'LOS')]"/>
+                <filter string="Power Fail" name="power_fail" domain="[('status', '=', 'Power fail')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="OLT" name="group_by_olt" context="{'group_by': 'olt_id'}"/>
+                    <filter string="Zona" name="group_by_zone" context="{'group_by': 'zone_id'}"/>
+                    <filter string="Board" name="group_by_board" context="{'group_by': 'board'}"/>
+                    <filter string="Puerto" name="group_by_port" context="{'group_by': 'port'}"/>
+                    <filter string="Estado" name="group_by_status" context="{'group_by': 'status'}"/>
+                    <filter string="Señal" name="group_by_signal" context="{'group_by': 'signal'}"/>
+                    <filter string="Tipo ONU" name="group_by_onu_type" context="{'group_by': 'onu_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+</odoo>

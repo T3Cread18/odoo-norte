@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de formulario para OLTs -->
+    <record id="view_smartolt_olt_form" model="ir.ui.view">
+        <field name="name">smartolt.olt.form</field>
+        <field name="model">smartolt.olt</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_get_system_info" string="Obtener Info Sistema" type="object" class="btn-secondary"/>
+                    <button name="action_get_olt_status" string="Obtener Estado" type="object" class="btn-secondary"/>
+                    <button name="action_sync_onus_by_olt" string="Sincronizar ONUs del OLT" type="object" class="btn-primary"/>
+                    <button name="action_sync_onus_by_board" string="Sincronizar ONUs por Board" type="object" class="btn-info"/>
+                    <button name="action_sync_onus_by_port" string="Sincronizar ONUs por Puerto" type="object" class="btn-warning"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del OLT"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="olt_id"/>
+                            <field name="ip_address"/>
+                            <field name="model"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="location"/>
+                            <field name="description"/>
+                            <field name="firmware_version"/>
+                            <field name="hardware_version"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="ONUs" name="onus">
+                            <field name="onu_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="serial_number"/>
+                                    <field name="status"/>
+                                    <field name="signal_1310"/>
+                                    <field name="distance"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Zonas" name="zones">
+                            <field name="zone_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <field name="status"/>
+                                    <field name="location"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de lista para OLTs -->
+    <record id="view_smartolt_olt_tree" model="ir.ui.view">
+        <field name="name">smartolt.olt.tree</field>
+        <field name="model">smartolt.olt</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="olt_id"/>
+                <field name="ip_address"/>
+                <field name="model"/>
+                <field name="status"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de búsqueda para OLTs -->
+    <record id="view_smartolt_olt_search" model="ir.ui.view">
+        <field name="name">smartolt.olt.search</field>
+        <field name="model">smartolt.olt</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="olt_id"/>
+                <field name="ip_address"/>
+                <field name="model"/>
+                <filter string="En Línea" name="online" domain="[('status', '=', 'online')]"/>
+                <filter string="Desconectado" name="offline" domain="[('status', '=', 'offline')]"/>
+                <filter string="Mantenimiento" name="maintenance" domain="[('status', '=', 'maintenance')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Estado" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="Modelo" name="group_model" context="{'group_by': 'model'}"/>
+                    <filter string="Ubicación" name="group_location" context="{'group_by': 'location'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+</odoo>

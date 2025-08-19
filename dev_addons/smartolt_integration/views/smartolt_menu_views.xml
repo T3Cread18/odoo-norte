@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Acción para OLTs -->
+        <record id="action_smartolt_olt" model="ir.actions.act_window">
+            <field name="name">OLTs</field>
+            <field name="res_model">smartolt.olt</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer OLT
+                </p>
+                <p>
+                    Los OLTs (Optical Line Terminals) son los dispositivos principales de la red GPON.
+                    Aquí puedes gestionar toda la información de tus OLTs.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para ONUs -->
+        <record id="action_smartolt_onu" model="ir.actions.act_window">
+            <field name="name">ONUs</field>
+            <field name="res_model">smartolt.onu</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primera ONU
+                </p>
+                <p>
+                    Las ONUs (Optical Network Units) son los dispositivos de cliente que se conectan a la red GPON.
+                    Aquí puedes gestionar toda la información de tus ONUs.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Zonas -->
+        <record id="action_smartolt_zone" model="ir.actions.act_window">
+            <field name="name">Zonas</field>
+            <field name="res_model">smartolt.zone</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primera zona
+                </p>
+                <p>
+                    Las zonas organizan geográficamente tu red GPON.
+                    Aquí puedes gestionar la información de tus zonas.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para ODBs -->
+        <record id="action_smartolt_odb" model="ir.actions.act_window">
+            <field name="name">ODBs</field>
+            <field name="res_model">smartolt.odb</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer ODB
+                </p>
+                <p>
+                    Los ODBs (Optical Distribution Boxes) son cajas de distribución óptica.
+                    Aquí puedes gestionar la información de tus ODBs.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acciones para perfiles de velocidad y VLANs -->
+        <record id="action_smartolt_speed_profile" model="ir.actions.act_window">
+            <field name="name">Perfiles de Velocidad</field>
+            <field name="res_model">smartolt.speed_profile</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer perfil de velocidad
+                </p>
+                <p>
+                    Los perfiles de velocidad definen las capacidades de ancho de banda para las ONUs.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_smartolt_vlan" model="ir.actions.act_window">
+            <field name="name">VLANs</field>
+            <field name="res_model">smartolt.vlan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primera VLAN
+                </p>
+                <p>
+                    Las VLANs segmentan el tráfico de red para diferentes servicios.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Wizard de Sincronización -->
+        <record id="action_smartolt_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Sincronización</field>
+            <field name="res_model">smartolt.sync.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Configura la sincronización con SmartOLT
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Wizard de Configuración de Logging -->
+        <record id="action_smartolt_logging_wizard" model="ir.actions.act_window">
+            <field name="name">Configuración de Logging</field>
+            <field name="res_model">smartolt.logging.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Configura el sistema de logging de SmartOLT
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Gestión Masiva de Planes -->
+        <record id="action_smartolt_bulk_plan_wizard" model="ir.actions.act_window">
+            <field name="name">Gestión Masiva de Planes</field>
+            <field name="res_model">smartolt.bulk.plan.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cambia planes de velocidad de forma masiva
+                </p>
+                <p>
+                    Selecciona múltiples ONUs y cambia sus planes de velocidad en lote.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Movilidad Masiva de PONs -->
+        <record id="action_smartolt_bulk_pon_move_wizard" model="ir.actions.act_window">
+            <field name="name">Movilidad Masiva de PONs</field>
+            <field name="res_model">smartolt.bulk.pon.move.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Mueve clientes entre PONs de forma masiva
+                </p>
+                <p>
+                    Selecciona múltiples ONUs y muévelas entre diferentes puertos PON.
+                </p>
+            </field>
+        </record>
+
+        <!-- Acción para Movimientos de PON -->
+        <record id="action_smartolt_pon_move" model="ir.actions.act_window">
+            <field name="name">Movimientos de PON</field>
+            <field name="res_model">smartolt.pon.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No hay movimientos de PON registrados
+                </p>
+                <p>
+                    Los movimientos de PON se crean automáticamente cuando se ejecuta
+                    la movilidad masiva de clientes entre PONs.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menú principal SmartOLT -->
+        <menuitem id="menu_smartolt_root"
+                  name="SmartOLT"
+                  web_icon="smartolt_integration,static/description/icon.png"
+                  sequence="10"/>
+
+        <!-- Submenú de Gestión -->
+        <menuitem id="menu_smartolt_management"
+                  name="Gestión"
+                  parent="menu_smartolt_root"
+                  sequence="10"/>
+
+        <!-- Menús de elementos principales -->
+        <menuitem id="menu_smartolt_olt"
+                  name="OLTs"
+                  parent="menu_smartolt_management"
+                  action="action_smartolt_olt"
+                  sequence="10"/>
+
+        <menuitem id="menu_smartolt_onu"
+                  name="ONUs"
+                  parent="menu_smartolt_management"
+                  action="action_smartolt_onu"
+                  sequence="20"/>
+
+        <menuitem id="menu_smartolt_zone"
+                  name="Zonas"
+                  parent="menu_smartolt_management"
+                  action="action_smartolt_zone"
+                  sequence="30"/>
+
+        <menuitem id="menu_smartolt_odb"
+                  name="ODBs"
+                  parent="menu_smartolt_management"
+                  action="action_smartolt_odb"
+                  sequence="40"/>
+
+        <!-- Submenú de Configuración -->
+        <menuitem id="menu_smartolt_config"
+                  name="Configuración"
+                  parent="menu_smartolt_root"
+                  sequence="20"/>
+
+        <!-- Menús de elementos de configuración -->
+        <menuitem id="menu_smartolt_config_api"
+                  name="Configuración de API"
+                  parent="menu_smartolt_config"
+                  action="action_smartolt_config"
+                  sequence="10"/>
+
+        <menuitem id="menu_smartolt_speed_profile"
+                  name="Perfiles de Velocidad"
+                  parent="menu_smartolt_config"
+                  action="action_smartolt_speed_profile"
+                  sequence="20"/>
+
+        <menuitem id="menu_smartolt_vlan"
+                  name="VLANs"
+                  parent="menu_smartolt_config"
+                  action="action_smartolt_vlan"
+                  sequence="30"/>
+
+        <!-- Submenú de Herramientas -->
+        <menuitem id="menu_smartolt_tools"
+                  name="Herramientas"
+                  parent="menu_smartolt_root"
+                  sequence="30"/>
+
+        <!-- Menú de sincronización -->
+        <menuitem id="menu_smartolt_sync"
+                  name="Sincronización"
+                  parent="menu_smartolt_tools"
+                  action="action_smartolt_sync_wizard"
+                  sequence="10"/>
+        
+        <menuitem id="menu_smartolt_logging" 
+                  name="Configuración de Logging" 
+                  parent="menu_smartolt_tools" 
+                  action="action_smartolt_logging_wizard" 
+                  sequence="20"/>
+
+        <!-- Menú de gestión masiva de planes -->
+        <menuitem id="menu_smartolt_bulk_plan"
+                  name="Gestión Masiva de Planes"
+                  parent="menu_smartolt_tools"
+                  action="action_smartolt_bulk_plan_wizard"
+                  sequence="30"/>
+
+        <!-- Menú de movilidad masiva de PONs -->
+        <menuitem id="menu_smartolt_bulk_pon_move"
+                  name="Movilidad Masiva de PONs"
+                  parent="menu_smartolt_tools"
+                  action="action_smartolt_bulk_pon_move_wizard"
+                  sequence="40"/>
+
+        <!-- Menú de movimientos de PON -->
+        <menuitem id="menu_smartolt_pon_move"
+                  name="Movimientos de PON"
+                  parent="menu_smartolt_tools"
+                  action="action_smartolt_pon_move"
+                  sequence="50"/>
+    </data>
+</odoo>

@@ -1,0 +1,218 @@
+/* Estilos para la ventana de progreso responsiva */
+
+/* Animaciones suaves para las transiciones */
+.smartolt-progress-window {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Barra de progreso mejorada */
+.progress {
+    border-radius: 12px !important;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar.progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+    from { background-position: 40px 0; }
+    to { background-position: 0 0; }
+}
+
+/* Cards de estadísticas responsivas */
+.smartolt-stat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.smartolt-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Iconos de estadísticas */
+.smartolt-stat-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+/* Log terminal responsivo */
+.smartolt-terminal {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    animation: terminalGlow 0.5s ease-in;
+    position: relative;
+}
+
+@keyframes terminalGlow {
+    from { box-shadow: none; }
+    to { box-shadow: 0 0 20px rgba(0, 255, 65, 0.1); }
+}
+
+/* Scrollbar personalizado para el terminal */
+.smartolt-terminal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.smartolt-terminal::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.smartolt-terminal::-webkit-scrollbar-thumb {
+    background: #00ff41;
+    border-radius: 4px;
+    opacity: 0.7;
+}
+
+.smartolt-terminal::-webkit-scrollbar-thumb:hover {
+    background: #00cc33;
+}
+
+/* Efecto de cursor parpadeante */
+.smartolt-terminal::after {
+    content: "█";
+    animation: blink 1s linear infinite;
+    color: #00ff41;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Badges de estado mejorados */
+.smartolt-status-badge {
+    font-size: 0.9em;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: pulseState 2s ease-in-out infinite;
+}
+
+@keyframes pulseState {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Layout responsivo */
+@media (max-width: 768px) {
+    .smartolt-progress-window .col-md-3 {
+        margin-bottom: 15px;
+    }
+    
+    .smartolt-terminal {
+        min-height: 200px;
+        max-height: 300px;
+        font-size: 12px;
+        padding: 15px;
+    }
+    
+    .smartolt-stat-card {
+        margin-bottom: 10px;
+    }
+    
+    .progress {
+        height: 15px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .smartolt-progress-window {
+        padding: 10px;
+    }
+    
+    .smartolt-terminal {
+        min-height: 150px;
+        max-height: 250px;
+        font-size: 11px;
+        padding: 10px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+}
+
+/* Efectos hover para botones */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Animación para elementos que aparecen */
+.fade-in {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header mejorado */
+.smartolt-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 20px;
+}
+
+/* Cards con sombra sutil */
+.card {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* Efectos de loading */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

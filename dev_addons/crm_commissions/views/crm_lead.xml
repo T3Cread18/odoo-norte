@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherit_crm_lead_atributes" model="ir.ui.view">
+        <field name="name">inherit.crm.lead.atributes</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@id='probability']"
+            position="attributes"
+            >
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+
+
+            <xpath expr="//form"
+            position="attributes"
+            >
+            <attribute name="attrs">{'readonly': [('state', '=', 'confirmado')]}</attribute>
+            </xpath>
+
+
+            <xpath expr="//field[@name='stage_id']"
+            position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='stage_id']" position="after">
+                <button string="Confirmar Oportunidad" name="confirmar_aoportunity" type="object" class="oe_highlight"
+                attrs="{'invisible': ['|', ('state', '=','confirmado'), ('type', '=','lead')]}"
+                />
+
+                <field name="state" widget="statusbar" readonly="1"/>
+            </xpath>
+
+
+            <xpath expr="//field[@name='email_from']"
+            position="attributes"
+            >
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//span[@class='oe_grey p-2']"
+            position="attributes"
+            >
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('type', '=', 'lead')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_name']"
+            position="attributes"
+            >
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//span[@class='oe_grey p-2'][1]"
+            position="attributes"
+            >
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//span[@class='oe_grey p-2'][2]"
+            position="attributes"
+            >
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//span[@class='oe_grey']"
+            position="attributes"
+            >
+                <attribute name="invisible" >1</attribute>
+            </xpath>
+            <xpath expr="//div[@id='probability']" position="before">
+                <!-- <div id="commission" class="d-inline-block">
+                    <label for='commission'>Comicion</label> -->
+                    <!-- <field name="commission" invisible="1"  widget="monetary" options="{'currency_field': 'company_currency'}" class="oe_inline o_input_6ch"
+                    attrs="{'invisible': [('type', '=','lead')]}"/> -->
+                <!-- </div> -->
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_crm_lead_tree" model="ir.ui.view">
+        <field name="name">inherit.crm.lead.tree</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_list_activities"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expected_revenue']" position="after">
+                <!-- <field name="commission" invisible="1" widget="monetary"  options="{'no_create_edit': True,'currency_field': 'company_currency'}"/> -->
+            </xpath>
+        </field>
+    </record>
+    <record id="inherit_crm_lead_form" model="ir.ui.view">
+        <field name="name">inherit.crm.lead.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_name']" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- <xpath expr="//field[@name='commission']" position="after">
+                <field name="contact_name" string="Cliente"/>
+            </xpath> -->
+            <xpath expr="//field[@name='lead_properties']" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='mobile']" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="string">Vendedor</attribute>
+            </xpath>
+            <xpath expr="//notebook" position="before">
+                <label for="street_page_lead" string="Dirección"/>
+                
+                <div class="o_address_format">
+                    <field name="street" id="street_page_lead" placeholder="Street..." class="o_address_street"/>
+                    <field name="city" placeholder="City" class="o_address_city"/>
+                    <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                    <field name="country_id" placeholder="Country"/>
+                </div>
+            </xpath>
+           <!-- <xpath expr="//group[@name='opportunity_partner']" position="replace">
+                <group name="opportunity_partner" attrs="{'invisible': [('type', '=', 'lead')]}">
+                     <field name="partner_id" invisible="1" widget="res_partner_many2one" string="Customer" /> 
+                    <field name="contact_name"/>
+                    <field name="is_blacklisted" invisible="1"/>
+                    <field name="partner_is_blacklisted" invisible="1"/>
+                    <field name="phone_blacklisted" invisible="1"/>
+                    <field name="mobile_blacklisted" invisible="1"/>
+                    <field name="email_state" invisible="1"/>
+                    <field name="phone_state" invisible="1"/>
+                    <field name="partner_email_update" invisible="1"/>
+                    <field name="partner_phone_update" invisible="1"/>
+                    <label for="phone" class="oe_inline"/>
+                    <div class="o_row o_row_readonly">
+                        <field name="phone" widget="phone"/>
+                    </div>
+                    <field name="date_conversion" invisible="1"/>
+                    <field name="user_company_ids" invisible="1"/>
+                </group>
+            </xpath>
+            -->
+            <xpath expr="//page[@name='lead']" position="replace">
+                <page name="lead" string="Propiedades de inversión (Comming soon)" attrs="{'invisible': [('type', '=', 'lead')]}">
+                </page>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='user_id']" position="before">
+                    <field name="commission" string="Comisión" widget="monetary" options="{'currency_field': 'company_currency'}" class="oe_inline o_input_15ch fs-3" attrs="{'invisible': [('type', '=','lead')]}"/>
+            </xpath>
+            <xpath expr="//form/sheet/group/group/field[@name='tag_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

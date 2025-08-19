@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="hide_odoo_brand_in_top_right_corner.list">
+      <field name="name">hide_odoo_brand_in_top_right_corner list</field>
+      <field name="model">hide_odoo_brand_in_top_right_corner.hide_odoo_brand_in_top_right_corner</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="hide_odoo_brand_in_top_right_corner.action_window">
+      <field name="name">hide_odoo_brand_in_top_right_corner window</field>
+      <field name="res_model">hide_odoo_brand_in_top_right_corner.hide_odoo_brand_in_top_right_corner</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="hide_odoo_brand_in_top_right_corner.action_server">
+      <field name="name">hide_odoo_brand_in_top_right_corner server</field>
+      <field name="model_id" ref="model_hide_odoo_brand_in_top_right_corner_hide_odoo_brand_in_top_right_corner"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="hide_odoo_brand_in_top_right_corner" id="hide_odoo_brand_in_top_right_corner.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="hide_odoo_brand_in_top_right_corner.menu_1" parent="hide_odoo_brand_in_top_right_corner.menu_root"/>
+    <menuitem name="Menu 2" id="hide_odoo_brand_in_top_right_corner.menu_2" parent="hide_odoo_brand_in_top_right_corner.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="hide_odoo_brand_in_top_right_corner.menu_1_list" parent="hide_odoo_brand_in_top_right_corner.menu_1"
+              action="hide_odoo_brand_in_top_right_corner.action_window"/>
+    <menuitem name="Server to list" id="hide_odoo_brand_in_top_right_corner" parent="hide_odoo_brand_in_top_right_corner.menu_2"
+              action="hide_odoo_brand_in_top_right_corner.action_server"/>
+-->
+  </data>
+</odoo>

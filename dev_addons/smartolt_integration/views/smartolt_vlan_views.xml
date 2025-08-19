@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de formulario para VLANs -->
+    <record id="view_smartolt_vlan_form" model="ir.ui.view">
+        <field name="name">smartolt.vlan.form</field>
+        <field name="model">smartolt.vlan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_get_vlan_details" string="Obtener Detalles" type="object" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre de la VLAN"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="vlan_id"/>
+                            <field name="vlan_number"/>
+                            <field name="olt_id"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                            <field name="last_sync"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de lista para VLANs -->
+    <record id="view_smartolt_vlan_tree" model="ir.ui.view">
+        <field name="name">smartolt.vlan.tree</field>
+        <field name="model">smartolt.vlan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="vlan_id"/>
+                <field name="vlan_number"/>
+                <field name="olt_id"/>
+                <field name="status"/>
+                <field name="last_sync"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de búsqueda para VLANs -->
+    <record id="view_smartolt_vlan_search" model="ir.ui.view">
+        <field name="name">smartolt.vlan.search</field>
+        <field name="model">smartolt.vlan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="vlan_id"/>
+                <field name="vlan_number"/>
+                <field name="olt_id"/>
+                <filter string="Activo" name="active" domain="[('status', '=', 'active')]"/>
+                <filter string="Inactivo" name="inactive" domain="[('status', '=', 'inactive')]"/>
+                <filter string="Reservado" name="reserved" domain="[('status', '=', 'reserved')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Estado" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="OLT" name="group_olt" context="{'group_by': 'olt_id'}"/>
+                    <filter string="Número de VLAN" name="group_vlan_number" context="{'group_by': 'vlan_number'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acciones para VLANs -->
+    <record id="action_smartolt_vlan" model="ir.actions.act_window">
+        <field name="name">VLANs</field>
+        <field name="res_model">smartolt.vlan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cree su primera VLAN
+            </p>
+            <p>
+                Configure las VLANs para segmentar el tráfico de red
+                y organizar los servicios de manera eficiente.
+            </p>
+        </field>
+    </record>
+
+</odoo>

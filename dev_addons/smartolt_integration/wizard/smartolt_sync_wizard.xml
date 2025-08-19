@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Wizard de Sincronización -->
+        <record id="view_smartolt_sync_wizard_form" model="ir.ui.view">
+            <field name="name">smartolt.sync.wizard.form</field>
+            <field name="model">smartolt.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sincronización SmartOLT">
+                    <group>
+                        <group string="Configuración de Sincronización">
+                            <field name="sync_type"/>
+                            <field name="olt_id" attrs="{'invisible': [('sync_type', 'in', ['olts', 'all'])]}"/>
+                            <field name="force_sync"/>
+                        </group>
+                        <group string="Configuración por Lotes" attrs="{'invisible': [('sync_type', '!=', 'onus')]}">
+                            <field name="enable_batch_sync"/>
+                            <field name="batch_size" attrs="{'invisible': [('enable_batch_sync', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="alert" attrs="{'invisible': [('sync_type', '!=', 'onus')]}">
+                        <h4>💡 Sincronización por Lotes</h4>
+                        <p><strong>Problema resuelto:</strong> La sincronización por lotes evita errores de "cursor already closed" cuando se procesan grandes cantidades de ONUs.</p>
+                        <p><strong>Beneficios:</strong></p>
+                        <ul>
+                            <li>✅ Procesamiento estable de miles de ONUs</li>
+                            <li>✅ Commits automáticos para liberar memoria</li>
+                            <li>✅ Pausas entre lotes para no sobrecargar la API</li>
+                            <li>✅ Manejo robusto de errores individuales</li>
+                        </ul>
+                    </div>
+                    <footer>
+                        <button name="action_sync" string="Sincronizar" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

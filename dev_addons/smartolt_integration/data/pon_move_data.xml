@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Datos de ejemplo para movimientos de PON (opcional) -->
+        <!-- Estos registros se pueden usar para pruebas y demostración -->
+        
+        <!-- 
+        <record id="pon_move_example_1" model="smartolt.pon.move">
+            <field name="onu_id" ref="smartolt_integration.smartolt_onu_1"/>
+            <field name="source_olt_id" ref="smartolt_integration.smartolt_olt_1"/>
+            <field name="source_board">1</field>
+            <field name="source_port">1</field>
+            <field name="target_olt_id" ref="smartolt_integration.smartolt_olt_1"/>
+            <field name="target_board">1</field>
+            <field name="target_port">2</field>
+            <field name="state">completed</field>
+            <field name="move_date" eval="DateTime.now()"/>
+            <field name="completed_date" eval="DateTime.now()"/>
+        </record>
+        -->
+        
+    </data>
+</odoo> 

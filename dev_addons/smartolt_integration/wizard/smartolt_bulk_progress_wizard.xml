@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Vista del wizard de progreso responsivo -->
+    <record id="view_smartolt_bulk_progress_wizard_form" model="ir.ui.view">
+        <field name="name">smartolt.bulk.progress.wizard.form</field>
+        <field name="model">smartolt.bulk.progress.wizard</field>
+        <field name="arch" type="xml">
+            <form string="🚀 Progreso de Actualización Masiva" create="false" edit="false">
+                <header>
+                    <!-- Estado del proceso -->
+                    <field name="state" widget="statusbar" statusbar_visible="running,completed,error,cancelled"/>
+                </header>
+                
+                <sheet class="o_form_sheet_bg smartolt-progress-window">
+                    <!-- Header responsivo -->
+                    <div class="oe_title mb-4">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-7 col-sm-12">
+                                <h2 class="mb-0">
+                                    <field name="process_title" readonly="1"/>
+                                </h2>
+                                <p class="text-muted mb-0">
+                                    <field name="start_time" readonly="1" widget="datetime"/> - 
+                                    <span attrs="{'invisible': [('state', '!=', 'completed')]}">
+                                        <field name="end_time" readonly="1" widget="datetime"/>
+                                    </span>
+                                    <span attrs="{'invisible': [('state', '==', 'completed')]}">
+                                        En progreso...
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-12 text-right">
+                                <div class="mt-2">
+                                    <span class="badge badge-pill badge-primary px-3 py-2" 
+                                          style="font-size: 12px;"
+                                          attrs="{'invisible': [('state', '!=', 'running')]}">
+                                        🔄 Ejecutándose
+                                    </span>
+                                    <span class="badge badge-pill badge-success px-3 py-2" 
+                                          style="font-size: 12px;"
+                                          attrs="{'invisible': [('state', '!=', 'completed')]}">
+                                        ✅ Completado
+                                    </span>
+                                    <span class="badge badge-pill badge-danger px-3 py-2" 
+                                          style="font-size: 12px;"
+                                          attrs="{'invisible': [('state', '!=', 'error')]}">
+                                        ❌ Error
+                                    </span>
+                                    <span class="badge badge-pill badge-warning px-3 py-2" 
+                                          style="font-size: 12px;"
+                                          attrs="{'invisible': [('state', '!=', 'cancelled')]}">
+                                        ⚠️ Cancelado
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dashboard principal responsivo -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card shadow-sm border-0">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">📊 Progreso General</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Barra de progreso mejorada -->
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="font-weight-bold">ONUs Procesadas</span>
+                                            <span class="text-muted">
+                                                <field name="processed_onus" readonly="1"/> / <field name="total_onus" readonly="1"/>
+                                            </span>
+                                        </div>
+                                        <div class="progress mb-2" style="height: 20px; border-radius: 10px;">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-gradient-primary" 
+                                                 role="progressbar" 
+                                                 style="min-width: 2em; border-radius: 10px;">
+                                                <field name="progress_percentage" invisible="1"/>
+                                                <span class="font-weight-bold text-white">
+                                                    <field name="progress_percentage" readonly="1" widget="percentage"/>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <small class="text-muted">
+                                                Lote <field name="current_batch_num" readonly="1"/> de <field name="total_batches" readonly="1"/>
+                                            </small>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Estadísticas en cards responsivas -->
+                                    <div class="row">
+                                        <div class="col-6 col-lg-3 mb-3">
+                                            <div class="card border-success smartolt-stat-card fade-in">
+                                                <div class="card-body text-center py-3">
+                                                    <div class="text-success smartolt-stat-icon">✅</div>
+                                                    <h4 class="mb-1 text-success">
+                                                        <field name="success_count" readonly="1"/>
+                                                    </h4>
+                                                    <small class="text-muted">Éxitos</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-3 mb-3">
+                                            <div class="card border-danger smartolt-stat-card fade-in">
+                                                <div class="card-body text-center py-3">
+                                                    <div class="text-danger smartolt-stat-icon">❌</div>
+                                                    <h4 class="mb-1 text-danger">
+                                                        <field name="error_count" readonly="1"/>
+                                                    </h4>
+                                                    <small class="text-muted">Errores</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-3 mb-3">
+                                            <div class="card border-warning smartolt-stat-card fade-in">
+                                                <div class="card-body text-center py-3">
+                                                    <div class="text-warning smartolt-stat-icon">⚠️</div>
+                                                    <h4 class="mb-1 text-warning">
+                                                        <field name="warning_count" readonly="1"/>
+                                                    </h4>
+                                                    <small class="text-muted">Advertencias</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-3 mb-3">
+                                            <div class="card border-info smartolt-stat-card fade-in">
+                                                <div class="card-body text-center py-3">
+                                                    <div class="text-info smartolt-stat-icon">📦</div>
+                                                    <h6 class="mb-1 text-info">
+                                                        <field name="current_batch_info" readonly="1"/>
+                                                    </h6>
+                                                    <small class="text-muted">Lote Actual</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Log en tiempo real responsivo -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card shadow-sm border-0">
+                                <div class="card-header bg-dark text-white">
+                                    <h5 class="mb-0">💻 Log en Tiempo Real</h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="smartolt-terminal">
+                                        <field name="log_output" readonly="1" nolabel="1" 
+                                               widget="text" 
+                                               placeholder="📋 Esperando inicio del proceso...&#10;&#10;Los logs aparecerán aquí en tiempo real..."/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Campos ocultos para el funcionamiento -->
+                    <field name="parent_wizard_id" invisible="1"/>
+                    <field name="total_onus" invisible="1"/>
+                    <field name="processed_onus" invisible="1"/>
+                    <field name="progress_percentage" invisible="1"/>
+                    <field name="current_batch_num" invisible="1"/>
+                    <field name="total_batches" invisible="1"/>
+                    <field name="success_count" invisible="1"/>
+                    <field name="error_count" invisible="1"/>
+                    <field name="warning_count" invisible="1"/>
+                    <field name="start_time" invisible="1"/>
+                    <field name="end_time" invisible="1"/>
+                    <field name="current_batch_info" invisible="1"/>
+                    <field name="log_output" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="remaining_onu_ids" invisible="1"/>
+                    <field name="upload_profile" invisible="1"/>
+                    <field name="download_profile" invisible="1"/>
+                </sheet>
+                
+                <!-- Footer responsivo -->
+                <footer>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button string="🚀 Ejecutar REAL" name="start_process_manual" type="object" 
+                                    class="btn btn-success"
+                                    attrs="{'invisible': [('state', '!=', 'running'), ('processed_onus', '>', 0)]}"/>
+                        </div>
+                        <div class="col-md-3">
+                            <button string="📊 Demo Progreso" name="simulate_progress" type="object" 
+                                    class="btn btn-info"
+                                    attrs="{'invisible': [('state', '!=', 'running')]}"/>
+                        </div>
+                        <div class="col-md-3">
+                            <button string="🔄 Continuar Lote" name="continue_next_batch" type="object" 
+                                    class="btn btn-warning"
+                                    attrs="{'invisible': ['|', ('state', 'in', ['completed', 'error', 'cancelled']), ('remaining_onu_ids', '=', False)]}"/>
+                            <button string="🔄 Actualizar" name="refresh" type="object" 
+                                    class="btn btn-secondary"
+                                    attrs="{'invisible': ['|', ('state', 'in', ['completed', 'error', 'cancelled']), ('remaining_onu_ids', '!=', False)]}"/>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <button string="❌ Cancelar Proceso" name="cancel_process" type="object" 
+                                    class="btn btn-warning"
+                                    attrs="{'invisible': [('state', 'in', ['completed', 'error', 'cancelled'])]}"/>
+                            <button string="✅ Cerrar" special="cancel" 
+                                    class="btn btn-primary"
+                                    attrs="{'invisible': [('state', 'not in', ['completed', 'error', 'cancelled'])]}"/>
+                        </div>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Acción del wizard de progreso -->
+    <record id="action_smartolt_bulk_progress_wizard" model="ir.actions.act_window">
+        <field name="name">Progreso de Actualización Masiva</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">smartolt.bulk.progress.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

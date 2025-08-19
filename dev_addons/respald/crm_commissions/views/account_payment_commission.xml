@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_payment_register_commission_actions_window" model="ir.actions.act_window">
+        <field name="name">Pago Comiciones</field>
+        <field name="res_model">account.payment.register.commission</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="arch" type="xml"></field> -->
+    </record>
+
+    <menuitem
+        id="account_payment_register_menu"
+        name="Cuentas"
+        action="crm_commissions.account_payment_register_commission_actions_window"
+        parent="crm.crm_menu_sales"
+        sequence="10"/>
+
+
+    <record id="account_payment_register_commission_view_form" model="ir.ui.view">
+        <field name="name">account.payment.register.commission.view.form</field>
+        <field name="model">account.payment.register.commission</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name ="name" string="Nombre"></field>
+                            <field name="accounts_payable_crm_id" invisible="1" default="context.get('default_accounts_payable_crm_id')" ></field>
+                            <field name="sale_order_id" invisible="1"></field>
+                            <field name="is_payment_sale"></field>
+                            <field name="catidad" readonly="1" widget="monetary" options="{'currency_field': 'company_currency'}"></field>
+                            <field name="amount"  widget="monetary" options="{'currency_field': 'company_currency'}"></field>
+                        </group>
+                        <group>
+                            <field name="company_currency" invisible="1"></field>
+                            <field name="payment_date"></field>
+                            <field name="communication"></field>
+                            <field name="payment_method_line_id"></field>
+                        </group>
+                    </group>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_payment_register_commission_view_tree" model="ir.ui.view">
+        <field name="name">account.payment.register.commission.view.tree</field>
+        <field name="model">account.payment.register.commission</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Cuentas">
+                <field name ="name"></field>
+                <field name="accounts_payable_crm_id" invisible="1" ></field>
+                <field name="sale_order_id"></field>
+                <field name="is_payment_sale"></field>
+                <field name="catidad" widget="monetary" options="{'currency_field': 'company_currency'}"></field>
+                <field name="amount"  widget="monetary" options="{'currency_field': 'company_currency'}"></field>
+                <field name="company_currency" invisible="1"></field>
+                <field name="payment_date"></field>
+                <field name="communication"></field>
+                <field name="payment_method_line_id"></field>
+                
+            </tree>
+        </field>
+    </record>
+    
+
+</odoo>

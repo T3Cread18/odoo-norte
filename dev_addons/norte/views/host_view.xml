@@ -1,0 +1,60 @@
+<odoo>
+    <record id="view_form_host" model="ir.ui.view">
+        <field name="name">host.form</field>
+        <field name="model">custom.host</field>
+        <field name="arch" type="xml">
+            <form string="Host">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="host_type"/>
+                        <field name="franchise"/>
+                        <field name="description"/>
+                        <field name="ip_host_pre"/>
+                        <field name="ip_host"/>
+                        <field name="port"/>
+                        <field name="ext"/>
+                        <field name="status"/>
+                        <field name="user"/>
+                        <field name="passw"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_host" model="ir.ui.view">
+        <field name="name">host.tree</field>
+        <field name="model">custom.host</field>
+        <field name="arch" type="xml">
+            <tree string="Hosts">
+                <field name="name"/>
+                <field name="host_type"/>
+                <field name="franchise"/>
+                <field name="ip_host_pre"/>
+                <field name="ip_host"/>
+                <field name="port"/>
+                <field name="ext"/>
+                <field name="status"/>
+                <field name="user"/>
+                <field name="passw"/>
+            </tree>
+        </field>
+    </record>
+     <record id="action_custom_host" model="ir.actions.act_window">
+        <field name="name">Hosts</field>
+        <field name="res_model">custom.host</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea tu primer host
+            </p>
+        </field>
+    </record>
+
+    <!-- Menú principal (opcional, si no existe) -->
+    <menuitem id="menu_custom_root" name="Gestión de Hosts" sequence="10"/>
+
+    <!-- Submenú que apunta a la acción -->
+    <menuitem id="menu_custom_host" name="Hosts" parent="menu_custom_root" action="action_custom_host" sequence="10"/>
+</odoo>

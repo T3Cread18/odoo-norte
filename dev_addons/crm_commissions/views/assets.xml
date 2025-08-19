@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="view_assets_backend" model="ir.ui.view">
+            <field name="name">view.assets.backend</field>
+            <field name="inherit_id" ref="web.assets_backend"/>
+            <field name="arch" type="xml">
+                <xpath expr="." position="inside">
+                    <script type="text/javascript" src="/crm_commissions/static/src/js/total_footer.js"></script>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

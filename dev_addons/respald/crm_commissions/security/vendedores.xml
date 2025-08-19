@@ -1,0 +1,10 @@
+<record id="menu_security_rule" model="ir.rule">
+    <field name="name">Allow specific menus for group</field>
+    <field name="model_id" ref="model_ir_ui_menu"/>
+    <field name="domain_force">[('id', 'in', [199, 251])]</field>
+    <field name="groups" eval="[(4, ref('Vendedores'))]"/>
+    <field name="perm_read" eval="True"/>
+    <field name="perm_write" eval="True"/>
+    <field name="perm_create" eval="True"/>
+    <field name="perm_unlink" eval="True"/>
+</record>

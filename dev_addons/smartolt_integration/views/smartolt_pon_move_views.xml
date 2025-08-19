@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Vista de lista para movimientos de PON -->
+    <record id="view_smartolt_pon_move_list" model="ir.ui.view">
+        <field name="name">smartolt.pon.move.list</field>
+        <field name="model">smartolt.pon.move</field>
+        <field name="arch" type="xml">
+            <tree string="Movimientos de PON" decoration-info="state == 'pending'" decoration-warning="state == 'in_progress'" decoration-success="state == 'completed'" decoration-danger="state == 'failed'">
+                <field name="onu_id" string="ONU"/>
+                <field name="source_location" string="Origen"/>
+                <field name="target_location" string="Destino"/>
+                <field name="state" widget="badge" decoration-info="state == 'pending'" decoration-warning="state == 'in_progress'" decoration-success="state == 'completed'" decoration-danger="state == 'failed'"/>
+                <field name="move_date" string="Fecha"/>
+                <field name="move_duration" string="Duración (min)"/>
+                <field name="is_same_olt" string="Misma OLT"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Vista de formulario para movimientos de PON -->
+    <record id="view_smartolt_pon_move_form" model="ir.ui.view">
+        <field name="name">smartolt.pon.move.form</field>
+        <field name="model">smartolt.pon.move</field>
+        <field name="arch" type="xml">
+            <form string="Movimiento de PON">
+                <header>
+                    <button name="action_start_move" string="▶️ Iniciar" type="object" 
+                            attrs="{'invisible': [('state', '!=', 'pending')]}" class="btn-primary"/>
+                    <button name="action_complete_move" string="✅ Completar" type="object" 
+                            attrs="{'invisible': [('state', '!=', 'in_progress')]}" class="btn-success"/>
+                    <button name="action_rollback_move" string="🔄 Revertir" type="object" 
+                            attrs="{'invisible': [('state', 'not in', ['completed', 'failed'])]}" class="btn-warning"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,in_progress,completed"/>
+                </header>
+                
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="onu_id" placeholder="ONU"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="📍 Origen">
+                            <field name="source_olt_id" readonly="1"/>
+                            <field name="source_board" readonly="1"/>
+                            <field name="source_port" readonly="1"/>
+                            <field name="source_location" readonly="1"/>
+                        </group>
+                        <group string="🎯 Destino">
+                            <field name="target_olt_id" readonly="1"/>
+                            <field name="target_board" readonly="1"/>
+                            <field name="target_port" readonly="1"/>
+                            <field name="target_location" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="📊 Información del Movimiento">
+                            <field name="move_date" readonly="1"/>
+                            <field name="completed_date" readonly="1"/>
+                            <field name="move_duration" readonly="1"/>
+                            <field name="is_same_olt" readonly="1"/>
+                        </group>
+                        <group string="🔗 Relaciones">
+                            <field name="batch_move_id" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <group string="📝 Detalles Adicionales">
+                        <field name="error_message" readonly="1" attrs="{'invisible': [('state', '!=', 'failed')]}"/>
+                        <field name="api_response" readonly="1" attrs="{'invisible': [('state', '!=', 'failed')]}"/>
+                    </group>
+                    
+                    <notebook>
+                        <page string="📋 Historial de Cambios" name="chatter">
+                            <field name="message_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Vista de búsqueda para movimientos de PON -->
+    <record id="view_smartolt_pon_move_search" model="ir.ui.view">
+        <field name="name">smartolt.pon.move.search</field>
+        <field name="model">smartolt.pon.move</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Movimientos de PON">
+                <field name="onu_id"/>
+                <field name="source_olt_id"/>
+                <field name="target_olt_id"/>
+                <field name="state"/>
+                <field name="move_date"/>
+                
+                <filter string="Pendientes" name="pending" domain="[('state', '=', 'pending')]"/>
+                <filter string="En Progreso" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="Completados" name="completed" domain="[('state', '=', 'completed')]"/>
+                <filter string="Fallidos" name="failed" domain="[('state', '=', 'failed')]"/>
+                <filter string="Revertidos" name="rolled_back" domain="[('state', '=', 'rolled_back')]"/>
+                
+                <filter string="Misma OLT" name="same_olt" domain="[('is_same_olt', '=', True)]"/>
+                <filter string="Diferente OLT" name="different_olt" domain="[('is_same_olt', '=', False)]"/>
+                
+                <group expand="0" string="Agrupar Por">
+                    <filter string="Estado" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="OLT Origen" name="group_source_olt" context="{'group_by': 'source_olt_id'}"/>
+                    <filter string="OLT Destino" name="group_target_olt" context="{'group_by': 'target_olt_id'}"/>
+                    <filter string="Fecha" name="group_date" context="{'group_by': 'move_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Acción para movimientos de PON -->
+    <record id="action_smartolt_pon_move" model="ir.actions.act_window">
+        <field name="name">Movimientos de PON</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">smartolt.pon.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_smartolt_pon_move_list"/>
+        <field name="search_view_id" ref="view_smartolt_pon_move_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No hay movimientos de PON registrados
+            </p>
+            <p>
+                Los movimientos de PON se crean automáticamente cuando se ejecuta
+                la movilidad masiva de clientes entre PONs.
+            </p>
+        </field>
+    </record>
+    
+</odoo> 

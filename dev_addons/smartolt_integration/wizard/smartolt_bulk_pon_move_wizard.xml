@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard de Movilidad Masiva de PONs -->
+    <record id="view_smartolt_bulk_pon_move_wizard_form" model="ir.ui.view">
+        <field name="name">smartolt.bulk.pon.move.wizard.form</field>
+        <field name="model">smartolt.bulk.pon.move.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Movilidad Masiva de PONs">
+                <header>
+                    <field name="state" widget="statusbar" 
+                           statusbar_visible="select,done"/>
+                </header>
+                
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="source_location" readonly="1"/>
+                            <span> → </span>
+                            <field name="target_location" readonly="1"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Origen" col="4">
+                            <field name="source_olt_id"/>
+                            <field name="source_board"/>
+                            <field name="source_port"/>
+                        </group>
+                        
+                        <group string="Destino" col="4">
+                            <field name="target_olt_id" 
+                                   attrs="{'invisible': [('is_same_olt', '=', True)]}"/>
+                            <field name="target_board"/>
+                            <field name="target_port"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Filtros" col="4">
+                            <field name="zone_filter" placeholder="Ej: GUANARE, ACARIGUA"/>
+                            <field name="status_filter"/>
+                            <field name="batch_size"/>
+                        </group>
+                        
+                        <group string="Configuración" col="4">
+                            <field name="enable_rollback"/>
+                            <field name="onu_count"/>
+                            <field name="total_batches"/>
+                            <field name="estimated_time"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Campo oculto para lógica de attrs -->
+                    <field name="is_same_olt" invisible="1"/>
+                    
+                    <notebook>
+                        <page string="ONUs Seleccionadas" name="onus">
+                            <field name="onu_ids" readonly="1">
+                                <tree>
+                                    <field name="serial_number"/>
+                                    <field name="name"/>
+                                    <field name="status"/>
+                                    <field name="olt_id"/>
+                                    <field name="board"/>
+                                    <field name="port"/>
+                                    <field name="allocated_onu"/>
+                                    <field name="zone_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                        
+                        <page string="Resultados" name="results" attrs="{'invisible': [('state', '!=', 'done')]}">
+                            <group>
+                                <field name="success_count"/>
+                                <field name="error_count"/>
+                                <field name="result_message"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                
+                <footer>
+                    <button name="action_search_onus" string="Buscar ONUs" type="object" 
+                            class="btn-primary" states="select"/>
+                    <button name="action_update_pon_locations" string="Ejecutar Movimiento" type="object" 
+                            class="btn-success" states="select"/>
+                    <button name="action_close" string="Cerrar" type="object" 
+                            class="btn-secondary" states="done"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Acción del wizard -->
+    <record id="action_smartolt_bulk_pon_move_wizard" model="ir.actions.act_window">
+        <field name="name">Movilidad Masiva de PONs</field>
+        <field name="res_model">smartolt.bulk.pon.move.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Configure el movimiento masivo de ONUs entre PONs
+            </p>
+            <p>
+                Seleccione la ubicación de origen y destino, configure los filtros
+                y ejecute el movimiento de forma masiva y segura.
+            </p>
+        </field>
+    </record>
+    
+    <!-- Menú del wizard -->
+    <menuitem id="menu_smartolt_bulk_pon_move_wizard"
+              name="Movilidad Masiva de PONs"
+              parent="menu_smartolt_tools"
+              action="action_smartolt_bulk_pon_move_wizard"
+              sequence="20"/>
+</odoo>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Cliente de ejemplo Totalnet -->
+        <record id="totalnet_client_example_1" model="totalnet.client">
+            <field name="zona">ACARIGUA</field>
+            <field name="franquicia">OSPINO</field>
+            <field name="sector"></field>
+            <field name="ubicacion">CALLE PRINCIPAL</field>
+            <field name="contrato">00362198</field>
+            <field name="id_contrato">285871</field>
+            <field name="id_detalle_contr">362198</field>
+            <field name="id_recibo_contr">335843</field>
+            <field name="id_cliente">252337</field>
+            <field name="rif">V-8662832-</field>
+            <field name="razon_social">JOSE GREGORIO AGUERO TORRES</field>
+            <field name="nombre">JOSE GREGORIO</field>
+            <field name="apellido">AGUERO TORRES</field>
+            <field name="estado_servicio">ACTIVO</field>
+            <field name="servicio">INTERNET</field>
+            <field name="tipo_servicio">INT FTTH</field>
+            <field name="paquete">FTTH-RES-600MB-THE END</field>
+            <field name="referencia">OSPINO AVENIDA PAEZ ESQUINA CARLOS ALBERTO</field>
+            <field name="num_casa">LOCAL 2</field>
+            <field name="poste"></field>
+            <field name="precinto"></field>
+            <field name="direccion_ip">172.17.142.135</field>
+            <field name="direccion_mac">44FB4B421D16</field>
+            <field name="direccion_mac_trabajo">44:FB:4B:42:1D:16</field>
+            <field name="serial_decodificador"></field>
+            <field name="tlf_fijo">-2609593</field>
+            <field name="tlf_movil">412-2609181</field>
+            <field name="correo">AGUERO5000@GMAIL.COM</field>
+            <field name="financiado">NO</field>
+            <field name="fecha_registro">2022-07-27 20:40:00</field>
+            <field name="fecha_instalacion">2022-08-31 00:00:00</field>
+            <field name="fecha_ultimo_status">2025-07-21 09:29:00</field>
+            <field name="vendedor">SIXTO GABRIEL ALCALA ROMERO</field>
+            <field name="tarifa">3424.09</field>
+            <field name="moneda">BsD</field>
+        </record>
+
+        <!-- Cliente de ejemplo adicional -->
+        <record id="totalnet_client_example_2" model="totalnet.client">
+            <field name="zona">GUANARE</field>
+            <field name="franquicia">GUANARE CENTRO</field>
+            <field name="sector">ZONA CENTRAL</field>
+            <field name="ubicacion">AVENIDA PRINCIPAL</field>
+            <field name="contrato">00362199</field>
+            <field name="id_contrato">285872</field>
+            <field name="id_detalle_contr">362199</field>
+            <field name="id_recibo_contr">335844</field>
+            <field name="id_cliente">252338</field>
+            <field name="rif">V-12345678-</field>
+            <field name="razon_social">MARIA JOSE LOPEZ GARCIA</field>
+            <field name="nombre">MARIA JOSE</field>
+            <field name="apellido">LOPEZ GARCIA</field>
+            <field name="estado_servicio">ACTIVO</field>
+            <field name="servicio">COMBO</field>
+            <field name="tipo_servicio">COMBO FTTH</field>
+            <field name="paquete">FTTH-RES-100MB-TRIPLE PLAY</field>
+            <field name="referencia">GUANARE CENTRO ESQUINA PRINCIPAL</field>
+            <field name="num_casa">CASA 15</field>
+            <field name="poste">P-001</field>
+            <field name="precinto">PR-001</field>
+            <field name="direccion_ip">172.17.142.136</field>
+            <field name="direccion_mac">44FB4B421D17</field>
+            <field name="direccion_mac_trabajo">44:FB:4B:42:1D:17</field>
+            <field name="serial_decodificador">DEC001</field>
+            <field name="tlf_fijo">257-1234567</field>
+            <field name="tlf_movil">412-1234567</field>
+            <field name="correo">MARIA.LOPEZ@GMAIL.COM</field>
+            <field name="financiado">SI</field>
+            <field name="fecha_registro">2022-08-01 10:00:00</field>
+            <field name="fecha_instalacion">2022-08-15 14:00:00</field>
+            <field name="fecha_ultimo_status">2025-07-21 10:00:00</field>
+            <field name="vendedor">CARLOS ALBERTO MARTINEZ</field>
+            <field name="tarifa">4567.89</field>
+            <field name="moneda">BsD</field>
+        </record>
+
+        <!-- Cliente de ejemplo adicional -->
+        <record id="totalnet_client_example_3" model="totalnet.client">
+            <field name="zona">BARINAS</field>
+            <field name="franquicia">BARINAS SUR</field>
+            <field name="sector">ZONA SUR</field>
+            <field name="ubicacion">CALLE COMERCIAL</field>
+            <field name="contrato">00362200</field>
+            <field name="id_contrato">285873</field>
+            <field name="id_detalle_contr">362200</field>
+            <field name="id_recibo_contr">335845</field>
+            <field name="id_cliente">252339</field>
+            <field name="rif">V-87654321-</field>
+            <field name="razon_social">JUAN CARLOS RODRIGUEZ PEREZ</field>
+            <field name="nombre">JUAN CARLOS</field>
+            <field name="apellido">RODRIGUEZ PEREZ</field>
+            <field name="estado_servicio">SUSPENDIDO</field>
+            <field name="servicio">INTERNET</field>
+            <field name="tipo_servicio">INT FTTH</field>
+            <field name="paquete">FTTH-RES-200MB-BASIC</field>
+            <field name="referencia">BARINAS SUR CALLE COMERCIAL</field>
+            <field name="num_casa">LOCAL 8</field>
+            <field name="poste">P-002</field>
+            <field name="precinto">PR-002</field>
+            <field name="direccion_ip">172.17.142.137</field>
+            <field name="direccion_mac">44FB4B421D18</field>
+            <field name="direccion_mac_trabajo">44:FB:4B:42:1D:18</field>
+            <field name="serial_decodificador"></field>
+            <field name="tlf_fijo">273-9876543</field>
+            <field name="tlf_movil">414-9876543</field>
+            <field name="correo">JUAN.RODRIGUEZ@HOTMAIL.COM</field>
+            <field name="financiado">NO</field>
+            <field name="fecha_registro">2022-09-01 09:00:00</field>
+            <field name="fecha_instalacion">2022-09-10 16:00:00</field>
+            <field name="fecha_ultimo_status">2025-07-20 15:30:00</field>
+            <field name="vendedor">ANA MARIA GONZALEZ</field>
+            <field name="tarifa">2345.67</field>
+            <field name="moneda">BsD</field>
+        </record>
+
+    </data>
+</odoo> 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="acconts_payable_crm_acction_window" model="ir.actions.act_window">
+        <field name="name">Cuentas Por Pagar</field>
+        <field name="res_model">accounts.payable.crm</field>
+        <field name="view_mode">tree,form,graph</field>
+        <!-- <field name="arch" type="xml"></field> -->
+    </record>
+
+    <menuitem
+        id="acconts_payable_crm_acction_menu"
+        name="Comisiones"
+        action="crm_commissions.acconts_payable_crm_acction_window"
+        parent="crm.crm_menu_sales"
+        sequence="10"/>
+
+    <record id="acconts_payable_crm_view_tree" model="ir.ui.view">
+        <field name="name">acconts.payable.crm.view.tree</field>
+        <field name="model">accounts.payable.crm</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Comisiones" default_order="commission desc">
+                
+                <field name="oprtunity_id"  invisible="1"></field>
+                <field name="user_id" string="Vendedor"></field>
+                <field name="contact_name" string="Cliente"></field>
+                <field name="commission" sum="Total Comisión" widget="monetary" options="{'currency_field': 'company_currency'}"></field>
+                <field name="company_currency" invisible="1"/>
+                <field name="total_amounts" widget="monetary" sum="Total" string='Total Pagado'/>
+                <field name="total_amount" widget="monetary" invisible="1" sum="Total" string='Total Pagado'/>
+                <field name="faltan" string='Falta por Pagar' widget="monetary" sum="Total"/>
+                <field name="state" widget="statusbar"/>
+            </tree>
+        </field>
+    </record>
+    <record id="acconts_payable_crm_view_form" model="ir.ui.view">
+        <field name="name">acconts.payable.crm.view.form</field>
+        <field name="model">accounts.payable.crm</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <field name="state" 
+                    widget="statusbar"
+                    ></field>
+                    <button string="Registrar Pago" name="action_register_payment_crm" type="object" class="oe_highlight"/>
+                    
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="company_currency" invisible="1"/>
+                            <field name="oprtunity_id"></field>
+                            <field name ="user_id" string="Vendedor"></field>
+                            <field name="contact_name" string="Cliente"></field>
+                        </group>
+                        <group>
+                            <field name="commission"  widget="monetary" options="{'currency_field': 'company_currency'}"></field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="payment_register" string="Pagos Registrados">
+                            <field name="account_payment_commission_ids" 
+                            readonly="1"
+                              options="{'no_create': True, 'no_edit': True, 'no_open': True,'create': False}">
+                              
+                                
+                                <tree string="Pagos Realizados">
+                                    <field name="name" string="Nombre"></field>
+                                    <field name="accounts_payable_crm_id" invisible="1"/>
+                                    <field name="company_currency" invisible="1"></field>
+                                    <field name="amount"  widget="monetary" options="{'currency_field': 'company_currency'}" />
+                                    <field name="payment_date" />
+                                    <field name="communication" />
+                                    <field name="payment_method_line_id" />
+                                </tree>
+                                
+                            </field>
+                            <div id="total_ammount">
+                                <h5>
+                                    <label for='total_amount'>Total Pagado :</label>
+                                    <field name="total_amount"/>
+                                </h5>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+        <record id="accounts_payable_crm_view_graph" model="ir.ui.view">
+            <field name="name">accounts.payable.crm.graph</field>
+            <field name="model">accounts.payable.crm</field>
+            <field name="arch" type="xml">
+                <graph string="Pagos CRM" type="bar">
+                    <field name="create_date" type="row"/>
+                    <field name="total_amounts" type="measure"/>
+                    <field name="faltan" type="measure"/>
+                </graph>
+            </field>
+        </record>
+</odoo>

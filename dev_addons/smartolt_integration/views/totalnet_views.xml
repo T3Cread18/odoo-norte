@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Vista de lista para clientes Totalnet -->
+    <record id="view_totalnet_client_tree" model="ir.ui.view">
+        <field name="name">totalnet.client.tree</field>
+        <field name="model">totalnet.client</field>
+        <field name="arch" type="xml">
+            <tree string="Clientes Totalnet" decoration-info="estado_servicio in ['PENDIENTE', 'EXONERADO', 'POR RECONECTAR', 'POR INSTALAR', 'NO RECONECTADO']" decoration-warning="estado_servicio in ['SUSPENDIDO', 'POR CORTAR', 'POR SUSPENDER', 'BAJA TEMPORAL', 'POR REINSTALAR']" decoration-danger="estado_servicio in ['CANCELADO', 'CORTADO', 'BAJA TOTAL', 'RETIRADO']" decoration-success="estado_servicio == 'ACTIVO'">
+                <field name="contrato"/>
+                <field name="razon_social"/>
+                <field name="zona"/>
+                <field name="franquicia"/>
+                <field name="servicio"/>
+                <field name="paquete"/>
+                <field name="estado_servicio" widget="badge" decoration-info="estado_servicio in ['PENDIENTE', 'EXONERADO', 'POR RECONECTAR', 'POR INSTALAR', 'NO RECONECTADO']" decoration-warning="estado_servicio in ['SUSPENDIDO', 'POR CORTAR', 'POR SUSPENDER', 'BAJA TEMPORAL', 'POR REINSTALAR']" decoration-danger="estado_servicio in ['CANCELADO', 'CORTADO', 'BAJA TOTAL', 'RETIRADO']" decoration-success="estado_servicio == 'ACTIVO'"/>
+                <field name="direccion_ip"/>
+                <field name="direccion_mac"/>
+                <field name="tarifa" widget="monetary"/>
+                <field name="moneda"/>
+                <field name="fecha_registro"/>
+                <field name="vendedor"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de formulario para clientes Totalnet -->
+    <record id="view_totalnet_client_form" model="ir.ui.view">
+        <field name="name">totalnet.client.form</field>
+        <field name="model">totalnet.client</field>
+        <field name="arch" type="xml">
+            <form string="Cliente Totalnet">
+                <header>
+                    <button name="action_activar_servicio" string="Activar" type="object" class="oe_highlight" attrs="{'invisible': [('estado_servicio', '=', 'ACTIVO')]}"/>
+                    <button name="action_suspender_servicio" string="Suspender" type="object" class="oe_warning" attrs="{'invisible': [('estado_servicio', 'in', ['SUSPENDIDO', 'CANCELADO'])]}"/>
+                    <button name="action_cancelar_servicio" string="Cancelar" type="object" class="oe_danger" attrs="{'invisible': [('estado_servicio', '=', 'CANCELADO')]}"/>
+                    <field name="estado_servicio" widget="statusbar" statusbar_visible="ACTIVO,SUSPENDIDO,CANCELADO"/>
+                </header>
+                
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="razon_social" placeholder="Razón Social del Cliente"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Información del Cliente">
+                            <field name="id_cliente"/>
+                            <field name="rif"/>
+                            <field name="nombre"/>
+                            <field name="apellido"/>
+                            <field name="nombre_completo" readonly="1"/>
+                        </group>
+                        <group string="Ubicación">
+                            <field name="zona"/>
+                            <field name="franquicia"/>
+                            <field name="sector"/>
+                            <field name="ubicacion"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Contrato">
+                            <field name="contrato"/>
+                            <field name="id_contrato"/>
+                            <field name="id_detalle_contr"/>
+                            <field name="id_recibo_contr"/>
+                        </group>
+                        <group string="Servicio">
+                            <field name="servicio"/>
+                            <field name="tipo_servicio"/>
+                            <field name="paquete"/>
+                            <field name="referencia"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Dirección Física">
+                            <field name="num_casa"/>
+                            <field name="poste"/>
+                            <field name="precinto"/>
+                            <field name="direccion_completa" readonly="1"/>
+                        </group>
+                        <group string="Información Técnica">
+                            <field name="direccion_ip"/>
+                            <field name="direccion_mac"/>
+                            <field name="direccion_mac_trabajo"/>
+                            <field name="serial_decodificador"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Contacto">
+                            <field name="tlf_fijo"/>
+                            <field name="tlf_movil"/>
+                            <field name="correo"/>
+                        </group>
+                        <group string="Información Comercial">
+                            <field name="vendedor"/>
+                            <field name="tarifa" widget="monetary"/>
+                            <field name="moneda"/>
+                            <field name="financiado"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Fechas">
+                            <field name="fecha_registro"/>
+                            <field name="fecha_instalacion"/>
+                            <field name="fecha_ultimo_status"/>
+                        </group>
+                        <group string="Auditoría">
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                            <field name="create_uid"/>
+                            <field name="write_uid"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Notas" name="notes">
+                            <field name="active"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de búsqueda para clientes Totalnet -->
+    <record id="view_totalnet_client_search" model="ir.ui.view">
+        <field name="name">totalnet.client.search</field>
+        <field name="model">totalnet.client</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Clientes Totalnet">
+                <field name="contrato"/>
+                <field name="razon_social"/>
+                <field name="rif"/>
+                <field name="zona"/>
+                <field name="franquicia"/>
+                <field name="servicio"/>
+                <field name="estado_servicio"/>
+                <field name="vendedor"/>
+                <field name="correo"/>
+                
+                <filter string="Activos" name="activos" domain="[('estado_servicio', '=', 'ACTIVO')]"/>
+                <filter string="Suspendidos" name="suspendidos" domain="[('estado_servicio', '=', 'SUSPENDIDO')]"/>
+                <filter string="Cancelados" name="cancelados" domain="[('estado_servicio', '=', 'CANCELADO')]"/>
+                <filter string="Pendientes" name="pendientes" domain="[('estado_servicio', '=', 'PENDIENTE')]"/>
+                <filter string="Cortados" name="cortados" domain="[('estado_servicio', '=', 'CORTADO')]"/>
+                <filter string="Por Cortar" name="por_cortar" domain="[('estado_servicio', '=', 'POR CORTAR')]"/>
+                <filter string="Por Suspender" name="por_suspender" domain="[('estado_servicio', '=', 'POR SUSPENDER')]"/>
+                <filter string="Exonerados" name="exonerados" domain="[('estado_servicio', '=', 'EXONERADO')]"/>
+                <filter string="Por Reconectar" name="por_reconectar" domain="[('estado_servicio', '=', 'POR RECONECTAR')]"/>
+                <filter string="Por Instalar" name="por_instalar" domain="[('estado_servicio', '=', 'POR INSTALAR')]"/>
+                <filter string="Baja Total" name="baja_total" domain="[('estado_servicio', '=', 'BAJA TOTAL')]"/>
+                <filter string="Baja Temporal" name="baja_temporal" domain="[('estado_servicio', '=', 'BAJA TEMPORAL')]"/>
+                <filter string="Por Reinstalar" name="por_reinstalar" domain="[('estado_servicio', '=', 'POR REINSTALAR')]"/>
+                <filter string="No Reconectado" name="no_reconectado" domain="[('estado_servicio', '=', 'NO RECONECTADO')]"/>
+                <filter string="Retirado" name="retirado" domain="[('estado_servicio', '=', 'RETIRADO')]"/>
+                
+                <separator/>
+                <filter string="Internet" name="internet" domain="[('servicio', '=', 'INTERNET')]"/>
+                <filter string="TV" name="tv" domain="[('servicio', '=', 'TV')]"/>
+                <filter string="Televisión" name="television" domain="[('servicio', '=', 'TELEVISION')]"/>
+                <filter string="Internet TV" name="internet_tv" domain="[('servicio', '=', 'INTERNET TV')]"/>
+                <filter string="Telefonía" name="telefonia" domain="[('servicio', '=', 'TELEFONIA')]"/>
+                <filter string="Combo" name="combo" domain="[('servicio', '=', 'COMBO')]"/>
+                
+                <separator/>
+                <filter string="ACARIGUA" name="acarigua" domain="[('zona', '=', 'ACARIGUA')]"/>
+                <filter string="GUANARE" name="guanare" domain="[('zona', '=', 'GUANARE')]"/>
+                <filter string="BARINAS" name="barinas" domain="[('zona', '=', 'BARINAS')]"/>
+                <filter string="APURE" name="apure" domain="[('zona', '=', 'APURE')]"/>
+                
+                <separator/>
+                <filter string="Financiados" name="financiados" domain="[('financiado', '=', 'SI')]"/>
+                <filter string="No Financiados" name="no_financiados" domain="[('financiado', '=', 'NO')]"/>
+                
+                <group expand="0" string="Agrupar por">
+                    <filter string="Estado" name="group_estado" context="{'group_by': 'estado_servicio'}"/>
+                    <filter string="Zona" name="group_zona" context="{'group_by': 'zona'}"/>
+                    <filter string="Servicio" name="group_servicio" context="{'group_by': 'servicio'}"/>
+                    <filter string="Franquicia" name="group_franquicia" context="{'group_by': 'franquicia'}"/>
+                    <filter string="Vendedor" name="group_vendedor" context="{'group_by': 'vendedor'}"/>
+                    <filter string="Moneda" name="group_moneda" context="{'group_by': 'moneda'}"/>
+                    <filter string="Fecha Registro" name="group_fecha_registro" context="{'group_by': 'fecha_registro:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vista kanban para clientes Totalnet -->
+    <record id="view_totalnet_client_kanban" model="ir.ui.view">
+        <field name="name">totalnet.client.kanban</field>
+        <field name="model">totalnet.client</field>
+        <field name="arch" type="xml">
+            <kanban string="Clientes Totalnet" class="o_kanban_small_column" default_group_by="estado_servicio">
+                <field name="contrato"/>
+                <field name="razon_social"/>
+                <field name="zona"/>
+                <field name="servicio"/>
+                <field name="paquete"/>
+                <field name="estado_servicio"/>
+                <field name="tarifa"/>
+                <field name="moneda"/>
+                <field name="fecha_registro"/>
+                <field name="vendedor"/>
+                <field name="correo"/>
+                
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="razon_social"/>
+                                </strong>
+                                <div class="o_kanban_record_subtitle">
+                                    <field name="zona"/> - <field name="servicio"/>
+                                </div>
+                                <div class="o_kanban_record_subtitle">
+                                    <small>IP: <field name="direccion_ip"/> | MAC: <field name="direccion_mac"/></small>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <span class="badge badge-pill" t-attf-class="badge-#{record.estado_servicio.value == 'ACTIVO' ? 'success' : record.estado_servicio.value == 'SUSPENDIDO' ? 'warning' : record.estado_servicio.value == 'CANCELADO' ? 'danger' : record.estado_servicio.value == 'CORTADO' ? 'danger' : record.estado_servicio.value == 'POR CORTAR' ? 'warning' : record.estado_servicio.value == 'POR SUSPENDER' ? 'warning' : record.estado_servicio.value == 'EXONERADO' ? 'info' : record.estado_servicio.value == 'POR RECONECTAR' ? 'primary' : record.estado_servicio.value == 'POR INSTALAR' ? 'info' : record.estado_servicio.value == 'BAJA TOTAL' ? 'danger' : record.estado_servicio.value == 'BAJA TEMPORAL' ? 'warning' : record.estado_servicio.value == 'POR REINSTALAR' ? 'warning' : record.estado_servicio.value == 'NO RECONECTADO' ? 'info' : record.estado_servicio.value == 'RETIRADO' ? 'danger' : 'info'}">
+                                            <field name="estado_servicio"/>
+                                        </span>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="tarifa" widget="monetary"/>
+                                        <field name="moneda"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Acción para abrir la vista de clientes Totalnet -->
+    <record id="action_totalnet_client" model="ir.actions.act_window">
+        <field name="name">Clientes Totalnet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">totalnet.client</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_activos': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Crea tu primer cliente Totalnet!
+            </p>
+            <p>
+                Aquí podrás gestionar todos los clientes del sistema Totalnet con información completa
+                de contratos, servicios, ubicaciones y estados.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menú para clientes Totalnet -->
+    <menuitem id="menu_totalnet_client"
+              name="Clientes Totalnet"
+              parent="menu_smartolt_management"
+              action="action_totalnet_client"
+              sequence="50"/>
+
+</odoo> 

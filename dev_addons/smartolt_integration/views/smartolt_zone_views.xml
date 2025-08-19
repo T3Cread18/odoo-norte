@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista de formulario para Zonas -->
+    <record id="view_smartolt_zone_form" model="ir.ui.view">
+        <field name="name">smartolt.zone.form</field>
+        <field name="model">smartolt.zone</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_get_zone_details" string="Obtener Detalles" type="object" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre de la Zona"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="zone_id"/>
+                            <field name="olt_id"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="location"/>
+                            <field name="coordinates"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="ODBs" name="odbs">
+                            <field name="odb_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="odb_id"/>
+                                    <field name="status"/>
+                                    <field name="location"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="ONUs" name="onus">
+                            <field name="onu_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="serial_number"/>
+                                    <field name="status"/>
+                                    <field name="olt_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de lista para Zonas -->
+    <record id="view_smartolt_zone_tree" model="ir.ui.view">
+        <field name="name">smartolt.zone.tree</field>
+        <field name="model">smartolt.zone</field>
+        <field name="arch" type="xml">
+                            <tree>
+                    <field name="name"/>
+                    <field name="zone_id"/>
+                    <field name="olt_id"/>
+                    <field name="status"/>
+                    <field name="location"/>
+                    <field name="description"/>
+                </tree>
+        </field>
+    </record>
+
+    <!-- Vista de búsqueda para Zonas -->
+    <record id="view_smartolt_zone_search" model="ir.ui.view">
+        <field name="name">smartolt.zone.search</field>
+        <field name="model">smartolt.zone</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="zone_id"/>
+                <field name="olt_id"/>
+                <field name="location"/>
+                <filter string="Activa" name="active" domain="[('status', '=', 'active')]"/>
+                <filter string="Inactiva" name="inactive" domain="[('status', '=', 'inactive')]"/>
+                <filter string="Mantenimiento" name="maintenance" domain="[('status', '=', 'maintenance')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Estado" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="OLT" name="group_olt" context="{'group_by': 'olt_id'}"/>
+                    <filter string="Ubicación" name="group_location" context="{'group_by': 'location'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+</odoo>
