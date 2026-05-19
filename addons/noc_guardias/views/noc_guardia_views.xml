@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vista Formulario -->
+    <record id="view_noc_guardia_form" model="ir.ui.view">
+        <field name="name">noc.guardia.form</field>
+        <field name="model">noc.guardia</field>
+        <field name="arch" type="xml">
+            <form string="Guardia NOC">
+                <sheet>
+                    <group>
+                        <group string="Personal">
+                            <field name="employee_id"/>
+                            <field name="turno"/>
+                        </group>
+                        <group string="Horario">
+                            <field name="date_start"/>
+                            <field name="date_stop"/>
+                        </group>
+                    </group>
+                    <group string="Notas">
+                        <field name="notas" nolabel="1" placeholder="Observaciones de la guardia..."/>
+                    </group>
+                    <notebook>
+                        <page string="Actividades / Tareas" name="tareas">
+                            <field name="tarea_ids">
+                                <list editable="bottom"
+                                      decoration-success="estado=='completada'"
+                                      decoration-muted="estado=='cancelada'"
+                                      decoration-danger="estado=='pendiente' and prioridad=='2'">
+                                    <field name="prioridad" widget="priority"/>
+                                    <field name="name"/>
+                                    <field name="tipo"/>
+                                    <field name="departamento_id" optional="show"/>
+                                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
+                                    <field name="employee_id"/>
+                                    <field name="date_start"/>
+                                    <field name="date_stop" optional="show"/>
+                                    <field name="estado"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter reload_on_follower="True"/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Lista -->
+    <record id="view_noc_guardia_list" model="ir.ui.view">
+        <field name="name">noc.guardia.list</field>
+        <field name="model">noc.guardia</field>
+        <field name="arch" type="xml">
+            <list string="Guardias NOC" decoration-info="turno=='manana'" decoration-warning="turno=='tarde'" decoration-danger="turno=='noche'">
+                <field name="employee_id"/>
+                <field name="turno"/>
+                <field name="date_start"/>
+                <field name="date_stop"/>
+                <field name="notas"/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista Calendario -->
+    <record id="view_noc_guardia_calendar" model="ir.ui.view">
+        <field name="name">noc.guardia.calendar</field>
+        <field name="model">noc.guardia</field>
+        <field name="arch" type="xml">
+            <calendar string="Guardias NOC"
+                      date_start="date_start"
+                      date_stop="date_stop"
+                      all_day="allday"
+                      color="employee_id"
+                      mode="month"
+                      quick_create="False">
+                <field name="employee_id" filters="1" avatar_field="image_128"/>
+                <field name="turno"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_noc_guardia" model="ir.actions.act_window">
+        <field name="name">Guardias NOC</field>
+        <field name="res_model">noc.guardia</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="context">{'search_default_filter_my_guardias': 0}</field>
+    </record>
+
+</odoo>

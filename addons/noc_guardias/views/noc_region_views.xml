@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Acciones definidas primero para que el formulario pueda referenciarlas -->
+
+    <record id="action_noc_region" model="ir.actions.act_window">
+        <field name="name">Regiones NOC</field>
+        <field name="res_model">noc.region</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_noc_region_employees" model="ir.actions.act_window">
+        <field name="name">Ingenieros de la Región</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('noc_region_id', '=', active_id)]</field>
+    </record>
+
+    <record id="view_noc_region_form" model="ir.ui.view">
+        <field name="name">noc.region.form</field>
+        <field name="model">noc.region</field>
+        <field name="arch" type="xml">
+            <form string="Región NOC">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_noc_region_employees)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-users">
+                            <field name="employee_count" widget="statinfo" string="Ingenieros"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre de la región..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="color" widget="color_picker"/>
+                        <field name="descripcion" placeholder="Descripción de la región..."/>
+                    </group>
+                    <notebook>
+                        <page string="Ingenieros" name="ingenieros">
+                            <field name="employee_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="job_title"/>
+                                    <field name="department_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_noc_region_list" model="ir.ui.view">
+        <field name="name">noc.region.list</field>
+        <field name="model">noc.region</field>
+        <field name="arch" type="xml">
+            <list string="Regiones NOC">
+                <field name="name"/>
+                <field name="descripcion"/>
+                <field name="employee_count" string="Ingenieros"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>

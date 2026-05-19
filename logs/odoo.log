@@ -1,0 +1,61 @@
+2026-04-24 18:05:13,992 1 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:05:13,992 1 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:05:13,992 1 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-04-24 18:05:13,992 1 INFO ? odoo: Odoo version 19.0-20260421 
+2026-04-24 18:05:13,992 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-04-24 18:05:13,993 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+2026-04-24 18:05:13,993 1 INFO ? odoo: database: odoo@db:5432 
+2026-04-24 18:05:14,230 1 INFO ? odoo.service.server: HTTP service (werkzeug) running on 0.0.0.0:8069 
+2026-04-24 18:05:14,232 30 INFO ? odoo.service.server: Worker WorkerHTTP (30) alive 
+2026-04-24 18:05:14,234 31 INFO ? odoo.service.server: Worker WorkerHTTP (31) alive 
+2026-04-24 18:05:14,236 34 INFO ? odoo.service.server: Worker WorkerCron (34) alive 
+2026-04-24 18:05:14,626 32 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:05:14,626 32 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:05:14,626 32 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-04-24 18:05:14,627 32 INFO ? odoo: Odoo version 19.0-20260421 
+2026-04-24 18:05:14,627 32 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-04-24 18:05:14,627 32 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+2026-04-24 18:05:14,627 32 INFO ? odoo: database: odoo@db:5432 
+2026-04-24 18:05:14,868 32 INFO ? odoo.service.server: Evented Service (longpolling) running on 0.0.0.0:8072 
+2026-04-24 18:06:15,368 1 INFO ? odoo.service.server: Stopping workers gracefully 
+2026-04-24 18:06:15,368 30 INFO ? odoo.service.server: Worker (30) exiting. request_count: 0, registry count: 0. 
+2026-04-24 18:06:15,368 31 INFO ? odoo.service.server: Worker (31) exiting. request_count: 0, registry count: 0. 
+2026-04-24 18:06:15,409 34 INFO ? odoo.service.server: Worker (34) exiting. request_count: 0, registry count: 0. 
+2026-04-24 18:06:16,392 1 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:06:16,392 1 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:06:16,393 1 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-04-24 18:06:16,393 1 INFO ? odoo: Odoo version 19.0-20260421 
+2026-04-24 18:06:16,393 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-04-24 18:06:16,393 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+2026-04-24 18:06:16,393 1 INFO ? odoo: database: odoo@db:5432 
+2026-04-24 18:06:16,619 1 INFO ? odoo.service.server: HTTP service (werkzeug) running on 0.0.0.0:8069 
+2026-04-24 18:06:16,622 30 INFO ? odoo.service.server: Worker WorkerHTTP (30) alive 
+2026-04-24 18:06:16,623 31 INFO ? odoo.service.server: Worker WorkerHTTP (31) alive 
+2026-04-24 18:06:16,625 34 INFO ? odoo.service.server: Worker WorkerCron (34) alive 
+2026-04-24 18:06:16,994 32 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:06:16,994 32 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-04-24 18:06:16,994 32 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-04-24 18:06:16,995 32 INFO ? odoo: Odoo version 19.0-20260421 
+2026-04-24 18:06:16,995 32 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-04-24 18:06:16,995 32 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+2026-04-24 18:06:16,995 32 INFO ? odoo: database: odoo@db:5432 
+2026-04-24 18:06:17,252 32 INFO ? odoo.service.server: Evented Service (longpolling) running on 0.0.0.0:8072 
+2026-04-24 18:10:27,839 1 INFO ? odoo.service.server: Stopping workers gracefully 
+2026-04-24 18:10:27,839 30 INFO ? odoo.service.server: Worker (30) exiting. request_count: 0, registry count: 0. 
+2026-04-24 18:10:27,839 31 INFO ? odoo.service.server: Worker (31) exiting. request_count: 0, registry count: 0. 
+2026-04-24 18:10:27,879 34 INFO ? odoo.service.server: Worker (34) exiting. request_count: 0, registry count: 0. 
+2026-04-24 18:10:28,884 1 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-04-24 18:10:28,884 1 INFO ? odoo: Odoo version 19.0-20260421 
+2026-04-24 18:10:28,884 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-04-24 18:10:28,885 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/mnt/extra-addons', '/usr/lib/python3/dist-packages/addons']) 
+2026-04-24 18:10:28,885 1 INFO ? odoo: database: odoo@db:5432 
+2026-04-24 18:10:29,102 1 INFO ? odoo.service.server: HTTP service (werkzeug) running on 0.0.0.0:8069 
+2026-04-24 18:10:29,104 30 INFO ? odoo.service.server: Worker WorkerHTTP (30) alive 
+2026-04-24 18:10:29,106 31 INFO ? odoo.service.server: Worker WorkerHTTP (31) alive 
+2026-04-24 18:10:29,108 34 INFO ? odoo.service.server: Worker WorkerCron (34) alive 
+2026-04-24 18:10:29,481 32 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-04-24 18:10:29,481 32 INFO ? odoo: Odoo version 19.0-20260421 
+2026-04-24 18:10:29,482 32 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-04-24 18:10:29,482 32 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/mnt/extra-addons', '/usr/lib/python3/dist-packages/addons']) 
+2026-04-24 18:10:29,482 32 INFO ? odoo: database: odoo@db:5432 
+2026-04-24 18:10:29,716 32 INFO ? odoo.service.server: Evented Service (longpolling) running on 0.0.0.0:8072 

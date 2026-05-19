@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vista Formulario -->
+    <record id="view_noc_tarea_form" model="ir.ui.view">
+        <field name="name">noc.tarea.form</field>
+        <field name="model">noc.tarea</field>
+        <field name="arch" type="xml">
+            <form string="Actividad / Tarea NOC">
+                <header>
+                    <field name="estado" widget="statusbar"
+                           statusbar_visible="pendiente,en_progreso,completada"
+                           options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Título de la actividad..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Información">
+                            <field name="tipo"/>
+                            <field name="prioridad" widget="priority"/>
+                            <field name="departamento_id"/>
+                            <field name="employee_id"/>
+                            <field name="guardia_id"/>
+                        </group>
+                        <group string="Fechas">
+                            <field name="allday"/>
+                            <field name="date_start" widget="datetime" invisible="allday"/>
+                            <field name="date_stop" widget="datetime" invisible="allday"/>
+                            <field name="date_start" widget="date" string="Fecha" invisible="not allday"/>
+                        </group>
+                    </group>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <notebook>
+                        <page string="Descripción">
+                            <field name="descripcion" placeholder="Descripción detallada..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter reload_on_follower="True"/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Lista -->
+    <record id="view_noc_tarea_list" model="ir.ui.view">
+        <field name="name">noc.tarea.list</field>
+        <field name="model">noc.tarea</field>
+        <field name="arch" type="xml">
+            <list string="Actividades / Tareas NOC"
+                  decoration-success="estado=='completada'"
+                  decoration-muted="estado=='cancelada'"
+                  decoration-danger="estado=='pendiente' and prioridad=='2'"
+                  decoration-warning="estado=='pendiente' and prioridad=='1'">
+                <field name="prioridad" widget="priority" optional="show"/>
+                <field name="name"/>
+                <field name="tipo"/>
+                <field name="departamento_id" optional="show"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
+                <field name="employee_id" optional="show"/>
+                <field name="date_start"/>
+                <field name="date_stop" optional="show"/>
+                <field name="estado"/>
+                <field name="guardia_id" optional="show"/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista Calendario -->
+    <record id="view_noc_tarea_calendar" model="ir.ui.view">
+        <field name="name">noc.tarea.calendar</field>
+        <field name="model">noc.tarea</field>
+        <field name="arch" type="xml">
+            <calendar string="Actividades / Tareas NOC"
+                      date_start="date_start"
+                      date_stop="date_stop"
+                      all_day="allday"
+                      color="employee_id"
+                      mode="month"
+                      quick_create="False">
+                <field name="employee_id" filters="1" avatar_field="image_128"/>
+                <field name="tipo"/>
+                <field name="estado"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_noc_tarea" model="ir.actions.act_window">
+        <field name="name">Actividades y Tareas NOC</field>
+        <field name="res_model">noc.tarea</field>
+        <field name="view_mode">calendar,list,form</field>
+    </record>
+
+</odoo>

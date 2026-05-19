@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_noc_root"
+              name="NOC"
+              sequence="50"
+              web_icon="noc_guardias,static/description/icon.png"/>
+
+    <menuitem id="menu_noc_guardias"
+              name="Guardias"
+              parent="menu_noc_root"
+              action="action_noc_guardia"
+              sequence="10"/>
+
+    <menuitem id="menu_noc_tareas"
+              name="Actividades y Tareas"
+              parent="menu_noc_root"
+              action="action_noc_tarea"
+              sequence="20"/>
+
+    <menuitem id="menu_noc_configuracion"
+              name="Configuración"
+              parent="menu_noc_root"
+              sequence="90"/>
+
+    <menuitem id="menu_noc_regiones"
+              name="Regiones"
+              parent="menu_noc_configuracion"
+              action="action_noc_region"
+              sequence="10"/>
+
+    <menuitem id="menu_noc_departamentos"
+              name="Departamentos"
+              parent="menu_noc_configuracion"
+              action="action_noc_departamento"
+              sequence="20"/>
+
+    <menuitem id="menu_noc_etiquetas"
+              name="Etiquetas"
+              parent="menu_noc_configuracion"
+              action="action_noc_tag"
+              sequence="30"/>
+
+</odoo>

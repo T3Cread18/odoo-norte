@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_noc_guardia_user,noc.guardia.user,model_noc_guardia,base.group_user,1,1,1,1
+access_noc_tarea_user,noc.tarea.user,model_noc_tarea,base.group_user,1,1,1,1
+access_noc_region_user,noc.region.user,model_noc_region,base.group_user,1,1,1,1
+access_noc_tag_user,noc.tag.user,model_noc_tag,base.group_user,1,1,1,1
+access_noc_departamento_user,noc.departamento.user,model_noc_departamento,base.group_user,1,1,1,1
