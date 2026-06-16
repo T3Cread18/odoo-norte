@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Oculta la pestaña "Tax Info / Fiscalidad" del formulario de vehículo -->
+    <record id="fleet_vehicle_form_atc_no_fiscal" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.atc.no.fiscal</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <page name="page_tax_info" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+        </field>
+    </record>
+</odoo>

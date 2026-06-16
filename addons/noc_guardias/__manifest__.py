@@ -1,11 +1,12 @@
 {
     'name': 'NOC - Guardias',
-    'version': '19.0.1.2.0',
+    'version': '19.0.1.3.0',
     'summary': 'Gestión de guardias, actividades y tareas del personal NOC',
     'category': 'Human Resources',
     'author': 'Ing Pablo Ramìrez',
     'depends': ['hr', 'calendar', 'mail'],
     'data': [
+        'security/noc_security.xml',
         'security/ir.model.access.csv',
         'views/noc_region_views.xml',
         'views/noc_tag_views.xml',

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Restringe los menús estándar al grupo "Menús completos".
+         Así el rol ATC (que no lo tiene) deja de verlos. -->
+    <record id="mail.menu_root_discuss" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('group_menus_completos')])]"/>
+    </record>
+    <record id="calendar.mail_menu_calendar" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('group_menus_completos')])]"/>
+    </record>
+    <record id="contacts.menu_contacts" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('group_menus_completos')])]"/>
+    </record>
+    <record id="project_todo.menu_todo_todos" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('group_menus_completos')])]"/>
+    </record>
+    <!-- NOC: visible para todos los usuarios internos (sin restricción de menú). -->
+    <record id="base.menu_management" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('group_menus_completos')])]"/>
+    </record>
+    <!-- Empleados: conservamos los grupos de RRHH/Admin, solo quitamos
+         "Usuario interno" y añadimos "Menús completos" para ocultarlo al rol ATC. -->
+    <record id="hr.menu_hr_root" model="ir.ui.menu">
+        <field name="group_ids" eval="[(3, ref('base.group_user')), (4, ref('group_menus_completos'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="activity_type_visita_tecnica" model="mail.activity.type">
+            <field name="name">Visita Técnica</field>
+            <field name="icon">fa-wrench</field>
+            <field name="category">default</field>
+            <field name="delay_count">1</field>
+            <field name="delay_unit">days</field>
+            <field name="delay_from">current_date</field>
+            <field name="decoration_type">warning</field>
+        </record>
+    </data>
+</odoo>

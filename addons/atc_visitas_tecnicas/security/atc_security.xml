@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_atc" model="ir.module.category">
+        <field name="name">ATC</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="privilege_atc" model="res.groups.privilege">
+        <field name="name">Visitas Técnicas</field>
+        <field name="category_id" ref="module_category_atc"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Grupo "llave": quien lo tiene ve los menús estándar.
+         El rol ATC NO lo tiene, por eso solo ve Visitas Técnicas. -->
+    <record id="group_menus_completos" model="res.groups">
+        <field name="name">Menús completos</field>
+        <field name="comment">Permite ver los menús estándar (Discuss, Contactos, Calendario, To-do, NOC, Apps). Los usuarios internos que NO tengan este grupo (p. ej. el rol ATC / Visitas Técnicas) no verán esos menús. Asígnalo a todo usuario que deba ver la interfaz completa.</field>
+    </record>
+
+    <!-- Rol del operador ATC -->
+    <record id="group_atc_visitas_user" model="res.groups">
+        <field name="name">ATC / Visitas Técnicas</field>
+        <field name="privilege_id" ref="privilege_atc"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Rol de operador ATC: solo ve y gestiona el menú Visitas Técnicas (no ve el resto de la interfaz).</field>
+    </record>
+</odoo>

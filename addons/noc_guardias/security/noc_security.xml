@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Categoría de módulo NOC -->
+        <record id="module_category_noc" model="ir.module.category">
+            <field name="name">NOC</field>
+            <field name="description">Acceso al módulo NOC - Guardias y Tareas</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Privilegio NOC (agrupa los roles como selección en Ajustes) -->
+        <record id="privilege_noc" model="res.groups.privilege">
+            <field name="name">NOC</field>
+            <field name="category_id" ref="module_category_noc"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Rol: Usuario NOC (operar guardias y tareas) -->
+        <record id="group_noc_user" model="res.groups">
+            <field name="name">Usuario</field>
+            <field name="privilege_id" ref="privilege_noc"/>
+            <field name="sequence">10</field>
+            <field name="comment">Puede gestionar guardias y tareas del NOC.</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Rol: Responsable NOC (además configuración: regiones, departamentos, etiquetas) -->
+        <record id="group_noc_manager" model="res.groups">
+            <field name="name">Responsable</field>
+            <field name="privilege_id" ref="privilege_noc"/>
+            <field name="sequence">20</field>
+            <field name="comment">Acceso completo al NOC, incluida la configuración.</field>
+            <field name="implied_ids" eval="[(4, ref('group_noc_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

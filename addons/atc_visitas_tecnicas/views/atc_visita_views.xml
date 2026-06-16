@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FORMULARIO con chatter (mensajes, notas, historial) -->
+    <record id="view_atc_visita_form" model="ir.ui.view">
+        <field name="name">atc.visita.form</field>
+        <field name="model">atc.visita</field>
+        <field name="arch" type="xml">
+            <form string="Visita Técnica">
+                <header>
+                    <button name="action_abrir_asignar" type="object"
+                            string="Asignar técnico" class="btn-primary"
+                            invisible="estado == 'realizada'"/>
+                    <button name="action_marcar_realizada" type="object"
+                            string="Marcar realizada" class="btn-primary"
+                            invisible="estado == 'realizada'"/>
+                    <button name="action_marcar_pendiente" type="object"
+                            string="Reabrir" class="btn-secondary"
+                            invisible="estado != 'realizada'"/>
+                    <field name="estado" widget="statusbar"
+                           options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Referencia (puedes editarla)"/></h1>
+                    </div>
+                    <group>
+                        <group string="Cliente">
+                            <field name="cedula"
+                                   placeholder="Escribe la cédula y se traerá el cliente"/>
+                            <field name="nombre"
+                                   placeholder="Nombre del cliente (si la cédula es nueva, se crea el contacto)"/>
+                            <field name="cliente_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Visita">
+                            <field name="tecnico_asignado_ids" widget="many2many_tags"
+                                   placeholder="Escribe un nombre para crear el técnico"/>
+                            <field name="vehiculo_id" options="{'no_quick_create': True}"/>
+                            <field name="tecnico_id" widget="many2one_avatar_user"/>
+                            <field name="fecha"/>
+                            <field name="zona_id"/>
+                            <field name="direccion"/>
+                            <field name="tag_ids" widget="many2many_tags"
+                                   options="{'color_field': 'color'}"/>
+                        </group>
+                    </group>
+                    <separator string="Descripción"/>
+                    <field name="descripcion" widget="html"
+                           placeholder="Detalle de la visita: observaciones, trabajo realizado, materiales, etc."/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- WIZARD: asignar técnico(s) -->
+    <record id="view_atc_visita_asignar_form" model="ir.ui.view">
+        <field name="name">atc.visita.asignar.form</field>
+        <field name="model">atc.visita.asignar</field>
+        <field name="arch" type="xml">
+            <form string="Asignar técnico">
+                <group>
+                    <field name="visita_id" invisible="1"/>
+                    <field name="tecnico_asignado_ids" widget="many2many_tags"
+                           placeholder="Escribe un nombre para crear el técnico"/>
+                    <field name="vehiculo_id" options="{'no_quick_create': True}"/>
+                </group>
+                <footer>
+                    <button name="action_asignar" type="object"
+                            string="Asignar" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- LISTA -->
+    <record id="view_atc_visita_list" model="ir.ui.view">
+        <field name="name">atc.visita.list</field>
+        <field name="model">atc.visita</field>
+        <field name="arch" type="xml">
+            <list string="Visitas Técnicas" decoration-muted="estado == 'realizada'">
+                <field name="fecha"/>
+                <field name="cedula"/>
+                <field name="nombre"/>
+                <field name="cliente_id" optional="hide"/>
+                <field name="zona_id"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
+                <field name="direccion" optional="show"/>
+                <field name="tecnico_asignado_ids" widget="many2many_tags" optional="show"/>
+                <field name="vehiculo_id" optional="hide"/>
+                <field name="tecnico_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="estado" widget="badge"
+                       decoration-success="estado == 'realizada'"
+                       decoration-info="estado == 'asignada'"
+                       decoration-warning="estado == 'pendiente'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- KANBAN por etapas -->
+    <record id="view_atc_visita_kanban" model="ir.ui.view">
+        <field name="name">atc.visita.kanban</field>
+        <field name="model">atc.visita</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="estado" class="o_kanban_small_column">
+                <field name="estado"/>
+                <field name="nombre"/>
+                <field name="cedula"/>
+                <field name="zona_id"/>
+                <field name="tag_ids"/>
+                <field name="tecnico_asignado_ids"/>
+                <field name="vehiculo_id"/>
+                <field name="tecnico_id"/>
+                <field name="fecha"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="fw-bold fs-6"><field name="nombre"/></div>
+                        <div t-if="record.cedula.value" class="text-muted small">CI: <field name="cedula"/></div>
+                        <div t-if="record.zona_id.value" class="small"><i class="fa fa-map-marker me-1" title="Zona"/><field name="zona_id"/></div>
+                        <div t-if="record.vehiculo_id.value" class="small"><i class="fa fa-car me-1" title="Vehículo"/><field name="vehiculo_id"/></div>
+                        <field name="tecnico_asignado_ids" widget="many2many_tags"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        <footer class="align-items-center">
+                            <field name="fecha"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- BÚSQUEDA -->
+    <record id="view_atc_visita_search" model="ir.ui.view">
+        <field name="name">atc.visita.search</field>
+        <field name="model">atc.visita</field>
+        <field name="arch" type="xml">
+            <search string="Visitas Técnicas">
+                <field name="cedula"/>
+                <field name="nombre"/>
+                <field name="cliente_id"/>
+                <field name="zona_id"/>
+                <field name="tecnico_asignado_ids"/>
+                <field name="vehiculo_id"/>
+                <field name="tecnico_id"/>
+                <filter string="Pendiente" name="f_pendiente" domain="[('estado','=','pendiente')]"/>
+                <filter string="Asignada" name="f_asignada" domain="[('estado','=','asignada')]"/>
+                <filter string="Realizada" name="f_realizada" domain="[('estado','=','realizada')]"/>
+                <separator/>
+                <filter string="Asignadas a mí" name="f_asignadas_mias" domain="[('tecnico_asignado_ids.user_id','=',uid)]"/>
+                <filter string="Atendidas por mí" name="f_mias" domain="[('tecnico_id','=',uid)]"/>
+                <separator/>
+                <group>
+                    <filter string="Estado" name="g_estado" context="{'group_by':'estado'}"/>
+                    <filter string="Zona" name="g_zona" context="{'group_by':'zona_id'}"/>
+                    <filter string="Asignado a" name="g_asignado" context="{'group_by':'tecnico_asignado_ids'}"/>
+                    <filter string="Vehículo" name="g_vehiculo" context="{'group_by':'vehiculo_id'}"/>
+                    <filter string="Atendido por" name="g_tecnico" context="{'group_by':'tecnico_id'}"/>
+                    <filter string="Cliente ISP" name="g_cliente" context="{'group_by':'cliente_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_atc_visita" model="ir.actions.act_window">
+        <field name="name">Visitas Técnicas</field>
+        <field name="res_model">atc.visita</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="view_atc_visita_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aún no hay visitas técnicas registradas.</p>
+            <p>Crea una visita para llevar el control de las atenciones a clientes del ISP.</p>
+        </field>
+    </record>
+</odoo>

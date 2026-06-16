@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_atc_root" name="Visitas Técnicas"
+              web_icon="mail,static/description/icon.png" sequence="50"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+
+    <menuitem id="menu_atc_visitas" name="Visitas Técnicas"
+              parent="menu_atc_root"
+              action="action_atc_visita" sequence="10"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+
+    <menuitem id="menu_atc_config" name="Configuración"
+              parent="menu_atc_root" sequence="90"
+              groups="group_menus_completos"/>
+
+    <menuitem id="menu_atc_zonas" name="Zonas"
+              parent="menu_atc_config"
+              action="action_atc_zona" sequence="10"
+              groups="group_menus_completos"/>
+
+    <menuitem id="menu_atc_etiquetas" name="Etiquetas"
+              parent="menu_atc_config"
+              action="action_atc_visita_tag" sequence="20"
+              groups="group_menus_completos"/>
+</odoo>

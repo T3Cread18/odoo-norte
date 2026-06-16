@@ -4,3 +4,13 @@ access_noc_tarea_user,noc.tarea.user,model_noc_tarea,base.group_user,1,1,1,1
 access_noc_region_user,noc.region.user,model_noc_region,base.group_user,1,1,1,1
 access_noc_tag_user,noc.tag.user,model_noc_tag,base.group_user,1,1,1,1
 access_noc_departamento_user,noc.departamento.user,model_noc_departamento,base.group_user,1,1,1,1
+access_noc_guardia_nuser,noc.guardia.noc.user,model_noc_guardia,noc_guardias.group_noc_user,1,1,1,0
+access_noc_tarea_nuser,noc.tarea.noc.user,model_noc_tarea,noc_guardias.group_noc_user,1,1,1,0
+access_noc_region_nuser,noc.region.noc.user,model_noc_region,noc_guardias.group_noc_user,1,0,0,0
+access_noc_tag_nuser,noc.tag.noc.user,model_noc_tag,noc_guardias.group_noc_user,1,0,0,0
+access_noc_departamento_nuser,noc.departamento.noc.user,model_noc_departamento,noc_guardias.group_noc_user,1,0,0,0
+access_noc_guardia_nmgr,noc.guardia.noc.manager,model_noc_guardia,noc_guardias.group_noc_manager,1,1,1,1
+access_noc_tarea_nmgr,noc.tarea.noc.manager,model_noc_tarea,noc_guardias.group_noc_manager,1,1,1,1
+access_noc_region_nmgr,noc.region.noc.manager,model_noc_region,noc_guardias.group_noc_manager,1,1,1,1
+access_noc_tag_nmgr,noc.tag.noc.manager,model_noc_tag,noc_guardias.group_noc_manager,1,1,1,1
+access_noc_departamento_nmgr,noc.departamento.noc.manager,model_noc_departamento,noc_guardias.group_noc_manager,1,1,1,1

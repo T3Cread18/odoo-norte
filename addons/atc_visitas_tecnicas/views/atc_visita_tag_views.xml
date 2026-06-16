@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_atc_visita_tag_list" model="ir.ui.view">
+        <field name="name">atc.visita.tag.list</field>
+        <field name="model">atc.visita.tag</field>
+        <field name="arch" type="xml">
+            <list string="Etiquetas" editable="bottom">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_visita_tag_form" model="ir.ui.view">
+        <field name="name">atc.visita.tag.form</field>
+        <field name="model">atc.visita.tag</field>
+        <field name="arch" type="xml">
+            <form string="Etiqueta">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="color" widget="color_picker"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_atc_visita_tag" model="ir.actions.act_window">
+        <field name="name">Etiquetas</field>
+        <field name="res_model">atc.visita.tag</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
