@@ -4,13 +4,18 @@ from odoo.exceptions import ValidationError
 
 class AtcVisita(models.Model):
     _name = "atc.visita"
-    _description = "Visita Técnica"
+    _description = "Orden ATC (Visita / Instalación)"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "fecha desc, id desc"
 
     name = fields.Char(
         string="Referencia", compute="_compute_name", store=True,
         readonly=False)
+    tipo_orden = fields.Selection(
+        selection=[("visita", "Visita Técnica"),
+                   ("instalacion", "Instalación")],
+        string="Tipo de orden", default="visita", required=True,
+        index=True, tracking=True)
     cedula = fields.Char(string="Cédula", tracking=True)
     nombre = fields.Char(string="Nombre del cliente", tracking=True)
     cliente_id = fields.Many2one(
@@ -32,22 +37,23 @@ class AtcVisita(models.Model):
     tecnico_asignado_ids = fields.Many2many(
         "hr.employee", "atc_visita_tecnico_rel", "visita_id", "employee_id",
         string="Asignado a", tracking=True,
-        help="Técnicos (empleados) asignados a la visita. Puede ser más de uno.")
+        help="Técnicos (empleados) asignados a la orden. Puede ser más de uno.")
     vehiculo_id = fields.Many2one(
         "fleet.vehicle", string="Vehículo utilizado", tracking=True,
-        help="Vehículo usado para la visita.")
+        help="Vehículo usado para la orden.")
     tecnico_id = fields.Many2one(
         "res.users", string="Atendido por",
         default=lambda self: self.env.user, tracking=True,
-        help="Usuario que efectivamente atendió la visita.")
+        help="Usuario que efectivamente atendió la orden.")
     active = fields.Boolean(default=True)
 
-    @api.depends("nombre", "cliente_id", "fecha")
+    @api.depends("nombre", "cliente_id", "fecha", "tipo_orden")
     def _compute_name(self):
         for v in self:
             if v.name:
                 continue
-            base = v.nombre or (v.cliente_id.name if v.cliente_id else "Visita")
+            etiqueta = "Instalación" if v.tipo_orden == "instalacion" else "Visita"
+            base = v.nombre or (v.cliente_id.name if v.cliente_id else etiqueta)
             v.name = "%s — %s" % (base, v.fecha) if v.fecha else base
 
     @api.constrains("estado", "tecnico_asignado_ids")
@@ -55,7 +61,7 @@ class AtcVisita(models.Model):
         for v in self:
             if v.estado == "asignada" and not v.tecnico_asignado_ids:
                 raise ValidationError(self.env._(
-                    "No puedes pasar la visita a 'Asignada' sin al menos un "
+                    "No puedes pasar la orden a 'Asignada' sin al menos un "
                     "técnico en 'Asignado a'. Usa el botón 'Asignar técnico'."))
 
     # --------------------------------------------------------------

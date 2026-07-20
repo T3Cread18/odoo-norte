@@ -5,7 +5,7 @@
         <field name="name">atc.visita.form</field>
         <field name="model">atc.visita</field>
         <field name="arch" type="xml">
-            <form string="Visita Técnica">
+            <form string="Orden ATC">
                 <header>
                     <button name="action_abrir_asignar" type="object"
                             string="Asignar técnico" class="btn-primary"
@@ -31,7 +31,8 @@
                                    placeholder="Nombre del cliente (si la cédula es nueva, se crea el contacto)"/>
                             <field name="cliente_id" options="{'no_create': True}"/>
                         </group>
-                        <group string="Visita">
+                        <group string="Orden">
+                            <field name="tipo_orden"/>
                             <field name="tecnico_asignado_ids" widget="many2many_tags"
                                    placeholder="Escribe un nombre para crear el técnico"/>
                             <field name="vehiculo_id" options="{'no_quick_create': True}"/>
@@ -45,7 +46,7 @@
                     </group>
                     <separator string="Descripción"/>
                     <field name="descripcion" widget="html"
-                           placeholder="Detalle de la visita: observaciones, trabajo realizado, materiales, etc."/>
+                           placeholder="Detalle de la orden: observaciones, trabajo realizado, materiales, etc."/>
                 </sheet>
                 <chatter/>
             </form>
@@ -79,8 +80,9 @@
         <field name="name">atc.visita.list</field>
         <field name="model">atc.visita</field>
         <field name="arch" type="xml">
-            <list string="Visitas Técnicas" decoration-muted="estado == 'realizada'">
+            <list string="Órdenes ATC" decoration-muted="estado == 'realizada'">
                 <field name="fecha"/>
+                <field name="tipo_orden" widget="badge" optional="show"/>
                 <field name="cedula"/>
                 <field name="nombre"/>
                 <field name="cliente_id" optional="hide"/>
@@ -105,6 +107,7 @@
         <field name="arch" type="xml">
             <kanban default_group_by="estado" class="o_kanban_small_column">
                 <field name="estado"/>
+                <field name="tipo_orden"/>
                 <field name="nombre"/>
                 <field name="cedula"/>
                 <field name="zona_id"/>
@@ -115,6 +118,7 @@
                 <field name="fecha"/>
                 <templates>
                     <t t-name="card">
+                        <span class="badge text-bg-secondary float-end"><field name="tipo_orden"/></span>
                         <div class="fw-bold fs-6"><field name="nombre"/></div>
                         <div t-if="record.cedula.value" class="text-muted small">CI: <field name="cedula"/></div>
                         <div t-if="record.zona_id.value" class="small"><i class="fa fa-map-marker me-1" title="Zona"/><field name="zona_id"/></div>
@@ -135,7 +139,7 @@
         <field name="name">atc.visita.search</field>
         <field name="model">atc.visita</field>
         <field name="arch" type="xml">
-            <search string="Visitas Técnicas">
+            <search string="Órdenes ATC">
                 <field name="cedula"/>
                 <field name="nombre"/>
                 <field name="cliente_id"/>
@@ -143,6 +147,9 @@
                 <field name="tecnico_asignado_ids"/>
                 <field name="vehiculo_id"/>
                 <field name="tecnico_id"/>
+                <filter string="Visitas Técnicas" name="f_visitas" domain="[('tipo_orden','=','visita')]"/>
+                <filter string="Instalaciones" name="f_instalaciones" domain="[('tipo_orden','=','instalacion')]"/>
+                <separator/>
                 <filter string="Pendiente" name="f_pendiente" domain="[('estado','=','pendiente')]"/>
                 <filter string="Asignada" name="f_asignada" domain="[('estado','=','asignada')]"/>
                 <filter string="Realizada" name="f_realizada" domain="[('estado','=','realizada')]"/>
@@ -151,6 +158,7 @@
                 <filter string="Atendidas por mí" name="f_mias" domain="[('tecnico_id','=',uid)]"/>
                 <separator/>
                 <group>
+                    <filter string="Tipo de orden" name="g_tipo" context="{'group_by':'tipo_orden'}"/>
                     <filter string="Estado" name="g_estado" context="{'group_by':'estado'}"/>
                     <filter string="Zona" name="g_zona" context="{'group_by':'zona_id'}"/>
                     <filter string="Asignado a" name="g_asignado" context="{'group_by':'tecnico_asignado_ids'}"/>
@@ -162,14 +170,31 @@
         </field>
     </record>
 
+    <!-- ACCIÓN: Visitas Técnicas -->
     <record id="action_atc_visita" model="ir.actions.act_window">
         <field name="name">Visitas Técnicas</field>
         <field name="res_model">atc.visita</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="view_atc_visita_search"/>
+        <field name="domain">[('tipo_orden', '=', 'visita')]</field>
+        <field name="context">{'default_tipo_orden': 'visita'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Aún no hay visitas técnicas registradas.</p>
             <p>Crea una visita para llevar el control de las atenciones a clientes del ISP.</p>
+        </field>
+    </record>
+
+    <!-- ACCIÓN: Instalaciones -->
+    <record id="action_atc_instalacion" model="ir.actions.act_window">
+        <field name="name">Instalaciones</field>
+        <field name="res_model">atc.visita</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="view_atc_visita_search"/>
+        <field name="domain">[('tipo_orden', '=', 'instalacion')]</field>
+        <field name="context">{'default_tipo_orden': 'instalacion'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aún no hay instalaciones registradas.</p>
+            <p>Crea una instalación para asignarla a los técnicos.</p>
         </field>
     </record>
 </odoo>

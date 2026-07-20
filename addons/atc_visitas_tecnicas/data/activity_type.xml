@@ -10,5 +10,14 @@
             <field name="delay_from">current_date</field>
             <field name="decoration_type">warning</field>
         </record>
+        <record id="activity_type_instalacion" model="mail.activity.type">
+            <field name="name">Instalación</field>
+            <field name="icon">fa-plug</field>
+            <field name="category">default</field>
+            <field name="delay_count">1</field>
+            <field name="delay_unit">days</field>
+            <field name="delay_from">current_date</field>
+            <field name="decoration_type">warning</field>
+        </record>
     </data>
 </odoo>

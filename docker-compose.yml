@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8069:8069"
+      - "80:8069"
       - "8072:8072"
     environment:
       HOST: db

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_atc_root" name="Visitas Técnicas"
+    <menuitem id="menu_atc_root" name="ATC"
               web_icon="mail,static/description/icon.png" sequence="50"
               groups="group_atc_visitas_user,group_menus_completos"/>
 
     <menuitem id="menu_atc_visitas" name="Visitas Técnicas"
               parent="menu_atc_root"
               action="action_atc_visita" sequence="10"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+
+    <menuitem id="menu_atc_instalaciones" name="Instalaciones"
+              parent="menu_atc_root"
+              action="action_atc_instalacion" sequence="20"
               groups="group_atc_visitas_user,group_menus_completos"/>
 
     <menuitem id="menu_atc_config" name="Configuración"

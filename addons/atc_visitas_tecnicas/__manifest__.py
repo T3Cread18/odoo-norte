@@ -1,6 +1,6 @@
 {
     'name': 'ATC - Visitas Técnicas',
-    'version': '19.0.2.7.0',
+    'version': '19.0.2.8.0',
     'summary': 'Control de visitas técnicas a clientes de ISPs sobre Actividades',
     'description': 'Extiende las Actividades estandar (mail.activity) para que ATC controle visitas tecnicas a clientes de ISPs: tipo de actividad, campos (cedula con autocompletado de nombre, zona, etiquetas, estado), filtros, menu propio y un rol kiosko.',
     'category': 'Services',
