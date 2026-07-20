@@ -4,9 +4,10 @@
         <field name="name">atc.zona.list</field>
         <field name="model">atc.zona</field>
         <field name="arch" type="xml">
-            <list string="Zonas" editable="bottom">
+            <list string="Zonas">
                 <field name="name"/>
                 <field name="code"/>
+                <field name="vgt_count" string="N° VGT"/>
             </list>
         </field>
     </record>
@@ -21,6 +22,17 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="active"/>
+                    </group>
+                    <group string="VGT / Proyectos autorizados de esta zona">
+                        <field name="vgt_ids" nolabel="1"
+                               options="{'no_create': True}">
+                            <list string="VGT">
+                                <field name="codigo"/>
+                                <field name="nombre"/>
+                                <field name="estado"/>
+                                <field name="municipio"/>
+                            </list>
+                        </field>
                     </group>
                 </sheet>
             </form>

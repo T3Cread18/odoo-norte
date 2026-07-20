@@ -2,6 +2,9 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_atc_zona_user,atc.zona.user,model_atc_zona,base.group_user,1,0,0,0
 access_atc_zona_atc,atc.zona.atc,model_atc_zona,group_atc_visitas_user,1,1,1,0
 access_atc_zona_manager,atc.zona.manager,model_atc_zona,base.group_system,1,1,1,1
+access_atc_vgt_user,atc.vgt.user,model_atc_vgt,base.group_user,1,0,0,0
+access_atc_vgt_atc,atc.vgt.atc,model_atc_vgt,group_atc_visitas_user,1,1,1,0
+access_atc_vgt_manager,atc.vgt.manager,model_atc_vgt,base.group_system,1,1,1,1
 access_atc_visita_tag_user,atc.visita.tag.user,model_atc_visita_tag,base.group_user,1,0,0,0
 access_atc_visita_tag_atc,atc.visita.tag.atc,model_atc_visita_tag,group_atc_visitas_user,1,1,1,0
 access_atc_visita_tag_manager,atc.visita.tag.manager,model_atc_visita_tag,base.group_system,1,1,1,1

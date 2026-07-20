@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_atc_vgt_list" model="ir.ui.view">
+        <field name="name">atc.vgt.list</field>
+        <field name="model">atc.vgt</field>
+        <field name="arch" type="xml">
+            <list string="VGT / Proyectos autorizados">
+                <field name="codigo"/>
+                <field name="nombre"/>
+                <field name="estado"/>
+                <field name="municipio"/>
+                <field name="region"/>
+                <field name="cantidad_postes" sum="Total postes"/>
+                <field name="fecha_autorizacion"/>
+                <field name="zona_ids" widget="many2many_tags" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_vgt_form" model="ir.ui.view">
+        <field name="name">atc.vgt.form</field>
+        <field name="model">atc.vgt</field>
+        <field name="arch" type="xml">
+            <form string="VGT / Proyecto autorizado">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="codigo"/>
+                        <h1><field name="codigo" placeholder="VGT-AAAA-P-000"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="nombre"/>
+                            <field name="estado"/>
+                            <field name="municipio"/>
+                        </group>
+                        <group>
+                            <field name="region"/>
+                            <field name="cantidad_postes"/>
+                            <field name="fecha_autorizacion"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Zonas">
+                        <field name="zona_ids" nolabel="1"
+                               widget="many2many_tags"
+                               options="{'no_quick_create': True}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_atc_vgt_search" model="ir.ui.view">
+        <field name="name">atc.vgt.search</field>
+        <field name="model">atc.vgt</field>
+        <field name="arch" type="xml">
+            <search string="VGT / Proyectos autorizados">
+                <field name="codigo"/>
+                <field name="nombre"/>
+                <field name="estado"/>
+                <field name="municipio"/>
+                <field name="zona_ids"/>
+                <filter string="Sin zona asignada" name="f_sin_zona"
+                        domain="[('zona_ids','=',False)]"/>
+                <separator/>
+                <filter string="ANDES" name="f_andes"
+                        domain="[('region','=','andes')]"/>
+                <filter string="General Nacional" name="f_general"
+                        domain="[('region','=','general')]"/>
+                <group>
+                    <filter string="Región" name="g_region"
+                            context="{'group_by':'region'}"/>
+                    <filter string="Estado" name="g_estado"
+                            context="{'group_by':'estado'}"/>
+                    <filter string="Municipio" name="g_municipio"
+                            context="{'group_by':'municipio'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_atc_vgt" model="ir.actions.act_window">
+        <field name="name">VGT / Proyectos autorizados</field>
+        <field name="res_model">atc.vgt</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_atc_vgt_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aún no hay proyectos VGT cargados.</p>
+            <p>Los proyectos VGT autorizados se importan del catálogo nacional.</p>
+        </field>
+    </record>
+</odoo>

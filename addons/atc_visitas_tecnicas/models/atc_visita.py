@@ -22,6 +22,13 @@ class AtcVisita(models.Model):
         "res.partner", string="Cliente ISP", index=True, tracking=True)
     zona_id = fields.Many2one(
         "atc.zona", string="Zona", index=True, tracking=True)
+    vgt_id = fields.Many2one(
+        "atc.vgt", string="VGT / Proyecto autorizado", index=True,
+        tracking=True,
+        help="Proyecto VGT autorizado asociado a esta orden.")
+    allowed_vgt_ids = fields.Many2many(
+        "atc.vgt", compute="_compute_allowed_vgt_ids",
+        string="VGT permitidas")
     tag_ids = fields.Many2many("atc.visita.tag", string="Etiquetas")
     direccion = fields.Char(string="Dirección de la visita", tracking=True)
     descripcion = fields.Html(string="Descripción")
@@ -55,6 +62,26 @@ class AtcVisita(models.Model):
             etiqueta = "Instalación" if v.tipo_orden == "instalacion" else "Visita"
             base = v.nombre or (v.cliente_id.name if v.cliente_id else etiqueta)
             v.name = "%s — %s" % (base, v.fecha) if v.fecha else base
+
+    @api.depends("zona_id", "zona_id.vgt_ids")
+    def _compute_allowed_vgt_ids(self):
+        all_vgt = self.env["atc.vgt"].search([])
+        for v in self:
+            v.allowed_vgt_ids = v.zona_id.vgt_ids if v.zona_id else all_vgt
+
+    @api.onchange("zona_id")
+    def _onchange_zona_id(self):
+        # Si la VGT elegida no pertenece a la nueva zona, se limpia.
+        if self.zona_id and self.vgt_id \
+                and self.zona_id not in self.vgt_id.zona_ids:
+            self.vgt_id = False
+
+    @api.onchange("vgt_id")
+    def _onchange_vgt_id(self):
+        # Si la orden no tiene zona y la VGT pertenece a una sola, se hereda.
+        if self.vgt_id and not self.zona_id \
+                and len(self.vgt_id.zona_ids) == 1:
+            self.zona_id = self.vgt_id.zona_ids
 
     @api.constrains("estado", "tecnico_asignado_ids")
     def _check_asignada_tecnico(self):

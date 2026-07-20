@@ -39,6 +39,10 @@
                             <field name="tecnico_id" widget="many2one_avatar_user"/>
                             <field name="fecha"/>
                             <field name="zona_id"/>
+                            <field name="allowed_vgt_ids" invisible="1"/>
+                            <field name="vgt_id"
+                                   domain="[('id', 'in', allowed_vgt_ids)]"
+                                   options="{'no_create': True}"/>
                             <field name="direccion"/>
                             <field name="tag_ids" widget="many2many_tags"
                                    options="{'color_field': 'color'}"/>
@@ -87,6 +91,7 @@
                 <field name="nombre"/>
                 <field name="cliente_id" optional="hide"/>
                 <field name="zona_id"/>
+                <field name="vgt_id" optional="show"/>
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
                 <field name="direccion" optional="show"/>
                 <field name="tecnico_asignado_ids" widget="many2many_tags" optional="show"/>
@@ -111,6 +116,7 @@
                 <field name="nombre"/>
                 <field name="cedula"/>
                 <field name="zona_id"/>
+                <field name="vgt_id"/>
                 <field name="tag_ids"/>
                 <field name="tecnico_asignado_ids"/>
                 <field name="vehiculo_id"/>
@@ -122,6 +128,7 @@
                         <div class="fw-bold fs-6"><field name="nombre"/></div>
                         <div t-if="record.cedula.value" class="text-muted small">CI: <field name="cedula"/></div>
                         <div t-if="record.zona_id.value" class="small"><i class="fa fa-map-marker me-1" title="Zona"/><field name="zona_id"/></div>
+                        <div t-if="record.vgt_id.value" class="small"><i class="fa fa-file-text-o me-1" title="VGT"/><field name="vgt_id"/></div>
                         <div t-if="record.vehiculo_id.value" class="small"><i class="fa fa-car me-1" title="Vehículo"/><field name="vehiculo_id"/></div>
                         <field name="tecnico_asignado_ids" widget="many2many_tags"/>
                         <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
@@ -144,6 +151,7 @@
                 <field name="nombre"/>
                 <field name="cliente_id"/>
                 <field name="zona_id"/>
+                <field name="vgt_id"/>
                 <field name="tecnico_asignado_ids"/>
                 <field name="vehiculo_id"/>
                 <field name="tecnico_id"/>
@@ -161,6 +169,7 @@
                     <filter string="Tipo de orden" name="g_tipo" context="{'group_by':'tipo_orden'}"/>
                     <filter string="Estado" name="g_estado" context="{'group_by':'estado'}"/>
                     <filter string="Zona" name="g_zona" context="{'group_by':'zona_id'}"/>
+                    <filter string="VGT" name="g_vgt" context="{'group_by':'vgt_id'}"/>
                     <filter string="Asignado a" name="g_asignado" context="{'group_by':'tecnico_asignado_ids'}"/>
                     <filter string="Vehículo" name="g_vehiculo" context="{'group_by':'vehiculo_id'}"/>
                     <filter string="Atendido por" name="g_tecnico" context="{'group_by':'tecnico_id'}"/>

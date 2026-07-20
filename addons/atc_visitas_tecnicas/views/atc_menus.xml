@@ -23,6 +23,11 @@
               action="action_atc_zona" sequence="10"
               groups="group_menus_completos"/>
 
+    <menuitem id="menu_atc_vgt" name="VGT / Proyectos autorizados"
+              parent="menu_atc_config"
+              action="action_atc_vgt" sequence="15"
+              groups="group_menus_completos"/>
+
     <menuitem id="menu_atc_etiquetas" name="Etiquetas"
               parent="menu_atc_config"
               action="action_atc_visita_tag" sequence="20"
