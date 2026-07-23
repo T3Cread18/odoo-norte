@@ -39,10 +39,11 @@
                             <field name="tecnico_id" widget="many2one_avatar_user"/>
                             <field name="fecha"/>
                             <field name="zona_id"/>
-                            <field name="allowed_vgt_ids" invisible="1"/>
-                            <field name="vgt_id"
-                                   domain="[('id', 'in', allowed_vgt_ids)]"
-                                   options="{'no_create': True}"/>
+                            <field name="vgt_id" options="{'no_create': True}"/>
+                            <field name="vgt_zona_ids" invisible="not vgt_id"
+                                   widget="many2many_tags" readonly="1"
+                                   string="Zonas de la VGT"
+                                   help="Zonas a las que ya está enlazada esta VGT."/>
                             <field name="direccion"/>
                             <field name="tag_ids" widget="many2many_tags"
                                    options="{'color_field': 'color'}"/>

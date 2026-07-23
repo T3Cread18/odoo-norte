@@ -25,10 +25,11 @@ class AtcVisita(models.Model):
     vgt_id = fields.Many2one(
         "atc.vgt", string="VGT / Proyecto autorizado", index=True,
         tracking=True,
-        help="Proyecto VGT autorizado asociado a esta orden.")
-    allowed_vgt_ids = fields.Many2many(
-        "atc.vgt", compute="_compute_allowed_vgt_ids",
-        string="VGT permitidas")
+        help="Proyecto VGT autorizado asociado a esta orden. Puedes elegir "
+             "cualquier VGT; si aún no está enlazada a una zona, se enlazará "
+             "automáticamente a la zona de esta orden al guardar.")
+    vgt_zona_ids = fields.Many2many(
+        "atc.zona", related="vgt_id.zona_ids", string="Zonas de la VGT")
     tag_ids = fields.Many2many("atc.visita.tag", string="Etiquetas")
     direccion = fields.Char(string="Dirección de la visita", tracking=True)
     descripcion = fields.Html(string="Descripción")
@@ -63,25 +64,19 @@ class AtcVisita(models.Model):
             base = v.nombre or (v.cliente_id.name if v.cliente_id else etiqueta)
             v.name = "%s — %s" % (base, v.fecha) if v.fecha else base
 
-    @api.depends("zona_id", "zona_id.vgt_ids")
-    def _compute_allowed_vgt_ids(self):
-        all_vgt = self.env["atc.vgt"].search([])
-        for v in self:
-            v.allowed_vgt_ids = v.zona_id.vgt_ids if v.zona_id else all_vgt
-
-    @api.onchange("zona_id")
-    def _onchange_zona_id(self):
-        # Si la VGT elegida no pertenece a la nueva zona, se limpia.
-        if self.zona_id and self.vgt_id \
-                and self.zona_id not in self.vgt_id.zona_ids:
-            self.vgt_id = False
-
     @api.onchange("vgt_id")
     def _onchange_vgt_id(self):
         # Si la orden no tiene zona y la VGT pertenece a una sola, se hereda.
         if self.vgt_id and not self.zona_id \
                 and len(self.vgt_id.zona_ids) == 1:
             self.zona_id = self.vgt_id.zona_ids
+
+    def _autoenlazar_vgt_zona(self):
+        """Enlaza la VGT de la orden a su zona, solo si la VGT aún no está
+        enlazada a ninguna zona (las ya enlazadas no se tocan)."""
+        for v in self:
+            if v.vgt_id and v.zona_id and not v.vgt_id.zona_ids:
+                v.vgt_id.sudo().write({"zona_ids": [(4, v.zona_id.id)]})
 
     @api.constrains("estado", "tecnico_asignado_ids")
     def _check_asignada_tecnico(self):
@@ -153,14 +148,19 @@ class AtcVisita(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             self._resolve_partner(vals)
-        return super().create(vals_list)
+        visitas = super().create(vals_list)
+        visitas._autoenlazar_vgt_zona()
+        return visitas
 
     def write(self, vals):
         if (vals.get("cedula") or vals.get("nombre")) \
                 and not vals.get("cliente_id") and len(self) == 1 \
                 and not self.cliente_id:
             self._resolve_partner(vals, current=self)
-        return super().write(vals)
+        res = super().write(vals)
+        if "vgt_id" in vals or "zona_id" in vals:
+            self._autoenlazar_vgt_zona()
+        return res
 
     # --------------------------------------------------------------
     # Asignación de técnico (abre el wizard)
