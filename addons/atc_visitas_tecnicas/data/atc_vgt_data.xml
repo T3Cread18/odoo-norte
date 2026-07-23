@@ -1,0 +1,3635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Seed inicial del catálogo VGT (migración única). noupdate=1:
+         se crean una vez y luego se mantienen desde el asistente de importación. -->
+    <data noupdate="1">
+        <record id="vgt_2023_p_226" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-226</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA CAPACHO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">INDEPENDENCIA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1282</field>
+            <field name="fecha_autorizacion">2023-06-28</field>
+        </record>
+        <record id="vgt_2023_p_236" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-236</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA EL VALLE</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">INDEPENDENCIA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">613</field>
+            <field name="fecha_autorizacion">2023-06-28</field>
+        </record>
+        <record id="vgt_2023_p_241" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-241</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA PALO GORDO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">CARDENAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">622</field>
+            <field name="fecha_autorizacion">2023-06-28</field>
+        </record>
+        <record id="vgt_2023_p_242" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-242</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA SAN JOSECITO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">TORBES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">746</field>
+            <field name="fecha_autorizacion">2023-06-28</field>
+        </record>
+        <record id="vgt_2023_p_247" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-247</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA LA FRÍA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">GARCIA DE HEVIA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">247</field>
+            <field name="fecha_autorizacion">2023-06-28</field>
+        </record>
+        <record id="vgt_2023_p_251" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-251</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA MICHELENA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">MICHELENA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">403</field>
+            <field name="fecha_autorizacion">2023-06-28</field>
+        </record>
+        <record id="vgt_2023_p_253" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-253</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA EL PALMAR</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">924</field>
+            <field name="fecha_autorizacion">2023-06-28</field>
+        </record>
+        <record id="vgt_2023_p_249" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-249</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA UREÑA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">PEDRO MARIA UREÑA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">311</field>
+            <field name="fecha_autorizacion">2023-08-07</field>
+        </record>
+        <record id="vgt_2023_p_124" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-124</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA 23 DE ENERO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1218</field>
+            <field name="fecha_autorizacion">2023-07-21</field>
+        </record>
+        <record id="vgt_2023_p_227" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-227</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA MIRADOR</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">331</field>
+            <field name="fecha_autorizacion">2023-07-21</field>
+        </record>
+        <record id="vgt_2023_p_228" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-228</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA EL LLANITO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">111</field>
+            <field name="fecha_autorizacion">2023-07-21</field>
+        </record>
+        <record id="vgt_2023_p_238" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-238</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA TARIBA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">CARDENAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">556</field>
+            <field name="fecha_autorizacion">2023-07-21</field>
+        </record>
+        <record id="vgt_2023_p_248" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-248</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA RUBIO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JUNIN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1695</field>
+            <field name="fecha_autorizacion">2023-07-21</field>
+        </record>
+        <record id="vgt_2023_p_245" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-245</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA LLANO GORGE</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">200</field>
+            <field name="fecha_autorizacion">2023-07-21</field>
+        </record>
+        <record id="vgt_2023_p_244" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-244</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA ROMULO GALLEGOS</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">548</field>
+            <field name="fecha_autorizacion">2023-07-21</field>
+        </record>
+        <record id="vgt_2023_p_252" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-252</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA BARRIO OBRERO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">51</field>
+            <field name="fecha_autorizacion">2023-07-27</field>
+        </record>
+        <record id="vgt_2023_p_250" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-250</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA ABEJALES</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LIBERTADOR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">191</field>
+            <field name="fecha_autorizacion">2023-08-07</field>
+        </record>
+        <record id="vgt_2023_p_809" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-809</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR LA POPA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">95</field>
+            <field name="fecha_autorizacion">2023-09-13</field>
+        </record>
+        <record id="vgt_2023_p_759" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-759</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR SANTA TERESA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">220</field>
+            <field name="fecha_autorizacion">2023-09-13</field>
+        </record>
+        <record id="vgt_2023_p_744" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-744</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR ZORCA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">268</field>
+            <field name="fecha_autorizacion">2023-09-13</field>
+        </record>
+        <record id="vgt_2023_p_860" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-860</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA SAN ANTONIO DEL TACHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">363</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_905" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-905</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA LA GRITA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JAUREGUI</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">741</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1032" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1032</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA COPA ORO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">GUASIMOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">589</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1040" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1040</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA LAS ADJUNTAS</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">55</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1060" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1060</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RUBIO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JUNIN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">757</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1062" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1062</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA EL RECREO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">62</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1071" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1071</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA TRONCAL CAPACHO- SAN ANTONIO DEL TÁCHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">168</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1080" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1080</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA MESAS DE SEBORUCO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">ANTONIO ROMULO ACOSTA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">362</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1085" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1085</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA EL COBRE</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JOSE MARIA VARGAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">218</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1086" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1086</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA TRONCAL DE EL COBRE</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JOSE MARIA VARGAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">186</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1078" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1078</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA SEBORUCO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SEBORUCO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">119</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2024_p_48" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-48</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR PREGONERO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">URIBANTE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">281</field>
+            <field name="fecha_autorizacion">2024-01-01</field>
+        </record>
+        <record id="vgt_2023_p_1608" model="atc.vgt">
+            <field name="codigo">VGT-2023-P - 1608</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR LA TENDIDA EDO. TACHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAMUEL DARIO MALDONADO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">342</field>
+            <field name="fecha_autorizacion">2024-02-09</field>
+        </record>
+        <record id="vgt_2023_p_1610" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1610</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR HERNANDEZ EDO. TACHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAMUEL DARIO MALDONADO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">181</field>
+            <field name="fecha_autorizacion">2024-02-09</field>
+        </record>
+        <record id="vgt_2024_p_82" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-82</field>
+            <field name="nombre">PROYECTO LA PALMITA EDO. TÁCHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">PANAMERICANO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">142</field>
+            <field name="fecha_autorizacion">2024-04-02</field>
+        </record>
+        <record id="vgt_2023_p_1364" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1364</field>
+            <field name="nombre">SAN LORENZO ETAPA I</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">FERNANDEZ FEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">209</field>
+            <field name="fecha_autorizacion">2024-05-16</field>
+        </record>
+        <record id="vgt_2024_p_35" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-35</field>
+            <field name="nombre">SAN LORENZ III ETAPA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">FERNANDEZ FEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">56</field>
+            <field name="fecha_autorizacion">2024-05-16</field>
+        </record>
+        <record id="vgt_2024_p_83" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-83</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA PUERTO NUEVO - EDO. TÁCHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LIBERTADOR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">138</field>
+            <field name="fecha_autorizacion">2024-05-16</field>
+        </record>
+        <record id="vgt_2023_p_1341" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1341</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA SECTOR VEGA DE CEDRO</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LIBERTAD</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">60</field>
+            <field name="fecha_autorizacion">2023-11-01</field>
+        </record>
+        <record id="vgt_2024_p_113" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-113</field>
+            <field name="nombre">PROYECTO COLONCITO LA TENDIDA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAMUEL DARIO MALDONADO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">484</field>
+            <field name="fecha_autorizacion">2024-02-01</field>
+        </record>
+        <record id="vgt_2024_p_811" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-811</field>
+            <field name="nombre">PROYECTO RUTA FIBRA ÓPTICA CHURURU</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">FERNANDEZ FEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">95</field>
+            <field name="fecha_autorizacion">2024-10-03</field>
+        </record>
+        <record id="vgt_2024_p_812" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-812</field>
+            <field name="nombre">RUTA FIBRA OPTICA LOS NARANJOS</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">FERNANDEZ FEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">205</field>
+            <field name="fecha_autorizacion">2024-10-03</field>
+        </record>
+        <record id="vgt_2024_p_818" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-818</field>
+            <field name="nombre">TENDIDO FIBRA OPTICA EL PIÑAL</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN JUDAS TADEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">342</field>
+            <field name="fecha_autorizacion">2024-10-03</field>
+        </record>
+        <record id="vgt_2024_p_1690" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1690</field>
+            <field name="nombre">PROYECTO RED GPON UMUQUENA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LIBERTADOR - ANDRES ELOY BLANCO BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">251</field>
+            <field name="fecha_autorizacion">2024-10-17</field>
+        </record>
+        <record id="vgt_2024_p_1046" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1046</field>
+            <field name="nombre">RUTA FIBRA OPTICA PUERTO NEVO EL CANTON</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">PANAMERICANO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">227</field>
+            <field name="fecha_autorizacion">2024-10-17</field>
+        </record>
+        <record id="vgt_2024_p_1464" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1464</field>
+            <field name="nombre">TENDIDO FIBRA OPTICA  RED GPON COLONCITO, EDO TACHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">GUASIMOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1253</field>
+            <field name="fecha_autorizacion">2024-09-23</field>
+        </record>
+        <record id="vgt_2024_p_2107" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2107</field>
+            <field name="nombre">PROYECTO EL ABEJAL DE PALMIRA VELLA VISTA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">CARDENAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">69</field>
+            <field name="fecha_autorizacion">2024-11-28</field>
+        </record>
+        <record id="vgt_2023_p_243" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-243</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA TUCAPE</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN JUDAS TADEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">7</field>
+            <field name="fecha_autorizacion">2023-08-11</field>
+        </record>
+        <record id="vgt_2024_p_1693" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1693</field>
+            <field name="nombre">RUTA FIBRA OPTICA TRONCAL COLONCITO UMUQUENA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">PANAMERICANO - GARCIA DE HEVIA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">114</field>
+            <field name="fecha_autorizacion">2024-09-11</field>
+        </record>
+        <record id="vgt_2024_p_1856" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1856</field>
+            <field name="nombre">RUTA FIBRA OPTICA TRONCAL COLONCITO LA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">FERNANDEZ FEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">209</field>
+            <field name="fecha_autorizacion">2024-08-07</field>
+        </record>
+        <record id="vgt_2024_p_2197" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2197</field>
+            <field name="nombre">TENDIDO FIBRA ÓPTICA EL ROISAL, EL PIÑAL, EDO TÁCHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">FERNANDEZ FEO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">84</field>
+            <field name="fecha_autorizacion">2024-04-27</field>
+        </record>
+        <record id="vgt_2025_p_267" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-267</field>
+            <field name="nombre">RED GPON CAPACHO PALO GORDO, EDO. TACHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">INDEPENDENCIA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">69</field>
+            <field name="fecha_autorizacion">2025-02-03</field>
+        </record>
+        <record id="vgt_2025_p_1764" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1764</field>
+            <field name="nombre">RED GPON SECTOR TOITUNA Y LA YEE, GUASIMOS, EDO. TÁCHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">GUASIMOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">161</field>
+            <field name="fecha_autorizacion">2025-04-07</field>
+        </record>
+        <record id="vgt_2023_p_1371" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1371</field>
+            <field name="nombre">PROYECTO LA FRÍA SECTOR - LAS AMÉRICAS</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JUNIN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">103</field>
+            <field name="fecha_autorizacion">2023-10-23</field>
+        </record>
+        <record id="vgt_2025_p_3159" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3159</field>
+            <field name="nombre">RED GPON LAS MINAS DE LOBATERA, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LOBATERA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">246</field>
+            <field name="fecha_autorizacion">2025-10-02</field>
+        </record>
+        <record id="vgt_2025_pr_3178" model="atc.vgt">
+            <field name="codigo">VGT-2025-PR-3178</field>
+            <field name="nombre">RED GPON SECTOR PALO GRANDE LOBATERA, EDO. TACHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LOBATERA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">72</field>
+            <field name="fecha_autorizacion">2025-10-02</field>
+        </record>
+        <record id="vgt_2025_p_3408" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3408</field>
+            <field name="nombre">RED GPON SECTOR EL POBLADO - MISIA JULIA, RUBIO, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JUNIN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">360</field>
+            <field name="fecha_autorizacion">2025-11-05</field>
+        </record>
+        <record id="vgt_2025_p_3396" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3396</field>
+            <field name="nombre">RED GPON SECTOR LA QUIRACHA, RUBIO, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JUNIN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">75</field>
+            <field name="fecha_autorizacion">2025-11-05</field>
+        </record>
+        <record id="vgt_2025_p_3697" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3697</field>
+            <field name="nombre">RED GPON SECTOR CERRO LA LAGUNA CAPACHO VIEJO, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LIBERTAD</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">70</field>
+            <field name="fecha_autorizacion">2025-02-20</field>
+        </record>
+        <record id="vgt_2025_p_3715" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3715</field>
+            <field name="nombre">RED GPON HATO DE LA VIRGEN CAPACHO VIEJO, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LIBERTAD</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">85</field>
+            <field name="fecha_autorizacion">2025-02-20</field>
+        </record>
+        <record id="vgt_2025_p_3688" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3688</field>
+            <field name="nombre">RED GPON SECTOR BOROTA - PALO GRANDE, LOBATERA, EDO, TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LOBATERA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">338</field>
+            <field name="fecha_autorizacion">2026-02-26</field>
+        </record>
+        <record id="vgt_2025_p_3717" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3717</field>
+            <field name="nombre">RED GPON PERIBECA CAPACHO, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">INDEPENDENCIA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">126</field>
+            <field name="fecha_autorizacion">2026-02-25</field>
+        </record>
+        <record id="vgt_2025_p_3696" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3696</field>
+            <field name="nombre">RED GPON SECTOR EL UVITO, MICHELENA, EDO. TACHIRA</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">MICHELENA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">55</field>
+            <field name="fecha_autorizacion">2026-02-25</field>
+        </record>
+        <record id="vgt_2025_p_3693" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3693</field>
+            <field name="nombre">RED GPON CASCO CENTRAL LOBATERA, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">LOBATERA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">194</field>
+            <field name="fecha_autorizacion">2026-02-25</field>
+        </record>
+        <record id="vgt_2026_pr_052" model="atc.vgt">
+            <field name="codigo">VGT-2026-PR-052</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA PROYECTO RED GPON SECTOR BARRIO ALIANZA, SAN CRISTÓBAL, EDO. TACHIRA (REGULARIZACIÓN)</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">64</field>
+            <field name="fecha_autorizacion">2026-03-04</field>
+        </record>
+        <record id="vgt_2026_pr_057" model="atc.vgt">
+            <field name="codigo">VGT-2026-PR-057</field>
+            <field name="nombre">RED GPON SECTOR LA CONCORDIA, POZO AZUL, BARRIO PARQUE EXPOSICIÓN, EDO. TACHIRA (REGULARIZACIÓN)</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">631</field>
+            <field name="fecha_autorizacion">2026-03-04</field>
+        </record>
+        <record id="vgt_2026_pr_055" model="atc.vgt">
+            <field name="codigo">VGT-2026-PR-055</field>
+            <field name="nombre">RED GPON SECTOR GENARO MENDEZ, MARCO TULIO, URB TACHIRA, SAN CRISTÓBAL, EDO. TACHIRA (REGULARIZACIÓN) -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">199</field>
+            <field name="fecha_autorizacion">2026-03-04</field>
+        </record>
+        <record id="vgt_2026_pr_059" model="atc.vgt">
+            <field name="codigo">VGT-2026-PR-059</field>
+            <field name="nombre">RED GPON PUEBLO NUEVO, EDO. TACHIRA (REGULARIZACIÓN) -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">269</field>
+            <field name="fecha_autorizacion">2026-03-05</field>
+        </record>
+        <record id="vgt_2025_p_3687" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3687</field>
+            <field name="nombre">RED GPON SECTOR BRAMON - COLINA, RUBIO, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">JUNIN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">628</field>
+            <field name="fecha_autorizacion">2026-04-15</field>
+        </record>
+        <record id="vgt_2026_pr_058" model="atc.vgt">
+            <field name="codigo">VGT-2026-PR-058</field>
+            <field name="nombre">RED GPON SECTOR BARRIO EL LOBO, STA CECILIA, STA TERESA, EDO. TACHIRA (REGULARIZACIÓN) -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="municipio">SAN CRISTOBAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">490</field>
+            <field name="fecha_autorizacion">2026-04-28</field>
+        </record>
+        <record id="vgt_2026_p_594" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-594</field>
+            <field name="nombre">PROYECTO RED GPON SECTOR LOS LIBERTADORES VILLA BOLIVIA SAN ANTONIO, EDO. TACHIRA -</field>
+            <field name="estado">TACHIRA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">140</field>
+            <field name="fecha_autorizacion">2026-05-12</field>
+        </record>
+        <record id="vgt_2024_p_2215" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2215</field>
+            <field name="nombre">PROYECTO RED GPON EL PEÑOL</field>
+            <field name="estado">TRUJILLO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">88</field>
+            <field name="fecha_autorizacion">2024-11-15</field>
+        </record>
+        <record id="vgt_2024_p_2345" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2345</field>
+            <field name="nombre">PROYECTO TRONCAL CAMPO ELIAS - BOCONO</field>
+            <field name="estado">TRUJILLO</field>
+            <field name="municipio">BOCONO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">518</field>
+            <field name="fecha_autorizacion">2024-03-12</field>
+        </record>
+        <record id="vgt_2024_p_2376" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2376</field>
+            <field name="nombre">PROYECTO RED GPON AMPLICION CAMPO ELIAS</field>
+            <field name="estado">TRUJILLO</field>
+            <field name="municipio">JUAN VICENTE CAMPO ELIAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">44</field>
+            <field name="fecha_autorizacion">2024-09-12</field>
+        </record>
+        <record id="vgt_2024_p_2400" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2400</field>
+            <field name="nombre">PROYECTO RED GPON BOCONO PRIMERA ETAPA</field>
+            <field name="estado">TRUJILLO</field>
+            <field name="municipio">BOCONO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">581</field>
+            <field name="fecha_autorizacion">2024-11-12</field>
+        </record>
+        <record id="vgt_2024_p_2407" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2407</field>
+            <field name="nombre">RED GPON BOCONO SEGUNDA ETAPA</field>
+            <field name="estado">TRUJILLO</field>
+            <field name="municipio">BOCONO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">612</field>
+            <field name="fecha_autorizacion">2024-12-12</field>
+        </record>
+        <record id="vgt_2024_p_2414" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2414</field>
+            <field name="nombre">RED GPON BOCONO TERCERA ETAPA</field>
+            <field name="estado">TRUJILLO</field>
+            <field name="municipio">BOCONO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">393</field>
+        </record>
+        <record id="vgt_2024_p_1436" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1436</field>
+            <field name="nombre">PROYECTO CAMPO ELÍAS</field>
+            <field name="estado">TRUJILLO</field>
+            <field name="municipio">JUAN VICENTE CAMPO ELIAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">132</field>
+            <field name="fecha_autorizacion">2023-11-03</field>
+        </record>
+        <record id="vgt_2023_p_1362" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1362</field>
+            <field name="nombre">PROYECTO TOVAR EDO. MERIDA</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">TOVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">571</field>
+            <field name="fecha_autorizacion">2023-12-27</field>
+        </record>
+        <record id="vgt_2023_p_1629" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1629</field>
+            <field name="nombre">PROYECTO ZEA EDO. MÉRIDA</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">ZEA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">216</field>
+            <field name="fecha_autorizacion">2024-03-20</field>
+        </record>
+        <record id="vgt_2023_p_1509" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1509</field>
+            <field name="nombre">PROYECTO BAILADORES  EDO. MÉRIDA</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">BAILADORES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">109</field>
+            <field name="fecha_autorizacion">2024-04-05</field>
+        </record>
+        <record id="vgt_2024_p_427" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-427</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA SECTOR MUCUCHÍES</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">RANGEL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">289</field>
+            <field name="fecha_autorizacion">2024-04-01</field>
+        </record>
+        <record id="vgt_2024_p_1628" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1628</field>
+            <field name="nombre">PROYECTO TRONCAL LAS TIENDAS ZEA</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">HERNANDEZ - SAMUEL DARIO MALDONADO - ZEA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">63</field>
+            <field name="fecha_autorizacion">2024-09-11</field>
+        </record>
+        <record id="vgt_2024_p_1829" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1829</field>
+            <field name="nombre">RUTA FIBRA ÓPTICA TRONCAL TOVAR, LA PLAYA, BAILADORES</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">RIVAS DAVILA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">298</field>
+            <field name="fecha_autorizacion">2024-10-03</field>
+        </record>
+        <record id="vgt_2025_p_454" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-454</field>
+            <field name="nombre">RED GPON GUAYANITO, EDO. MERIDA</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">LIBERTADOR - PADRE NOGUERA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">117</field>
+            <field name="fecha_autorizacion">2025-02-17</field>
+        </record>
+        <record id="vgt_2023_p_1630" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1630</field>
+            <field name="nombre">PROYECTO TRONCAL ZEA - TOVAR  EDO. MÉRIDA,</field>
+            <field name="estado">MERIDA</field>
+            <field name="municipio">TOVAR - ZEA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">134</field>
+            <field name="fecha_autorizacion">2023-12-11</field>
+        </record>
+        <record id="vgt_2023_p_399" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-399</field>
+            <field name="nombre">NUEVO EMPLAZAMIENTO BOCONOITO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SAN GENARO DE BOCONOITO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">466</field>
+            <field name="fecha_autorizacion">2023-06-02</field>
+        </record>
+        <record id="vgt_2023_p_483" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-483</field>
+            <field name="nombre">PROYECTO ZONA ESTE GUANARE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">769</field>
+            <field name="fecha_autorizacion">2023-06-12</field>
+        </record>
+        <record id="vgt_2023_p_485" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-485</field>
+            <field name="nombre">NUEVO EMPLAZAMIENTO CHABASQUEN</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">VICENTE DE UNDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">162</field>
+            <field name="fecha_autorizacion">2023-07-13</field>
+        </record>
+        <record id="vgt_2023_p_482" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-482</field>
+            <field name="nombre">MUDANZA TRONCAL OFICINA HEAD END GUANARE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">59</field>
+            <field name="fecha_autorizacion">2023-06-12</field>
+        </record>
+        <record id="vgt_2023_p_486" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-486</field>
+            <field name="nombre">NUEVO EMPLAZAMIENTO ACARIGUA TRONCAL MOVISTAR (CENTRO)</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">29</field>
+            <field name="fecha_autorizacion">2023-07-27</field>
+        </record>
+        <record id="vgt_2023_p_488" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-488</field>
+            <field name="nombre">NUEVO EMPLAZAMIENTO TRONCAL BISCUCUY VALLE VERDE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">386</field>
+            <field name="fecha_autorizacion">2023-07-27</field>
+        </record>
+        <record id="vgt_2023_p_316" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-316</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA ACARIGUA OSPINO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">948</field>
+            <field name="fecha_autorizacion">2023-05-17</field>
+        </record>
+        <record id="vgt_2023_p_923" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-923</field>
+            <field name="nombre">SECTOR PALO GORDO-HIPERPDVAL ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">62</field>
+            <field name="fecha_autorizacion">2023-11-24</field>
+        </record>
+        <record id="vgt_2023_p_932" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-932</field>
+            <field name="nombre">SECTOR HIPERPDVAL-CUERPO DE BOMBEROS ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">141</field>
+            <field name="fecha_autorizacion">2023-11-24</field>
+        </record>
+        <record id="vgt_2023_p_957" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-957</field>
+            <field name="nombre">PROYECTO NUEVO OSPINO-ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">101</field>
+            <field name="fecha_autorizacion">2023-10-09</field>
+        </record>
+        <record id="vgt_2023_p_487" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-487</field>
+            <field name="nombre">NUEVO EMPLAZAMIENTO TRONCAL THUNDERTNET F CORTEZA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">89</field>
+            <field name="fecha_autorizacion">2023-07-27</field>
+        </record>
+        <record id="vgt_2023_p_949" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-949</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA SECTOR VALLE VERDE - GUANARE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">55</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2023_p_1154" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1154</field>
+            <field name="nombre">ZONA CENTRO GUANARE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">418</field>
+            <field name="fecha_autorizacion">2023-10-24</field>
+        </record>
+        <record id="vgt_2023_p_845" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-845</field>
+            <field name="nombre">PROYECTO LAS CRUCES, PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">106</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2023_p_1257" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1257</field>
+            <field name="nombre">PROYECTO BARRIO LIBERTADOR GUANARE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">38</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2023_p_1344" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1344</field>
+            <field name="nombre">PROYECTO SECTOR CUATRICENTENARIO SECTOR 4</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">25</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2023_p_1302" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1302</field>
+            <field name="nombre">PROYECTO SECTOR GRACIANERA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">66</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2023_p_1291" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1291</field>
+            <field name="nombre">PROYECTO SECTOR FUNDA GUANARE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">81</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2023_p_847" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-847</field>
+            <field name="nombre">PROYECTO TRONCAL MESA DE CAVACA LAS CRUCES</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">CARRETERA NACIONAL BOCONO GUANARE (GUANARE)</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">378</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2023_p_970" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-970</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTORES LA CARMELO, LA CONCORDIA MAISANTA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">256</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_874" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-874</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA RIO ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">259</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1453" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1453</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA DURIGUA VIEJA URB. LA VIRGINIA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">318</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_969" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-969</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA TRONCAL CALLE 5 - PARQUE RESIDENCIAL LOS ROBLES, ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">70</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1445" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1445</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA BELLAS ARTES LOS CORTIJOS</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">313</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1430" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1430</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA TRONCAL 5 DE DICIEMBRE VIA MI JAGUITO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">88</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1442" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1442</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA 5 DE DICIEMBRE, PADRE MORENO, 15 DE MARZO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">296</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1490" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1490</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA PARTE BAJA DE 5 DE DICIEMBRE LOS ROBLES</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">247</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1499" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1499</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA BARAURE I</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">115</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1452" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1452</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA DURIGUA 2 Y 3</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">266</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1462" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1462</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA URB. VALLE ARRIBA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">137</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1460" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1460</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA TRONCAL AV. NEGRO PRIMERO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">64</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1463" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1463</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA LAS DELICIAS</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">170</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1495" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1495</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA BARRIO LAS AMERICAS</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">89</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1498" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1498</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA URB. MIRANDA PAEZ Y SUCRE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">124</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1059" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1059</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA PIRITU EN PROCESO DE DESINCORPORACION (VGT-2024-DP-031)</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">STELLER</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">726</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1072" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1072</field>
+            <field name="nombre">REGISTRO DE POSTEADURA NUEVA TRONCAL PIRITU- TUREN</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">STELLER</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">174</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2024_p_55" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-55</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA URB. LOS MALABARES</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">66</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_200" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-200</field>
+            <field name="nombre">TENDIDO DE FIBRA TRONCAL EL MIRADOR  SAN ANTONIO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">21</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_207" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-207</field>
+            <field name="nombre">TENDIDO DE FIBRA  ÓPTICA SECTOR COLOMBIA NORTE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">51</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_408" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-408</field>
+            <field name="nombre">TENDIDO DE FIBRA  ÓPTICA SECTOR PRADOS DEL SOL</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">157</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_415" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-415</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA URB. LA COROMOTANA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">13</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_416" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-416</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR NAZARENO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">41</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_397" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-397</field>
+            <field name="nombre">SECTOR LA GONZALO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">120</field>
+            <field name="fecha_autorizacion">2024-05-01</field>
+        </record>
+        <record id="vgt_2024_p_394" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-394</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA BARRIO BOLIVAR ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">158</field>
+            <field name="fecha_autorizacion">2024-05-16</field>
+        </record>
+        <record id="vgt_2024_p_383" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-383</field>
+            <field name="nombre">LA APARICION</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">210</field>
+            <field name="fecha_autorizacion">2024-05-16</field>
+        </record>
+        <record id="vgt_2024_p_77" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-77</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA  AGUA BLANCA SECTOR VENEZUELA DESDE 01/11/24</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">AGUA BLANCA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">106</field>
+            <field name="fecha_autorizacion">2024-05-16</field>
+        </record>
+        <record id="vgt_2024_p_470" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-470</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR  AGUA BLANCA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">93</field>
+            <field name="fecha_autorizacion">2024-04-01</field>
+        </record>
+        <record id="vgt_2024_p_725" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-725</field>
+            <field name="nombre">FIBRA OPTICA TRONCAL PIRITU TUREN II</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">TUREN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">145</field>
+            <field name="fecha_autorizacion">2024-04-01</field>
+        </record>
+        <record id="vgt_2023_p_400" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-400</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA TRONCAL GUANARE ENTRADA SABANETA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE -BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">767</field>
+            <field name="fecha_autorizacion">2023-06-12</field>
+        </record>
+        <record id="vgt_2024_p_1476" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1476</field>
+            <field name="nombre">PROYECTO RUTA FIBRA OPTICA TUCUPIDO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">91</field>
+            <field name="fecha_autorizacion">2023-06-03</field>
+        </record>
+        <record id="vgt_2024_p_1252" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1252</field>
+            <field name="nombre">RUTA FIBRA OPTICA LA ESTACIÓN OSPINO, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">48</field>
+        </record>
+        <record id="vgt_2024_p_1175" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1175</field>
+            <field name="nombre">PROYECTO RUTA FIBRA ÓPTICA TRONCAL LA ESTACION OSPINO-OSPINO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">126</field>
+            <field name="fecha_autorizacion">2023-06-03</field>
+        </record>
+        <record id="vgt_2024_p_412" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-412</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA URBANIZACION FERMIN TORO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">55</field>
+            <field name="fecha_autorizacion">2023-10-15</field>
+        </record>
+        <record id="vgt_2024_p_1297" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1297</field>
+            <field name="nombre">RUTA FIBRA OPTICA PAYARA EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">312</field>
+            <field name="fecha_autorizacion">2024-10-25</field>
+        </record>
+        <record id="vgt_2024_p_1295" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1295</field>
+            <field name="nombre">RUTA FIBRA OPTICA TRONCAL ACARIGUA PAYARA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">202</field>
+        </record>
+        <record id="vgt_2024_p_2155" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2155</field>
+            <field name="nombre">RUTA FIBRA OPTICA PROYECTO RED GPON LA COMUNIDAD NUEVA Y VIEJA, COROMOTO, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">303</field>
+            <field name="fecha_autorizacion">2024-11-28</field>
+        </record>
+        <record id="vgt_2023_p_1489" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1489</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA URB. LA GRANJA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">50</field>
+            <field name="fecha_autorizacion">2023-11-10</field>
+        </record>
+        <record id="vgt_2023_p_1672" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1672</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA TRAMO SAN ANTONIO - VILLA PASTORA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">338</field>
+            <field name="fecha_autorizacion">2023-12-19</field>
+        </record>
+        <record id="vgt_2024_p_1852" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1852</field>
+            <field name="nombre">PROYECTO BARRIO LA CONSTITUYENTE, ACARIGUA, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">93</field>
+            <field name="fecha_autorizacion">2024-09-26</field>
+        </record>
+        <record id="vgt_2024_p_1900" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1900</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA BARRIO EL BOSQUE PARAISO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">100</field>
+            <field name="fecha_autorizacion">2024-10-04</field>
+        </record>
+        <record id="vgt_2024_p_384" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-384</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA BISCUCUY</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">287</field>
+            <field name="fecha_autorizacion">2023-08-04</field>
+        </record>
+        <record id="vgt_2024_p_385" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-385</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA TRONCAL LAS CRUCES- BISCUCUY EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">361</field>
+            <field name="fecha_autorizacion">2024-01-23</field>
+        </record>
+        <record id="vgt_2024_p_1988" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1988</field>
+            <field name="nombre">PROYECTO BARRIO ARAGUANEY, ACARIGUA, EDO PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">135</field>
+            <field name="fecha_autorizacion">2024-10-16</field>
+        </record>
+        <record id="vgt_2024_p_1989" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1989</field>
+            <field name="nombre">PROYECTO URB. SAN JOSÉ I, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">79</field>
+            <field name="fecha_autorizacion">2024-10-16</field>
+        </record>
+        <record id="vgt_2024_p_2188" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2188</field>
+            <field name="nombre">RED GPON JOSE ANTONIO PAEZ EDO PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">80</field>
+            <field name="fecha_autorizacion">2024-11-13</field>
+        </record>
+        <record id="vgt_2024_p_2309" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2309</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA PROYECTO RED GPON ESTADIO-CICLO BÁSICO,</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">TUREN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">123</field>
+        </record>
+        <record id="vgt_2024_p_2339" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2339</field>
+            <field name="nombre">PROYECTO RED GPON EL PROGRESO GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">171</field>
+            <field name="fecha_autorizacion">2024-03-12</field>
+        </record>
+        <record id="vgt_2024_p_2347" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2347</field>
+            <field name="nombre">RED GPON VALLE CENTRO - OSPINO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">78</field>
+            <field name="fecha_autorizacion">2024-04-12</field>
+        </record>
+        <record id="vgt_2024_p_2196" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2196</field>
+            <field name="nombre">RED GPON PRADOS DEL SOL II</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SAMUEL DARIA MALDONADO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">126</field>
+            <field name="fecha_autorizacion">2024-11-13</field>
+        </record>
+        <record id="vgt_2024_p_2201" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2201</field>
+            <field name="nombre">RED GPON  PAYARA LOS MAMONES, EDO PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">126</field>
+            <field name="fecha_autorizacion">2024-11-14</field>
+        </record>
+        <record id="vgt_2024_p_2202" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2202</field>
+            <field name="nombre">RED GPON  PAYARA LOS PUERTOS, EDO PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">108</field>
+            <field name="fecha_autorizacion">2024-11-14</field>
+        </record>
+        <record id="vgt_2024_p_1853" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1853</field>
+            <field name="nombre">PROYECTO EL TERMINAL BISCUCUY, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">14</field>
+            <field name="fecha_autorizacion">2024-09-26</field>
+        </record>
+        <record id="vgt_2024_p_2370" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2370</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON URB SANTA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">147</field>
+            <field name="fecha_autorizacion">2024-12-06</field>
+        </record>
+        <record id="vgt_2024_p_2374" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2374</field>
+            <field name="nombre">PROYECTO RUTA FIBRA OPTICA SAN MIGUEL - RIO ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">86</field>
+        </record>
+        <record id="vgt_2024_p_2452" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2452</field>
+            <field name="nombre">PROYECTO RED GPON ZONA CENTRO II GUANARE EDO PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">257</field>
+            <field name="fecha_autorizacion">2024-12-02</field>
+        </record>
+        <record id="vgt_2024_p_2459" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2459</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON CASERIO CHISPA,TUREN</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">TUREN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">119</field>
+            <field name="fecha_autorizacion">2024-12-18</field>
+        </record>
+        <record id="vgt_2024_p_2460" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2460</field>
+            <field name="nombre">NUEVO PROYECTO SECTOR ALTAMIRA ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">50</field>
+            <field name="fecha_autorizacion">2024-12-18</field>
+        </record>
+        <record id="vgt_2024_p_2030" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2030</field>
+            <field name="nombre">PROYECTO TENDIDO DE FIBRA  ZONA CENTRO ACARIGUA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">49</field>
+            <field name="fecha_autorizacion">2024-10-23</field>
+        </record>
+        <record id="vgt_2024_p_2461" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2461</field>
+            <field name="nombre">PROYECTO RED GPON ALGODONAL</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">179</field>
+            <field name="fecha_autorizacion">2024-12-19</field>
+        </record>
+        <record id="vgt_2024_p_2464" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2464</field>
+            <field name="nombre">PROYECTO RED GPON TURENLINDA, MERECURE Y JACOBERA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">184</field>
+            <field name="fecha_autorizacion">2024-12-19</field>
+        </record>
+        <record id="vgt_2024_p_2465" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2465</field>
+            <field name="nombre">RED GPON TRONCAL TUREN LAS MARIAS</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ACARIGUA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">70</field>
+            <field name="fecha_autorizacion">2024-12-19</field>
+        </record>
+        <record id="vgt_2024_p_2470" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2470</field>
+            <field name="nombre">RED GPON LA VEGA SECTOR II</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">TUREN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">110</field>
+            <field name="fecha_autorizacion">2024-12-23</field>
+        </record>
+        <record id="vgt_2024_p_2471" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2471</field>
+            <field name="nombre">RED GPON LA TRINIDAD, MCPIO. OSPINO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">TUREN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">208</field>
+            <field name="fecha_autorizacion">2024-12-23</field>
+        </record>
+        <record id="vgt_2025_p_72" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-72</field>
+            <field name="nombre">RED GPON VILLA ARAURE II, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">TUREN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">153</field>
+            <field name="fecha_autorizacion">2025-01-13</field>
+        </record>
+        <record id="vgt_2025_p_73" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-73</field>
+            <field name="nombre">RED GPON VILLA ARAURE I, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">134</field>
+            <field name="fecha_autorizacion">2025-01-13</field>
+        </record>
+        <record id="vgt_2025_p_133" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-133</field>
+            <field name="nombre">RED GPON BRUZUAL, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">55</field>
+            <field name="fecha_autorizacion">2025-01-17</field>
+        </record>
+        <record id="vgt_2025_p_16" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-16</field>
+            <field name="nombre">RED GPON TRONCAL BUENAVENTURA, VILLA ARAURE, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">101</field>
+        </record>
+        <record id="vgt_2025_p_317" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-317</field>
+            <field name="nombre">RED GPON RED GPON URB PEDRO CAMEJO, ACARIGUA, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">TUREN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">94</field>
+            <field name="fecha_autorizacion">2025-02-05</field>
+        </record>
+        <record id="vgt_2025_p_401" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-401</field>
+            <field name="nombre">RED GPON ESTADIO YANKEES PIEDRA, BARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">49</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_412" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-412</field>
+            <field name="nombre">RED GPON BARAURE II, EDO PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">221</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_551" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-551</field>
+            <field name="nombre">RED GPON VILLA ARAURE III, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">139</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_556" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-556</field>
+            <field name="nombre">RED GPON BELLA VISTA, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">98</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_332" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-332</field>
+            <field name="nombre">RED GPON LA ROJEÑA, RIO ACARIGUA, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">72</field>
+            <field name="fecha_autorizacion">2025-02-06</field>
+        </record>
+        <record id="vgt_2025_p_1920" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1920</field>
+            <field name="nombre">RED GPON AMPLIACION OSPINO, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">691</field>
+            <field name="fecha_autorizacion">2025-04-23</field>
+        </record>
+        <record id="vgt_2024_p_1854" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1854</field>
+            <field name="nombre">PROYECTO EL ROSAL BISCUCUY, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">29</field>
+            <field name="fecha_autorizacion">2024-09-26</field>
+        </record>
+        <record id="vgt_2024_p_61" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-61</field>
+            <field name="nombre">PROYECTO LA IMPORTANCIA EL CAMBIO - GUANARE</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">OSPINO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">84</field>
+            <field name="fecha_autorizacion">2024-01-12</field>
+        </record>
+        <record id="vgt_2025_p_2075" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2075</field>
+            <field name="nombre">RED GPON SAN RAFAEL DE ONOTO, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">636</field>
+            <field name="fecha_autorizacion">2025-05-15</field>
+        </record>
+        <record id="vgt_2025_p_2135" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2135</field>
+            <field name="nombre">PROYECTO RED GPON, VILLA DEL PILAR II, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">301</field>
+            <field name="fecha_autorizacion">2025-05-20</field>
+        </record>
+        <record id="vgt_2025_p_2143" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2143</field>
+            <field name="nombre">RED GPON URB 5 DE DICIEMBRE, LIMONCITO, SAN PABLO, TAMARINDO, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SAN RAFAEL DE ONOTO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">423</field>
+            <field name="fecha_autorizacion">2025-05-21</field>
+        </record>
+        <record id="vgt_2025_p_440" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-440</field>
+            <field name="nombre">RED GPON SOL DE JUSTICIA, GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">243</field>
+            <field name="fecha_autorizacion">2025-02-17</field>
+        </record>
+        <record id="vgt_2025_p_1611" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1611</field>
+            <field name="nombre">TRONCAL GUANARE - GUANARITO, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">712</field>
+            <field name="fecha_autorizacion">2025-03-19</field>
+        </record>
+        <record id="vgt_2025_p_2672" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2672</field>
+            <field name="nombre">PROYECTO RED GPON EXPANSION AGUA BLANCA, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">705</field>
+            <field name="fecha_autorizacion">2025-08-05</field>
+        </record>
+        <record id="vgt_2025_p_2725" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2725</field>
+            <field name="nombre">RED GPON VILLA ARAURE SECTOR ARBOLEDA, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">80</field>
+            <field name="fecha_autorizacion">2025-08-13</field>
+        </record>
+        <record id="vgt_2025_p_2737" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2737</field>
+            <field name="nombre">RED GPON URBANIZACION MARIA JOSE, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">AGUA BLANCA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">40</field>
+            <field name="fecha_autorizacion">2025-08-13</field>
+        </record>
+        <record id="vgt_2025_p_2742" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2742</field>
+            <field name="nombre">RED GPON URBANIZACION 24 DE JULIO, ACARIGUA, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">273</field>
+            <field name="fecha_autorizacion">2025-08-14</field>
+        </record>
+        <record id="vgt_2025_p_2744" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2744</field>
+            <field name="nombre">TRONCAL VILLA DEL PILAR, MISIA AMELIA, LA TAPA, ACARIGUA, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">58</field>
+            <field name="fecha_autorizacion">2025-08-14</field>
+        </record>
+        <record id="vgt_2025_p_2730" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2730</field>
+            <field name="nombre">RED GPON SECTOR EL MUERTICO ANDRES ELOY BLANCO, ACARIGUA, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">607</field>
+            <field name="fecha_autorizacion">2025-08-13</field>
+        </record>
+        <record id="vgt_2025_p_1578" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1578</field>
+            <field name="nombre">RED GPON BARRIO CEMENTERIO, SECTOR COLOMBIA SUR, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">132</field>
+            <field name="fecha_autorizacion">2025-03-17</field>
+        </record>
+        <record id="vgt_2025_p_2705" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2705</field>
+            <field name="nombre">RED GPON URBANIZACIÓN EL TRÉBOL, GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">26</field>
+            <field name="fecha_autorizacion">2025-08-11</field>
+        </record>
+        <record id="vgt_2025_p_2706" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2706</field>
+            <field name="nombre">RED GPON URBANIZACIÓN EL PASEO, GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">26</field>
+            <field name="fecha_autorizacion">2025-08-11</field>
+        </record>
+        <record id="vgt_2025_p_2710" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2710</field>
+            <field name="nombre">RED GPON LA COLINA PARTE ALTA , GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">131</field>
+            <field name="fecha_autorizacion">2025-08-11</field>
+        </record>
+        <record id="vgt_2025_p_2718" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2718</field>
+            <field name="nombre">RED GPON SECTOR GATO NEGRO, GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">349</field>
+            <field name="fecha_autorizacion">2025-08-12</field>
+        </record>
+        <record id="vgt_2025_p_1612" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1612</field>
+            <field name="nombre">RED GPON BARRIO CEMENTERIO, SECTOR SAN JOSE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">58</field>
+            <field name="fecha_autorizacion">2025-03-17</field>
+        </record>
+        <record id="vgt_2025_p_2756" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2756</field>
+            <field name="nombre">PROYECTO RED GPON SECTOR FE Y ALEGRÍA, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">192</field>
+            <field name="fecha_autorizacion">2025-08-18</field>
+        </record>
+        <record id="vgt_2025_p_2761_vgt_2026_dp_013" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2761 / VGT-2026-DP-013</field>
+            <field name="nombre">RED GPON SECTOR MISIA AMELIA - VENCEDORES, ARAURE, EDO. PORTUGUESA / DESINCORPORADO</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">87</field>
+        </record>
+        <record id="vgt_2025_p_2772" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2772</field>
+            <field name="nombre">RED GPON SECTOR ALTAMIRA ETAPA II, ACARIGUA, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">227</field>
+            <field name="fecha_autorizacion">2025-08-19</field>
+        </record>
+        <record id="vgt_2025_p_2774" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2774</field>
+            <field name="nombre">RED GPON SECTOR PALO GORDO, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">78</field>
+            <field name="fecha_autorizacion">2025-08-19</field>
+        </record>
+        <record id="vgt_2025_p_2801" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2801</field>
+            <field name="nombre">RED GPON SECTOR URBANIZACIÓN NUEVA VENEZUELA, ACARIGUA, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">602</field>
+            <field name="fecha_autorizacion">2025-08-20</field>
+        </record>
+        <record id="vgt_2025_p_2804" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2804</field>
+            <field name="nombre">RED GPON SECTOR LOS CAPUCHINOS, ARAURE, EDO. PORTUGUES</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">124</field>
+            <field name="fecha_autorizacion">2025-08-21</field>
+        </record>
+        <record id="vgt_2025_p_2845" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2845</field>
+            <field name="nombre">SECTOR TERRAZAS DE SAN JOSE, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">171</field>
+            <field name="fecha_autorizacion">2025-08-27</field>
+        </record>
+        <record id="vgt_2025_p_2917" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2917</field>
+            <field name="nombre">TRONCAL RÍO ACARIGUA - CAMBURITO FUNDA BARRIOS, ARAURE, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">77</field>
+            <field name="fecha_autorizacion">2025-08-28</field>
+        </record>
+        <record id="vgt_2025_p_2929" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2929</field>
+            <field name="nombre">RED GPON URB FUNDA BARRIO, ARAURE, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">418</field>
+            <field name="fecha_autorizacion">2025-08-29</field>
+        </record>
+        <record id="vgt_2025_p_2927" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2927</field>
+            <field name="nombre">RED GPON CAMBURITO, ARAURE, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">222</field>
+            <field name="fecha_autorizacion">2025-08-29</field>
+        </record>
+        <record id="vgt_2025_p_2759" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2759</field>
+            <field name="nombre">RED GPON SECTOR LA TAPA DE PIEDRA, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">260</field>
+            <field name="fecha_autorizacion">2025-08-18</field>
+        </record>
+        <record id="vgt_2025_p_2840" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2840</field>
+            <field name="nombre">RED GPON URB EL PLACER, GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">91</field>
+            <field name="fecha_autorizacion">2025-08-27</field>
+        </record>
+        <record id="vgt_2025_p_2844" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2844</field>
+            <field name="nombre">RED GPON JUAN PABLO II CIUDAD KANAN, GUANARE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">298</field>
+            <field name="fecha_autorizacion">2025-08-27</field>
+        </record>
+        <record id="vgt_2025_p_3105" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3105</field>
+            <field name="nombre">RED GPON LOS CORTIJOS, ACARIGUA ETAPA 2, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">SAN JUANB DE GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">279</field>
+            <field name="fecha_autorizacion">2025-09-18</field>
+        </record>
+        <record id="vgt_2025_p_3097" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3097</field>
+            <field name="nombre">PROYECTO RED GPON MALABARES GUANARE ETAPA 2, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">89</field>
+            <field name="fecha_autorizacion">2025-09-23</field>
+        </record>
+        <record id="vgt_2025_p_3365" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3365</field>
+            <field name="nombre">RED GPON BELLA VISTA, GUANARE, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">31</field>
+            <field name="fecha_autorizacion">2025-12-02</field>
+        </record>
+        <record id="vgt_2025_p_3690" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3690</field>
+            <field name="nombre">PROYECTO RED GPON GUAFILLAS, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">GUANARE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">54</field>
+            <field name="fecha_autorizacion">2026-01-06</field>
+        </record>
+        <record id="vgt_2026_p_108" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-108</field>
+            <field name="nombre">PROYECTO RED GPON SECTOR CASERÍO LOS BOTALONES, ARAURE, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">62</field>
+            <field name="fecha_autorizacion">2026-02-05</field>
+        </record>
+        <record id="vgt_2025_p_111" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-111</field>
+            <field name="nombre">PROYECTO RED GPON LA LUCIA - LOS TANQUES, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">154</field>
+            <field name="fecha_autorizacion">2026-02-05</field>
+        </record>
+        <record id="vgt_2026_p_106" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-106</field>
+            <field name="nombre">PROYECTO RED GPON LOS MALABARES, ARAURE, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">90</field>
+            <field name="fecha_autorizacion">2026-02-05</field>
+        </record>
+        <record id="vgt_2026_p_099" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-099</field>
+            <field name="nombre">PROYECTO RED GPON TRONCAL BUENA AVENTURA - LA LUCIA, ARAURE, EDO. PORTUGUESA</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">230</field>
+            <field name="fecha_autorizacion">2026-02-05</field>
+        </record>
+        <record id="vgt_2026_p_100" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-100</field>
+            <field name="nombre">PROYECTO RED GPON LA LUCIA, ARAURE, EDO. PORTUGUESA -</field>
+            <field name="estado">PORTUGUESA</field>
+            <field name="municipio">ARAURE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">57</field>
+            <field name="fecha_autorizacion">2026-02-12</field>
+        </record>
+        <record id="vgt_2023_p_337" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-337</field>
+            <field name="nombre">NUEVO EMPLAZAMIENTO SANTA BARBARA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">285</field>
+            <field name="fecha_autorizacion">2023-05-04</field>
+        </record>
+        <record id="vgt_2023_p_277" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-277</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SABANETA BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">SABANETA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">172</field>
+            <field name="fecha_autorizacion">2023-05-04</field>
+        </record>
+        <record id="vgt_2023_p_269" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-269</field>
+            <field name="nombre">PROYECTO MODIFICADO BARINAS JUAN PABLO</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1156</field>
+            <field name="fecha_autorizacion">2023-05-04</field>
+        </record>
+        <record id="vgt_2023_p_427" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-427</field>
+            <field name="nombre">NUEVO EMPLAZAMIENTO BARINAS PARTE II (CORRALITO) /YA SE INSPECCIONO NO HAN EMITIDO CARTA DE DESINCORPORACIÓN</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EN PROCESO DE DESINCORPORACION (VGT-2024-DP-018)</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">472</field>
+            <field name="fecha_autorizacion">2023-06-12</field>
+        </record>
+        <record id="vgt_2023_p_1576" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1576</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA BARRANCAS - BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">CRUZ PAREDES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">387</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2024_p_99" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-99</field>
+            <field name="nombre">PROYECTO SAN SILVESTRE EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">490</field>
+            <field name="fecha_autorizacion">2024-02-21</field>
+        </record>
+        <record id="vgt_2024_p_307" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-307</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR LAS COLINAS LOS POZONES, EDO. BARINAS (PALACIO FAJARDO)</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">449</field>
+            <field name="fecha_autorizacion">2024-03-01</field>
+        </record>
+        <record id="vgt_2024_p_329" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-329</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR PEDRAZA LA VIEJA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">151</field>
+            <field name="fecha_autorizacion">2024-03-01</field>
+        </record>
+        <record id="vgt_2024_p_336" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-336</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA SECTOR ANDRES VARELA - 23 DE ENERO</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">151</field>
+            <field name="fecha_autorizacion">2024-03-01</field>
+        </record>
+        <record id="vgt_2024_p_338" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-338</field>
+            <field name="nombre">PROYECTO SAN ANTONIO DE PAJÉN</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">46</field>
+            <field name="fecha_autorizacion">2024-04-02</field>
+        </record>
+        <record id="vgt_2024_p_351" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-351</field>
+            <field name="nombre">PROYECTO EL CAMBUR</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">18</field>
+            <field name="fecha_autorizacion">2024-04-02</field>
+        </record>
+        <record id="vgt_2024_p_352" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-352</field>
+            <field name="nombre">PROYECTO GUACAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ANDRES ELOY BLANCO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">297</field>
+            <field name="fecha_autorizacion">2024-04-02</field>
+        </record>
+        <record id="vgt_2024_p_492" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-492</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA SECTOR CAMPO ALEGRE - BORBURATA - OBISPOS, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS / OBISPOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">483</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2023_p_102" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-102</field>
+            <field name="nombre">TENDIDO FIBRA ÓPTICA SANTA BARBARA/ PUNTA DE PIEDRA - BOCONOITO</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA - ANTONIO JOSE DE SUCRE - PEDRAZA - BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">2166</field>
+            <field name="fecha_autorizacion">2023-05-04</field>
+        </record>
+        <record id="vgt_2024_p_331" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-331</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA SECTOR CAPITANEJO</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">251</field>
+            <field name="fecha_autorizacion">2024-03-15</field>
+        </record>
+        <record id="vgt_2024_p_778" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-778</field>
+            <field name="nombre">PROYECTO RUTA FIBRA ÓPTICA SECTOR EL CANTON</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ANDRES ELOY BLANCO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">219</field>
+            <field name="fecha_autorizacion">2023-12-18</field>
+        </record>
+        <record id="vgt_2024_p_1172" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1172</field>
+            <field name="nombre">PROYECTO RUTA FIBRA ÓPTICA RED GPON LA GUACHARACA BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">CRUZ PAREDES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">40</field>
+            <field name="fecha_autorizacion">2024-09-13</field>
+        </record>
+        <record id="vgt_2024_p_1181" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1181</field>
+            <field name="nombre">RUTA FIBRA OPTICA RED GPON LOS MEREYES</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">CRUZ PAREDES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">37</field>
+            <field name="fecha_autorizacion">2024-09-13</field>
+        </record>
+        <record id="vgt_2024_p_1183" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1183</field>
+            <field name="nombre">RUTA FIBRA ÓPTICA 23 DE ENERO, SABANETA, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ALBERTO TORREALBA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">62</field>
+            <field name="fecha_autorizacion">2024-09-13</field>
+        </record>
+        <record id="vgt_2024_p_1190" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1190</field>
+            <field name="nombre">RUTA FIBRA OPTICA ZONA CONTINENTAL, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">36</field>
+            <field name="fecha_autorizacion">2024-09-13</field>
+        </record>
+        <record id="vgt_2024_p_1253" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1253</field>
+            <field name="nombre">RUTA FIBRA OPTICA SECTOR LA MULA, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">335</field>
+            <field name="fecha_autorizacion">2024-09-13</field>
+        </record>
+        <record id="vgt_2024_p_1522" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1522</field>
+            <field name="nombre">RUTA FIBRA ÓPTICA URB. NUEVA BARINAS, CAPITAL, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">61</field>
+            <field name="fecha_autorizacion">2024-09-13</field>
+        </record>
+        <record id="vgt_2024_p_826" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-826</field>
+            <field name="nombre">PROYECTO FIBRA ÓPTICA TRONCAL CIUDAD BOLIVIA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">PEDRAZA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">92</field>
+            <field name="fecha_autorizacion">2024-10-17</field>
+        </record>
+        <record id="vgt_2024_p_966" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-966</field>
+            <field name="nombre">PROYECTO RED GPON LOS GUASIMITOS-PUEBLO OBRERO</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">OBISPOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">485</field>
+            <field name="fecha_autorizacion">2024-10-17</field>
+        </record>
+        <record id="vgt_2024_p_1629" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1629</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON 1RO DE DICIEMBRE</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">464</field>
+            <field name="fecha_autorizacion">2024-09-23</field>
+        </record>
+        <record id="vgt_2024_p_1369" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1369</field>
+            <field name="nombre">PROYECTO BARINAS ZONA BAJA I, EDO. BARINAS VGT ASIGNADA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">252</field>
+            <field name="fecha_autorizacion">2024-11-08</field>
+        </record>
+        <record id="vgt_2024_p_2095" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2095</field>
+            <field name="nombre">PROYECTO RED GPON BEJUCAL ALTO SABANETA ESTADO BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ALBERTO ARBELO TORREALBA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">115</field>
+            <field name="fecha_autorizacion">2024-10-04</field>
+        </record>
+        <record id="vgt_2024_p_2096" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2096</field>
+            <field name="nombre">PROYECTO RED GPON BEJUCAL BAJO SABANETA ESTADO BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ALBERTO ARBELO TORREALBA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">142</field>
+            <field name="fecha_autorizacion">2024-10-04</field>
+        </record>
+        <record id="vgt_2024_p_623" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-623</field>
+            <field name="nombre">PROYECTO TRONCAL BARINAS CAMPO ALEGRE</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">223</field>
+        </record>
+        <record id="vgt_2024_p_1001" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1001</field>
+            <field name="nombre">PROYECTO SAN RAFAEL DE CANAGUA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">PEDRAZA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">139</field>
+            <field name="fecha_autorizacion">2024-05-27</field>
+        </record>
+        <record id="vgt_2024_p_2026" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2026</field>
+            <field name="nombre">PROYECTO TENDIDO DE FIBRA ÓPTICA AMPLIACION SABANETA I EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ALBERTO ARBELO TORREALBA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">46</field>
+            <field name="fecha_autorizacion">2024-10-22</field>
+        </record>
+        <record id="vgt_2024_p_2027" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2027</field>
+            <field name="nombre">PROYECTO TENDIDO DE FIBRA ÓPTICA AMPLIACION SABANETA II</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ALBERTO ARBELO TORREALBA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">177</field>
+            <field name="fecha_autorizacion">2024-10-22</field>
+        </record>
+        <record id="vgt_2024_p_2029" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2029</field>
+            <field name="nombre">PROYECTO TENDIDO DE FIBRA ÓPTICA RED GPON SANTA RITA, VÍA SABANETA, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ALBERTO ARBELO TORREALBA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">29</field>
+            <field name="fecha_autorizacion">2024-10-23</field>
+        </record>
+        <record id="vgt_2024_p_2256" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2256</field>
+            <field name="nombre">RED GPON SECTOR EL RÍO I Y II, SANTA BÁRBARA, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">86</field>
+            <field name="fecha_autorizacion">2024-11-21</field>
+        </record>
+        <record id="vgt_2024_p_2258" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2258</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON SECTOR LAS MINAS DE ARENA II SANTA BARBARA, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">29</field>
+            <field name="fecha_autorizacion">2024-11-21</field>
+        </record>
+        <record id="vgt_2024_p_2257" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2257</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON SECTOR LAS MINAS DE ARENA I SANTA BARBARA, EDO BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">32</field>
+            <field name="fecha_autorizacion">2024-11-21</field>
+        </record>
+        <record id="vgt_2024_p_2259" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2259</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON SECTOR SAN JOSE SANTA BARBARA, EDO BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">51</field>
+            <field name="fecha_autorizacion">2024-11-22</field>
+        </record>
+        <record id="vgt_2024_p_2267" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2267</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON SECTOR CENTRO SANTA BARBARA, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">78</field>
+            <field name="fecha_autorizacion">2024-11-22</field>
+        </record>
+        <record id="vgt_2024_p_2265" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2265</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA PROYECTO TRONCAL CENTRO</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">152</field>
+            <field name="fecha_autorizacion">2024-11-22</field>
+        </record>
+        <record id="vgt_2024_p_2383" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2383</field>
+            <field name="nombre">TRONCAL BARINAS - BARINITAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">404</field>
+            <field name="fecha_autorizacion">2024-12-10</field>
+        </record>
+        <record id="vgt_2024_p_2416" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2416</field>
+            <field name="nombre">RED GPON SAN PEDRO AGUA Y DULCE</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">252</field>
+            <field name="fecha_autorizacion">2024-12-16</field>
+        </record>
+        <record id="vgt_2024_p_2421" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2421</field>
+            <field name="nombre">RED GPON ZONA CENTRO, BARINITAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">182</field>
+            <field name="fecha_autorizacion">2024-12-16</field>
+        </record>
+        <record id="vgt_2024_p_2445" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2445</field>
+            <field name="nombre">RED GPON EL JOBAL, OSPINO</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">80</field>
+            <field name="fecha_autorizacion">2024-12-17</field>
+        </record>
+        <record id="vgt_2024_p_2451" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2451</field>
+            <field name="nombre">TRONCAL RIO ACARIGUA - CEMENTERIO DE ACARIGUA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">138</field>
+            <field name="fecha_autorizacion">2024-12-17</field>
+        </record>
+        <record id="vgt_2024_p_2362" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2362</field>
+            <field name="nombre">PROYECTO RED GPON LA CARAMUCA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">481</field>
+            <field name="fecha_autorizacion">2024-12-05</field>
+        </record>
+        <record id="vgt_2025_p_84" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-84</field>
+            <field name="nombre">RED GPON SANTA LUCIA</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">145</field>
+            <field name="fecha_autorizacion">2025-01-14</field>
+        </record>
+        <record id="vgt_2025_p_83" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-83</field>
+            <field name="nombre">RED GPON SANTA INÉS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">PEDRO FELIPE SOSA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">82</field>
+            <field name="fecha_autorizacion">2025-01-14</field>
+        </record>
+        <record id="vgt_2025_p_524" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-524</field>
+            <field name="nombre">RED GPON CIUDAD BOLIVIA,   EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">PEDRO FELIPE SOSA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">641</field>
+            <field name="fecha_autorizacion">2025-02-14</field>
+        </record>
+        <record id="vgt_2025_p_587" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-587</field>
+            <field name="nombre">RED GPON PUERTO DE NUTRIAS EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">OBISPOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">106</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_1562" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1562</field>
+            <field name="nombre">RED GPON CIUDAD DE NUTRIAS, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">263</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_1622" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1622</field>
+            <field name="nombre">RED GPON GUASIMITO SECTOR BOLIVARIANO, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ARISMENDI</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">33</field>
+            <field name="fecha_autorizacion">2025-03-19</field>
+        </record>
+        <record id="vgt_2025_p_1632" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1632</field>
+            <field name="nombre">RED GPON GUASIMITO SECTOR EL HONGO, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ANTONIO JOSE DE SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">30</field>
+            <field name="fecha_autorizacion">2025-03-19</field>
+        </record>
+        <record id="vgt_2025_p_1689" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1689</field>
+            <field name="nombre">RED GPON ARISMENDI, EDO. BARINAS -</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">ANTONIO JOSE DE SUCRE</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">362</field>
+            <field name="fecha_autorizacion">2025-03-27</field>
+        </record>
+        <record id="vgt_2025_p_1728" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1728</field>
+            <field name="nombre">RED GPON SOCOPO ETAPA IV, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">584</field>
+            <field name="fecha_autorizacion">2025-04-02</field>
+        </record>
+        <record id="vgt_2025_p_1727" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1727</field>
+            <field name="nombre">RED GPON SOCOPO ETAPA III, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BOLIVARIANO DE ANUSTRIA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">353</field>
+            <field name="fecha_autorizacion">2025-04-02</field>
+        </record>
+        <record id="vgt_2025_p_1875" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1875</field>
+            <field name="nombre">RED GPON SECTOR ALTAMIRA, EDO. BARINAS</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BOLIVAR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">396</field>
+            <field name="fecha_autorizacion">2025-04-21</field>
+        </record>
+        <record id="vgt_2025_p_1908" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1908</field>
+            <field name="nombre">RED GPON ZONA SUR RAUL LEONI, EDO. BARINAS -</field>
+            <field name="estado">BARINAS</field>
+            <field name="municipio">BARINAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">316</field>
+            <field name="fecha_autorizacion">2025-04-22</field>
+        </record>
+        <record id="vgt_2023_p_1038" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1038</field>
+            <field name="nombre">PROYECTO NUEVO GUASDUALITO SECTOR CENTRO</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">247</field>
+            <field name="fecha_autorizacion">2023-10-06</field>
+        </record>
+        <record id="vgt_2023_p_1370" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1370</field>
+            <field name="nombre">PROYECTO TRONCAL GUASDUALITO EL AMPARO</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">219</field>
+            <field name="fecha_autorizacion">2023-11-30</field>
+        </record>
+        <record id="vgt_2023_p_990" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-990</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA GUASDUALITO</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">143</field>
+            <field name="fecha_autorizacion">2023-11-30</field>
+        </record>
+        <record id="vgt_2024_p_58" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-58</field>
+            <field name="nombre">TENDIDO DE FIBRA OPTICA TRAMO SECTOR EL NULA</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">285</field>
+            <field name="fecha_autorizacion">2024-03-01</field>
+        </record>
+        <record id="vgt_2024_p_718" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-718</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA TRONCAL NARANAJALES – EL NULA</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">AYACUCHO - PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">250</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_2023" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2023</field>
+            <field name="nombre">PROYECTO TENDIDO DE FIBRA ÓPTICA RED GPON GUASDUALITO FASE III</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">206</field>
+            <field name="fecha_autorizacion">2024-11-28</field>
+        </record>
+        <record id="vgt_2024_p_2269" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2269</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA PROYECTO RED GPON MANTECAL</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">MUÑOZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">273</field>
+            <field name="fecha_autorizacion">2024-11-22</field>
+        </record>
+        <record id="vgt_2024_p_971" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-971</field>
+            <field name="nombre">RUTA FIBRA ÓPTICA GUASDUALITO MORRONES</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">145</field>
+            <field name="fecha_autorizacion">2024-05-21</field>
+        </record>
+        <record id="vgt_2024_p_2275" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2275</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA PROYECTO RED GPON ELORZA</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">ROMULO GALLEGOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">636</field>
+            <field name="fecha_autorizacion">2024-11-22</field>
+        </record>
+        <record id="vgt_2025_p_42" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-42</field>
+            <field name="nombre">RED GPON LA TRINIDAD DE ORICHUNA</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">ROMULO GALLEGOS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">88</field>
+            <field name="fecha_autorizacion">2025-01-08</field>
+        </record>
+        <record id="vgt_2025_p_291" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-291</field>
+            <field name="nombre">RED GPON RED GPON GUASDUALITO FASE IV</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">103</field>
+            <field name="fecha_autorizacion">2025-02-04</field>
+        </record>
+        <record id="vgt_2025_p_377" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-377</field>
+            <field name="nombre">RED GPON RED GPON AV ACUEDUCTO, SAN FRANCISCO Y FE Y ALEGRIA, GUASDUALITO, EDO. APURE</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">PAEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">272</field>
+            <field name="fecha_autorizacion">2025-02-11</field>
+        </record>
+        <record id="vgt_2025_p_540" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-540</field>
+            <field name="nombre">RED GPON ACHAGUAS, EDO. APURE</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">ACHAGUAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">602</field>
+            <field name="fecha_autorizacion">2025-02-24</field>
+        </record>
+        <record id="vgt_2025_p_541" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-541</field>
+            <field name="nombre">RED GPON APURITO, EDO. APURE</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">ACHAGUAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">90</field>
+            <field name="fecha_autorizacion">2025-02-25</field>
+        </record>
+        <record id="vgt_2025_p_542" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-542</field>
+            <field name="nombre">RED GPON EL SAMAN, EDO. APURE</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">ACHAGUAS</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">132</field>
+            <field name="fecha_autorizacion">2025-02-25</field>
+        </record>
+        <record id="vgt_2025_p_1559" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1559</field>
+            <field name="nombre">RED GPON BRUZUAL, EDO. APURE</field>
+            <field name="estado">APURE</field>
+            <field name="municipio">MUÑOZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">179</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_599" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-599</field>
+            <field name="nombre">TRONCAL GUÁRICO- TOCUYO, EDO. LARA</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">MORAN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">255</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_606" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-606</field>
+            <field name="nombre">TRONCAL BARQUISIMETO- QUIBOR. EDO LARA</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">IRRIBARREN - JIMENEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">531</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_849" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-849</field>
+            <field name="nombre">TRONCAL QUIBOR - TOCUYO. EDO LARA</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">JIMENEZ - MORAN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">317</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_868" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-868</field>
+            <field name="nombre">TRONCAL QUIBOR - SANARE, EDO. LARA</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">JIMENEZ - ANDRES ELOY BLANCO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">277</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_1614" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1614</field>
+            <field name="nombre">RED GPON HUMOCARO BAJO, EDO LARA</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">MORAN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">97</field>
+            <field name="fecha_autorizacion">2025-04-02</field>
+        </record>
+        <record id="vgt_2025_p_1613" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1613</field>
+            <field name="nombre">RED GPON HUMOCARO ALTO, EDO LARA</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">MORAN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">99</field>
+            <field name="fecha_autorizacion">2025-04-02</field>
+        </record>
+        <record id="vgt_2025_p_1704" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1704</field>
+            <field name="nombre">RED GPON SANARE ETAPA I, EDO. LARA</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">ANDRES ELOY BLANCO</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">165</field>
+            <field name="fecha_autorizacion">2025-03-31</field>
+        </record>
+        <record id="vgt_2025_p_1839" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1839</field>
+            <field name="nombre">RED GPON QUIBOR ETAPA I, EDO. LARA -</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">JIMENEZ</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">341</field>
+            <field name="fecha_autorizacion">2025-04-10</field>
+        </record>
+        <record id="vgt_2025_p_1917" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1917</field>
+            <field name="nombre">TOCUYO ETAPA I, EDO. LARA -</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">MORAN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">447</field>
+            <field name="fecha_autorizacion">2025-04-23</field>
+        </record>
+        <record id="vgt_2025_p_1918" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1918</field>
+            <field name="nombre">TOCUYO ETAPA II, EDO. LARA -</field>
+            <field name="estado">LARA</field>
+            <field name="municipio">MORAN</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">173</field>
+            <field name="fecha_autorizacion">2025-04-23</field>
+        </record>
+        <record id="vgt_2025_p_1675" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1675</field>
+            <field name="nombre">RED GPON EL BAUL, EDO. COJEDES</field>
+            <field name="estado">COJEDES</field>
+            <field name="municipio">COJEDES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">355</field>
+            <field name="fecha_autorizacion">2025-07-26</field>
+        </record>
+        <record id="vgt_2025_p_1857" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1857</field>
+            <field name="nombre">RED GPON TINAQUILLO ETAPA I, EDO. COJEDES</field>
+            <field name="estado">COJEDES</field>
+            <field name="municipio">COJEDES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">643</field>
+            <field name="fecha_autorizacion">2025-04-14</field>
+        </record>
+        <record id="vgt_2025_p_3155" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3155</field>
+            <field name="nombre">RED GPON SAN CARLOS ETAPA 2 EDO. COJEDES -</field>
+            <field name="estado">COJEDES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">901</field>
+            <field name="fecha_autorizacion">2025-09-18</field>
+        </record>
+        <record id="vgt_2025_p_3156" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3156</field>
+            <field name="nombre">RED GPON SAN CARLOS CASCO CENTRAL ETAPA 1 EDO. COJEDES -</field>
+            <field name="estado">COJEDES</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">440</field>
+            <field name="fecha_autorizacion">2025-09-18</field>
+        </record>
+        <record id="vgt_2023_p_0254" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-0254</field>
+            <field name="nombre">LAS MINAS DE BARUTA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">49</field>
+            <field name="fecha_autorizacion">2022-08-19</field>
+        </record>
+        <record id="vgt_2024_p_195" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-195</field>
+            <field name="nombre">27 DE FEBRERO MENCA  (EN ESPERA DE RESPUESTA)</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">SE SOLICITO DESINCORPORACION</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">60</field>
+            <field name="fecha_autorizacion">2024-02-28</field>
+        </record>
+        <record id="vgt_2024_p_211" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-211</field>
+            <field name="nombre">RED GPON TRAPICHITO</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">125</field>
+            <field name="fecha_autorizacion">2024-02-29</field>
+        </record>
+        <record id="vgt_2023_p_118" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-118</field>
+            <field name="nombre">CAMBIO DE FIBRA SANTA TERESA- OCUMARE DEL TUY</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">360</field>
+            <field name="fecha_autorizacion">2023-04-13</field>
+        </record>
+        <record id="vgt_2023_p_401" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-401</field>
+            <field name="nombre">PROYECTO DE RED GPON GUARENAS</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">277</field>
+            <field name="fecha_autorizacion">2023-05-17</field>
+        </record>
+        <record id="vgt_2023_p_119" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-119</field>
+            <field name="nombre">PROYECTO TRONCAL TURUMO - SANTA LUCIA - SANTA TERESA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">713</field>
+            <field name="fecha_autorizacion">2023-04-13</field>
+        </record>
+        <record id="vgt_2023_p_139" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-139</field>
+            <field name="nombre">PROYECTO TORUMO - BARUTA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">571</field>
+            <field name="fecha_autorizacion">2023-05-04</field>
+        </record>
+        <record id="vgt_2023_p_736" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-736</field>
+            <field name="nombre">PROYECTO DE RED GPON GUATIRE</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1364</field>
+            <field name="fecha_autorizacion">2023-07-27</field>
+        </record>
+        <record id="vgt_2023_p_157" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-157</field>
+            <field name="nombre">CAMBIO DE FIBRA TRONCAL TORUMO - PETARE</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">207</field>
+            <field name="fecha_autorizacion">2023-05-17</field>
+        </record>
+        <record id="vgt_2023_p_472" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-472</field>
+            <field name="nombre">PROYECTO DE RED GPON OCUMARE</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1962</field>
+            <field name="fecha_autorizacion">2023-05-31</field>
+        </record>
+        <record id="vgt_2023_p_474" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-474</field>
+            <field name="nombre">PROYECTO DE RED GPON VALLES DEL TUY</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1627</field>
+            <field name="fecha_autorizacion">2023-05-31</field>
+        </record>
+        <record id="vgt_2023_p_471" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-471</field>
+            <field name="nombre">PROYECTO YARE MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">374</field>
+            <field name="fecha_autorizacion">2023-05-25</field>
+        </record>
+        <record id="vgt_2023_p_306" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-306</field>
+            <field name="nombre">TENDIDO DE FIBRA CAMBIO DE TECNOLOGIA HOLLO DE LA PUERTA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">170</field>
+            <field name="fecha_autorizacion">2023-05-25</field>
+        </record>
+        <record id="vgt_2023_p_156" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-156</field>
+            <field name="nombre">CAMBIO DE FIBRA TRONCAL TORUMO - GUATIRE</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">543</field>
+        </record>
+        <record id="vgt_2023_p_1621" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1621</field>
+            <field name="nombre">RED GPON CIUDAD BELEN</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">126</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_737" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-737</field>
+            <field name="nombre">PROYECTO DE RED GPON MUNICIPIO SUCRE</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">1987</field>
+            <field name="fecha_autorizacion">2023-07-27</field>
+        </record>
+        <record id="vgt_2024_p_167" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-167</field>
+            <field name="nombre">PROYECTO RED GPON LA PALOMERA - BARUTA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">67</field>
+            <field name="fecha_autorizacion">2024-02-26</field>
+        </record>
+        <record id="vgt_2024_p_198" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-198</field>
+            <field name="nombre">PROYECTO RED GPON CASCO CENTRAL - BARUTA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">123</field>
+            <field name="fecha_autorizacion">2024-04-30</field>
+        </record>
+        <record id="vgt_2024_p_292" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-292</field>
+            <field name="nombre">PROYECTO DE RED GPON VALLE ARRIBA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">EZEQUIEL ZAMORA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">272</field>
+            <field name="fecha_autorizacion">2024-03-01</field>
+        </record>
+        <record id="vgt_2024_p_493" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-493</field>
+            <field name="nombre">RED GPON LA COMUNIDAD - COLINA FELIZ - TAMARINDO</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">229</field>
+            <field name="fecha_autorizacion">2024-05-29</field>
+        </record>
+        <record id="vgt_2024_p_436" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-436</field>
+            <field name="nombre">PROYECTO RED GPON EL PEÑON PLACER DE MARÍAS Y MANZANARES</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">103</field>
+            <field name="fecha_autorizacion">2024-04-30</field>
+        </record>
+        <record id="vgt_2023_p_305" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-305</field>
+            <field name="nombre">CAMBIO DE TECNOLOGÍA SAN AGUSTÍN DEL SUR</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">180</field>
+            <field name="fecha_autorizacion">2023-05-08</field>
+        </record>
+        <record id="vgt_2024_p_1361" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1361</field>
+            <field name="nombre">RED GPON SAN MARTÍN - EL GUARATARO</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">EN PROCESO DE DESINCORPORACION (VGT-2024-DP-032)</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">253</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2024_p_1180" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1180</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA PROYECTO DE RED GPON CAMPO RICO</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">119</field>
+            <field name="fecha_autorizacion">2024-09-09</field>
+        </record>
+        <record id="vgt_2024_p_1207" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1207</field>
+            <field name="nombre">RED GPON CALVARIO GUACARAPA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">303</field>
+            <field name="fecha_autorizacion">2024-10-03</field>
+        </record>
+        <record id="vgt_2024_p_1410" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1410</field>
+            <field name="nombre">RED GPON VISTA HERMOSA - GUARENAS</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">79</field>
+            <field name="fecha_autorizacion">2024-10-03</field>
+        </record>
+        <record id="vgt_2024_p_1095" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1095</field>
+            <field name="nombre">RUTA FIBRA OPTICA RED GPON OROPEZA CASTILLO GUARENAS</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">215</field>
+            <field name="fecha_autorizacion">2024-11-28</field>
+        </record>
+        <record id="vgt_2024_p_2011" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2011</field>
+            <field name="nombre">PROYECTO FIBRA OPTICA TRONCAL PASEO TUY-SAN FRANCISCO DE YARE</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">235</field>
+            <field name="fecha_autorizacion">2024-09-17</field>
+        </record>
+        <record id="vgt_2024_p_1981" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1981</field>
+            <field name="nombre">TENDIDO DE FIBRA ÓPTICA RED GPON LA AGUADA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">251</field>
+            <field name="fecha_autorizacion">2023-04-13</field>
+        </record>
+        <record id="vgt_2024_p_2189" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2189</field>
+            <field name="nombre">PROYECTO RED GGPON MINAS DE BARUTA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">322</field>
+            <field name="fecha_autorizacion">2024-10-10</field>
+        </record>
+        <record id="vgt_2024_p_2213" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2213</field>
+            <field name="nombre">RED GPON LAS CLAVELLINAS</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">249</field>
+            <field name="fecha_autorizacion">2024-11-08</field>
+        </record>
+        <record id="vgt_2025_p_47" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-47</field>
+            <field name="nombre">TRONCAL CÚA - OCUMARE, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">149</field>
+            <field name="fecha_autorizacion">2025-01-09</field>
+        </record>
+        <record id="vgt_2025_p_49" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-49</field>
+            <field name="nombre">RED GPON LECUMBERRY - CÚA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">147</field>
+            <field name="fecha_autorizacion">2025-01-10</field>
+        </record>
+        <record id="vgt_2025_p_365" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-365</field>
+            <field name="nombre">TRONCAL LA VIRGEN - LOS TEQUES, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">90</field>
+            <field name="fecha_autorizacion">2025-02-11</field>
+        </record>
+        <record id="vgt_2025_p_127" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-127</field>
+            <field name="nombre">RED GPON SALAMANCA - CÚA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">133</field>
+            <field name="fecha_autorizacion">2025-01-16</field>
+        </record>
+        <record id="vgt_2024_p_2392" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2392</field>
+            <field name="nombre">PROYECTO RED GPON SAN PEDRO - LOS TEQUES</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">124</field>
+            <field name="fecha_autorizacion">2024-12-11</field>
+        </record>
+        <record id="vgt_2025_p_1819" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1819</field>
+            <field name="nombre">RED GPON CASCO CENTRAL - CUA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">157</field>
+            <field name="fecha_autorizacion">2025-04-09</field>
+        </record>
+        <record id="vgt_2025_p_2032" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2032</field>
+            <field name="nombre">RED GPON URB. INDUSTRIAL MARIN - CUA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">53</field>
+            <field name="fecha_autorizacion">2025-05-12</field>
+        </record>
+        <record id="vgt_2025_p_2034" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2034</field>
+            <field name="nombre">RED GPON COLINAS DE SANTA BARBARA - CUA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">41</field>
+            <field name="fecha_autorizacion">2025-05-12</field>
+        </record>
+        <record id="vgt_2025_p_1999" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1999</field>
+            <field name="nombre">RED GPON SECTOR SAN VICENTE, EDO. ARAGUA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">456</field>
+            <field name="fecha_autorizacion">2025-05-07</field>
+        </record>
+        <record id="vgt_2025_p_2040" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2040</field>
+            <field name="nombre">RED GPON SANTA CRUZ - CUA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">127</field>
+            <field name="fecha_autorizacion">2025-05-13</field>
+        </record>
+        <record id="vgt_2025_p_2049" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2049</field>
+            <field name="nombre">RED GPON EL CONDE - CUA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">60</field>
+            <field name="fecha_autorizacion">2025-05-13</field>
+        </record>
+        <record id="vgt_2025_p_2051" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2051</field>
+            <field name="nombre">TRONCAL AV BERMUDEZ - LOS JAVILLOS, EDO. ARAGUA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">164</field>
+            <field name="fecha_autorizacion">2025-05-13</field>
+        </record>
+        <record id="vgt_2025_p_2159" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2159</field>
+            <field name="nombre">RED GPON CAÑA DE AZUCAR, EDO. ARAGUA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">ARAGUA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">330</field>
+            <field name="fecha_autorizacion">2025-05-21</field>
+        </record>
+        <record id="vgt_2025_p_1972" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-1972</field>
+            <field name="nombre">RED GPON BARRIO ANDRÉS ELOY BLANCO, EDO. ARAGUA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">146</field>
+            <field name="fecha_autorizacion">2025-06-26</field>
+        </record>
+        <record id="vgt_2025_p_2019" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2019</field>
+            <field name="nombre">RED GPON CARTANAL, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">678</field>
+            <field name="fecha_autorizacion">2025-05-09</field>
+        </record>
+        <record id="vgt_2025_p_2685" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2685</field>
+            <field name="nombre">RED GPON CASCO CENTRAL SANTA TERESA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">414</field>
+            <field name="fecha_autorizacion">2025-08-07</field>
+        </record>
+        <record id="vgt_2025_p_3027" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3027</field>
+            <field name="nombre">CHARALLAVE CASCO CENTRAL, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">466</field>
+            <field name="fecha_autorizacion">2025-09-11</field>
+        </record>
+        <record id="vgt_2025_p_3057" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3057</field>
+            <field name="nombre">RED GPON SECTOR CHUPULUM, CHARALLAVE, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">220</field>
+            <field name="fecha_autorizacion">2025-09-16</field>
+        </record>
+        <record id="vgt_2025_p_3121" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3121</field>
+            <field name="nombre">TRONCAL EL ALGARROBO - CHARALLAVE, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">110</field>
+            <field name="fecha_autorizacion">2025-09-26</field>
+        </record>
+        <record id="vgt_2025_p_3119" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3119</field>
+            <field name="nombre">RED GPON SANTA LUCIA, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">408</field>
+            <field name="fecha_autorizacion">2025-09-26</field>
+        </record>
+        <record id="vgt_2025_p_3638" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3638</field>
+            <field name="nombre">RED GPON LOS OLIVOS CHARALLAVE, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">179</field>
+            <field name="fecha_autorizacion">2025-12-04</field>
+        </record>
+        <record id="vgt_2025_p_3645" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3645</field>
+            <field name="nombre">RED GPON TIERRA BLANCA CHARALLAVE, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">159</field>
+            <field name="fecha_autorizacion">2025-12-04</field>
+        </record>
+        <record id="vgt_2025_p_3577" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3577</field>
+            <field name="nombre">RED GPON EL CAOBAL CHARALLAVE, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">157</field>
+            <field name="fecha_autorizacion">2025-11-26</field>
+        </record>
+        <record id="vgt_2025_p_3387" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3387</field>
+            <field name="nombre">RED GPON ANTIMANO, DTTO. CAPITAL</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">270</field>
+            <field name="fecha_autorizacion">2025-11-04</field>
+        </record>
+        <record id="vgt_2025_p_3112" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3112</field>
+            <field name="nombre">RED GPON LAS CASITAS LA VEGA, DTTO. CAPITAL 2025 -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">482</field>
+            <field name="fecha_autorizacion">2025-09-25</field>
+        </record>
+        <record id="vgt_2025_p_3576" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3576</field>
+            <field name="nombre">RED GPON LOS NISPEROS - MAMERA ANTIMANO, DTTO. CAPITAL -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">398</field>
+            <field name="fecha_autorizacion">2025-11-26</field>
+        </record>
+        <record id="vgt_2025_p_3068" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3068</field>
+            <field name="nombre">TRONCAL CHARALLAVE, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">111</field>
+            <field name="fecha_autorizacion">2025-09-17</field>
+        </record>
+        <record id="vgt_2025_p_3080" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3080</field>
+            <field name="nombre">RED GPON SECTOR LA ESTREELLA, CHARALLAVE, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">210</field>
+            <field name="fecha_autorizacion">2025-09-19</field>
+        </record>
+        <record id="vgt_2025_p_3056" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-3056</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA PROYECTO TRONCAL CHARALLAVE - CAUJARITO, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">184</field>
+            <field name="fecha_autorizacion">2025-03-05</field>
+        </record>
+        <record id="vgt_2026_p_171" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-171</field>
+            <field name="nombre">PROYECTO RED GPON EL ALGARROBO CHARALLAVE, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">209</field>
+            <field name="fecha_autorizacion">2026-02-12</field>
+        </record>
+        <record id="vgt_2026_p_599" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-599</field>
+            <field name="nombre">PROYECTO RED GPON SECTOR TERMINAL DE ORIENTE - PETARE, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">115</field>
+            <field name="fecha_autorizacion">2026-05-05</field>
+        </record>
+        <record id="vgt_2025_p_101" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-101</field>
+            <field name="nombre">TRONCAL SUBTERRANEA LEBRUN - CASCO HISTORICO</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">2</field>
+            <field name="fecha_autorizacion">2026-05-11</field>
+        </record>
+        <record id="vgt_2026_p_622" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-622</field>
+            <field name="nombre">PROYECTO RED GPON URBANIZACION EL JOBITO, EDO. MIRANDA -</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">21</field>
+            <field name="fecha_autorizacion">2026-05-11</field>
+        </record>
+        <record id="vgt_2026_p_627" model="atc.vgt">
+            <field name="codigo">VGT-2026-P-627</field>
+            <field name="nombre">PROYECTO RED GPON EL ROSARIO, STA LUCIA, EDO. MIRANDA (REGULARIZACIÓN)</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">MIRANDA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">340</field>
+            <field name="fecha_autorizacion">2026-05-11</field>
+        </record>
+        <record id="vgt_2023_p_168" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-168</field>
+            <field name="nombre">CONSTRUCCIÓN DE RED GPON EN EL VALLE.</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">700</field>
+            <field name="fecha_autorizacion">2024-11-15</field>
+        </record>
+        <record id="vgt_2023_p_122" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-122</field>
+            <field name="nombre">PROYECTO SARRIA - COTIZA - MECEDORES</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">407</field>
+            <field name="fecha_autorizacion">2023-04-13</field>
+        </record>
+        <record id="vgt_2023_p_446" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-446</field>
+            <field name="nombre">PROYECTO DE RED GPON COTA 905</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">262</field>
+            <field name="fecha_autorizacion">2023-05-17</field>
+        </record>
+        <record id="vgt_2023_p_738" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-738</field>
+            <field name="nombre">PROYECTO DE RED GPON LAS MAYAS</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">95</field>
+            <field name="fecha_autorizacion">2023-07-27</field>
+        </record>
+        <record id="vgt_2023_p_164" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-164</field>
+            <field name="nombre">CONSTRUCCIÓN DE RED GPON EN COCHECITO</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">500</field>
+            <field name="fecha_autorizacion">2023-04-13</field>
+        </record>
+        <record id="vgt_2023_p_1359" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1359</field>
+            <field name="nombre">PROYECTO SARRIA</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">453</field>
+            <field name="fecha_autorizacion">2023-11-16</field>
+        </record>
+        <record id="vgt_2023_p_1380" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1380</field>
+            <field name="nombre">RED GPON URB. LA RINCONADA</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">47</field>
+            <field name="fecha_autorizacion">2023-12-04</field>
+        </record>
+        <record id="vgt_2023_p_177" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-177</field>
+            <field name="nombre">PROYECTO EL CEMENTERIO</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">372</field>
+            <field name="fecha_autorizacion">2023-04-13</field>
+        </record>
+        <record id="vgt_2023_p_1579" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1579</field>
+            <field name="nombre">RED GPON CALLE 14 EL VALLE</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">14</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2023_p_1574" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1574</field>
+            <field name="nombre">TRONCAL AV. FUERZAS ARMADAS - SAN MARTÍN</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">65</field>
+            <field name="fecha_autorizacion">2024-01-24</field>
+        </record>
+        <record id="vgt_2024_p_121" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-121</field>
+            <field name="nombre">PROYECTO TRONCAL MIRAFLORES - MECEDORES</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">121</field>
+            <field name="fecha_autorizacion">2024-02-01</field>
+        </record>
+        <record id="vgt_2024_p_84" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-84</field>
+            <field name="nombre">PROYECTO SUSTITUCIÓN DE TRAMO FO TRONCAL AV. VALLE - COCHE</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">LIBERTADOR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">25</field>
+            <field name="fecha_autorizacion">2024-01-30</field>
+        </record>
+        <record id="vgt_2023_p_1554" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-1554</field>
+            <field name="nombre">PROYECTO RED GPON ALCABALA 4 (CIUDAD TIUNA).</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">53</field>
+            <field name="fecha_autorizacion">2024-03-20</field>
+        </record>
+        <record id="vgt_2023_p_155" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-155</field>
+            <field name="nombre">PROYECTO TRONCAL BARUTA EL VALLE</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">163</field>
+            <field name="fecha_autorizacion">2023-05-04</field>
+        </record>
+        <record id="vgt_2023_p_992" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-992</field>
+            <field name="nombre">PROYECTO CIUDAD CARIBIA EN PROCESO DE DESINCORPORACION  (EN ESPERA DE RESPUESTA)</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">56</field>
+            <field name="fecha_autorizacion">2023-10-17</field>
+        </record>
+        <record id="vgt_2024_p_389" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-389</field>
+            <field name="nombre">PROYECTO DE RED GPON TURMERITO PARTE BAJA</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">38</field>
+            <field name="fecha_autorizacion">2024-03-11</field>
+        </record>
+        <record id="vgt_2024_p_158" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-158</field>
+            <field name="nombre">TRAMO RUTA SUBTERRÁNEA TRONCAL VALLE COCHE</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">2</field>
+            <field name="fecha_autorizacion">2024-04-29</field>
+        </record>
+        <record id="vgt_2024_pr_672" model="atc.vgt">
+            <field name="codigo">VGT-2024-PR-672</field>
+            <field name="nombre">RED GPON  SAN MIGUEL- PETARE</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">35</field>
+            <field name="fecha_autorizacion">2023-11-01</field>
+        </record>
+        <record id="vgt_2024_p_751" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-751</field>
+            <field name="nombre">PROYECTO DE RED GPON BOLEITA LA LUCHA</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">150</field>
+            <field name="fecha_autorizacion">2024-08-13</field>
+        </record>
+        <record id="vgt_2024_p_1013" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1013</field>
+            <field name="nombre">PROYECTO DE RED GPON  CANDELARIA</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">75</field>
+            <field name="fecha_autorizacion">2024-05-01</field>
+        </record>
+        <record id="vgt_2024_p_1407" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1407</field>
+            <field name="nombre">TRONCAL AÉREA SARRIA - CAÑICITO</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">125</field>
+            <field name="fecha_autorizacion">2024-10-17</field>
+        </record>
+        <record id="vgt_2024_pr_689" model="atc.vgt">
+            <field name="codigo">VGT-2024-PR-689</field>
+            <field name="nombre">PROYECTO DE RED GPON BLANQUITA PEREZ</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">LA GUAIRA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">67</field>
+            <field name="fecha_autorizacion">2024-10-17</field>
+        </record>
+        <record id="vgt_2024_pr_670" model="atc.vgt">
+            <field name="codigo">VGT-2024-PR-670</field>
+            <field name="nombre">TRONCAL TANAGUARENAS</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">54</field>
+            <field name="fecha_autorizacion">2024-10-17</field>
+        </record>
+        <record id="vgt_2024_p_1418" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1418</field>
+            <field name="nombre">SOLICITUD DE PERMISOLOGIA  PARA PROYECTO RED GPON NAIGUATA</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">LA GUAIRA</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">378</field>
+            <field name="fecha_autorizacion">2024-07-26</field>
+        </record>
+        <record id="vgt_2024_p_1663" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1663</field>
+            <field name="nombre">PROYECTO TRONCAL SARRIA- TELEFERICO</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">LIBERTADOR/DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">67</field>
+            <field name="fecha_autorizacion">2024-09-05</field>
+        </record>
+        <record id="vgt_2024_p_2389" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-2389</field>
+            <field name="nombre">PROYECTO TRONCAL TAZON - HOYO DE LA PUERTA</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">43</field>
+            <field name="fecha_autorizacion">2024-10-12</field>
+        </record>
+        <record id="vgt_2024_p_1528" model="atc.vgt">
+            <field name="codigo">VGT-2024-P-1528</field>
+            <field name="nombre">PROYECTO RED GPON SAN AGUSTÍN DEL SUR, MCPO LIBERTADOR, DTTO. CAPITAL.</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">LIBERTADOR</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">192</field>
+            <field name="fecha_autorizacion">2024-08-14</field>
+        </record>
+        <record id="vgt_2025_p_464" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-464</field>
+            <field name="nombre">RED GPON BARRIO EL AMPARO - CATIA, EDO. DTTO CAPITAL</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">172</field>
+            <field name="fecha_autorizacion">2025-02-18</field>
+        </record>
+        <record id="vgt_2025_p_221" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-221</field>
+            <field name="nombre">TRONCAL CATIA - EL JUNQUITO, EDO. DTTO CAPITAL</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">278</field>
+            <field name="fecha_autorizacion">2025-01-29</field>
+        </record>
+        <record id="vgt_2025_p_2836" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2836</field>
+            <field name="nombre">RED GPON CARAPITA PARTE BAJA, DTTO. CAPITAL</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">396</field>
+            <field name="fecha_autorizacion">2025-06-09</field>
+        </record>
+        <record id="vgt_2023_p_101" model="atc.vgt">
+            <field name="codigo">VGT-2023-P-101</field>
+            <field name="nombre">RUTA F.O CABLE NORTE CARACAS - GLOBALNET</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">75</field>
+        </record>
+        <record id="vgt_2025_p_2616" model="atc.vgt">
+            <field name="codigo">VGT-2025-P-2616</field>
+            <field name="nombre">RED GPON SECTOR LA CASONA, DTTO. CAPITAL -</field>
+            <field name="estado">DTO. CAPITAL</field>
+            <field name="municipio">DTTO. CAPITAL</field>
+            <field name="region">andes</field>
+            <field name="cantidad_postes">183</field>
+            <field name="fecha_autorizacion">2025-07-30</field>
+        </record>
+        <record id="vgts_2024_268" model="atc.vgt">
+            <field name="codigo">VGTS-2024-268</field>
+            <field name="nombre">Tramo Subterraneo Boleita La Lucha</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">SUCRE</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">2234</field>
+            <field name="fecha_autorizacion">2024-05-23</field>
+        </record>
+        <record id="vgts_2024_054" model="atc.vgt">
+            <field name="codigo">VGTS-2024-054</field>
+            <field name="nombre">Tramo Ruta Subterránea Troncal Valle Coche</field>
+            <field name="estado">DTTO. CAPITAL</field>
+            <field name="municipio">LIBERTADOR</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">606</field>
+            <field name="fecha_autorizacion">2024-03-18</field>
+        </record>
+        <record id="vgts_2024_282" model="atc.vgt">
+            <field name="codigo">VGTS-2024-282</field>
+            <field name="nombre">Troncal Subterranea Sarria- cotiza</field>
+            <field name="estado">DTTO. CAPITAL</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">1687</field>
+            <field name="fecha_autorizacion">2024-06-06</field>
+        </record>
+        <record id="vgts_2024_470" model="atc.vgt">
+            <field name="codigo">VGTS-2024-470</field>
+            <field name="nombre">Proyecto Troncal Subterránea Sarria – Cañicito (74 Tanquillas)</field>
+            <field name="estado">DTTO. CAPITAL</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">3500</field>
+            <field name="fecha_autorizacion">2024-10-04</field>
+        </record>
+        <record id="vgts_2025_213" model="atc.vgt">
+            <field name="codigo">VGTS-2025-213</field>
+            <field name="nombre">TRONCAL SUBTERRANEA CC VALLE - COCHE, DTTO CAPITAL</field>
+            <field name="estado">Distrito Capital</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">1500</field>
+            <field name="fecha_autorizacion">2025-04-22</field>
+        </record>
+        <record id="vgts_2025_424" model="atc.vgt">
+            <field name="codigo">VGTS-2025-424</field>
+            <field name="nombre">TRONCAL SECTOR LEBRUN - CC LA URBINA, EDO. MIRANDA</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">sucre</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">1444</field>
+            <field name="fecha_autorizacion">2025-08-08</field>
+        </record>
+        <record id="vgts_2025_025" model="atc.vgt">
+            <field name="codigo">VGTS-2025-025</field>
+            <field name="nombre">TRONCAL SUBTERRANEA LEBRUN - CASCO HISTORICO</field>
+            <field name="estado">MIRANDA</field>
+            <field name="municipio">Libertador</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">800</field>
+            <field name="fecha_autorizacion">2025-01-15</field>
+        </record>
+        <record id="vgts_2025_266" model="atc.vgt">
+            <field name="codigo">VGTS-2025-266.</field>
+            <field name="nombre">TRONCAL SUBTERRANEA CALLE 1 - CALLE 18 EL VALLE, DTTO. CAPITAL</field>
+            <field name="estado">Distrito Capital</field>
+            <field name="municipio">Libertador</field>
+            <field name="region">general</field>
+            <field name="cantidad_postes">1800</field>
+            <field name="fecha_autorizacion">2025-05-23</field>
+        </record>
+    </data>
+</odoo>

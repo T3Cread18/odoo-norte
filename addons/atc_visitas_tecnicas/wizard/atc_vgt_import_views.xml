@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_atc_vgt_import_form" model="ir.ui.view">
+        <field name="name">atc.vgt.import.form</field>
+        <field name="model">atc.vgt.import</field>
+        <field name="arch" type="xml">
+            <form string="Importar VGT desde Excel">
+                <field name="state" invisible="1"/>
+                <!-- Paso 1: cargar archivo -->
+                <group invisible="state == 'done'">
+                    <div colspan="2" class="alert alert-info" role="alert">
+                        Sube el Excel de <b>Proyectos Autorizados Nacional</b>.
+                        Las VGT se identifican por su <b>Código VGT</b>: se crean
+                        las nuevas, se actualizan las que cambiaron y se conservan
+                        los enlaces con las zonas.
+                    </div>
+                    <field name="archivo" filename="nombre_archivo"
+                           widget="binary"/>
+                    <field name="nombre_archivo" invisible="1"/>
+                    <field name="archivar_ausentes"/>
+                </group>
+                <!-- Paso 2: resultado -->
+                <group invisible="state != 'done'">
+                    <field name="resultado" nolabel="1" readonly="1"
+                           widget="text"/>
+                </group>
+                <footer>
+                    <button name="action_importar" type="object"
+                            string="Importar" class="btn-primary"
+                            invisible="state == 'done'"/>
+                    <button string="Cancelar" class="btn-secondary"
+                            special="cancel" invisible="state == 'done'"/>
+                    <button string="Cerrar" class="btn-primary"
+                            special="cancel" invisible="state != 'done'"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_atc_vgt_import" model="ir.actions.act_window">
+        <field name="name">Importar VGT</field>
+        <field name="res_model">atc.vgt.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_atc_vgt_import" name="Importar VGT (Excel)"
+              parent="menu_atc_config"
+              action="action_atc_vgt_import" sequence="16"
+              groups="group_menus_completos"/>
+</odoo>
