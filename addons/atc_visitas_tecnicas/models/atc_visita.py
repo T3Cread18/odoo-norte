@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 from .ubicacion import url_mapa
 
@@ -222,6 +222,18 @@ class AtcVisita(models.Model):
                 raise ValidationError(self.env._(
                     "La cédula del cliente es obligatoria en las visitas "
                     "técnicas."))
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_solo_visitas(self):
+        """El rol ATC puede borrar visitas técnicas. Las instalaciones (vienen
+        del Excel de contratistas) y las órdenes en LOS (el cron las volvería
+        a crear) solo las borra un administrador."""
+        if self.env.is_superuser() or self.env.user.has_group("base.group_system"):
+            return
+        if any(v.tipo_orden != "visita" or v.estado == "en_los" for v in self):
+            raise UserError(self.env._(
+                "Solo puedes borrar visitas técnicas. Las instalaciones y las "
+                "órdenes en LOS las borra un administrador (puedes archivarlas)."))
 
     @api.constrains("estado", "motivo_no_realizada_ids")
     def _check_motivo_no_realizada(self):
