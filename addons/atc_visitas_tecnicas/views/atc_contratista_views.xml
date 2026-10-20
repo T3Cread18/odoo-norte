@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- CONTRATISTAS -->
+    <record id="view_atc_contratista_list" model="ir.ui.view">
+        <field name="name">atc.contratista.list</field>
+        <field name="model">atc.contratista</field>
+        <field name="arch" type="xml">
+            <list string="Contratistas">
+                <field name="name"/>
+                <field name="rif" optional="show"/>
+                <field name="telefono" optional="show"/>
+                <field name="user_ids" widget="many2many_tags" optional="show"/>
+                <field name="pendientes_count"/>
+                <field name="vencidas_count"
+                       decoration-danger="vencidas_count &gt; 0"/>
+                <field name="realizadas_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_contratista_form" model="ir.ui.view">
+        <field name="name">atc.contratista.form</field>
+        <field name="model">atc.contratista</field>
+        <field name="arch" type="xml">
+            <form string="Contratista">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_ver_instalaciones" type="object"
+                                class="oe_stat_button" icon="fa-plug">
+                            <field name="pendientes_count" widget="statinfo"
+                                   string="Abiertas"/>
+                        </button>
+                        <button name="action_ver_instalaciones" type="object"
+                                class="oe_stat_button" icon="fa-clock-o">
+                            <field name="vencidas_count" widget="statinfo"
+                                   string="+7 días"/>
+                        </button>
+                        <button name="action_ver_instalaciones" type="object"
+                                class="oe_stat_button" icon="fa-check">
+                            <field name="realizadas_count" widget="statinfo"
+                                   string="Realizadas"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archivado" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nombre como viene en el reporte (columna TECNICO)"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="rif"/>
+                            <field name="telefono"/>
+                            <field name="email"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group string="Acceso al portal">
+                            <field name="user_ids" widget="many2many_tags"
+                                   options="{'no_create': True}" nolabel="1" colspan="2"/>
+                            <div colspan="2" class="text-muted small">
+                                Usuarios de portal que entran a /my/instalaciones
+                                y solo ven las instalaciones de este contratista.
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_atc_contratista" model="ir.actions.act_window">
+        <field name="name">Contratistas</field>
+        <field name="res_model">atc.contratista</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- TIPOS DE SERVICIO -->
+    <record id="view_atc_tipo_servicio_list" model="ir.ui.view">
+        <field name="name">atc.tipo.servicio.list</field>
+        <field name="model">atc.tipo.servicio</field>
+        <field name="arch" type="xml">
+            <list string="Tipos de servicio" editable="bottom">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_atc_tipo_servicio" model="ir.actions.act_window">
+        <field name="name">Tipos de servicio</field>
+        <field name="res_model">atc.tipo.servicio</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

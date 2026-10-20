@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tarjeta en /my -->
+    <template id="portal_my_home_instalaciones" name="Instalaciones (contratista)"
+              inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_alert_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_alert_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="bg_color" t-value="'alert alert-primary align-items-center'"/>
+                <t t-set="placeholder_count" t-value="'instalacion_count'"/>
+                <t t-set="title">Instalaciones por hacer</t>
+                <t t-set="url" t-value="'/my/instalaciones'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
+        </div>
+    </template>
+
+    <template id="portal_breadcrumbs_instalaciones" name="Breadcrumbs instalaciones"
+              inherit_id="portal.portal_breadcrumbs" priority="40">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'instalaciones'" class="breadcrumb-item">Instalaciones</li>
+            <li t-if="page_name == 'instalacion'" class="breadcrumb-item">
+                <a href="/my/instalaciones">Instalaciones</a>
+            </li>
+            <li t-if="page_name == 'instalacion'" class="breadcrumb-item" t-out="orden.nombre"/>
+        </xpath>
+    </template>
+
+    <template id="instalacion_estado_badge" name="Estado de la instalación">
+        <span t-attf-class="badge rounded-pill #{
+            'text-bg-success' if orden.estado == 'realizada' else
+            'text-bg-danger' if orden.estado == 'no_realizada' else
+            'text-bg-info' if orden.estado == 'asignada' else 'text-bg-warning'}"
+              t-field="orden.estado"/>
+    </template>
+
+    <!-- LISTA -->
+    <template id="portal_my_instalaciones" name="Mis instalaciones">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Instalaciones</t>
+            </t>
+            <div t-if="not instalaciones" class="alert alert-info">
+                No hay instalaciones en esta vista.
+            </div>
+            <t t-if="instalaciones" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Cliente</th>
+                        <th class="d-none d-md-table-cell">Servicio</th>
+                        <th class="d-none d-md-table-cell">Dirección</th>
+                        <th class="text-end">Días</th>
+                        <th class="text-end">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="instalaciones" t-as="orden">
+                        <td>
+                            <a t-att-href="orden.access_url" class="fw-bold" t-out="orden.nombre"/>
+                            <div class="small text-muted">
+                                CI <t t-out="orden.cedula"/>
+                                <t t-if="orden.telefono_movil"> · <a t-attf-href="tel:#{orden.telefono_movil}" t-out="orden.telefono_movil"/></t>
+                            </div>
+                            <div t-if="orden.fecha_programada" class="small text-primary">
+                                <i class="fa fa-calendar me-1"/>Programada: <span t-field="orden.fecha_programada"/>
+                            </div>
+                        </td>
+                        <td class="d-none d-md-table-cell" t-out="orden.tipo_servicio_id.name"/>
+                        <td class="d-none d-md-table-cell small" t-out="orden.direccion"/>
+                        <td class="text-end">
+                            <span t-attf-class="badge #{'text-bg-danger' if orden.dias_pendiente &gt; 7 and orden.estado in ('pendiente', 'asignada') else 'text-bg-light'}"
+                                  t-out="orden.dias_pendiente"/>
+                        </td>
+                        <td class="text-end"><t t-call="atc_visitas_tecnicas.instalacion_estado_badge"/></td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <!-- DETALLE + FORMULARIO -->
+    <template id="portal_my_instalacion" name="Instalación">
+        <t t-call="portal.portal_layout">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div t-if="error" class="alert alert-danger" t-out="error"/>
+                    <div t-if="success" class="alert alert-success">Cambios guardados.</div>
+
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                        <h3 class="mb-0 me-auto" t-out="orden.nombre"/>
+                        <t t-call="atc_visitas_tecnicas.instalacion_estado_badge"/>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Cédula / RIF</div>
+                                    <div t-out="orden.cedula or '—'"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Tipo de servicio</div>
+                                    <div t-out="orden.tipo_servicio_id.name or '—'"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Teléfonos</div>
+                                    <div>
+                                        <a t-if="orden.telefono_movil" t-attf-href="tel:#{orden.telefono_movil}" class="me-3"><i class="fa fa-mobile me-1"/><t t-out="orden.telefono_movil"/></a>
+                                        <a t-if="orden.telefono_fijo and orden.telefono_fijo != orden.telefono_movil" t-attf-href="tel:#{orden.telefono_fijo}"><i class="fa fa-phone me-1"/><t t-out="orden.telefono_fijo"/></a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Asignada el</div>
+                                    <div><span t-field="orden.fecha_asignacion"/> (<t t-out="orden.dias_pendiente"/> días)</div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="small text-muted">Dirección</div>
+                                    <div t-out="orden.direccion or '—'"/>
+                                    <div t-if="orden.zona_id" class="small text-muted">Zona: <t t-out="orden.zona_id.name"/></div>
+                                </div>
+                                <div t-if="orden.estado == 'no_realizada'" class="col-12">
+                                    <div class="small text-muted">Motivo (no realizada)</div>
+                                    <div>
+                                        <span t-foreach="orden.motivo_no_realizada_ids" t-as="motivo"
+                                              class="badge text-bg-danger me-1" t-out="motivo.name"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form t-att-action="'/my/instalaciones/%s/actualizar' % orden.id" method="post" class="mb-4">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <fieldset t-att-disabled="None if puede_editar else 'disabled'">
+                            <h5>Datos de la instalación</h5>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="fecha_programada">Fecha programada con el cliente</label>
+                                    <input type="date" class="form-control" id="fecha_programada" name="fecha_programada" t-att-value="orden.fecha_programada"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="fecha_instalacion">Fecha de instalación</label>
+                                    <input type="date" class="form-control" id="fecha_instalacion" name="fecha_instalacion" t-att-value="orden.fecha_instalacion"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="tecnico_contratista">Técnico que instala</label>
+                                    <input type="text" class="form-control" id="tecnico_contratista" name="tecnico_contratista" t-att-value="orden.tecnico_contratista"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="serial_onu">Serial ONU / equipo</label>
+                                    <input type="text" class="form-control" id="serial_onu" name="serial_onu" t-att-value="orden.serial_onu"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="precinto">Nº de precinto</label>
+                                    <input type="text" class="form-control" id="precinto" name="precinto" t-att-value="orden.precinto"/>
+                                </div>
+                                <div class="col-sm-6"/>
+                                <div class="col-sm-4">
+                                    <label class="form-label" for="potencia_rx">Potencia RX (dBm)</label>
+                                    <input type="number" step="0.01" class="form-control" id="potencia_rx" name="potencia_rx" placeholder="-20.50" t-att-value="orden.potencia_rx or ''"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="form-label" for="caja_nap">Caja NAP</label>
+                                    <input type="text" class="form-control" id="caja_nap" name="caja_nap" t-att-value="orden.caja_nap"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="form-label" for="puerto_nap">Puerto NAP</label>
+                                    <input type="text" class="form-control" id="puerto_nap" name="puerto_nap" t-att-value="orden.puerto_nap"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="form-label" for="metros_fibra">Metros de fibra</label>
+                                    <input type="number" min="0" step="1" class="form-control" id="metros_fibra" name="metros_fibra" t-att-value="orden.metros_fibra or ''"/>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label" for="observaciones_contratista">Observaciones</label>
+                                    <textarea class="form-control" id="observaciones_contratista" name="observaciones_contratista" rows="3" t-out="orden.observaciones_contratista or ''"/>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-label">Motivo si NO se pudo realizar <span class="small text-muted">(marca uno o varios; si eliges "Otro", explícalo en Observaciones)</span></div>
+                                    <input type="hidden" name="motivo_no_realizada_ids_enviado" value="1"/>
+                                    <div class="row">
+                                        <div t-foreach="motivos" t-as="motivo" class="col-sm-6 col-lg-4">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="motivo_no_realizada_ids"
+                                                       t-att-id="'motivo_%s' % motivo.id" t-att-value="motivo.id"
+                                                       t-att-checked="motivo in orden.motivo_no_realizada_ids"/>
+                                                <label class="form-check-label" t-att-for="'motivo_%s' % motivo.id" t-out="motivo.name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div t-if="puede_editar" class="d-flex flex-wrap gap-2 mt-3">
+                                <button type="submit" name="accion" value="guardar" class="btn btn-secondary">
+                                    <i class="fa fa-save me-1"/>Guardar avance
+                                </button>
+                                <button type="submit" name="accion" value="realizada" class="btn btn-success"
+                                        onclick="return confirm('¿Marcar la instalación como REALIZADA? Ya no podrás modificarla.');">
+                                    <i class="fa fa-check me-1"/>Marcar instalada
+                                </button>
+                                <button type="submit" name="accion" value="no_realizada" class="btn btn-outline-danger"
+                                        onclick="return confirm('¿Marcar como NO REALIZADA? Debes indicar el motivo.');">
+                                    <i class="fa fa-times me-1"/>No se pudo realizar
+                                </button>
+                            </div>
+                            <div t-else="" class="alert alert-secondary mt-3 mb-0">
+                                Esta instalación está cerrada. Si necesitas corregir algo, escribe un mensaje abajo.
+                            </div>
+                        </fieldset>
+                    </form>
+
+                    <div id="instalacion_comunicacion">
+                        <h5>Fotos y mensajes</h5>
+                        <p class="small text-muted">Adjunta aquí las fotos de la instalación (clip <i class="fa fa-paperclip"/>) o escribe a ATC.</p>
+                        <t t-call="portal.message_thread"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

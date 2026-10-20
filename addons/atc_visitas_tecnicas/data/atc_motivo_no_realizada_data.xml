@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Motivos convencionales de "no se pudo realizar". noupdate=1: se
+         crean una vez y luego se mantienen desde Configuración. -->
+    <data noupdate="1">
+        <record id="motivo_cliente_no_contesta" model="atc.motivo.no.realizada">
+            <field name="name">Cliente no contesta</field>
+            <field name="sequence">10</field>
+            <field name="color">2</field>
+        </record>
+        <record id="motivo_cliente_ausente" model="atc.motivo.no.realizada">
+            <field name="name">Cliente ausente</field>
+            <field name="sequence">20</field>
+            <field name="color">2</field>
+        </record>
+        <record id="motivo_cliente_desistio" model="atc.motivo.no.realizada">
+            <field name="name">Cliente desistió</field>
+            <field name="sequence">30</field>
+            <field name="color">1</field>
+        </record>
+        <record id="motivo_cliente_reprograma" model="atc.motivo.no.realizada">
+            <field name="name">Cliente reprograma</field>
+            <field name="sequence">40</field>
+            <field name="color">3</field>
+        </record>
+        <record id="motivo_datos_contacto_errados" model="atc.motivo.no.realizada">
+            <field name="name">Datos de contacto errados</field>
+            <field name="sequence">50</field>
+            <field name="color">2</field>
+        </record>
+        <record id="motivo_direccion_errada" model="atc.motivo.no.realizada">
+            <field name="name">Dirección errada</field>
+            <field name="sequence">60</field>
+            <field name="color">2</field>
+        </record>
+        <record id="motivo_sin_factibilidad" model="atc.motivo.no.realizada">
+            <field name="name">Sin factibilidad técnica</field>
+            <field name="sequence">70</field>
+            <field name="color">9</field>
+        </record>
+        <record id="motivo_nap_sin_puertos" model="atc.motivo.no.realizada">
+            <field name="name">NAP sin puertos libres</field>
+            <field name="sequence">80</field>
+            <field name="color">9</field>
+        </record>
+        <record id="motivo_nap_fuera_alcance" model="atc.motivo.no.realizada">
+            <field name="name">NAP fuera de alcance</field>
+            <field name="sequence">90</field>
+            <field name="color">9</field>
+        </record>
+        <record id="motivo_sin_potencia_nap" model="atc.motivo.no.realizada">
+            <field name="name">Sin potencia en NAP</field>
+            <field name="sequence">100</field>
+            <field name="color">9</field>
+        </record>
+        <record id="motivo_requiere_poste" model="atc.motivo.no.realizada">
+            <field name="name">Requiere poste / canalización</field>
+            <field name="sequence">110</field>
+            <field name="color">4</field>
+        </record>
+        <record id="motivo_acceso_inmueble" model="atc.motivo.no.realizada">
+            <field name="name">Problema de acceso al inmueble</field>
+            <field name="sequence">120</field>
+            <field name="color">4</field>
+        </record>
+        <record id="motivo_otro" model="atc.motivo.no.realizada">
+            <field name="name">Otro</field>
+            <field name="sequence">999</field>
+            <field name="color">0</field>
+        </record>
+    </data>
+</odoo>

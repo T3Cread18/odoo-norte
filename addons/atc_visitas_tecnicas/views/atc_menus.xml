@@ -14,6 +14,16 @@
               action="action_atc_instalacion" sequence="20"
               groups="group_atc_visitas_user,group_menus_completos"/>
 
+    <menuitem id="menu_atc_contratistas" name="Contratistas"
+              parent="menu_atc_root"
+              action="action_atc_contratista" sequence="22"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+
+    <menuitem id="menu_atc_instalacion_import" name="Importar instalaciones (Excel)"
+              parent="menu_atc_root"
+              action="action_atc_instalacion_import" sequence="24"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+
     <menuitem id="menu_atc_config" name="Configuración"
               parent="menu_atc_root" sequence="90"
               groups="group_menus_completos"/>
@@ -28,8 +38,18 @@
               action="action_atc_vgt" sequence="15"
               groups="group_menus_completos"/>
 
+    <menuitem id="menu_atc_tipos_servicio" name="Tipos de servicio"
+              parent="menu_atc_config"
+              action="action_atc_tipo_servicio" sequence="18"
+              groups="group_menus_completos"/>
+
     <menuitem id="menu_atc_etiquetas" name="Etiquetas"
               parent="menu_atc_config"
               action="action_atc_visita_tag" sequence="20"
+              groups="group_menus_completos"/>
+
+    <menuitem id="menu_atc_motivos_no_realizada" name="Motivos de no realizada"
+              parent="menu_atc_config"
+              action="action_atc_motivo_no_realizada" sequence="25"
               groups="group_menus_completos"/>
 </odoo>

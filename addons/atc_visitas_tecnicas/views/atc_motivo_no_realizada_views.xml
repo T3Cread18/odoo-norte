@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_atc_motivo_no_realizada_list" model="ir.ui.view">
+        <field name="name">atc.motivo.no.realizada.list</field>
+        <field name="model">atc.motivo.no.realizada</field>
+        <field name="arch" type="xml">
+            <list string="Motivos de no realizada" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+                <field name="active" widget="boolean_toggle" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_atc_motivo_no_realizada" model="ir.actions.act_window">
+        <field name="name">Motivos de no realizada</field>
+        <field name="res_model">atc.motivo.no.realizada</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

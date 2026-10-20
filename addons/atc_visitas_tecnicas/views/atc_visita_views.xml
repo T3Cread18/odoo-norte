@@ -9,14 +9,15 @@
                 <header>
                     <button name="action_abrir_asignar" type="object"
                             string="Asignar técnico" class="btn-primary"
-                            invisible="estado == 'realizada'"/>
+                            invisible="estado in ('realizada', 'no_realizada')"/>
                     <button name="action_marcar_realizada" type="object"
                             string="Marcar realizada" class="btn-primary"
-                            invisible="estado == 'realizada'"/>
+                            invisible="estado in ('realizada', 'no_realizada')"/>
                     <button name="action_marcar_pendiente" type="object"
                             string="Reabrir" class="btn-secondary"
-                            invisible="estado != 'realizada'"/>
+                            invisible="estado not in ('realizada', 'no_realizada')"/>
                     <field name="estado" widget="statusbar"
+                           statusbar_visible="pendiente,asignada,realizada"
                            options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
@@ -49,6 +50,38 @@
                                    options="{'color_field': 'color'}"/>
                         </group>
                     </group>
+                    <group invisible="tipo_orden != 'instalacion'">
+                        <group string="Instalación">
+                            <field name="contratista_id"/>
+                            <field name="tipo_servicio_id"/>
+                            <field name="telefono_movil" widget="phone"/>
+                            <field name="telefono_fijo" widget="phone"/>
+                        </group>
+                        <group string="Fechas">
+                            <field name="fecha_asignacion"/>
+                            <field name="dias_pendiente"/>
+                            <field name="fecha_programada"/>
+                            <field name="fecha_instalacion"/>
+                        </group>
+                        <group string="Reporte del contratista">
+                            <field name="tecnico_contratista"/>
+                            <field name="serial_onu"/>
+                            <field name="precinto"/>
+                            <field name="potencia_rx"/>
+                        </group>
+                        <group string="Red y material">
+                            <field name="caja_nap"/>
+                            <field name="puerto_nap"/>
+                            <field name="metros_fibra"/>
+                        </group>
+                        <field name="observaciones_contratista" colspan="2"
+                               placeholder="Observaciones del contratista"/>
+                        <field name="motivo_no_realizada_ids" colspan="2"
+                               widget="many2many_tags"
+                               options="{'color_field': 'color', 'no_create': True}"
+                               invisible="estado != 'no_realizada' and not motivo_no_realizada_ids"
+                               required="estado == 'no_realizada'"/>
+                    </group>
                     <separator string="Descripción"/>
                     <field name="descripcion" widget="html"
                            placeholder="Detalle de la orden: observaciones, trabajo realizado, materiales, etc."/>
@@ -66,6 +99,9 @@
             <form string="Asignar técnico">
                 <group>
                     <field name="visita_id" invisible="1"/>
+                    <field name="es_instalacion" invisible="1"/>
+                    <field name="contratista_id" invisible="not es_instalacion"
+                           options="{'no_create': True}"/>
                     <field name="tecnico_asignado_ids" widget="many2many_tags"
                            placeholder="Escribe un nombre para crear el técnico"/>
                     <field name="vehiculo_id" options="{'no_quick_create': True}"/>
@@ -85,7 +121,7 @@
         <field name="name">atc.visita.list</field>
         <field name="model">atc.visita</field>
         <field name="arch" type="xml">
-            <list string="Órdenes ATC" decoration-muted="estado == 'realizada'">
+            <list string="Órdenes ATC" decoration-muted="estado in ('realizada', 'no_realizada')">
                 <field name="fecha"/>
                 <field name="tipo_orden" widget="badge" optional="show"/>
                 <field name="cedula"/>
@@ -123,6 +159,8 @@
                 <field name="vehiculo_id"/>
                 <field name="tecnico_id"/>
                 <field name="fecha"/>
+                <field name="contratista_id"/>
+                <field name="dias_pendiente"/>
                 <templates>
                     <t t-name="card">
                         <span class="badge text-bg-secondary float-end"><field name="tipo_orden"/></span>
@@ -130,6 +168,11 @@
                         <div t-if="record.cedula.value" class="text-muted small">CI: <field name="cedula"/></div>
                         <div t-if="record.zona_id.value" class="small"><i class="fa fa-map-marker me-1" title="Zona"/><field name="zona_id"/></div>
                         <div t-if="record.vgt_id.value" class="small"><i class="fa fa-file-text-o me-1" title="VGT"/><field name="vgt_id"/></div>
+                        <div t-if="record.contratista_id.value" class="small"><i class="fa fa-briefcase me-1" title="Contratista"/><field name="contratista_id"/></div>
+                        <div t-if="record.tipo_orden.raw_value == 'instalacion' and ['pendiente', 'asignada'].includes(record.estado.raw_value) and record.dias_pendiente.raw_value"
+                             t-attf-class="small fw-bold #{record.dias_pendiente.raw_value > 7 ? 'text-danger' : 'text-muted'}">
+                            <i class="fa fa-clock-o me-1" title="Antigüedad"/><field name="dias_pendiente"/> días
+                        </div>
                         <div t-if="record.vehiculo_id.value" class="small"><i class="fa fa-car me-1" title="Vehículo"/><field name="vehiculo_id"/></div>
                         <field name="tecnico_asignado_ids" widget="many2many_tags"/>
                         <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
@@ -156,12 +199,24 @@
                 <field name="tecnico_asignado_ids"/>
                 <field name="vehiculo_id"/>
                 <field name="tecnico_id"/>
+                <field name="contratista_id"/>
+                <field name="tipo_servicio_id"/>
+                <field name="precinto"/>
+                <field name="motivo_no_realizada_ids"/>
+                <field name="direccion"/>
                 <filter string="Visitas Técnicas" name="f_visitas" domain="[('tipo_orden','=','visita')]"/>
                 <filter string="Instalaciones" name="f_instalaciones" domain="[('tipo_orden','=','instalacion')]"/>
                 <separator/>
                 <filter string="Pendiente" name="f_pendiente" domain="[('estado','=','pendiente')]"/>
                 <filter string="Asignada" name="f_asignada" domain="[('estado','=','asignada')]"/>
                 <filter string="Realizada" name="f_realizada" domain="[('estado','=','realizada')]"/>
+                <filter string="No realizada" name="f_no_realizada" domain="[('estado','=','no_realizada')]"/>
+                <separator/>
+                <filter string="Abiertas" name="f_abiertas" domain="[('estado','in',('pendiente','asignada'))]"/>
+                <filter string="Abiertas con más de 7 días" name="f_vencidas"
+                        domain="[('estado','in',('pendiente','asignada')), ('fecha_asignacion','&lt;', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Sin contratista" name="f_sin_contratista"
+                        domain="[('tipo_orden','=','instalacion'), ('contratista_id','=',False)]"/>
                 <separator/>
                 <filter string="Asignadas a mí" name="f_asignadas_mias" domain="[('tecnico_asignado_ids.user_id','=',uid)]"/>
                 <filter string="Atendidas por mí" name="f_mias" domain="[('tecnico_id','=',uid)]"/>
@@ -169,6 +224,9 @@
                 <group>
                     <filter string="Tipo de orden" name="g_tipo" context="{'group_by':'tipo_orden'}"/>
                     <filter string="Estado" name="g_estado" context="{'group_by':'estado'}"/>
+                    <filter string="Contratista" name="g_contratista" context="{'group_by':'contratista_id'}"/>
+                    <filter string="Tipo de servicio" name="g_tipo_servicio" context="{'group_by':'tipo_servicio_id'}"/>
+                    <filter string="Motivo (no realizada)" name="g_motivo" context="{'group_by':'motivo_no_realizada_ids'}"/>
                     <filter string="Zona" name="g_zona" context="{'group_by':'zona_id'}"/>
                     <filter string="VGT" name="g_vgt" context="{'group_by':'vgt_id'}"/>
                     <filter string="Asignado a" name="g_asignado" context="{'group_by':'tecnico_asignado_ids'}"/>
@@ -194,11 +252,78 @@
         </field>
     </record>
 
+    <!-- LISTA de instalaciones (contratistas) -->
+    <record id="view_atc_instalacion_list" model="ir.ui.view">
+        <field name="name">atc.visita.instalacion.list</field>
+        <field name="model">atc.visita</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <list string="Instalaciones"
+                  decoration-muted="estado in ('realizada', 'no_realizada')"
+                  decoration-danger="estado in ('pendiente', 'asignada') and dias_pendiente &gt; 7">
+                <field name="fecha_asignacion"/>
+                <field name="dias_pendiente" string="Días"/>
+                <field name="contratista_id"/>
+                <field name="tipo_servicio_id" optional="show"/>
+                <field name="cedula"/>
+                <field name="nombre"/>
+                <field name="telefono_movil" optional="show"/>
+                <field name="telefono_fijo" optional="hide"/>
+                <field name="zona_id" optional="show"/>
+                <field name="direccion" optional="show"/>
+                <field name="fecha_programada" optional="show"/>
+                <field name="fecha_instalacion" optional="hide"/>
+                <field name="tecnico_contratista" optional="hide"/>
+                <field name="serial_onu" optional="hide"/>
+                <field name="precinto" optional="hide"/>
+                <field name="potencia_rx" optional="hide"/>
+                <field name="caja_nap" optional="hide"/>
+                <field name="metros_fibra" optional="hide" sum="Total"/>
+                <field name="motivo_no_realizada_ids" widget="many2many_tags"
+                       options="{'color_field': 'color'}" optional="show"/>
+                <field name="estado" widget="badge"
+                       decoration-success="estado == 'realizada'"
+                       decoration-info="estado == 'asignada'"
+                       decoration-warning="estado == 'pendiente'"
+                       decoration-danger="estado == 'no_realizada'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_instalacion_pivot" model="ir.ui.view">
+        <field name="name">atc.visita.instalacion.pivot</field>
+        <field name="model">atc.visita</field>
+        <field name="arch" type="xml">
+            <pivot string="Instalaciones por contratista" sample="1">
+                <field name="contratista_id" type="row"/>
+                <field name="estado" type="col"/>
+                <field name="dias_instalacion" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_atc_instalacion_graph" model="ir.ui.view">
+        <field name="name">atc.visita.instalacion.graph</field>
+        <field name="model">atc.visita</field>
+        <field name="arch" type="xml">
+            <graph string="Instalaciones por contratista" type="bar" stacked="1" sample="1">
+                <field name="contratista_id"/>
+                <field name="estado"/>
+            </graph>
+        </field>
+    </record>
+
     <!-- ACCIÓN: Instalaciones -->
     <record id="action_atc_instalacion" model="ir.actions.act_window">
         <field name="name">Instalaciones</field>
         <field name="res_model">atc.visita</field>
-        <field name="view_mode">list,kanban,form</field>
+        <field name="view_mode">list,kanban,form,pivot,graph</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_atc_instalacion_list')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_atc_visita_kanban')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_atc_visita_form')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_atc_instalacion_pivot')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('view_atc_instalacion_graph')})]"/>
         <field name="search_view_id" ref="view_atc_visita_search"/>
         <field name="domain">[('tipo_orden', '=', 'instalacion')]</field>
         <field name="context">{'default_tipo_orden': 'instalacion'}</field>
