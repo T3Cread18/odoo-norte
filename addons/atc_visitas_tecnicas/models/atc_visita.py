@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+from .ubicacion import url_mapa
+
 # Estados que solo tienen sentido en instalaciones (se ocultan del kanban de
 # visitas) y estados que solo tienen sentido en visitas (se ocultan del de
 # instalaciones; 'en_los' lo añade noc_onu_los).
@@ -12,6 +14,7 @@ CAMPOS_PORTAL = (
     "fecha_programada", "fecha_instalacion", "tecnico_contratista",
     "serial_onu", "precinto", "potencia_rx", "caja_nap", "puerto_nap",
     "metros_fibra", "observaciones_contratista", "motivo_no_realizada_ids",
+    "cliente_latitud", "cliente_longitud", "nap_latitud", "nap_longitud",
 )
 
 
@@ -108,6 +111,18 @@ class AtcVisita(models.Model):
     caja_nap = fields.Char(string="Caja NAP", tracking=True)
     puerto_nap = fields.Char(string="Puerto NAP", tracking=True)
     metros_fibra = fields.Integer(string="Metros de fibra", tracking=True)
+    cliente_latitud = fields.Float(
+        string="Latitud cliente", digits=(10, 7), tracking=True)
+    cliente_longitud = fields.Float(
+        string="Longitud cliente", digits=(10, 7), tracking=True)
+    cliente_mapa_url = fields.Char(
+        string="Ubicación del cliente", compute="_compute_mapa_url")
+    nap_latitud = fields.Float(
+        string="Latitud caja NAP", digits=(10, 7), tracking=True)
+    nap_longitud = fields.Float(
+        string="Longitud caja NAP", digits=(10, 7), tracking=True)
+    nap_mapa_url = fields.Char(
+        string="Ubicación de la caja NAP", compute="_compute_mapa_url")
     observaciones_contratista = fields.Text(
         string="Observaciones del contratista")
     motivo_no_realizada_ids = fields.Many2many(
@@ -120,6 +135,13 @@ class AtcVisita(models.Model):
         super()._compute_access_url()
         for v in self:
             v.access_url = "/my/instalaciones/%s" % v.id
+
+    @api.depends("cliente_latitud", "cliente_longitud",
+                 "nap_latitud", "nap_longitud")
+    def _compute_mapa_url(self):
+        for v in self:
+            v.cliente_mapa_url = url_mapa(v.cliente_latitud, v.cliente_longitud)
+            v.nap_mapa_url = url_mapa(v.nap_latitud, v.nap_longitud)
 
     @api.depends("fecha_asignacion", "fecha_instalacion")
     def _compute_dias_pendiente(self):

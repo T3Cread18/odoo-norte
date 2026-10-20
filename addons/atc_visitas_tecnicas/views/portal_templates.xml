@@ -174,6 +174,39 @@
                                     <label class="form-label" for="metros_fibra">Metros de fibra</label>
                                     <input type="number" min="0" step="1" class="form-control" id="metros_fibra" name="metros_fibra" t-att-value="orden.metros_fibra or ''"/>
                                 </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="ubicacion_cliente">Ubicación del cliente</label>
+                                    <input type="text" class="form-control" id="ubicacion_cliente" name="ubicacion_cliente"
+                                           placeholder="Pega el enlace de Google Maps o las coordenadas"
+                                           t-att-value="'%.7f, %.7f' % (orden.cliente_latitud, orden.cliente_longitud) if orden.cliente_mapa_url else ''"/>
+                                    <div class="d-flex flex-wrap gap-3 mt-1 small">
+                                        <button type="button" class="btn btn-link btn-sm p-0 o_atc_mi_ubicacion d-none" data-target="ubicacion_cliente">
+                                            <i class="fa fa-crosshairs me-1"/>Usar mi ubicación actual
+                                        </button>
+                                        <a t-if="orden.cliente_mapa_url" t-att-href="orden.cliente_mapa_url" target="_blank">
+                                            <i class="fa fa-map-marker me-1"/>Ver en mapa
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label" for="ubicacion_nap">Ubicación de la caja NAP</label>
+                                    <input type="text" class="form-control" id="ubicacion_nap" name="ubicacion_nap"
+                                           placeholder="Pega el enlace de Google Maps o las coordenadas"
+                                           t-att-value="'%.7f, %.7f' % (orden.nap_latitud, orden.nap_longitud) if orden.nap_mapa_url else ''"/>
+                                    <div class="d-flex flex-wrap gap-3 mt-1 small">
+                                        <button type="button" class="btn btn-link btn-sm p-0 o_atc_mi_ubicacion d-none" data-target="ubicacion_nap">
+                                            <i class="fa fa-crosshairs me-1"/>Usar mi ubicación actual
+                                        </button>
+                                        <a t-if="orden.nap_mapa_url" t-att-href="orden.nap_mapa_url" target="_blank">
+                                            <i class="fa fa-map-marker me-1"/>Ver en mapa
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-text mt-0">
+                                        Para el pin: en Google Maps mantén presionado el punto, toca <b>Compartir</b> y copia el enlace (o copia las coordenadas que aparecen arriba).
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <label class="form-label" for="observaciones_contratista">Observaciones</label>
                                     <textarea class="form-control" id="observaciones_contratista" name="observaciones_contratista" rows="3" t-out="orden.observaciones_contratista or ''"/>

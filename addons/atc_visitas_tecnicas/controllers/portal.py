@@ -7,12 +7,19 @@ from odoo.http import request
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
 from ..models.atc_visita import CAMPOS_PORTAL
+from ..models.ubicacion import leer_ubicacion
 
 PASO = 20
 CAMPOS_FECHA = ("fecha_programada", "fecha_instalacion")
 CAMPOS_ENTEROS = ("metros_fibra",)
 CAMPOS_DECIMALES = ("potencia_rx",)
 CAMPOS_ETIQUETAS = ("motivo_no_realizada_ids",)
+# Pines de ubicación: el formulario envía un texto (coordenadas o enlace de
+# Google Maps) que se convierte en latitud/longitud.
+PINES = {
+    "ubicacion_cliente": ("cliente_latitud", "cliente_longitud", "del cliente"),
+    "ubicacion_nap": ("nap_latitud", "nap_longitud", "de la caja NAP"),
+}
 
 
 class AtcInstalacionPortal(CustomerPortal):
@@ -152,6 +159,17 @@ class AtcInstalacionPortal(CustomerPortal):
                 vals[campo] = float(valor.replace(",", ".")) if valor else 0.0
             else:
                 vals[campo] = valor or False
+        for entrada, (campo_lat, campo_lng, que) in PINES.items():
+            if entrada not in post:
+                continue
+            try:
+                coords = leer_ubicacion(post.get(entrada))
+            except ValueError:
+                raise ValidationError(request.env._(
+                    "No se entendió la ubicación %(que)s. Pega el enlace de "
+                    "Google Maps o las coordenadas, p. ej. 10.0661, -69.3207.",
+                    que=que))
+            vals[campo_lat], vals[campo_lng] = coords or (0.0, 0.0)
         return vals
 
     @http.route(["/my/instalaciones/<int:orden_id>/actualizar"],

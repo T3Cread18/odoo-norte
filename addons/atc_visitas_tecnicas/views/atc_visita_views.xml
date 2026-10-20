@@ -74,6 +74,22 @@
                             <field name="puerto_nap"/>
                             <field name="metros_fibra"/>
                         </group>
+                        <group string="Ubicación">
+                            <label for="cliente_latitud" string="Cliente"/>
+                            <div class="o_row">
+                                <field name="cliente_latitud" placeholder="Latitud"/>
+                                <field name="cliente_longitud" placeholder="Longitud"/>
+                                <field name="cliente_mapa_url" widget="url" text="Ver en mapa"
+                                       invisible="not cliente_mapa_url"/>
+                            </div>
+                            <label for="nap_latitud" string="Caja NAP"/>
+                            <div class="o_row">
+                                <field name="nap_latitud" placeholder="Latitud"/>
+                                <field name="nap_longitud" placeholder="Longitud"/>
+                                <field name="nap_mapa_url" widget="url" text="Ver en mapa"
+                                       invisible="not nap_mapa_url"/>
+                            </div>
+                        </group>
                         <field name="observaciones_contratista" colspan="2"
                                placeholder="Observaciones del contratista"/>
                         <field name="motivo_no_realizada_ids" colspan="2"
@@ -279,6 +295,8 @@
                 <field name="potencia_rx" optional="hide"/>
                 <field name="caja_nap" optional="hide"/>
                 <field name="metros_fibra" optional="hide" sum="Total"/>
+                <field name="cliente_mapa_url" widget="url" text="Mapa" optional="hide"/>
+                <field name="nap_mapa_url" widget="url" text="Mapa" optional="hide"/>
                 <field name="motivo_no_realizada_ids" widget="many2many_tags"
                        options="{'color_field': 'color'}" optional="show"/>
                 <field name="estado" widget="badge"
