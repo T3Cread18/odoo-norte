@@ -442,9 +442,22 @@ class AtcInstalacionImport(models.TransientModel):
         for v in abiertas:
             if v.cedula:
                 por_cedula.setdefault(v.cedula, v)
+        # Instalaciones ya cerradas o archivadas: la más reciente por cédula.
+        # Si siguen en el reporte, las realizadas/archivadas se omiten y las
+        # no realizadas se reabren, en vez de crear una orden duplicada.
+        cedulas = {f["cedula"] for _n, f in filas if f["cedula"]}
+        cerradas = {}
+        for v in Visita.with_context(active_test=False).search(
+                [("tipo_orden", "=", "instalacion"),
+                 ("cedula", "in", list(cedulas - set(por_cedula))),
+                 "|", ("estado", "not in", ESTADOS_ABIERTOS),
+                 ("active", "=", False)],
+                order="id desc"):
+            cerradas.setdefault(v.cedula, v)
 
         actualizadas = sin_cambios = con_zona = 0
         vistas, errores, repetidas = set(), [], []
+        omitidas, reabiertas = [], []
         nuevas, cedulas_nuevas = [], set()   # [(nº fila, vals, teléfono)]
         for n, fila in filas:
             contratista = self._buscar_o_crear(
@@ -477,6 +490,25 @@ class AtcInstalacionImport(models.TransientModel):
                     actualizadas += 1
                 else:
                     sin_cambios += 1
+                continue
+            cerrada = cerradas.get(cedula) if cedula else None
+            if cerrada:
+                if cerrada.active and cerrada.estado == "no_realizada":
+                    cambios = {campo: vals[campo]
+                               for dato, campo in ACTUALIZABLES.items()
+                               if dato in mapeo and vals[campo]}
+                    cambios["estado"] = "asignada" if (
+                        cambios.get("contratista_id") or cerrada.contratista_id
+                        or cerrada.tecnico_asignado_ids) else "pendiente"
+                    cerrada.write(cambios)
+                    cerrada.message_post(body=self.env._(
+                        "Reabierta al importar el reporte del %s: el cliente "
+                        "sigue pendiente de instalación.")
+                        % fields.Date.to_string(self.fecha_reporte))
+                    reabiertas.append(cerrada)
+                else:
+                    omitidas.append((n, cerrada))
+                del cerradas[cedula]
                 continue
             if cedula and cedula in cedulas_nuevas:
                 repetidas.append(n)
@@ -519,6 +551,23 @@ class AtcInstalacionImport(models.TransientModel):
             self.env._("• Instalaciones abiertas que NO vienen en este "
                        "archivo: %s") % fuera,
         ]
+        if reabiertas:
+            lineas.append(self.env._(
+                "• No realizadas que siguen en el reporte, reabiertas: %s")
+                % len(reabiertas))
+            lineas += ["    %s (%s)" % (v.nombre, v.cedula) for v in reabiertas]
+        if omitidas:
+            lineas.append(self.env._(
+                "• Ya realizadas o archivadas en Odoo, omitidas (revisar si "
+                "hay que reinstalar): %s") % len(omitidas))
+            lineas += [
+                "    " + self.env._(
+                    "Fila %(n)s: %(nombre)s (%(cedula)s) — %(estado)s",
+                    n=n, nombre=v.nombre, cedula=v.cedula,
+                    estado=dict(v._fields["estado"]._description_selection(
+                        self.env))[v.estado]
+                    + ("" if v.active else self.env._(", archivada")))
+                for n, v in omitidas]
         if repetidas:
             lineas.append(self.env._(
                 "• Cédula repetida en el archivo (se usó la primera), "
