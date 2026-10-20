@@ -4,36 +4,83 @@
         <field name="name">atc.instalacion.import.form</field>
         <field name="model">atc.instalacion.import</field>
         <field name="arch" type="xml">
-            <form string="Importar instalaciones desde Excel">
-                <field name="state" invisible="1"/>
+            <form string="Importar instalaciones">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="input,mapeo,done"/>
+                </header>
                 <!-- Paso 1: cargar archivo -->
-                <group invisible="state == 'done'">
+                <group invisible="state != 'input'">
                     <div colspan="2" class="alert alert-info" role="alert">
-                        Sube el Excel de <b>órdenes de instalación pendientes</b>
-                        (columnas TIPO SERVICIO, RIF, RAZON SOCIAL, TLF. MOVIL,
-                        TLF. FIJO, ANTIGUEDAD, TECNICO, REFERENCIA). Se crean las
-                        órdenes nuevas asignadas a su contratista; las que ya están
-                        abiertas (misma cédula) solo se actualizan. Los contratistas
-                        y tipos de servicio nuevos se crean solos.
+                        Sube el reporte de <b>órdenes de instalación pendientes</b>
+                        (.xlsx, .xls o .csv). En el siguiente paso eliges qué
+                        columna corresponde a cada dato; las columnas conocidas
+                        y las que ya mapeaste antes se reconocen solas.
+                        Se crean las órdenes nuevas asignadas a su contratista;
+                        las que ya están abiertas (misma cédula) solo se
+                        actualizan. Los contratistas y tipos de servicio nuevos
+                        se crean solos.
                     </div>
-                    <field name="archivo" filename="nombre_archivo"
-                           widget="binary"/>
+                    <field name="archivo" filename="nombre_archivo" widget="binary"/>
                     <field name="nombre_archivo" invisible="1"/>
                     <field name="fecha_reporte"/>
                 </group>
-                <!-- Paso 2: resultado -->
+                <!-- Paso 2: mapeo de columnas -->
+                <div invisible="state != 'mapeo'">
+                    <group>
+                        <group>
+                            <field name="nombre_archivo" readonly="1" string="Archivo"/>
+                            <field name="hoja"/>
+                            <field name="total_filas"/>
+                        </group>
+                        <group>
+                            <field name="fecha_reporte"/>
+                            <label for="fila_encabezado"/>
+                            <div class="o_row">
+                                <field name="fila_encabezado"/>
+                                <button name="action_releer" type="object"
+                                        string="Volver a leer" class="btn-link"
+                                        icon="fa-refresh"/>
+                            </div>
+                        </group>
+                    </group>
+                    <p class="text-muted">
+                        Elige en <b>Importar como</b> a qué dato corresponde cada
+                        columna; déjalo vacío para ignorarla. Obligatorios:
+                        <b>Cédula / RIF</b> y <b>Nombre</b>. Si no hay columna de
+                        fecha de asignación se calcula con la antigüedad.
+                        El mapeo se recuerda para la próxima importación.
+                    </p>
+                    <field name="linea_ids" nolabel="1">
+                        <list editable="bottom" create="false" delete="false">
+                            <field name="indice" column_invisible="1"/>
+                            <field name="columna"/>
+                            <field name="ejemplo"/>
+                            <field name="campo" placeholder="No importar"/>
+                        </list>
+                    </field>
+                    <separator string="Vista previa (primeras filas, ya normalizadas)"/>
+                    <field name="vista_previa" nolabel="1" readonly="1"/>
+                    <field name="resultado" nolabel="1" readonly="1" widget="text"
+                           invisible="not resultado" class="alert alert-warning d-block"/>
+                </div>
+                <!-- Paso 3: resultado -->
                 <group invisible="state != 'done'">
-                    <field name="resultado" nolabel="1" readonly="1"
-                           widget="text"/>
+                    <field name="resultado" nolabel="1" readonly="1" widget="text"/>
                 </group>
                 <footer>
-                    <button name="action_importar" type="object"
-                            string="Importar" class="btn-primary"
+                    <button name="action_cargar" type="object" string="Cargar archivo"
+                            class="btn-primary" invisible="state != 'input'"/>
+                    <button name="action_importar" type="object" string="Importar"
+                            class="btn-primary" invisible="state != 'mapeo'"/>
+                    <button name="action_probar" type="object" string="Probar"
+                            class="btn-secondary" invisible="state != 'mapeo'"
+                            help="Simula la importación sin guardar nada y muestra el resumen."/>
+                    <button name="action_volver" type="object" string="Cambiar archivo"
+                            class="btn-secondary" invisible="state != 'mapeo'"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"
                             invisible="state == 'done'"/>
-                    <button string="Cancelar" class="btn-secondary"
-                            special="cancel" invisible="state == 'done'"/>
-                    <button string="Cerrar" class="btn-primary"
-                            special="cancel" invisible="state != 'done'"/>
+                    <button string="Cerrar" class="btn-primary" special="cancel"
+                            invisible="state != 'done'"/>
                 </footer>
             </form>
         </field>

@@ -38,4 +38,6 @@ access_atc_tipo_servicio_atc,atc.tipo.servicio.atc,model_atc_tipo_servicio,group
 access_atc_tipo_servicio_manager,atc.tipo.servicio.manager,model_atc_tipo_servicio,base.group_system,1,1,1,1
 access_atc_instalacion_import_atc,atc.instalacion.import.atc,model_atc_instalacion_import,group_atc_visitas_user,1,1,1,1
 access_atc_instalacion_import_staff,atc.instalacion.import.staff,model_atc_instalacion_import,group_menus_completos,1,1,1,1
+access_atc_instalacion_import_columna_atc,atc.instalacion.import.columna.atc,model_atc_instalacion_import_columna,group_atc_visitas_user,1,1,1,1
+access_atc_instalacion_import_columna_staff,atc.instalacion.import.columna.staff,model_atc_instalacion_import_columna,group_menus_completos,1,1,1,1
 access_atc_visita_portal,atc.visita.portal,model_atc_visita,base.group_portal,1,0,0,0
