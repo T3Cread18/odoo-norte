@@ -14,7 +14,14 @@
     <record id="project_todo.menu_todo_todos" model="ir.ui.menu">
         <field name="group_ids" eval="[(6, 0, [ref('group_menus_completos')])]"/>
     </record>
-    <!-- NOC: visible para todos los usuarios internos (sin restricción de menú). -->
+    <!-- NOC y Tableros: solo para el rol NOC y quien tenga "Menús completos";
+         los usuarios con solo el rol ATC no los ven. -->
+    <record id="noc_guardias.menu_noc_root" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('noc_guardias.group_noc_user'), ref('group_menus_completos')])]"/>
+    </record>
+    <record id="spreadsheet_dashboard.spreadsheet_dashboard_menu_root" model="ir.ui.menu">
+        <field name="group_ids" eval="[(6, 0, [ref('noc_guardias.group_noc_user'), ref('group_menus_completos')])]"/>
+    </record>
     <record id="base.menu_management" model="ir.ui.menu">
         <field name="group_ids" eval="[(6, 0, [ref('group_menus_completos')])]"/>
     </record>

@@ -1,11 +1,11 @@
 {
     'name': 'ATC - Visitas Técnicas',
-    'version': '19.0.5.0.0',
+    'version': '19.0.5.1.0',
     'summary': 'Control de visitas técnicas a clientes de ISPs sobre Actividades',
     'description': 'Extiende las Actividades estandar (mail.activity) para que ATC controle visitas tecnicas a clientes de ISPs: tipo de actividad, campos (cedula con autocompletado de nombre, zona, etiquetas, estado), filtros, menu propio y un rol kiosko. Instalaciones por contratista externo: importación del reporte de pendientes en Excel, seguimiento por antigüedad y portal /my/instalaciones para que cada contratista actualice las suyas.',
     'category': 'Services',
     'author': 'Ing Pablo Ramìrez',
-    'depends': ['mail', 'contacts', 'calendar', 'project_todo', 'hr', 'fleet', 'portal', 'noc_guardias'],
+    'depends': ['mail', 'contacts', 'calendar', 'project_todo', 'hr', 'fleet', 'portal', 'noc_guardias', 'spreadsheet_dashboard'],
     'data': [
         'security/atc_security.xml',
         'security/ir.model.access.csv',
