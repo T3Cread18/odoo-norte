@@ -27,6 +27,7 @@
                     <group>
                         <group string="Cliente">
                             <field name="cedula"
+                                   required="tipo_orden == 'visita' and not id"
                                    placeholder="Escribe la cédula y se traerá el cliente"/>
                             <field name="nombre"
                                    placeholder="Nombre del cliente (si la cédula es nueva, se crea el contacto)"/>
@@ -163,7 +164,8 @@
         <field name="name">atc.visita.kanban</field>
         <field name="model">atc.visita</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="estado" class="o_kanban_small_column">
+            <kanban default_group_by="estado" class="o_kanban_small_column"
+                    quick_create="false">
                 <field name="estado"/>
                 <field name="tipo_orden"/>
                 <field name="nombre"/>

@@ -211,6 +211,18 @@ class AtcVisita(models.Model):
                     "técnico en 'Asignado a' o un contratista. Usa el botón "
                     "'Asignar técnico'."))
 
+    @api.constrains("cedula", "tipo_orden")
+    def _check_cedula_visita(self):
+        # Solo salta al crear o al cambiar la cédula: las visitas antiguas sin
+        # cédula se pueden seguir editando. Las órdenes que genera el cron de
+        # LOS (estado 'en_los') pueden venir sin cédula de SmartOLT.
+        for v in self:
+            if v.tipo_orden == "visita" and v.estado != "en_los" \
+                    and not (v.cedula or "").strip():
+                raise ValidationError(self.env._(
+                    "La cédula del cliente es obligatoria en las visitas "
+                    "técnicas."))
+
     @api.constrains("estado", "motivo_no_realizada_ids")
     def _check_motivo_no_realizada(self):
         for v in self:
