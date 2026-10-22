@@ -12,7 +12,10 @@
                             invisible="estado in ('realizada', 'no_realizada')"/>
                     <button name="action_marcar_realizada" type="object"
                             string="Marcar realizada" class="btn-primary"
-                            invisible="estado in ('realizada', 'no_realizada')"/>
+                            invisible="estado in ('realizada', 'no_realizada', 'garantia')"/>
+                    <button name="action_garantia_atendida" type="object"
+                            string="Garantía atendida" class="btn-primary"
+                            invisible="estado != 'garantia'"/>
                     <button name="action_marcar_pendiente" type="object"
                             string="Reabrir" class="btn-secondary"
                             invisible="estado not in ('realizada', 'no_realizada')"/>
@@ -21,6 +24,10 @@
                            options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
+                    <div class="alert alert-danger" role="alert" invisible="estado != 'garantia'">
+                        <b>Visita por garantía</b> desde <field name="garantia_desde" readonly="1" class="d-inline"/>:
+                        <field name="garantia_motivo" readonly="1" class="d-inline"/>
+                    </div>
                     <div class="oe_title">
                         <h1><field name="name" placeholder="Referencia (puedes editarla)"/></h1>
                     </div>
@@ -63,6 +70,7 @@
                             <field name="dias_pendiente"/>
                             <field name="fecha_programada"/>
                             <field name="fecha_instalacion"/>
+                            <field name="garantia_hasta" invisible="not garantia_hasta"/>
                         </group>
                         <group string="Reporte del contratista">
                             <field name="tecnico_contratista"/>
@@ -154,7 +162,8 @@
                 <field name="estado" widget="badge"
                        decoration-success="estado == 'realizada'"
                        decoration-info="estado == 'asignada'"
-                       decoration-warning="estado == 'pendiente'"/>
+                       decoration-warning="estado == 'pendiente'"
+                       decoration-danger="estado == 'garantia'"/>
             </list>
         </field>
     </record>
@@ -191,6 +200,7 @@
                              t-attf-class="small fw-bold #{record.dias_pendiente.raw_value > 7 ? 'text-danger' : 'text-muted'}">
                             <i class="fa fa-clock-o me-1" title="Antigüedad"/><field name="dias_pendiente"/> días
                         </div>
+                        <div t-if="record.estado.raw_value == 'garantia'" class="small fw-bold text-danger"><i class="fa fa-shield me-1" title="Garantía"/>Visita por garantía</div>
                         <div t-if="record.vehiculo_id.value" class="small"><i class="fa fa-car me-1" title="Vehículo"/><field name="vehiculo_id"/></div>
                         <field name="tecnico_asignado_ids" widget="many2many_tags"/>
                         <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
@@ -229,8 +239,9 @@
                 <filter string="Asignada" name="f_asignada" domain="[('estado','=','asignada')]"/>
                 <filter string="Realizada" name="f_realizada" domain="[('estado','=','realizada')]"/>
                 <filter string="No realizada" name="f_no_realizada" domain="[('estado','=','no_realizada')]"/>
+                <filter string="Visita por garantía" name="f_garantia" domain="[('estado','=','garantia')]"/>
                 <separator/>
-                <filter string="Abiertas" name="f_abiertas" domain="[('estado','in',('pendiente','asignada'))]"/>
+                <filter string="Abiertas" name="f_abiertas" domain="[('estado','in',('pendiente','asignada','garantia'))]"/>
                 <filter string="Abiertas con más de 7 días" name="f_vencidas"
                         domain="[('estado','in',('pendiente','asignada')), ('fecha_asignacion','&lt;', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>
                 <filter string="Sin contratista" name="f_sin_contratista"
@@ -305,7 +316,7 @@
                        decoration-success="estado == 'realizada'"
                        decoration-info="estado == 'asignada'"
                        decoration-warning="estado == 'pendiente'"
-                       decoration-danger="estado == 'no_realizada'"/>
+                       decoration-danger="estado in ('no_realizada', 'garantia')"/>
             </list>
         </field>
     </record>

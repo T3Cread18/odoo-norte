@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -6,7 +8,11 @@ from .ubicacion import url_mapa
 # Estados que solo tienen sentido en instalaciones (se ocultan del kanban de
 # visitas) y estados que solo tienen sentido en visitas (se ocultan del de
 # instalaciones; 'en_los' lo añade noc_onu_los).
-ESTADOS_SOLO_INSTALACION = ("no_realizada",)
+ESTADOS_SOLO_INSTALACION = ("no_realizada", "garantia")
+# Estados en los que el contratista tiene trabajo pendiente (portal "Por hacer")
+ESTADOS_ABIERTOS_PORTAL = ("pendiente", "asignada", "garantia")
+# Días de garantía de una instalación desde su fecha de instalación
+PARAM_GARANTIA_DIAS = "atc_visitas_tecnicas.garantia_dias"
 # Obligatorios para cerrar una instalación como realizada
 CAMPOS_REALIZADA = ("serial_onu", "tecnico_contratista", "precinto")
 ESTADOS_SOLO_VISITA = ("en_los",)
@@ -57,10 +63,23 @@ class AtcVisita(models.Model):
     estado = fields.Selection(
         selection=[("pendiente", "Pendiente"),
                    ("asignada", "Asignada"),
+                   ("garantia", "Visita por garantía"),
                    ("realizada", "Realizada"),
                    ("no_realizada", "No realizada")],
         string="Estado", default="pendiente", index=True,
         tracking=True, group_expand="_group_expand_estado")
+    garantia_hasta = fields.Date(
+        string="Garantía hasta", compute="_compute_garantia_hasta",
+        help="Fin de la garantía de la instalación (fecha de instalación + "
+             "días de garantía).")
+    garantia_desde = fields.Datetime(
+        string="En garantía desde", copy=False,
+        help="Cuándo la instalación pasó a 'Visita por garantía'.")
+    garantia_motivo = fields.Char(string="Motivo de la garantía", copy=False)
+    garantia_automatica = fields.Boolean(
+        copy=False,
+        help="La puso en garantía el sistema (ruptura de la ONU): se cierra "
+             "sola si el cliente se recupera.")
     tecnico_asignado_ids = fields.Many2many(
         "hr.employee", "atc_visita_tecnico_rel", "visita_id", "employee_id",
         string="Asignado a", tracking=True,
@@ -166,6 +185,43 @@ class AtcVisita(models.Model):
                 v.dias_instalacion = 0
 
     @api.model
+    def _garantia_dias(self):
+        try:
+            return int(self.env["ir.config_parameter"].sudo().get_param(PARAM_GARANTIA_DIAS) or 30)
+        except (TypeError, ValueError):
+            return 30
+
+    @api.depends("fecha_instalacion", "tipo_orden")
+    def _compute_garantia_hasta(self):
+        dias = self._garantia_dias()
+        for v in self:
+            v.garantia_hasta = v.fecha_instalacion + timedelta(days=dias) \
+                if v.tipo_orden == "instalacion" and v.fecha_instalacion else False
+
+    @api.model
+    def _dominio_en_garantia(self):
+        """Instalaciones realizadas dentro del periodo de garantía, o ya en
+        visita por garantía."""
+        desde = fields.Date.context_today(self) - timedelta(days=self._garantia_dias())
+        return [("tipo_orden", "=", "instalacion"), "|",
+                ("estado", "=", "garantia"),
+                "&", ("estado", "=", "realizada"), ("fecha_instalacion", ">=", desde)]
+
+    def _pasar_a_garantia(self, motivo, automatica=True):
+        """Reabre la instalación como 'Visita por garantía' para su contratista."""
+        for v in self:
+            v.write({"estado": "garantia", "garantia_desde": fields.Datetime.now(),
+                     "garantia_motivo": motivo, "garantia_automatica": automatica})
+            v.message_post(body=self.env._(
+                "Visita por garantía (instalada el %(fecha)s, garantía hasta el "
+                "%(hasta)s): %(motivo)s",
+                fecha=v.fecha_instalacion, hasta=v.garantia_hasta, motivo=motivo),
+                subtype_xmlid="mail.mt_comment")
+
+    def action_garantia_atendida(self):
+        self.write({"estado": "realizada"})
+
+    @api.model
     def _group_expand_estado(self, estados, domain):
         """Columnas del kanban según el menú: las instalaciones no muestran
         'En LOS' y las visitas no muestran 'No realizada' (salvo que haya
@@ -247,7 +303,10 @@ class AtcVisita(models.Model):
     @api.constrains("estado", "serial_onu", "tecnico_contratista", "precinto")
     def _check_datos_instalacion_realizada(self):
         """Una instalación no se cierra como realizada sin serial de la ONU,
-        técnico que instala y precinto (portal, formulario y kanban)."""
+        técnico que instala y precinto (portal, formulario y kanban). El
+        autocierre de una garantía (cliente recuperado) no se bloquea."""
+        if self.env.context.get("atc_cierre_automatico"):
+            return
         for v in self:
             if v.tipo_orden != "instalacion" or v.estado != "realizada":
                 continue
@@ -340,6 +399,10 @@ class AtcVisita(models.Model):
         por_asignar = self.browse()
         if vals.get("contratista_id") and "estado" not in vals:
             por_asignar = self.filtered(lambda v: v.estado == "pendiente")
+        if vals.get("estado") and vals["estado"] != "garantia":
+            # Sale de garantía: queda el historial en el chatter
+            vals = dict(vals, garantia_desde=False, garantia_motivo=False,
+                        garantia_automatica=False)
         por_fechar = self.browse()
         if vals.get("estado") == "realizada" and "fecha_instalacion" not in vals:
             por_fechar = self.filtered(
@@ -363,7 +426,7 @@ class AtcVisita(models.Model):
     def _portal_puede_editar(self):
         self.ensure_one()
         return self.tipo_orden == "instalacion" \
-            and self.estado in ("pendiente", "asignada")
+            and self.estado in ESTADOS_ABIERTOS_PORTAL
 
     def _portal_actualizar(self, vals, accion=None):
         """Aplica los cambios enviados por el contratista. Solo escribe los
@@ -375,7 +438,14 @@ class AtcVisita(models.Model):
                 "Esta instalación ya está cerrada; pide a ATC que la reabra "
                 "si necesitas corregir algo."))
         datos = {k: v for k, v in vals.items() if k in CAMPOS_PORTAL}
-        if accion == "realizada":
+        if self.estado == "garantia" and accion in ("realizada", "no_realizada"):
+            raise ValidationError(self.env._(
+                "Esta orden es una visita por garantía: usa \"Garantía atendida\"."))
+        if accion == "garantia_atendida":
+            if self.estado != "garantia":
+                raise ValidationError(self.env._("Esta orden no está en garantía."))
+            datos["estado"] = "realizada"
+        elif accion == "realizada":
             datos["estado"] = "realizada"
             if not datos.get("fecha_instalacion"):
                 datos["fecha_instalacion"] = fields.Date.context_today(self)

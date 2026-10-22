@@ -31,7 +31,7 @@
     <template id="instalacion_estado_badge" name="Estado de la instalación">
         <span t-attf-class="badge rounded-pill #{
             'text-bg-success' if orden.estado == 'realizada' else
-            'text-bg-danger' if orden.estado == 'no_realizada' else
+            'text-bg-danger' if orden.estado in ('no_realizada', 'garantia') else
             'text-bg-info' if orden.estado == 'asignada' else 'text-bg-warning'}"
               t-field="orden.estado"/>
     </template>
@@ -92,6 +92,15 @@
                     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
                         <h3 class="mb-0 me-auto" t-out="orden.nombre"/>
                         <t t-call="atc_visitas_tecnicas.instalacion_estado_badge"/>
+                    </div>
+
+                    <div t-if="orden.estado == 'garantia'" class="alert alert-danger" role="alert">
+                        <h5 class="alert-heading"><i class="fa fa-shield me-1"/>Visita por garantía</h5>
+                        <div t-out="orden.garantia_motivo"/>
+                        <div class="small mt-1">
+                            Instalada el <span t-field="orden.fecha_instalacion"/>; garantía hasta el <span t-field="orden.garantia_hasta"/>.
+                            Revisa la instalación y, cuando quede resuelta, pulsa <b>Garantía atendida</b>.
+                        </div>
                     </div>
 
                     <div class="card mb-4">
@@ -231,11 +240,15 @@
                                 <button type="submit" name="accion" value="guardar" class="btn btn-secondary">
                                     <i class="fa fa-save me-1"/>Guardar avance
                                 </button>
-                                <button type="submit" name="accion" value="realizada" class="btn btn-success"
+                                <button t-if="orden.estado == 'garantia'" type="submit" name="accion" value="garantia_atendida" class="btn btn-success"
+                                        onclick="return confirm('¿Marcar la visita por garantía como ATENDIDA?');">
+                                    <i class="fa fa-check me-1"/>Garantía atendida
+                                </button>
+                                <button t-if="orden.estado != 'garantia'" type="submit" name="accion" value="realizada" class="btn btn-success"
                                         onclick="var f = this.form, falta = [['serial_onu', 'Serial ONU'], ['tecnico_contratista', 'Técnico que instala'], ['precinto', 'Nº de precinto']].filter(function (c) { return !f.elements[c[0]].value.trim(); }).map(function (c) { return c[1]; }); if (falta.length) { alert('Para marcar la instalación como realizada falta: ' + falta.join(', ') + '.'); return false; } return confirm('¿Marcar la instalación como REALIZADA? Ya no podrás modificarla.');">
                                     <i class="fa fa-check me-1"/>Marcar instalada
                                 </button>
-                                <button type="submit" name="accion" value="no_realizada" class="btn btn-outline-danger"
+                                <button t-if="orden.estado != 'garantia'" type="submit" name="accion" value="no_realizada" class="btn btn-outline-danger"
                                         onclick="return confirm('¿Marcar como NO REALIZADA? Debes indicar el motivo.');">
                                     <i class="fa fa-times me-1"/>No se pudo realizar
                                 </button>

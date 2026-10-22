@@ -6,7 +6,7 @@ from odoo.http import request
 
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
-from ..models.atc_visita import CAMPOS_PORTAL
+from ..models.atc_visita import CAMPOS_PORTAL, ESTADOS_ABIERTOS_PORTAL
 from ..models.ubicacion import leer_ubicacion
 
 PASO = 20
@@ -34,7 +34,7 @@ class AtcInstalacionPortal(CustomerPortal):
             Visita = request.env["atc.visita"]
             values["instalacion_count"] = Visita.search_count(
                 self._instalaciones_domain()
-                + [("estado", "in", ("pendiente", "asignada"))]) \
+                + [("estado", "in", ESTADOS_ABIERTOS_PORTAL)]) \
                 if Visita.has_access("read") else 0
         return values
 
@@ -54,7 +54,9 @@ class AtcInstalacionPortal(CustomerPortal):
         }
         searchbar_filters = {
             "abiertas": {"label": _("Por hacer"),
-                         "domain": [("estado", "in", ("pendiente", "asignada"))]},
+                         "domain": [("estado", "in", ESTADOS_ABIERTOS_PORTAL)]},
+            "garantia": {"label": _("Visitas por garantía"),
+                         "domain": [("estado", "=", "garantia")]},
             "realizadas": {"label": _("Realizadas"),
                            "domain": [("estado", "=", "realizada")]},
             "no_realizadas": {"label": _("No realizadas"),
@@ -181,7 +183,7 @@ class AtcInstalacionPortal(CustomerPortal):
             return request.redirect("/my/instalaciones")
         url = "/my/instalaciones/%s" % orden_id
         accion = post.get("accion")
-        if accion not in ("guardar", "realizada", "no_realizada"):
+        if accion not in ("guardar", "realizada", "no_realizada", "garantia_atendida"):
             accion = "guardar"
         try:
             vals = self._leer_formulario(post)
