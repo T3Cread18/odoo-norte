@@ -36,6 +36,7 @@ OBLIGATORIOS = ("cedula", "nombre")
 # ni puntos). El mapeo que el usuario elige se recuerda en PARAM_MAPEO y
 # tiene prioridad sobre estos.
 ALIAS = {
+    # El primer alias gana si el archivo trae varios (ver _sugerencia)
     "tipo_servicio": ["TIPO SERVICIO", "TIPO DE SERVICIO", "SERVICIO"],
     "cedula": ["RIF", "CEDULA", "CI", "RIF CEDULA", "CEDULA RIF"],
     "nombre": ["RAZON SOCIAL", "NOMBRE", "CLIENTE", "NOMBRE CLIENTE"],
@@ -44,7 +45,9 @@ ALIAS = {
     "antiguedad": ["ANTIGUEDAD", "DIAS"],
     "contratista": ["TECNICO", "CONTRATISTA"],
     "direccion": ["REFERENCIA", "DIRECCION"],
-    "zona": ["ZONA", "SECTOR"],
+    # En el export del sistema ZONA es la región (siempre ACARIGUA) y
+    # FRANQUICIA trae las zonas de Odoo (ARAURE, ACARIGUA, VILLA ARAURE)
+    "zona": ["FRANQUICIA", "ZONA", "SECTOR"],
     "fecha_asignacion": ["FECHA ASIGNACION", "FECHA DE ASIGNACION"],
 }
 PARAM_MAPEO = "atc_visitas_tecnicas.import_instalaciones_mapeo"
@@ -251,15 +254,21 @@ class AtcInstalacionImport(models.TransientModel):
             return {}
 
     def _sugerir_campo(self, encabezado, recordado):
+        return self._sugerencia(encabezado, recordado)[0]
+
+    def _sugerencia(self, encabezado, recordado):
+        """(campo, prioridad); menor prioridad = mejor. Gana el mapeo
+        recordado y, entre alias, el que está antes en la lista: si el
+        archivo trae SERVICIO y TIPO SERVICIO, se usa TIPO SERVICIO."""
         clave = _norm(encabezado)
         if not clave:
-            return False
+            return False, 0
         if clave in recordado:
-            return recordado[clave] or False
+            return recordado[clave] or False, -1
         for campo, alias in ALIAS.items():
             if clave in alias:
-                return campo
-        return False
+                return campo, alias.index(clave)
+        return False, 0
 
     def _detectar_encabezado(self, hojas, recordado):
         """(hoja, índice de fila) del encabezado: la primera fila, en las 20
@@ -298,23 +307,24 @@ class AtcInstalacionImport(models.TransientModel):
         cuerpo = [f for f in filas[indice + 1:] if any(_limpiar(c) for c in f)]
         ancho = max([len(encabezado)] + [len(f) for f in cuerpo])
 
-        lineas, usados = [], set()
+        columnas, mejor = [], {}   # mejor: {campo: (prioridad, col)}
         for col in range(ancho):
             titulo = _limpiar(encabezado[col]) if col < len(encabezado) else ""
             valores = [_limpiar(f[col]) for f in cuerpo if col < len(f)]
             valores = [v for v in valores if v]
             if not titulo and not valores:
                 continue
-            campo = self._sugerir_campo(titulo, recordado)
-            if campo in usados:
-                campo = False
-            usados.add(campo)
-            lineas.append((0, 0, {
-                "indice": col,
-                "columna": titulo or self.env._("(columna %s sin título)") % (col + 1),
-                "ejemplo": " | ".join(valores[:3])[:120],
-                "campo": campo,
-            }))
+            campo, prioridad = self._sugerencia(titulo, recordado)
+            if campo and (campo not in mejor or prioridad < mejor[campo][0]):
+                mejor[campo] = (prioridad, col)
+            columnas.append((col, titulo, valores, campo))
+        # Cada campo, a una sola columna: la de mejor prioridad
+        lineas = [(0, 0, {
+            "indice": col,
+            "columna": titulo or self.env._("(columna %s sin título)") % (col + 1),
+            "ejemplo": " | ".join(valores[:3])[:120],
+            "campo": campo if campo and mejor[campo][1] == col else False,
+        }) for col, titulo, valores, campo in columnas]
         self.linea_ids.unlink()
         self.write({
             "state": "mapeo",
