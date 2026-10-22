@@ -60,6 +60,13 @@
                     </field>
                     <separator string="Vista previa (primeras filas, ya normalizadas)"/>
                     <field name="vista_previa" nolabel="1" readonly="1"/>
+                    <separator string="Revisión del archivo"/>
+                    <field name="hay_errores" invisible="1"/>
+                    <field name="revision" nolabel="1" readonly="1"/>
+                    <div class="o_row mb-3" invisible="not hay_errores">
+                        <field name="omitir_errores"/>
+                        <label for="omitir_errores"/>
+                    </div>
                     <field name="resultado" nolabel="1" readonly="1" widget="text"
                            invisible="not resultado" class="alert alert-warning d-block"/>
                 </div>
@@ -71,7 +78,8 @@
                     <button name="action_cargar" type="object" string="Cargar archivo"
                             class="btn-primary" invisible="state != 'input'"/>
                     <button name="action_importar" type="object" string="Importar"
-                            class="btn-primary" invisible="state != 'mapeo'"/>
+                            class="btn-primary"
+                            invisible="state != 'mapeo' or (hay_errores and not omitir_errores)"/>
                     <button name="action_probar" type="object" string="Probar"
                             class="btn-secondary" invisible="state != 'mapeo'"
                             help="Simula la importación sin guardar nada y muestra el resumen."/>

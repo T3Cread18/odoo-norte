@@ -61,6 +61,17 @@ ACTUALIZABLES = {
 ESTADOS_ABIERTOS = ("pendiente", "asignada")
 FILAS_PREVIA = 5
 
+# Palabras que delatan una dirección: si aparecen en la columna del
+# contratista, lo más probable es que las columnas estén cruzadas.
+PALABRAS_DIRECCION = {
+    "CALLE", "CALLEJON", "AV", "AVENIDA", "CARRERA", "CRA", "TRANSVERSAL",
+    "DIAGONAL", "BARRIO", "URB", "URBANIZACION", "SECTOR", "VEREDA", "CASA",
+    "QTA", "QUINTA", "ESQUINA", "EDIF", "EDIFICIO", "RESIDENCIAS", "CONJUNTO",
+    "MANZANA", "PARCELA", "KM", "CARRETERA", "CASERIO", "FRENTE", "DETRAS",
+}
+# Cédula ya normalizada: solo números, o RIF J/G
+CEDULA_VALIDA = re.compile(r"^(\d{5,9}|[JG]-\d{8}(-\d)?)$")
+
 
 def _sin_acentos(txt):
     return "".join(c for c in unicodedata.normalize("NFD", txt)
@@ -160,6 +171,14 @@ class AtcInstalacionImport(models.TransientModel):
     vista_previa = fields.Html(
         string="Vista previa", compute="_compute_vista_previa",
         sanitize=False)
+    revision = fields.Html(
+        string="Revisión del archivo", compute="_compute_revision",
+        sanitize=False)
+    hay_errores = fields.Boolean(compute="_compute_revision")
+    omitir_errores = fields.Boolean(
+        string="Importar sin las filas con error",
+        help="Importa el resto del archivo y deja fuera las filas con error, "
+             "que se listan en el resultado para cargarlas después.")
     resultado = fields.Text(string="Resultado", readonly=True)
 
     # ------------------------------------------------------------------
@@ -359,6 +378,129 @@ class AtcInstalacionImport(models.TransientModel):
             return fila["fecha_asignacion"]
         return self.fecha_reporte - timedelta(days=fila["antiguedad"] or 0)
 
+    def _revisar(self, mapeo, filas):
+        """Problemas del archivo antes de importar.
+
+        Devuelve ({nº fila: [errores]}, [avisos]). Una fila con error no se
+        debe importar tal cual (datos en la columna equivocada, cédula que no
+        se entiende); los avisos solo piden revisar algo."""
+        _ = self.env._
+        Contratista = self.env["atc.contratista"].with_context(active_test=False)
+        Servicio = self.env["atc.tipo.servicio"].with_context(active_test=False)
+        contratistas = Contratista.search([]).mapped("name")
+        # Igual que _buscar_o_crear (=ilike): sin distinguir mayúsculas
+        existentes_c = {n.lower() for n in contratistas}
+        contratistas_norm = {_norm(n) for n in contratistas}
+        existentes_s = {n.lower() for n in Servicio.search([]).mapped("name")}
+
+        errores = {}
+        nuevos_c, nuevos_s = {}, {}
+        sin_cedula, sin_contratista, telefonos, sin_antiguedad = [], [], [], []
+        for n, f in filas:
+            problemas = []
+            contratista, direccion = f["contratista"], f["direccion"]
+            nuevo = contratista and contratista.lower() not in existentes_c
+            palabras = set(re.sub(r"[^A-Z0-9]+", " ", _norm(contratista)).split())
+            if (nuevo or not contratista) and direccion and (
+                    _norm(direccion) in contratistas_norm
+                    or (nuevo and palabras & PALABRAS_DIRECCION)):
+                problemas.append(_(
+                    "las columnas de contratista y dirección parecen "
+                    "intercambiadas (contratista: «%(c)s», dirección: «%(d)s»)",
+                    c=contratista or _("vacío"), d=direccion))
+            elif nuevo and palabras & PALABRAS_DIRECCION:
+                problemas.append(_(
+                    "el contratista «%s» parece una dirección", contratista))
+            if f["cedula"] and not CEDULA_VALIDA.match(f["cedula"]):
+                problemas.append(_("cédula/RIF no válido «%s»", f["cedula"]))
+            if not f["nombre"]:
+                problemas.append(_("falta el nombre del cliente"))
+            if problemas:
+                errores[n] = problemas
+                continue
+            if nuevo:
+                nuevos_c.setdefault(contratista, []).append(n)
+            elif not contratista:
+                sin_contratista.append(n)
+            servicio = f["tipo_servicio"]
+            if servicio and servicio.lower() not in existentes_s:
+                nuevos_s.setdefault(servicio, []).append(n)
+            if not f["cedula"]:
+                sin_cedula.append(n)
+            for tel in (f["telefono_movil"], f["telefono_fijo"]):
+                if tel and len(tel) != 11:
+                    telefonos.append("%s (%s)" % (n, tel))
+            if ("antiguedad" in mapeo and "fecha_asignacion" not in mapeo
+                    and f["antiguedad"] is None):
+                sin_antiguedad.append(n)
+
+        def filas_txt(nums):
+            return ", ".join(map(str, nums))
+
+        avisos = []
+        for nombre, nums in nuevos_c.items():
+            avisos.append(_(
+                "Contratista nuevo «%(c)s» (filas %(f)s): no existe en Odoo; se "
+                "creará y no verá sus órdenes en el portal hasta que se le cree "
+                "un usuario. Si es un contratista que ya existe, escríbelo igual "
+                "que en Odoo.", c=nombre, f=filas_txt(nums)))
+        for nombre, nums in nuevos_s.items():
+            avisos.append(_("Tipo de servicio nuevo «%(s)s» (filas %(f)s): se "
+                            "creará.", s=nombre, f=filas_txt(nums)))
+        if sin_contratista:
+            avisos.append(_("Sin contratista, quedarán pendientes de asignar: "
+                            "filas %s.", filas_txt(sin_contratista)))
+        if sin_cedula:
+            avisos.append(_("Sin cédula/RIF (no se puede saber si ya existen, se "
+                            "crean siempre): filas %s.", filas_txt(sin_cedula)))
+        if telefonos:
+            avisos.append(_("Teléfonos que no tienen 11 dígitos: filas %s.",
+                            ", ".join(telefonos)))
+        if sin_antiguedad:
+            avisos.append(_("Antigüedad vacía o sin número, se toma la fecha del "
+                            "reporte como asignación: filas %s.",
+                            filas_txt(sin_antiguedad)))
+        return errores, avisos
+
+    @staticmethod
+    def _errores_txt(errores):
+        return ["Fila %s: %s" % (n, "; ".join(p))
+                for n, p in sorted(errores.items())]
+
+    @api.depends("linea_ids.campo", "datos", "fila_encabezado")
+    def _compute_revision(self):
+        for w in self:
+            w.revision = False
+            w.hay_errores = False
+            if w.state != "mapeo" or not w.datos:
+                continue
+            mapeo = {l.campo: l.indice for l in w.linea_ids if l.campo}
+            if not all(c in mapeo for c in OBLIGATORIOS):
+                continue
+            errores, avisos = w._revisar(mapeo, w._filas(mapeo))
+            w.hay_errores = bool(errores)
+            html = Markup("")
+            if errores:
+                html += Markup(
+                    '<div class="alert alert-danger" role="alert"><b>%s</b>'
+                    "<ul>%s</ul>%s</div>") % (
+                    w.env._("%s fila(s) con error: corrige el archivo y vuelve "
+                            "a cargarlo (botón «Cambiar archivo»).", len(errores)),
+                    Markup("").join(Markup("<li>%s</li>") % e
+                                    for e in w._errores_txt(errores)),
+                    w.env._("Si no puedes corregirlo ahora, marca «Importar sin "
+                            "las filas con error» para cargar el resto."))
+            if avisos:
+                html += Markup(
+                    '<div class="alert alert-warning" role="alert"><b>%s</b>'
+                    "<ul>%s</ul></div>") % (
+                    w.env._("Revisa antes de importar:"),
+                    Markup("").join(Markup("<li>%s</li>") % a for a in avisos))
+            if not errores and not avisos:
+                html = Markup('<div class="alert alert-success" role="alert">%s</div>') \
+                    % w.env._("Revisión del archivo: sin problemas.")
+            w.revision = html
+
     @api.depends("linea_ids.campo", "datos", "fecha_reporte",
                  "fila_encabezado")
     def _compute_vista_previa(self):
@@ -418,12 +560,21 @@ class AtcInstalacionImport(models.TransientModel):
     # ------------------------------------------------------------------
     # Importación
     # ------------------------------------------------------------------
-    def _importar(self):
-        """Crea/actualiza las instalaciones y devuelve el resumen."""
+    def _importar(self, omitir_errores=False):
+        """Crea/actualiza las instalaciones y devuelve el resumen. Las filas
+        con error (ver _revisar) bloquean la importación salvo que se pida
+        omitirlas."""
         mapeo = self._mapeo()
         filas = self._filas(mapeo)
         if not filas:
             raise UserError(self.env._("No hay filas con cédula o nombre."))
+        con_error, avisos = self._revisar(mapeo, filas)
+        if con_error and not omitir_errores:
+            raise UserError(self.env._(
+                "El archivo tiene filas con error; corrígelo y vuelve a "
+                "cargarlo, o marca «Importar sin las filas con error».\n\n%s")
+                % "\n".join(self._errores_txt(con_error)))
+        filas = [(n, f) for n, f in filas if n not in con_error]
 
         Visita = self.env["atc.visita"]
         Contratista = self.env["atc.contratista"]
@@ -541,7 +692,7 @@ class AtcInstalacionImport(models.TransientModel):
 
         fuera = len(abiertas.filtered(lambda v: v.id not in vistas))
         lineas = [
-            self.env._("• Filas con datos: %s") % len(filas),
+            self.env._("• Filas con datos: %s") % (len(filas) + len(con_error)),
             self.env._("• Instalaciones creadas: %(n)s (con zona: %(z)s)",
                        n=len(creadas), z=con_zona),
             self.env._("• Actualizadas (contratista, servicio, teléfonos o "
@@ -572,10 +723,18 @@ class AtcInstalacionImport(models.TransientModel):
             lineas.append(self.env._(
                 "• Cédula repetida en el archivo (se usó la primera), "
                 "filas: %s") % ", ".join(map(str, repetidas)))
+        if con_error:
+            lineas.append(self.env._(
+                "• Filas con error en el archivo (NO importadas, corregir y "
+                "volver a cargar): %s") % len(con_error))
+            lineas += ["    %s" % e for e in self._errores_txt(con_error)]
         if errores:
             lineas.append(self.env._("• Filas con error (no importadas): %s")
                           % len(errores))
             lineas += ["    %s" % e for e in errores]
+        if avisos:
+            lineas.append(self.env._("• Avisos:"))
+            lineas += ["    %s" % a for a in avisos]
         return "\n".join(lineas)
 
     def _crear_en_lote(self, nuevas, errores):
@@ -647,7 +806,9 @@ class AtcInstalacionImport(models.TransientModel):
 
         try:
             with self.env.cr.savepoint():
-                resumen = self._importar()
+                # En la prueba se muestran las filas con error en el resumen
+                # en vez de cortar.
+                resumen = self._importar(omitir_errores=True)
                 raise _Simulacion()
         except _Simulacion:
             pass
@@ -658,7 +819,7 @@ class AtcInstalacionImport(models.TransientModel):
 
     def action_importar(self):
         self.ensure_one()
-        resumen = self._importar()
+        resumen = self._importar(omitir_errores=self.omitir_errores)
         self._recordar_mapeo()
         _logger.info("Import instalaciones: %s", resumen.replace("\n", " | "))
         self.write({"state": "done",
