@@ -632,7 +632,7 @@ class AtcInstalacionImport(models.TransientModel):
 
         actualizadas = sin_cambios = con_zona = 0
         vistas, errores, repetidas = set(), [], []
-        omitidas, reabiertas = [], []
+        omitidas, reabiertas, no_reabiertas, otro_contratista = [], [], [], []
         nuevas, cedulas_nuevas = [], set()   # [(nº fila, vals, teléfono)]
         for n, fila in filas:
             contratista = self._buscar_o_crear(
@@ -661,8 +661,14 @@ class AtcInstalacionImport(models.TransientModel):
                     if dato not in mapeo or not nuevo:
                         continue
                     actual = existente[campo]
-                    if (actual.id if hasattr(actual, "id") else actual) != nuevo:
-                        cambios[campo] = nuevo
+                    if (actual.id if hasattr(actual, "id") else actual) == nuevo:
+                        continue
+                    if campo == "contratista_id" and actual:
+                        # El contratista asignado en Odoo manda (ATC pudo
+                        # reasignarla y el sistema no estar al día)
+                        otro_contratista.append((n, existente, contratista))
+                        continue
+                    cambios[campo] = nuevo
                 if cambios:
                     existente.write(cambios)
                     actualizadas += 1
@@ -671,18 +677,27 @@ class AtcInstalacionImport(models.TransientModel):
                 continue
             cerrada = cerradas.get(cedula) if cedula else None
             if cerrada:
-                if cerrada.active and cerrada.estado == "no_realizada":
+                fecha_asig = self._fecha_asignacion(fila)
+                cierre = cerrada.fecha_no_realizada
+                reasignada = not cierre or fecha_asig > cierre.date()
+                if cerrada.active and cerrada.estado == "no_realizada" \
+                        and not reasignada:
+                    no_reabiertas.append((n, cerrada, fecha_asig))
+                elif cerrada.active and cerrada.estado == "no_realizada":
                     cambios = {campo: vals[campo]
                                for dato, campo in ACTUALIZABLES.items()
                                if dato in mapeo and vals[campo]}
                     cambios["estado"] = "asignada" if (
                         cambios.get("contratista_id") or cerrada.contratista_id
                         or cerrada.tecnico_asignado_ids) else "pendiente"
+                    cambios["fecha_asignacion"] = fecha_asig
                     cerrada.write(cambios)
                     cerrada.message_post(body=self.env._(
-                        "Reabierta al importar el reporte del %s: el cliente "
-                        "sigue pendiente de instalación.")
-                        % fields.Date.to_string(self.fecha_reporte))
+                        "Reabierta al importar el reporte del %(r)s: el cliente "
+                        "sigue pendiente de instalación y el reporte la asigna "
+                        "el %(a)s, después de marcarse no realizada.",
+                        r=fields.Date.to_string(self.fecha_reporte),
+                        a=fields.Date.to_string(fecha_asig)))
                     reabiertas.append(cerrada)
                 else:
                     omitidas.append((n, cerrada))
@@ -737,10 +752,36 @@ class AtcInstalacionImport(models.TransientModel):
             self.env._("• Instalaciones abiertas que NO vienen en este "
                        "archivo: %s") % fuera,
         ]
+        if otro_contratista:
+            lineas.append(self.env._(
+                "• Abiertas con otro contratista en el reporte (se mantiene el "
+                "de Odoo; revisar): %s") % len(otro_contratista))
+            lineas += [
+                "    " + self.env._(
+                    "Fila %(n)s: %(nombre)s (%(cedula)s) — Odoo: %(odoo)s; "
+                    "reporte: %(rep)s", n=n, nombre=v.nombre, cedula=v.cedula,
+                    odoo=v.contratista_id.name, rep=c.name)
+                for n, v, c in otro_contratista]
+        if no_reabiertas:
+            lineas.append(self.env._(
+                "• No realizadas que siguen en el reporte, NO reabiertas (el "
+                "reporte no las asigna después del cierre; el sistema puede no "
+                "estar al día): %s") % len(no_reabiertas))
+            lineas += [
+                "    " + self.env._(
+                    "Fila %(n)s: %(nombre)s (%(cedula)s) — no realizada el "
+                    "%(cierre)s por %(contratista)s: %(motivos)s; asignada en "
+                    "el reporte el %(asig)s", n=n, nombre=v.nombre,
+                    cedula=v.cedula,
+                    cierre=fields.Date.to_string(v.fecha_no_realizada.date()),
+                    contratista=v.contratista_id.name or "—",
+                    motivos=", ".join(v.motivo_no_realizada_ids.mapped("name")) or "—",
+                    asig=fields.Date.to_string(fecha))
+                for n, v, fecha in no_reabiertas]
         if reabiertas:
             lineas.append(self.env._(
-                "• No realizadas que siguen en el reporte, reabiertas: %s")
-                % len(reabiertas))
+                "• No realizadas reasignadas en el reporte después del cierre, "
+                "reabiertas: %s") % len(reabiertas))
             lineas += ["    %s (%s)" % (v.nombre, v.cedula) for v in reabiertas]
         if omitidas:
             lineas.append(self.env._(

@@ -108,6 +108,7 @@
                                options="{'color_field': 'color', 'no_create': True}"
                                invisible="estado != 'no_realizada' and not motivo_no_realizada_ids"
                                required="estado == 'no_realizada'"/>
+                        <field name="fecha_no_realizada" invisible="not fecha_no_realizada"/>
                     </group>
                     <separator string="Descripción"/>
                     <field name="descripcion" widget="html"

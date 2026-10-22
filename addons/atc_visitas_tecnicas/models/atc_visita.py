@@ -157,6 +157,11 @@ class AtcVisita(models.Model):
         tracking=True,
         help="Por qué no se pudo realizar la orden. Si eliges 'Otro', "
              "explícalo en las observaciones.")
+    fecha_no_realizada = fields.Datetime(
+        string="No realizada el", readonly=True, copy=False,
+        help="Cuándo se marcó como no realizada por última vez. Al importar "
+             "el reporte, la orden solo se reabre si allí aparece asignada "
+             "después de esta fecha.")
 
     def _compute_access_url(self):
         super()._compute_access_url()
@@ -415,6 +420,8 @@ class AtcVisita(models.Model):
             # Sale de garantía: queda el historial en el chatter
             vals = dict(vals, garantia_desde=False, garantia_motivo=False,
                         garantia_automatica=False)
+        if vals.get("estado") == "no_realizada":
+            vals = dict(vals, fecha_no_realizada=fields.Datetime.now())
         por_fechar = self.browse()
         if vals.get("estado") == "realizada" and "fecha_instalacion" not in vals:
             por_fechar = self.filtered(
