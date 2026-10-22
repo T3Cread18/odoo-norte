@@ -7,6 +7,8 @@ from .ubicacion import url_mapa
 # visitas) y estados que solo tienen sentido en visitas (se ocultan del de
 # instalaciones; 'en_los' lo añade noc_onu_los).
 ESTADOS_SOLO_INSTALACION = ("no_realizada",)
+# Obligatorios para cerrar una instalación como realizada
+CAMPOS_REALIZADA = ("serial_onu", "tecnico_contratista", "precinto")
 ESTADOS_SOLO_VISITA = ("en_los",)
 
 # Campos que el contratista puede actualizar desde el portal.
@@ -241,6 +243,20 @@ class AtcVisita(models.Model):
             if v.estado == "no_realizada" and not v.motivo_no_realizada_ids:
                 raise ValidationError(self.env._(
                     "Indica el motivo por el que la orden no se realizó."))
+
+    @api.constrains("estado", "serial_onu", "tecnico_contratista", "precinto")
+    def _check_datos_instalacion_realizada(self):
+        """Una instalación no se cierra como realizada sin serial de la ONU,
+        técnico que instala y precinto (portal, formulario y kanban)."""
+        for v in self:
+            if v.tipo_orden != "instalacion" or v.estado != "realizada":
+                continue
+            faltan = [v._fields[c].string for c in CAMPOS_REALIZADA
+                      if not (v[c] or "").strip()]
+            if faltan:
+                raise ValidationError(self.env._(
+                    "Para marcar la instalación como realizada falta: %(campos)s.",
+                    campos=", ".join(faltan)))
 
     # --------------------------------------------------------------
     # Autocompletado cliente <-> cédula / nombre

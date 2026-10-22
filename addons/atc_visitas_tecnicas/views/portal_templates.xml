@@ -136,6 +136,7 @@
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                         <fieldset t-att-disabled="None if puede_editar else 'disabled'">
                             <h5>Datos de la instalación</h5>
+                            <p t-if="puede_editar" class="small text-muted"><span class="text-danger">*</span> Obligatorio para marcar la instalación como realizada.</p>
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label class="form-label" for="fecha_programada">Fecha programada con el cliente</label>
@@ -146,15 +147,15 @@
                                     <input type="date" class="form-control" id="fecha_instalacion" name="fecha_instalacion" t-att-value="orden.fecha_instalacion"/>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="form-label" for="tecnico_contratista">Técnico que instala</label>
+                                    <label class="form-label" for="tecnico_contratista">Técnico que instala <span class="text-danger" title="Obligatorio para marcar instalada">*</span></label>
                                     <input type="text" class="form-control" id="tecnico_contratista" name="tecnico_contratista" t-att-value="orden.tecnico_contratista"/>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="form-label" for="serial_onu">Serial ONU / equipo</label>
+                                    <label class="form-label" for="serial_onu">Serial ONU / equipo <span class="text-danger" title="Obligatorio para marcar instalada">*</span></label>
                                     <input type="text" class="form-control" id="serial_onu" name="serial_onu" t-att-value="orden.serial_onu"/>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="form-label" for="precinto">Nº de precinto</label>
+                                    <label class="form-label" for="precinto">Nº de precinto <span class="text-danger" title="Obligatorio para marcar instalada">*</span></label>
                                     <input type="text" class="form-control" id="precinto" name="precinto" t-att-value="orden.precinto"/>
                                 </div>
                                 <div class="col-sm-6"/>
@@ -231,7 +232,7 @@
                                     <i class="fa fa-save me-1"/>Guardar avance
                                 </button>
                                 <button type="submit" name="accion" value="realizada" class="btn btn-success"
-                                        onclick="return confirm('¿Marcar la instalación como REALIZADA? Ya no podrás modificarla.');">
+                                        onclick="var f = this.form, falta = [['serial_onu', 'Serial ONU'], ['tecnico_contratista', 'Técnico que instala'], ['precinto', 'Nº de precinto']].filter(function (c) { return !f.elements[c[0]].value.trim(); }).map(function (c) { return c[1]; }); if (falta.length) { alert('Para marcar la instalación como realizada falta: ' + falta.join(', ') + '.'); return false; } return confirm('¿Marcar la instalación como REALIZADA? Ya no podrás modificarla.');">
                                     <i class="fa fa-check me-1"/>Marcar instalada
                                 </button>
                                 <button type="submit" name="accion" value="no_realizada" class="btn btn-outline-danger"
