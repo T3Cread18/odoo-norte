@@ -28,6 +28,11 @@
               parent="menu_atc_root" sequence="90"
               groups="group_menus_completos"/>
 
+    <menuitem id="menu_atc_franquicias" name="Franquicias (sedes)"
+              parent="menu_atc_config"
+              action="action_atc_franquicia" sequence="5"
+              groups="group_menus_completos"/>
+
     <menuitem id="menu_atc_zonas" name="Zonas"
               parent="menu_atc_config"
               action="action_atc_zona" sequence="10"

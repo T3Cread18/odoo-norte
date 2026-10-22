@@ -47,7 +47,9 @@
                             <field name="vehiculo_id" options="{'no_quick_create': True}"/>
                             <field name="tecnico_id" widget="many2one_avatar_user"/>
                             <field name="fecha"/>
-                            <field name="zona_id"/>
+                            <field name="franquicia_id" options="{'no_create': True}"/>
+                            <field name="zona_id"
+                                   domain="franquicia_id and ['|', ('franquicia_id', '=', False), ('franquicia_id', '=', franquicia_id)] or []"/>
                             <field name="vgt_id" options="{'no_create': True}"/>
                             <field name="vgt_zona_ids" invisible="not vgt_id"
                                    widget="many2many_tags" readonly="1"
@@ -152,6 +154,7 @@
                 <field name="cedula"/>
                 <field name="nombre"/>
                 <field name="cliente_id" optional="hide"/>
+                <field name="franquicia_id" optional="show"/>
                 <field name="zona_id"/>
                 <field name="vgt_id" optional="show"/>
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
@@ -179,6 +182,7 @@
                 <field name="tipo_orden"/>
                 <field name="nombre"/>
                 <field name="cedula"/>
+                <field name="franquicia_id"/>
                 <field name="zona_id"/>
                 <field name="vgt_id"/>
                 <field name="tag_ids"/>
@@ -193,6 +197,7 @@
                         <span class="badge text-bg-secondary float-end"><field name="tipo_orden"/></span>
                         <div class="fw-bold fs-6"><field name="nombre"/></div>
                         <div t-if="record.cedula.value" class="text-muted small">CI: <field name="cedula"/></div>
+                        <div t-if="record.franquicia_id.value" class="small"><i class="fa fa-building-o me-1" title="Franquicia"/><field name="franquicia_id"/></div>
                         <div t-if="record.zona_id.value" class="small"><i class="fa fa-map-marker me-1" title="Zona"/><field name="zona_id"/></div>
                         <div t-if="record.vgt_id.value" class="small"><i class="fa fa-file-text-o me-1" title="VGT"/><field name="vgt_id"/></div>
                         <div t-if="record.contratista_id.value" class="small"><i class="fa fa-briefcase me-1" title="Contratista"/><field name="contratista_id"/></div>
@@ -222,6 +227,7 @@
                 <field name="cedula"/>
                 <field name="nombre"/>
                 <field name="cliente_id"/>
+                <field name="franquicia_id"/>
                 <field name="zona_id"/>
                 <field name="vgt_id"/>
                 <field name="tecnico_asignado_ids"/>
@@ -256,6 +262,7 @@
                     <filter string="Contratista" name="g_contratista" context="{'group_by':'contratista_id'}"/>
                     <filter string="Tipo de servicio" name="g_tipo_servicio" context="{'group_by':'tipo_servicio_id'}"/>
                     <filter string="Motivo (no realizada)" name="g_motivo" context="{'group_by':'motivo_no_realizada_ids'}"/>
+                    <filter string="Franquicia" name="g_franquicia" context="{'group_by':'franquicia_id'}"/>
                     <filter string="Zona" name="g_zona" context="{'group_by':'zona_id'}"/>
                     <filter string="VGT" name="g_vgt" context="{'group_by':'vgt_id'}"/>
                     <filter string="Asignado a" name="g_asignado" context="{'group_by':'tecnico_asignado_ids'}"/>
@@ -298,6 +305,7 @@
                 <field name="nombre"/>
                 <field name="telefono_movil" optional="show"/>
                 <field name="telefono_fijo" optional="hide"/>
+                <field name="franquicia_id" optional="show"/>
                 <field name="zona_id" optional="show"/>
                 <field name="direccion" optional="show"/>
                 <field name="fecha_programada" optional="show"/>

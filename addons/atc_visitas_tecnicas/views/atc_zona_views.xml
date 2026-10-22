@@ -7,6 +7,7 @@
             <list string="Zonas">
                 <field name="name"/>
                 <field name="code"/>
+                <field name="franquicia_id"/>
                 <field name="vgt_count" string="N° VGT"/>
             </list>
         </field>
@@ -21,6 +22,7 @@
                     <group>
                         <field name="name"/>
                         <field name="code"/>
+                        <field name="franquicia_id"/>
                         <field name="active"/>
                     </group>
                     <group string="VGT / Proyectos autorizados de esta zona">

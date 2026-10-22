@@ -128,6 +128,7 @@
                                 <div class="col-12">
                                     <div class="small text-muted">Dirección</div>
                                     <div t-out="orden.direccion or '—'"/>
+                                    <div t-if="orden.franquicia_id" class="small text-muted">Franquicia: <t t-out="orden.franquicia_id.name"/></div>
                                     <div t-if="orden.zona_id" class="small text-muted">Zona: <t t-out="orden.zona_id.name"/></div>
                                 </div>
                                 <div t-if="orden.estado == 'no_realizada'" class="col-12">

@@ -41,3 +41,6 @@ access_atc_instalacion_import_staff,atc.instalacion.import.staff,model_atc_insta
 access_atc_instalacion_import_columna_atc,atc.instalacion.import.columna.atc,model_atc_instalacion_import_columna,group_atc_visitas_user,1,1,1,1
 access_atc_instalacion_import_columna_staff,atc.instalacion.import.columna.staff,model_atc_instalacion_import_columna,group_menus_completos,1,1,1,1
 access_atc_visita_portal,atc.visita.portal,model_atc_visita,base.group_portal,1,0,0,0
+access_atc_franquicia_user,atc.franquicia.user,model_atc_franquicia,base.group_user,1,0,0,0
+access_atc_franquicia_atc,atc.franquicia.atc,model_atc_franquicia,group_atc_visitas_user,1,1,1,0
+access_atc_franquicia_manager,atc.franquicia.manager,model_atc_franquicia,base.group_system,1,1,1,1

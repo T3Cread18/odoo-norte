@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Franquicias que trae el reporte del sistema (columna FRANQUICIA) -->
+    <data noupdate="1">
+        <record id="franquicia_acarigua" model="atc.franquicia">
+            <field name="name">ACARIGUA</field>
+        </record>
+        <record id="franquicia_araure" model="atc.franquicia">
+            <field name="name">ARAURE</field>
+        </record>
+        <record id="franquicia_villa_araure" model="atc.franquicia">
+            <field name="name">VILLA ARAURE</field>
+        </record>
+    </data>
+</odoo>

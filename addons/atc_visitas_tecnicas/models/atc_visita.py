@@ -44,6 +44,12 @@ class AtcVisita(models.Model):
     nombre = fields.Char(string="Nombre del cliente", tracking=True)
     cliente_id = fields.Many2one(
         "res.partner", string="Cliente ISP", index=True, tracking=True)
+    franquicia_id = fields.Many2one(
+        "atc.franquicia", string="Franquicia", index=True, tracking=True,
+        compute="_compute_franquicia_id", store=True, readonly=False,
+        precompute=True,
+        help="Franquicia (sede) de la orden. Si la zona pertenece a una "
+             "franquicia se toma de ahí; si no, viene del reporte importado.")
     zona_id = fields.Many2one(
         "atc.zona", string="Zona", index=True, tracking=True)
     vgt_id = fields.Many2one(
@@ -244,6 +250,12 @@ class AtcVisita(models.Model):
             etiqueta = "Instalación" if v.tipo_orden == "instalacion" else "Visita"
             base = v.nombre or (v.cliente_id.name if v.cliente_id else etiqueta)
             v.name = "%s — %s" % (base, v.fecha) if v.fecha else base
+
+    @api.depends("zona_id")
+    def _compute_franquicia_id(self):
+        # Una zona sin franquicia no borra la que ya tiene la orden
+        for v in self:
+            v.franquicia_id = v.zona_id.franquicia_id or v.franquicia_id
 
     @api.onchange("vgt_id")
     def _onchange_vgt_id(self):
