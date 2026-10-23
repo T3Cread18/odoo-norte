@@ -30,6 +30,8 @@ CAMPOS = [
     ("zona", "Zona"),
     ("antiguedad", "Antigüedad (días)"),
     ("fecha_asignacion", "Fecha de asignación"),
+    ("estatus", "Estatus de la orden (sistema)"),
+    ("fecha_finalizacion", "Fecha de finalización"),
 ]
 ETIQUETAS = dict(CAMPOS)
 OBLIGATORIOS = ("cedula", "nombre")
@@ -53,6 +55,8 @@ ALIAS = {
     # prefiere SECTOR; si no coincide con una zona, se busca en la dirección
     "zona": ["SECTOR", "ZONA"],
     "fecha_asignacion": ["FECHA ASIGNACION", "FECHA DE ASIGNACION"],
+    "estatus": ["ESTATUS ORDEN SERVICIO", "ESTATUS ORDEN", "ESTATUS"],
+    "fecha_finalizacion": ["FECHA FINALIZACION", "FECHA DE FINALIZACION"],
 }
 PARAM_MAPEO = "atc_visitas_tecnicas.import_instalaciones_mapeo"
 # Campo de la orden que actualiza cada dato del archivo cuando la orden ya
@@ -132,6 +136,17 @@ def normalizar_telefono(val):
     if len(digitos) == 10 and not digitos.startswith("0"):
         digitos = "0" + digitos
     return digitos
+
+
+def estatus_origen(val):
+    """Estatus de la orden en el sistema de origen: 'finalizada',
+    'cancelada' o 'abierta' (POR ACTIVAR, PENDIENTE, ASIGNADA, vacío...)."""
+    txt = _norm(val)
+    if txt.startswith("FINALIZ"):
+        return "finalizada"
+    if txt.startswith(("CANCEL", "ANUL")):
+        return "cancelada"
+    return "abierta"
 
 
 def leer_fecha(val):
@@ -397,6 +412,8 @@ class AtcInstalacionImport(models.TransientModel):
                 "direccion": _limpiar(get("direccion")),
                 "franquicia": _limpiar(get("franquicia")),
                 "zona": _limpiar(get("zona")),
+                "estatus": estatus_origen(get("estatus")),
+                "fecha_finalizacion": leer_fecha(get("fecha_finalizacion")),
             }))
         return res
 
@@ -658,8 +675,25 @@ class AtcInstalacionImport(models.TransientModel):
         actualizadas = sin_cambios = con_zona = 0
         vistas, errores, repetidas = set(), [], []
         omitidas, reabiertas, no_reabiertas, otro_contratista = [], [], [], []
-        nuevas, cedulas_nuevas = [], set()   # [(nº fila, vals, teléfono)]
+        # Export completo (con ESTATUS): finalizadas ya cerradas en Odoo,
+        # canceladas que no se importan y estatus que no cuadran con Odoo
+        ya_realizadas = canceladas = 0
+        discrepancias = []   # [(nº fila, orden, estatus en el sistema)]
+        nuevas, procesadas = [], set()   # [(nº fila, vals, teléfono)]
+        solo_canceladas = set()   # cédulas nuevas que solo trajeron canceladas
         for n, fila in filas:
+            cedula = fila["cedula"]
+            # Cédula repetida (export detallado: una fila por artículo; o el
+            # mismo cliente dos veces): solo cuenta la primera fila. Se
+            # comprueba antes de todo para que una repetida no cree un
+            # duplicado de una orden ya tratada.
+            if cedula and cedula in procesadas and not (
+                    cedula in solo_canceladas and fila["estatus"] != "cancelada"):
+                repetidas.append(n)
+                continue
+            if cedula:
+                procesadas.add(cedula)
+                solo_canceladas.discard(cedula)
             contratista = self._buscar_o_crear(
                 Contratista, fila["contratista"], cache_c)
             servicio = self._buscar_o_crear(
@@ -677,7 +711,6 @@ class AtcInstalacionImport(models.TransientModel):
                 "telefono_fijo": fila["telefono_fijo"],
                 "direccion": fila["direccion"] or False,
             }
-            cedula = fila["cedula"]
             existente = por_cedula.get(cedula) if cedula else None
             if existente:
                 vistas.add(existente.id)
@@ -697,6 +730,9 @@ class AtcInstalacionImport(models.TransientModel):
                         otro_contratista.append((n, existente, contratista))
                         continue
                     cambios[campo] = nuevo
+                if fila["estatus"] != "abierta":
+                    # No se cierra sola: el contratista o ATC deben cerrarla
+                    discrepancias.append((n, existente, fila["estatus"]))
                 if cambios:
                     existente.write(cambios)
                     actualizadas += 1
@@ -704,6 +740,18 @@ class AtcInstalacionImport(models.TransientModel):
                     sin_cambios += 1
                 continue
             cerrada = cerradas.get(cedula) if cedula else None
+            if cerrada and fila["estatus"] != "abierta":
+                # Cerrada en el sistema y en Odoo: no se reabre nunca
+                if vendedor and not cerrada.vendedor_id:
+                    cerrada.vendedor_id = vendedor
+                if fila["estatus"] == "cancelada":
+                    canceladas += 1
+                elif cerrada.active and cerrada.estado in ("realizada", "garantia"):
+                    ya_realizadas += 1
+                else:
+                    discrepancias.append((n, cerrada, fila["estatus"]))
+                del cerradas[cedula]
+                continue
             if cerrada:
                 fecha_asig = self._fecha_asignacion(fila)
                 cierre = cerrada.fecha_no_realizada
@@ -735,10 +783,13 @@ class AtcInstalacionImport(models.TransientModel):
                     cerrada.vendedor_id = vendedor
                 del cerradas[cedula]
                 continue
-            if cedula and cedula in cedulas_nuevas:
-                repetidas.append(n)
+            if fila["estatus"] == "cancelada":
+                # Nunca se instaló: no se crea; una fila posterior del mismo
+                # cliente (otra orden) sí puede crearla
+                canceladas += 1
+                if cedula:
+                    solo_canceladas.add(cedula)
                 continue
-            cedulas_nuevas.add(cedula)
 
             fecha_asig = self._fecha_asignacion(fila)
             zona = zonas_por_nombre.get(_norm(fila["zona"]), Zona) \
@@ -763,9 +814,24 @@ class AtcInstalacionImport(models.TransientModel):
                 "tecnico_id": False,
                 "estado": "asignada" if contratista else "pendiente",
             })
+            if fila["estatus"] == "finalizada":
+                # Historial: ya instalada en el sistema. Sin serial ni
+                # precinto (no vienen en el reporte); sin serial tampoco la
+                # vigila la garantía automática.
+                fecha_fin = fila["fecha_finalizacion"] or fecha_asig
+                vals.update({
+                    "estado": "realizada",
+                    "fecha_instalacion": fecha_fin,
+                    "descripcion": self.env._(
+                        "<p>Finalizada en el sistema el %(f)s; importada como "
+                        "realizada del reporte del %(r)s.</p>",
+                        f=fecha_fin.strftime("%d/%m/%Y"),
+                        r=self.fecha_reporte.strftime("%d/%m/%Y")),
+                })
             nuevas.append((n, vals, fila["telefono_movil"]))
 
         creadas = self._crear_en_lote(nuevas, errores)
+        n_realizadas = sum(o.estado == "realizada" for o, _t in creadas)
         for orden, telefono in creadas:
             partner = orden.cliente_id.sudo()
             if partner and not partner.phone and telefono:
@@ -776,6 +842,18 @@ class AtcInstalacionImport(models.TransientModel):
             self.env._("• Filas con datos: %s") % (len(filas) + len(con_error)),
             self.env._("• Instalaciones creadas: %(n)s (con zona: %(z)s)",
                        n=len(creadas), z=con_zona),
+        ]
+        if "estatus" in mapeo:
+            lineas += [
+                self.env._("    abiertas: %s") % (len(creadas) - n_realizadas),
+                self.env._("    como realizadas (finalizadas en el sistema): %s")
+                % n_realizadas,
+                self.env._("• Finalizadas en el sistema que ya están realizadas "
+                           "en Odoo: %s") % ya_realizadas,
+                self.env._("• Canceladas en el sistema (no se importan): %s")
+                % canceladas,
+            ]
+        lineas += [
             self.env._("• Actualizadas (contratista, vendedor, servicio, "
                        "teléfonos, dirección o franquicia): %s") % actualizadas,
             self.env._("• Sin cambios: %s") % sin_cambios,
@@ -785,6 +863,23 @@ class AtcInstalacionImport(models.TransientModel):
             self.env._("• Instalaciones abiertas que NO vienen en este "
                        "archivo: %s") % fuera,
         ]
+        if discrepancias:
+            etiquetas = {"finalizada": self.env._("FINALIZADA"),
+                         "cancelada": self.env._("CANCELADA")}
+            estados = dict(self.env["atc.visita"]._fields["estado"]
+                           ._description_selection(self.env))
+            lineas.append(self.env._(
+                "• Cerradas en el sistema pero no en Odoo (no se cambiaron; "
+                "revisar): %s") % len(discrepancias))
+            lineas += [
+                "    " + self.env._(
+                    "Fila %(n)s: %(nombre)s (%(cedula)s) — sistema: %(sis)s; "
+                    "Odoo: %(odoo)s (%(contratista)s)", n=n, nombre=v.nombre,
+                    cedula=v.cedula, sis=etiquetas[est],
+                    odoo=estados[v.estado] + (
+                        "" if v.active else self.env._(", archivada")),
+                    contratista=v.contratista_id.name or "—")
+                for n, v, est in discrepancias]
         if otro_contratista:
             lineas.append(self.env._(
                 "• Abiertas con otro contratista en el reporte (se mantiene el "
@@ -849,7 +944,9 @@ class AtcInstalacionImport(models.TransientModel):
     def _crear_en_lote(self, nuevas, errores):
         """Crea todas de una vez; si alguna falla, las crea una por una para
         saltar solo las filas con error."""
-        Visita = self.env["atc.visita"]
+        # atc_cierre_automatico: las finalizadas en el sistema entran como
+        # realizadas sin serial, técnico ni precinto
+        Visita = self.env["atc.visita"].with_context(atc_cierre_automatico=True)
         if not nuevas:
             return []
         try:
