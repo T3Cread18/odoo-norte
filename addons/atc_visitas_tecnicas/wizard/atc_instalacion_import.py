@@ -78,6 +78,9 @@ PALABRAS_DIRECCION = {
     "QTA", "QUINTA", "ESQUINA", "EDIF", "EDIFICIO", "RESIDENCIAS", "CONJUNTO",
     "MANZANA", "PARCELA", "KM", "CARRETERA", "CASERIO", "FRENTE", "DETRAS",
 }
+# Celdas que el sistema de origen llena cuando no hay dato (p. ej. TECNICO
+# "N/A" = aún sin contratista): se tratan como vacías.
+SIN_DATO = {"N/A", "NA", "N/D", "-", "--"}
 # Cédula ya normalizada: solo números, o RIF J/G
 CEDULA_VALIDA = re.compile(r"^(\d{5,9}|[JG]-\d{8}(-\d)?)$")
 
@@ -243,11 +246,16 @@ class AtcInstalacionImport(models.TransientModel):
         except UnicodeDecodeError:
             texto = data.decode("latin-1")
         try:
-            dialecto = csv.Sniffer().sniff(texto[:4096], delimiters=",;\t")
+            delimitador = csv.Sniffer().sniff(
+                texto[:4096], delimiters=",;\t").delimiter
         except csv.Error:
-            dialecto = csv.excel
+            # El Sniffer falla con filas largas o comas dentro de los campos
+            # (export del sistema, separado por ';'): el más frecuente en
+            # la primera línea
+            primera = texto.split("\n", 1)[0]
+            delimitador = max(",;\t", key=primera.count)
         return [[c if c != "" else None for c in fila]
-                for fila in csv.reader(io.StringIO(texto), dialecto)]
+                for fila in csv.reader(io.StringIO(texto), delimiter=delimitador)]
 
     # ------------------------------------------------------------------
     # Mapeo de columnas
@@ -368,7 +376,8 @@ class AtcInstalacionImport(models.TransientModel):
         for n, f in enumerate(cuerpo[:limite] if limite else cuerpo):
             def get(campo):
                 i = mapeo.get(campo)
-                return f[i] if i is not None and i < len(f) else None
+                val = f[i] if i is not None and i < len(f) else None
+                return None if _norm(val) in SIN_DATO else val
 
             cedula = normalizar_cedula(get("cedula")) if get("cedula") else ""
             nombre = _limpiar(get("nombre"))
