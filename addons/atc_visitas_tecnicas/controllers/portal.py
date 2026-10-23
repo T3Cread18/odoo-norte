@@ -6,6 +6,7 @@ from odoo.http import request
 
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
+from ..models.atc_vendedor import ESTADOS_EN_PROCESO
 from ..models.atc_visita import CAMPOS_PORTAL, ESTADOS_ABIERTOS_PORTAL
 from ..models.ubicacion import leer_ubicacion
 
@@ -25,8 +26,19 @@ PINES = {
 class AtcInstalacionPortal(CustomerPortal):
 
     def _instalaciones_domain(self):
-        # Las reglas de registro ya limitan al contratista del usuario.
-        return [("tipo_orden", "=", "instalacion")]
+        # Las reglas de portal dejan ver también las ventas del usuario
+        # (vendedor): aquí solo las de su contratista. El portal no lee
+        # atc.contratista, por eso se resuelve con sudo.
+        contratistas = request.env["atc.contratista"].sudo().search(
+            [("user_ids", "in", request.env.user.ids)])
+        return [("tipo_orden", "=", "instalacion"),
+                ("contratista_id", "in", contratistas.ids)]
+
+    def _ventas_domain(self):
+        vendedores = request.env["atc.vendedor"].sudo().search(
+            [("user_ids", "in", request.env.user.ids)])
+        return [("tipo_orden", "=", "instalacion"),
+                ("vendedor_id", "in", vendedores.ids)]
 
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
@@ -35,6 +47,12 @@ class AtcInstalacionPortal(CustomerPortal):
             values["instalacion_count"] = Visita.search_count(
                 self._instalaciones_domain()
                 + [("estado", "in", ESTADOS_ABIERTOS_PORTAL)]) \
+                if Visita.has_access("read") else 0
+        if "venta_count" in counters:
+            Visita = request.env["atc.visita"]
+            values["venta_count"] = Visita.search_count(
+                self._ventas_domain()
+                + [("estado", "in", ESTADOS_EN_PROCESO)]) \
                 if Visita.has_access("read") else 0
         return values
 
@@ -108,6 +126,10 @@ class AtcInstalacionPortal(CustomerPortal):
         orden_sudo = self._document_check_access("atc.visita", orden_id)
         if orden_sudo.tipo_orden != "instalacion":
             raise MissingError(request.env._("Esta orden no existe."))
+        # La regla de portal también deja leer al vendedor: editar (y ver
+        # la ficha del contratista) solo los usuarios del contratista.
+        if request.env.user not in orden_sudo.contratista_id.user_ids:
+            raise AccessError(request.env._("Esta orden no es de tu contratista."))
         return orden_sudo
 
     @http.route(["/my/instalaciones/<int:orden_id>"],
@@ -199,3 +221,89 @@ class AtcInstalacionPortal(CustomerPortal):
                 else request.env._("Revisa los valores numéricos y las fechas.")
             return request.redirect(url + "?error=%s" % quote(msg))
         return request.redirect(url + "?success=1")
+
+    # ------------------------------------------------------------------
+    # Ventas (vendedores): solo lectura
+    # ------------------------------------------------------------------
+    @http.route(["/my/ventas", "/my/ventas/page/<int:page>"],
+                type="http", auth="user", website=True)
+    def portal_my_ventas(self, page=1, sortby=None, filterby=None,
+                         search=None, search_in="todo", **kw):
+        Visita = request.env["atc.visita"]
+        _ = request.env._
+        searchbar_sortings = {
+            "recientes": {"label": _("Más recientes primero"),
+                          "order": "fecha_asignacion desc, id desc"},
+            "antiguedad": {"label": _("Más antiguas primero"),
+                           "order": "fecha_asignacion asc, id asc"},
+            "cliente": {"label": _("Cliente"), "order": "nombre asc, id asc"},
+        }
+        searchbar_filters = {
+            "todas": {"label": _("Todas"), "domain": []},
+            "en_proceso": {"label": _("En proceso"),
+                           "domain": [("estado", "in", ESTADOS_EN_PROCESO)]},
+            "instaladas": {"label": _("Instaladas"),
+                           "domain": [("estado", "in", ("realizada", "garantia"))]},
+            "no_instaladas": {"label": _("No se pudieron instalar"),
+                              "domain": [("estado", "=", "no_realizada")]},
+        }
+        searchbar_inputs = {
+            "todo": {"input": "todo", "label": _("Cliente, cédula o dirección")},
+        }
+        sortby = sortby if sortby in searchbar_sortings else "recientes"
+        filterby = filterby if filterby in searchbar_filters else "todas"
+
+        domain = self._ventas_domain() + searchbar_filters[filterby]["domain"]
+        if search:
+            domain += ["|", "|", ("nombre", "ilike", search),
+                       ("cedula", "ilike", search),
+                       ("direccion", "ilike", search)]
+
+        total = Visita.search_count(domain)
+        pager = portal_pager(
+            url="/my/ventas",
+            url_args={"sortby": sortby, "filterby": filterby,
+                      "search": search, "search_in": search_in},
+            total=total, page=page, step=PASO)
+        ventas = Visita.search(
+            domain, order=searchbar_sortings[sortby]["order"],
+            limit=PASO, offset=pager["offset"])
+        request.session["my_ventas_history"] = ventas.ids[:100]
+
+        values = self._prepare_portal_layout_values()
+        values.update({
+            "ventas": ventas.sudo(),
+            "page_name": "ventas",
+            "default_url": "/my/ventas",
+            "pager": pager,
+            "searchbar_sortings": searchbar_sortings,
+            "sortby": sortby,
+            "searchbar_filters": searchbar_filters,
+            "filterby": filterby,
+            "searchbar_inputs": searchbar_inputs,
+            "search_in": search_in,
+            "search": search,
+        })
+        return request.render("atc_visitas_tecnicas.portal_my_ventas", values)
+
+    @http.route(["/my/ventas/<int:orden_id>"],
+                type="http", auth="user", website=True)
+    def portal_my_venta(self, orden_id, **kw):
+        try:
+            orden_sudo = self._document_check_access("atc.visita", orden_id)
+            if orden_sudo.tipo_orden != "instalacion" \
+                    or request.env.user not in orden_sudo.vendedor_id.user_ids:
+                raise MissingError(request.env._("Esta venta no existe."))
+        except (AccessError, MissingError):
+            return request.redirect("/my/ventas")
+        values = self._prepare_portal_layout_values()
+        values.update({"orden": orden_sudo, "page_name": "venta"})
+        # Anterior / siguiente de la lista (access_url es la del contratista)
+        historial = request.session.get("my_ventas_history") or []
+        if orden_id in historial:
+            i = historial.index(orden_id)
+            if i > 0:
+                values["prev_record"] = "/my/ventas/%s" % historial[i - 1]
+            if i < len(historial) - 1:
+                values["next_record"] = "/my/ventas/%s" % historial[i + 1]
+        return request.render("atc_visitas_tecnicas.portal_my_venta", values)

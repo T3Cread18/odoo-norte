@@ -21,6 +21,7 @@ CAMPOS = [
     ("cedula", "Cédula / RIF"),
     ("nombre", "Nombre / razón social"),
     ("contratista", "Contratista"),
+    ("vendedor", "Vendedor"),
     ("tipo_servicio", "Tipo de servicio"),
     ("telefono_movil", "Teléfono móvil"),
     ("telefono_fijo", "Teléfono fijo"),
@@ -45,6 +46,7 @@ ALIAS = {
     "telefono_fijo": ["TLF FIJO", "TELEFONO FIJO", "FIJO"],
     "antiguedad": ["ANTIGUEDAD", "DIAS"],
     "contratista": ["TECNICO", "CONTRATISTA"],
+    "vendedor": ["VENDEDOR", "VENDEDORA", "ASESOR", "ASESOR DE VENTAS"],
     "direccion": ["REFERENCIA", "DIRECCION"],
     "franquicia": ["FRANQUICIA", "SEDE"],
     # En el export del sistema ZONA es la región (siempre ACARIGUA): se
@@ -58,6 +60,7 @@ PARAM_MAPEO = "atc_visitas_tecnicas.import_instalaciones_mapeo"
 ACTUALIZABLES = {
     "tipo_servicio": "tipo_servicio_id",
     "contratista": "contratista_id",
+    "vendedor": "vendedor_id",
     "telefono_movil": "telefono_movil",
     "telefono_fijo": "telefono_fijo",
     "direccion": "direccion",
@@ -381,6 +384,7 @@ class AtcInstalacionImport(models.TransientModel):
                 "antiguedad": int(antig.group()) if antig else None,
                 "fecha_asignacion": leer_fecha(get("fecha_asignacion")),
                 "contratista": _limpiar(get("contratista")),
+                "vendedor": _limpiar(get("vendedor")),
                 "direccion": _limpiar(get("direccion")),
                 "franquicia": _limpiar(get("franquicia")),
                 "zona": _limpiar(get("zona")),
@@ -408,9 +412,11 @@ class AtcInstalacionImport(models.TransientModel):
         existentes_s = {n.lower() for n in Servicio.search([]).mapped("name")}
         existentes_f = {n.lower() for n in self.env["atc.franquicia"].with_context(
             active_test=False).search([]).mapped("name")}
+        existentes_v = {n.lower() for n in self.env["atc.vendedor"].with_context(
+            active_test=False).search([]).mapped("name")}
 
         errores = {}
-        nuevos_c, nuevos_s, nuevas_f = {}, {}, {}
+        nuevos_c, nuevos_s, nuevas_f, nuevos_v = {}, {}, {}, {}
         sin_cedula, sin_contratista, telefonos, sin_antiguedad = [], [], [], []
         for n, f in filas:
             problemas = []
@@ -444,6 +450,9 @@ class AtcInstalacionImport(models.TransientModel):
             franquicia = f["franquicia"]
             if franquicia and franquicia.lower() not in existentes_f:
                 nuevas_f.setdefault(franquicia, []).append(n)
+            vendedor = f["vendedor"]
+            if vendedor and vendedor.lower() not in existentes_v:
+                nuevos_v.setdefault(vendedor, []).append(n)
             if not f["cedula"]:
                 sin_cedula.append(n)
             for tel in (f["telefono_movil"], f["telefono_fijo"]):
@@ -470,6 +479,12 @@ class AtcInstalacionImport(models.TransientModel):
             avisos.append(_("Franquicia nueva «%(s)s» (filas %(f)s): se creará; "
                             "revisa en Configuración → Franquicias qué zonas "
                             "atiende.", s=nombre, f=filas_txt(nums)))
+        if nuevos_v:
+            avisos.append(_(
+                "Vendedores nuevos (se crearán; no verán sus ventas en el "
+                "portal hasta que se les cree un usuario): %s.",
+                "; ".join("%s (%s)" % (v, len(nums))
+                          for v, nums in nuevos_v.items())))
         if sin_contratista:
             avisos.append(_("Sin contratista, quedarán pendientes de asignar: "
                             "filas %s.", filas_txt(sin_contratista)))
@@ -601,6 +616,7 @@ class AtcInstalacionImport(models.TransientModel):
 
         Visita = self.env["atc.visita"]
         Contratista = self.env["atc.contratista"]
+        Vendedor = self.env["atc.vendedor"]
         Servicio = self.env["atc.tipo.servicio"]
         Franquicia = self.env["atc.franquicia"]
         Zona = self.env["atc.zona"]
@@ -609,7 +625,7 @@ class AtcInstalacionImport(models.TransientModel):
              for z in Zona.search([])),
             key=lambda t: -len(t[0]))
         zonas_por_nombre = {_norm(z.name): z for _c, z in zonas}
-        cache_c, cache_s, cache_f = {}, {}, {}
+        cache_c, cache_s, cache_f, cache_v = {}, {}, {}, {}
 
         abiertas = Visita.search([("tipo_orden", "=", "instalacion"),
                                   ("estado", "in", ESTADOS_ABIERTOS)])
@@ -641,9 +657,12 @@ class AtcInstalacionImport(models.TransientModel):
                 Servicio, fila["tipo_servicio"], cache_s)
             franquicia = self._buscar_o_crear(
                 Franquicia, fila["franquicia"], cache_f)
+            vendedor = self._buscar_o_crear(
+                Vendedor, fila["vendedor"], cache_v)
             vals = {
                 "tipo_servicio_id": servicio.id,
                 "contratista_id": contratista.id,
+                "vendedor_id": vendedor.id,
                 "franquicia_id": franquicia.id,
                 "telefono_movil": fila["telefono_movil"],
                 "telefono_fijo": fila["telefono_fijo"],
@@ -701,6 +720,10 @@ class AtcInstalacionImport(models.TransientModel):
                     reabiertas.append(cerrada)
                 else:
                     omitidas.append((n, cerrada))
+                # Aunque no se toque, se completa el vendedor si no lo tenía
+                # (órdenes importadas antes de leer esa columna)
+                if vendedor and not cerrada.vendedor_id:
+                    cerrada.vendedor_id = vendedor
                 del cerradas[cedula]
                 continue
             if cedula and cedula in cedulas_nuevas:
@@ -744,11 +767,12 @@ class AtcInstalacionImport(models.TransientModel):
             self.env._("• Filas con datos: %s") % (len(filas) + len(con_error)),
             self.env._("• Instalaciones creadas: %(n)s (con zona: %(z)s)",
                        n=len(creadas), z=con_zona),
-            self.env._("• Actualizadas (contratista, servicio, teléfonos, "
-                       "dirección o franquicia): %s") % actualizadas,
+            self.env._("• Actualizadas (contratista, vendedor, servicio, "
+                       "teléfonos, dirección o franquicia): %s") % actualizadas,
             self.env._("• Sin cambios: %s") % sin_cambios,
             self.env._("• Contratistas en el archivo: %s") % len(cache_c),
             self.env._("• Franquicias en el archivo: %s") % len(cache_f),
+            self.env._("• Vendedores en el archivo: %s") % len(cache_v),
             self.env._("• Instalaciones abiertas que NO vienen en este "
                        "archivo: %s") % fuera,
         ]

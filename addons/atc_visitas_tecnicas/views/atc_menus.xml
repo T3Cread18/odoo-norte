@@ -19,6 +19,11 @@
               action="action_atc_contratista" sequence="22"
               groups="group_atc_visitas_user,group_menus_completos"/>
 
+    <menuitem id="menu_atc_vendedores" name="Vendedores"
+              parent="menu_atc_root"
+              action="action_atc_vendedor" sequence="23"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+
     <menuitem id="menu_atc_instalacion_import" name="Importar instalaciones (Excel)"
               parent="menu_atc_root"
               action="action_atc_instalacion_import" sequence="24"

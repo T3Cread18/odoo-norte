@@ -106,6 +106,10 @@ class AtcVisita(models.Model):
         "atc.contratista", string="Contratista", index=True, tracking=True,
         help="Contratista externo responsable de la instalación. Sus "
              "usuarios de portal la ven y la actualizan en /my/instalaciones.")
+    vendedor_id = fields.Many2one(
+        "atc.vendedor", string="Vendedor", index=True, tracking=True,
+        help="Vendedor que hizo la venta (columna VENDEDOR del reporte). Sus "
+             "usuarios de portal siguen el estado en /my/ventas.")
     tipo_servicio_id = fields.Many2one(
         "atc.tipo.servicio", string="Tipo de servicio", tracking=True)
     telefono_movil = fields.Char(string="Teléfono móvil")

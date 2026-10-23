@@ -44,3 +44,7 @@ access_atc_visita_portal,atc.visita.portal,model_atc_visita,base.group_portal,1,
 access_atc_franquicia_user,atc.franquicia.user,model_atc_franquicia,base.group_user,1,0,0,0
 access_atc_franquicia_atc,atc.franquicia.atc,model_atc_franquicia,group_atc_visitas_user,1,1,1,0
 access_atc_franquicia_manager,atc.franquicia.manager,model_atc_franquicia,base.group_system,1,1,1,1
+access_atc_vendedor_user,atc.vendedor.user,model_atc_vendedor,base.group_user,1,0,0,0
+access_atc_vendedor_atc,atc.vendedor.atc,model_atc_vendedor,group_atc_visitas_user,1,1,1,0
+access_atc_vendedor_staff,atc.vendedor.staff,model_atc_vendedor,group_menus_completos,1,1,1,0
+access_atc_vendedor_manager,atc.vendedor.manager,model_atc_vendedor,base.group_system,1,1,1,1

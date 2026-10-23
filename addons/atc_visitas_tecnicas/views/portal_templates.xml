@@ -269,4 +269,164 @@
             </div>
         </t>
     </template>
+
+    <!-- ============================================================
+         VENDEDORES: estado de sus ventas (solo lectura)
+         ============================================================ -->
+    <template id="portal_my_home_ventas" name="Ventas (vendedor)"
+              inherit_id="portal.portal_my_home" priority="41">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_alert_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_alert_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="bg_color" t-value="'alert alert-success align-items-center'"/>
+                <t t-set="placeholder_count" t-value="'venta_count'"/>
+                <t t-set="title">Mis ventas en proceso</t>
+                <t t-set="url" t-value="'/my/ventas'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
+        </div>
+    </template>
+
+    <template id="portal_breadcrumbs_ventas" name="Breadcrumbs ventas"
+              inherit_id="portal.portal_breadcrumbs" priority="41">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'ventas'" class="breadcrumb-item">Mis ventas</li>
+            <li t-if="page_name == 'venta'" class="breadcrumb-item">
+                <a href="/my/ventas">Mis ventas</a>
+            </li>
+            <li t-if="page_name == 'venta'" class="breadcrumb-item" t-out="orden.nombre"/>
+        </xpath>
+    </template>
+
+    <!-- Estado contado para el vendedor -->
+    <template id="venta_estado_badge" name="Estado de la venta">
+        <t t-set="estado_venta" t-value="{
+            'pendiente': ('Por asignar instalador', 'text-bg-warning'),
+            'asignada': ('Con el instalador', 'text-bg-info'),
+            'garantia': ('Instalada (en revisión)', 'text-bg-success'),
+            'realizada': ('Instalada', 'text-bg-success'),
+            'no_realizada': ('No se pudo instalar', 'text-bg-danger'),
+        }.get(orden.estado, (orden.estado, 'text-bg-light'))"/>
+        <span t-attf-class="badge rounded-pill #{estado_venta[1]}" t-out="estado_venta[0]"/>
+    </template>
+
+    <template id="portal_my_ventas" name="Mis ventas">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Mis ventas</t>
+            </t>
+            <div t-if="not ventas" class="alert alert-info">
+                No hay ventas en esta vista.
+            </div>
+            <t t-if="ventas" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Cliente</th>
+                        <th class="d-none d-md-table-cell">Servicio</th>
+                        <th class="d-none d-md-table-cell">Asignada el</th>
+                        <th class="d-none d-md-table-cell">Instalador</th>
+                        <th class="text-end">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="ventas" t-as="orden">
+                        <td>
+                            <a t-attf-href="/my/ventas/#{orden.id}" class="fw-bold" t-out="orden.nombre"/>
+                            <div class="small text-muted">CI <t t-out="orden.cedula"/></div>
+                            <div t-if="orden.estado == 'asignada' and orden.fecha_programada" class="small text-primary">
+                                <i class="fa fa-calendar me-1"/>Programada: <span t-field="orden.fecha_programada"/>
+                            </div>
+                            <div t-if="orden.estado in ('realizada', 'garantia') and orden.fecha_instalacion" class="small text-success">
+                                <i class="fa fa-check me-1"/>Instalada el <span t-field="orden.fecha_instalacion"/>
+                            </div>
+                            <div t-if="orden.estado == 'no_realizada' and orden.motivo_no_realizada_ids" class="small text-danger"
+                                 t-out="', '.join(orden.motivo_no_realizada_ids.mapped('name'))"/>
+                        </td>
+                        <td class="d-none d-md-table-cell" t-out="orden.tipo_servicio_id.name"/>
+                        <td class="d-none d-md-table-cell">
+                            <span t-field="orden.fecha_asignacion"/>
+                            <div t-if="orden.estado in ('pendiente', 'asignada')" class="small text-muted"><t t-out="orden.dias_pendiente"/> días</div>
+                        </td>
+                        <td class="d-none d-md-table-cell small" t-out="orden.contratista_id.name"/>
+                        <td class="text-end"><t t-call="atc_visitas_tecnicas.venta_estado_badge"/></td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_venta" name="Venta">
+        <t t-call="portal.portal_layout">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                        <h3 class="mb-0 me-auto" t-out="orden.nombre"/>
+                        <t t-call="atc_visitas_tecnicas.venta_estado_badge"/>
+                    </div>
+
+                    <div t-if="orden.estado == 'no_realizada'" class="alert alert-danger" role="alert">
+                        <h5 class="alert-heading"><i class="fa fa-times-circle me-1"/>No se pudo instalar</h5>
+                        <div t-if="orden.motivo_no_realizada_ids">
+                            <span t-foreach="orden.motivo_no_realizada_ids" t-as="motivo"
+                                  class="badge text-bg-danger me-1" t-out="motivo.name"/>
+                        </div>
+                        <div t-if="orden.observaciones_contratista" class="mt-2" style="white-space: pre-line;"
+                             t-out="orden.observaciones_contratista"/>
+                        <div t-if="orden.fecha_no_realizada" class="small mt-1">
+                            Marcada el <span t-field="orden.fecha_no_realizada" t-options="{'widget': 'date'}"/>.
+                        </div>
+                    </div>
+                    <div t-if="orden.estado == 'garantia'" class="alert alert-warning" role="alert">
+                        <i class="fa fa-shield me-1"/>El cliente ya está instalado; el instalador está revisando una falla dentro de la garantía.
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Cédula / RIF</div>
+                                    <div t-out="orden.cedula or '—'"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Tipo de servicio</div>
+                                    <div t-out="orden.tipo_servicio_id.name or '—'"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Asignada al instalador el</div>
+                                    <div>
+                                        <span t-field="orden.fecha_asignacion"/>
+                                        <t t-if="orden.fecha_asignacion and orden.estado in ('pendiente', 'asignada')"> (<t t-out="orden.dias_pendiente"/> días)</t>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Instalador</div>
+                                    <div t-out="orden.contratista_id.name or 'Sin asignar'"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Fecha programada con el cliente</div>
+                                    <div><span t-if="orden.fecha_programada" t-field="orden.fecha_programada"/><t t-else="">—</t></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="small text-muted">Fecha de instalación</div>
+                                    <div><span t-if="orden.fecha_instalacion" t-field="orden.fecha_instalacion"/><t t-else="">—</t></div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="small text-muted">Dirección</div>
+                                    <div t-out="orden.direccion or '—'"/>
+                                    <div t-if="orden.franquicia_id" class="small text-muted">Franquicia: <t t-out="orden.franquicia_id.name"/></div>
+                                    <div t-if="orden.zona_id" class="small text-muted">Zona: <t t-out="orden.zona_id.name"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="small text-muted">
+                        Esta página es solo de consulta. Si hay que corregir algo de la venta, comunícate con ATC.
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
 </odoo>

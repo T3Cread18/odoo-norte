@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- VENDEDORES -->
+    <record id="view_atc_vendedor_list" model="ir.ui.view">
+        <field name="name">atc.vendedor.list</field>
+        <field name="model">atc.vendedor</field>
+        <field name="arch" type="xml">
+            <list string="Vendedores">
+                <field name="name"/>
+                <field name="cedula" optional="hide"/>
+                <field name="telefono" optional="show"/>
+                <field name="user_ids" widget="many2many_tags" optional="show"/>
+                <field name="en_proceso_count"/>
+                <field name="realizadas_count"/>
+                <field name="no_realizadas_count"
+                       decoration-danger="no_realizadas_count &gt; 0"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_vendedor_form" model="ir.ui.view">
+        <field name="name">atc.vendedor.form</field>
+        <field name="model">atc.vendedor</field>
+        <field name="arch" type="xml">
+            <form string="Vendedor">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_ver_ventas" type="object"
+                                class="oe_stat_button" icon="fa-hourglass-half">
+                            <field name="en_proceso_count" widget="statinfo"
+                                   string="En proceso"/>
+                        </button>
+                        <button name="action_ver_ventas" type="object"
+                                class="oe_stat_button" icon="fa-check">
+                            <field name="realizadas_count" widget="statinfo"
+                                   string="Instaladas"/>
+                        </button>
+                        <button name="action_ver_ventas" type="object"
+                                class="oe_stat_button" icon="fa-times">
+                            <field name="no_realizadas_count" widget="statinfo"
+                                   string="No instaladas"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archivado" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nombre como viene en el reporte (columna VENDEDOR)"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="cedula"/>
+                            <field name="telefono"/>
+                            <field name="email"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group string="Acceso al portal">
+                            <field name="user_ids" widget="many2many_tags"
+                                   options="{'no_create': True}" nolabel="1" colspan="2"/>
+                            <div colspan="2" class="text-muted small">
+                                Usuarios de portal que entran a /my/ventas y ven,
+                                sin poder editar, el estado de las ventas de este vendedor.
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_atc_vendedor" model="ir.actions.act_window">
+        <field name="name">Vendedores</field>
+        <field name="res_model">atc.vendedor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

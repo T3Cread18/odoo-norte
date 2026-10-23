@@ -2,6 +2,7 @@ from . import atc_franquicia
 from . import atc_zona
 from . import atc_vgt
 from . import atc_contratista
+from . import atc_vendedor
 from . import atc_visita_tag
 from . import atc_motivo_no_realizada
 from . import res_partner

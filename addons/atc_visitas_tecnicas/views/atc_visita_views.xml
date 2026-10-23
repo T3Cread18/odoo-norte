@@ -63,6 +63,7 @@
                     <group invisible="tipo_orden != 'instalacion'">
                         <group string="Instalación">
                             <field name="contratista_id"/>
+                            <field name="vendedor_id"/>
                             <field name="tipo_servicio_id"/>
                             <field name="telefono_movil" widget="phone"/>
                             <field name="telefono_fijo" widget="phone"/>
@@ -235,6 +236,7 @@
                 <field name="vehiculo_id"/>
                 <field name="tecnico_id"/>
                 <field name="contratista_id"/>
+                <field name="vendedor_id"/>
                 <field name="tipo_servicio_id"/>
                 <field name="precinto"/>
                 <field name="motivo_no_realizada_ids"/>
@@ -261,6 +263,7 @@
                     <filter string="Tipo de orden" name="g_tipo" context="{'group_by':'tipo_orden'}"/>
                     <filter string="Estado" name="g_estado" context="{'group_by':'estado'}"/>
                     <filter string="Contratista" name="g_contratista" context="{'group_by':'contratista_id'}"/>
+                    <filter string="Vendedor" name="g_vendedor" context="{'group_by':'vendedor_id'}"/>
                     <filter string="Tipo de servicio" name="g_tipo_servicio" context="{'group_by':'tipo_servicio_id'}"/>
                     <filter string="Motivo (no realizada)" name="g_motivo" context="{'group_by':'motivo_no_realizada_ids'}"/>
                     <filter string="Franquicia" name="g_franquicia" context="{'group_by':'franquicia_id'}"/>
@@ -301,6 +304,7 @@
                 <field name="fecha_asignacion"/>
                 <field name="dias_pendiente" string="Días"/>
                 <field name="contratista_id"/>
+                <field name="vendedor_id" optional="show"/>
                 <field name="tipo_servicio_id" optional="show"/>
                 <field name="cedula"/>
                 <field name="nombre"/>

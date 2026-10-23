@@ -13,4 +13,19 @@
         <field name="perm_create" eval="True"/>
         <field name="perm_unlink" eval="True"/>
     </record>
+
+    <!-- Vendedores (usuarios de portal): solo leen las instalaciones que
+         vendieron, en /my/ventas. Las reglas de portal se combinan con OR:
+         por eso las rutas del contratista comprueban además que el usuario
+         sea del contratista de la orden (controllers/portal.py). -->
+    <record id="rule_atc_visita_portal_vendedor" model="ir.rule">
+        <field name="name">Instalaciones: solo las vendidas por el vendedor del usuario (portal)</field>
+        <field name="model_id" ref="model_atc_visita"/>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="domain_force">[('tipo_orden', '=', 'instalacion'), ('vendedor_id.user_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
 </odoo>
