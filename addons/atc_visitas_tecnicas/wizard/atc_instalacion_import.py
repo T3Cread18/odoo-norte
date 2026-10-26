@@ -611,6 +611,15 @@ class AtcInstalacionImport(models.TransientModel):
             cache[clave] = rec
         return cache[clave]
 
+    def _buscar_franquicia(self, name, cache):
+        # Siempre una franquicia hija (el padre ACARIGUA se llama igual que una hija)
+        if not name:
+            return self.env["atc.franquicia"]
+        clave = _norm(name)
+        if clave not in cache:
+            cache[clave] = self.env["atc.franquicia"]._buscar_hija(name)
+        return cache[clave]
+
     def _zona_por_direccion(self, direccion, zonas):
         """Primera zona cuyo nombre aparece como palabra completa en la
         dirección; se prueban primero los nombres más largos para que
@@ -644,7 +653,6 @@ class AtcInstalacionImport(models.TransientModel):
         Contratista = self.env["atc.contratista"]
         Vendedor = self.env["atc.vendedor"]
         Servicio = self.env["atc.tipo.servicio"]
-        Franquicia = self.env["atc.franquicia"]
         Zona = self.env["atc.zona"]
         zonas = sorted(
             ((re.sub(r"[^A-Z0-9]+", " ", _norm(z.name)).strip(), z)
@@ -698,8 +706,7 @@ class AtcInstalacionImport(models.TransientModel):
                 Contratista, fila["contratista"], cache_c)
             servicio = self._buscar_o_crear(
                 Servicio, fila["tipo_servicio"], cache_s)
-            franquicia = self._buscar_o_crear(
-                Franquicia, fila["franquicia"], cache_f)
+            franquicia = self._buscar_franquicia(fila["franquicia"], cache_f)
             vendedor = self._buscar_o_crear(
                 Vendedor, fila["vendedor"], cache_v)
             vals = {

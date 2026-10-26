@@ -38,6 +38,11 @@
               action="action_atc_franquicia" sequence="5"
               groups="group_menus_completos"/>
 
+    <menuitem id="menu_atc_cliente_franquicia" name="Franquicia por cliente"
+              parent="menu_atc_config"
+              action="action_atc_cliente_franquicia" sequence="7"
+              groups="group_menus_completos"/>
+
     <menuitem id="menu_atc_zonas" name="Zonas"
               parent="menu_atc_config"
               action="action_atc_zona" sequence="10"

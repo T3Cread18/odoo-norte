@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Usuarios ATC limitados a sus franquicias (res.users.atc_franquicia_ids).
-         Vacío = ven todas. Las reglas de grupo se combinan con OR: un usuario que
-         además sea NOC Responsable ve todas, y noc_onu_los añade las órdenes En LOS
-         de sus OLTs (llegan sin franquicia). -->
+    <!-- Usuarios ATC / NOC Usuario limitados a sus franquicias (res.users.atc_franquicia_ids;
+         un padre incluye sus hijas). Vacío = ven todas. Las reglas de grupo se combinan con
+         OR: un usuario que además sea NOC Responsable ve todas, y noc_onu_los añade las
+         órdenes LOS "por definir" (sin franquicia) de las OLTs de sus franquicias. -->
     <record id="rule_atc_visita_franquicia_user" model="ir.rule">
         <field name="name">Órdenes ATC: solo de las franquicias del usuario</field>
         <field name="model_id" ref="model_atc_visita"/>
-        <field name="groups" eval="[(4, ref('group_atc_visitas_user'))]"/>
-        <field name="domain_force">[('franquicia_id', 'in', user.atc_franquicia_ids.ids)] if user.atc_franquicia_ids else [(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_atc_visitas_user')), (4, ref('noc_guardias.group_noc_user'))]"/>
+        <field name="domain_force">[('franquicia_id', 'in', user.atc_franquicia_todas_ids.ids)] if user.atc_franquicia_ids else [(1, '=', 1)]</field>
     </record>
 </odoo>

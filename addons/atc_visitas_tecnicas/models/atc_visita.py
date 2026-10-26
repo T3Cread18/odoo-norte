@@ -396,10 +396,49 @@ class AtcVisita(models.Model):
         if not vals.get("cedula") and partner.cedula:
             vals["cedula"] = partner.cedula
 
+    @api.model
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        # Usuario limitado a una sola franquicia: la orden nueva es de esa
+        if "franquicia_id" in fields_list and not res.get("franquicia_id"):
+            hojas = self.env.user.atc_franquicia_todas_ids.filtered(lambda f: not f.child_ids)
+            if len(hojas) == 1:
+                res["franquicia_id"] = hojas.id
+        return res
+
+    @api.model
+    def _sin_franquicia_visible(self, vals):
+        """¿La orden sin franquicia la verán los usuarios limitados por franquicia?
+        noc_onu_los: sí, si se conoce la OLT del cliente (queda por definir)."""
+        return False
+
+    def _aprender_franquicia_cliente(self):
+        Cliente = self.env["atc.cliente.franquicia"]
+        for v in self:
+            if v.cedula and v.franquicia_id and not v.franquicia_id.child_ids:
+                Cliente._aprender(v.cedula, v.franquicia_id, v.nombre)
+
     @api.model_create_multi
     def create(self, vals_list):
+        Cliente = self.env["atc.cliente.franquicia"]
         for vals in vals_list:
             self._resolve_partner(vals)
+            # Sin franquicia: la del cliente según TotalNet (por cédula)
+            if not vals.get("franquicia_id") and vals.get("cedula"):
+                franquicia = Cliente._franquicia_de(vals["cedula"])
+                if franquicia:
+                    vals["franquicia_id"] = franquicia.id
+            # Un usuario limitado por franquicia no podría ver una orden sin ella:
+            # se le pide en vez de dar un error de acceso al guardar
+            user = self.env.user
+            if not vals.get("franquicia_id") and not self.env.su and user.atc_franquicia_ids \
+                    and not user.has_group("noc_guardias.group_noc_manager") \
+                    and not self._sin_franquicia_visible(vals):
+                raise UserError(self.env._(
+                    "Indica la franquicia de la orden (%s): el cliente no tiene "
+                    "franquicia conocida.",
+                    ", ".join(user.atc_franquicia_todas_ids.filtered(
+                        lambda f: not f.child_ids).mapped("name"))))
             # Entregar la orden a un contratista la deja asignada.
             if vals.get("contratista_id") \
                     and vals.get("estado", "pendiente") == "pendiente":
@@ -408,6 +447,7 @@ class AtcVisita(models.Model):
                                 fields.Date.context_today(self))
         visitas = super().create(vals_list)
         visitas._autoenlazar_vgt_zona()
+        visitas._aprender_franquicia_cliente()
         return visitas
 
     def write(self, vals):
@@ -432,6 +472,8 @@ class AtcVisita(models.Model):
                 lambda v: v.tipo_orden == "instalacion"
                 and not v.fecha_instalacion)
         res = super().write(vals)
+        if vals.get("franquicia_id") or (vals.get("cedula") and "franquicia_id" not in vals):
+            self._aprender_franquicia_cliente()
         if por_asignar:
             sin_fecha = por_asignar.filtered(lambda v: not v.fecha_asignacion)
             super(AtcVisita, por_asignar).write({"estado": "asignada"})

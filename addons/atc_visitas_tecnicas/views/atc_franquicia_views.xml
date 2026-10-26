@@ -5,7 +5,8 @@
         <field name="model">atc.franquicia</field>
         <field name="arch" type="xml">
             <list string="Franquicias">
-                <field name="name"/>
+                <field name="display_name" string="Franquicia"/>
+                <field name="parent_id"/>
                 <field name="code"/>
                 <field name="zona_count"/>
             </list>
@@ -20,6 +21,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="parent_id" options="{'no_create': True}"/>
                         <field name="code"/>
                         <field name="active"/>
                     </group>
@@ -34,6 +36,44 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_atc_cliente_franquicia_list" model="ir.ui.view">
+        <field name="name">atc.cliente.franquicia.list</field>
+        <field name="model">atc.cliente.franquicia</field>
+        <field name="arch" type="xml">
+            <list string="Franquicia por cliente" editable="top">
+                <field name="cedula"/>
+                <field name="nombre"/>
+                <field name="franquicia_id" options="{'no_create': True}" domain="[('child_ids', '=', False)]"/>
+                <field name="origen" readonly="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_cliente_franquicia_search" model="ir.ui.view">
+        <field name="name">atc.cliente.franquicia.search</field>
+        <field name="model">atc.cliente.franquicia</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="cedula"/>
+                <field name="nombre"/>
+                <field name="franquicia_id"/>
+                <filter string="Franquicia" name="g_franquicia" context="{'group_by': 'franquicia_id'}"/>
+                <filter string="Origen" name="g_origen" context="{'group_by': 'origen'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_atc_cliente_franquicia" model="ir.actions.act_window">
+        <field name="name">Franquicia por cliente</field>
+        <field name="res_model">atc.cliente.franquicia</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Sin clientes todavía</p>
+            <p>Se llena sola con las órdenes importadas de TotalNet. Para cargar todos los
+               clientes de una vez: Acciones → Importar, con las columnas cédula y franquicia.</p>
         </field>
     </record>
 

@@ -1,4 +1,5 @@
 from . import atc_franquicia
+from . import atc_cliente_franquicia
 from . import atc_zona
 from . import atc_vgt
 from . import atc_contratista

@@ -12,8 +12,9 @@
                                placeholder="Todas (sin restricción)"/>
                     </group>
                     <div class="text-muted">
-                        Con el rol ATC solo verá las órdenes de estas franquicias (y las En LOS de sus OLTs NOC).
-                        Vacío: ve todas.
+                        Con el rol ATC o NOC Usuario solo verá las órdenes de estas franquicias (un padre
+                        incluye todas sus hijas) y las caídas LOS por definir de las OLTs que las atienden.
+                        Vacío: ve todas. Con el rol NOC Responsable ve todas siempre.
                     </div>
                 </page>
             </xpath>
