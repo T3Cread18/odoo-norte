@@ -186,7 +186,7 @@
                                     <input type="number" min="0" step="1" class="form-control" id="metros_fibra" name="metros_fibra" t-att-value="orden.metros_fibra or ''"/>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="form-label" for="ubicacion_cliente">Ubicación del cliente</label>
+                                    <label class="form-label" for="ubicacion_cliente">Ubicación del cliente <span class="text-danger" title="Obligatorio para marcar instalada">*</span></label>
                                     <input type="text" class="form-control" id="ubicacion_cliente" name="ubicacion_cliente"
                                            placeholder="Pega el enlace de Google Maps o las coordenadas"
                                            t-att-value="'%.7f, %.7f' % (orden.cliente_latitud, orden.cliente_longitud) if orden.cliente_mapa_url else ''"/>
@@ -200,7 +200,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="form-label" for="ubicacion_nap">Ubicación de la caja NAP</label>
+                                    <label class="form-label" for="ubicacion_nap">Ubicación de la caja NAP <span class="text-danger" title="Obligatorio para marcar instalada">*</span></label>
                                     <input type="text" class="form-control" id="ubicacion_nap" name="ubicacion_nap"
                                            placeholder="Pega el enlace de Google Maps o las coordenadas"
                                            t-att-value="'%.7f, %.7f' % (orden.nap_latitud, orden.nap_longitud) if orden.nap_mapa_url else ''"/>

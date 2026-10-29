@@ -338,6 +338,28 @@ class AtcVisita(models.Model):
                     "Para marcar la instalación como realizada falta: %(campos)s.",
                     campos=", ".join(faltan)))
 
+    @api.constrains("estado", "cliente_latitud", "cliente_longitud",
+                    "nap_latitud", "nap_longitud")
+    def _check_ubicaciones_instalacion_realizada(self):
+        """Tampoco se cierra sin el pin del cliente y el de la caja NAP. Va
+        aparte del chequeo de serial/precinto para que corregir esos datos en
+        realizadas antiguas sin pin no lo dispare. Mismo bypass de cierre
+        automático (importación del reporte, cliente recuperado)."""
+        if self.env.context.get("atc_cierre_automatico"):
+            return
+        for v in self:
+            if v.tipo_orden != "instalacion" or v.estado != "realizada":
+                continue
+            faltan = []
+            if not (v.cliente_latitud or v.cliente_longitud):
+                faltan.append(self.env._("ubicación del cliente"))
+            if not (v.nap_latitud or v.nap_longitud):
+                faltan.append(self.env._("ubicación de la caja NAP"))
+            if faltan:
+                raise ValidationError(self.env._(
+                    "Para marcar la instalación como realizada falta: %(campos)s.",
+                    campos=", ".join(faltan)))
+
     # --------------------------------------------------------------
     # Autocompletado cliente <-> cédula / nombre
     # --------------------------------------------------------------
