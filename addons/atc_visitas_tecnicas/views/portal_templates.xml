@@ -246,7 +246,7 @@
                                     <i class="fa fa-check me-1"/>Garantía atendida
                                 </button>
                                 <button t-if="orden.estado != 'garantia'" type="submit" name="accion" value="realizada" class="btn btn-success"
-                                        onclick="var f = this.form, falta = [['serial_onu', 'Serial ONU'], ['tecnico_contratista', 'Técnico que instala'], ['precinto', 'Nº de precinto']].filter(function (c) { return !f.elements[c[0]].value.trim(); }).map(function (c) { return c[1]; }); if (falta.length) { alert('Para marcar la instalación como realizada falta: ' + falta.join(', ') + '.'); return false; } return confirm('¿Marcar la instalación como REALIZADA? Ya no podrás modificarla.');">
+                                        onclick="var f = this.form, falta = [['serial_onu', 'Serial ONU'], ['tecnico_contratista', 'Técnico que instala'], ['precinto', 'Nº de precinto'], ['ubicacion_cliente', 'Ubicación del cliente'], ['ubicacion_nap', 'Ubicación de la caja NAP']].filter(function (c) { return !f.elements[c[0]].value.trim(); }).map(function (c) { return c[1]; }); if (falta.length) { alert('Para marcar la instalación como realizada falta: ' + falta.join(', ') + '.'); return false; } return confirm('¿Marcar la instalación como REALIZADA? Ya no podrás modificarla.');">
                                     <i class="fa fa-check me-1"/>Marcar instalada
                                 </button>
                                 <button t-if="orden.estado != 'garantia'" type="submit" name="accion" value="no_realizada" class="btn btn-outline-danger"
