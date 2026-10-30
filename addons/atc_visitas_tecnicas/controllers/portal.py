@@ -68,6 +68,11 @@ class AtcInstalacionPortal(CustomerPortal):
             values["instalacion_mes_count"] = Visita.search_count(
                 self._instalaciones_domain() + self._realizadas_mes_domain()) \
                 if Visita.has_access("read") else 0
+        if "garantia_count" in counters:
+            Visita = request.env["atc.visita"]
+            values["garantia_count"] = Visita.search_count(
+                self._instalaciones_domain() + [("estado", "=", "garantia")]) \
+                if Visita.has_access("read") else 0
         if "venta_count" in counters:
             Visita = request.env["atc.visita"]
             values["venta_count"] = Visita.search_count(
@@ -132,6 +137,8 @@ class AtcInstalacionPortal(CustomerPortal):
             "realizadas_mes": Visita.search_count(
                 self._instalaciones_domain() + self._realizadas_mes_domain()),
             "mes_actual": self._nombre_mes_actual(),
+            "garantias": Visita.search_count(
+                self._instalaciones_domain() + [("estado", "=", "garantia")]),
             "instalaciones": instalaciones.sudo(),
             "page_name": "instalaciones",
             "default_url": "/my/instalaciones",

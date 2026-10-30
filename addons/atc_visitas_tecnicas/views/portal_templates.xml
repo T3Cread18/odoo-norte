@@ -21,6 +21,13 @@
                 <t t-set="url" t-value="'/my/instalaciones?filterby=realizadas_mes'"/>
                 <t t-set="show_count" t-value="True"/>
             </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="bg_color" t-value="'alert alert-danger align-items-center'"/>
+                <t t-set="placeholder_count" t-value="'garantia_count'"/>
+                <t t-set="title">Visitas por garantía</t>
+                <t t-set="url" t-value="'/my/instalaciones?filterby=garantia'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
         </div>
     </template>
 
@@ -50,14 +57,28 @@
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">Instalaciones</t>
             </t>
-            <a href="/my/instalaciones?filterby=realizadas_mes"
-               class="alert alert-success d-flex align-items-center justify-content-between text-decoration-none mt-3">
-                <span>
-                    <i class="fa fa-check-circle me-2"/>Instalaciones realizadas en
-                    <strong t-out="mes_actual"/>
-                </span>
-                <span class="fs-4 fw-bold" t-out="realizadas_mes"/>
-            </a>
+            <div class="row g-2 mt-3">
+                <div class="col-md-6">
+                    <a href="/my/instalaciones?filterby=realizadas_mes"
+                       class="alert alert-success d-flex align-items-center justify-content-between text-decoration-none h-100 mb-0">
+                        <span>
+                            <i class="fa fa-check-circle me-2"/>Instalaciones realizadas en
+                            <strong t-out="mes_actual"/>
+                        </span>
+                        <span class="fs-4 fw-bold" t-out="realizadas_mes"/>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="/my/instalaciones?filterby=garantia"
+                       t-attf-class="alert #{'alert-danger' if garantias else 'alert-light border'} d-flex align-items-center justify-content-between text-decoration-none h-100 mb-0">
+                        <span>
+                            <i class="fa fa-wrench me-2"/>Visitas por garantía pendientes
+                        </span>
+                        <span class="fs-4 fw-bold" t-out="garantias"/>
+                    </a>
+                </div>
+            </div>
+            <div class="mb-3"/>
             <div t-if="not instalaciones" class="alert alert-info">
                 No hay instalaciones en esta vista.
             </div>
@@ -81,6 +102,10 @@
                             </div>
                             <div t-if="orden.fecha_programada" class="small text-primary">
                                 <i class="fa fa-calendar me-1"/>Programada: <span t-field="orden.fecha_programada"/>
+                            </div>
+                            <div t-if="orden.estado == 'garantia'" class="small text-danger">
+                                <i class="fa fa-wrench me-1"/>Garantía<t t-if="orden.garantia_motivo">: <t t-out="orden.garantia_motivo"/></t>
+                                <t t-if="orden.garantia_desde"> · desde <span t-field="orden.garantia_desde" t-options="{'widget': 'date'}"/></t>
                             </div>
                         </td>
                         <td class="d-none d-md-table-cell" t-out="orden.tipo_servicio_id.name"/>
