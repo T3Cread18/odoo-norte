@@ -14,6 +14,13 @@
                 <t t-set="url" t-value="'/my/instalaciones'"/>
                 <t t-set="show_count" t-value="True"/>
             </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="bg_color" t-value="'alert alert-success align-items-center'"/>
+                <t t-set="placeholder_count" t-value="'instalacion_mes_count'"/>
+                <t t-set="title">Instalaciones realizadas este mes</t>
+                <t t-set="url" t-value="'/my/instalaciones?filterby=realizadas_mes'"/>
+                <t t-set="show_count" t-value="True"/>
+            </t>
         </div>
     </template>
 
@@ -43,6 +50,14 @@
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">Instalaciones</t>
             </t>
+            <a href="/my/instalaciones?filterby=realizadas_mes"
+               class="alert alert-success d-flex align-items-center justify-content-between text-decoration-none mt-3">
+                <span>
+                    <i class="fa fa-check-circle me-2"/>Instalaciones realizadas en
+                    <strong t-out="mes_actual"/>
+                </span>
+                <span class="fs-4 fw-bold" t-out="realizadas_mes"/>
+            </a>
             <div t-if="not instalaciones" class="alert alert-info">
                 No hay instalaciones en esta vista.
             </div>

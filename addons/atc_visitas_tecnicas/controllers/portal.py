@@ -1,6 +1,7 @@
 from urllib.parse import quote
 
 from odoo import fields, http
+from odoo.tools import date_utils
 from odoo.exceptions import AccessError, MissingError, ValidationError
 from odoo.http import request
 
@@ -21,6 +22,8 @@ PINES = {
     "ubicacion_cliente": ("cliente_latitud", "cliente_longitud", "del cliente"),
     "ubicacion_nap": ("nap_latitud", "nap_longitud", "de la caja NAP"),
 }
+MESES = ("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+         "agosto", "septiembre", "octubre", "noviembre", "diciembre")
 
 
 class AtcInstalacionPortal(CustomerPortal):
@@ -33,6 +36,18 @@ class AtcInstalacionPortal(CustomerPortal):
             [("user_ids", "in", request.env.user.ids)])
         return [("tipo_orden", "=", "instalacion"),
                 ("contratista_id", "in", contratistas.ids)]
+
+    def _realizadas_mes_domain(self):
+        """Instalaciones hechas en el mes en curso (por fecha de instalación).
+        Cuentan también las que están en garantía: se instalaron igual."""
+        hoy = fields.Date.context_today(request.env["atc.visita"])
+        return [("estado", "in", ("realizada", "garantia")),
+                ("fecha_instalacion", ">=", date_utils.start_of(hoy, "month")),
+                ("fecha_instalacion", "<=", date_utils.end_of(hoy, "month"))]
+
+    def _nombre_mes_actual(self):
+        hoy = fields.Date.context_today(request.env["atc.visita"])
+        return "%s %s" % (MESES[hoy.month - 1], hoy.year)
 
     def _ventas_domain(self):
         vendedores = request.env["atc.vendedor"].sudo().search(
@@ -47,6 +62,11 @@ class AtcInstalacionPortal(CustomerPortal):
             values["instalacion_count"] = Visita.search_count(
                 self._instalaciones_domain()
                 + [("estado", "in", ESTADOS_ABIERTOS_PORTAL)]) \
+                if Visita.has_access("read") else 0
+        if "instalacion_mes_count" in counters:
+            Visita = request.env["atc.visita"]
+            values["instalacion_mes_count"] = Visita.search_count(
+                self._instalaciones_domain() + self._realizadas_mes_domain()) \
                 if Visita.has_access("read") else 0
         if "venta_count" in counters:
             Visita = request.env["atc.visita"]
@@ -75,6 +95,8 @@ class AtcInstalacionPortal(CustomerPortal):
                          "domain": [("estado", "in", ESTADOS_ABIERTOS_PORTAL)]},
             "garantia": {"label": _("Visitas por garantía"),
                          "domain": [("estado", "=", "garantia")]},
+            "realizadas_mes": {"label": _("Realizadas este mes"),
+                               "domain": self._realizadas_mes_domain()},
             "realizadas": {"label": _("Realizadas"),
                            "domain": [("estado", "=", "realizada")]},
             "no_realizadas": {"label": _("No realizadas"),
@@ -107,6 +129,9 @@ class AtcInstalacionPortal(CustomerPortal):
 
         values = self._prepare_portal_layout_values()
         values.update({
+            "realizadas_mes": Visita.search_count(
+                self._instalaciones_domain() + self._realizadas_mes_domain()),
+            "mes_actual": self._nombre_mes_actual(),
             "instalaciones": instalaciones.sudo(),
             "page_name": "instalaciones",
             "default_url": "/my/instalaciones",
