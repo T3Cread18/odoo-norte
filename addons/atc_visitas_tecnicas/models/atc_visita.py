@@ -360,6 +360,23 @@ class AtcVisita(models.Model):
                     "Para marcar la instalación como realizada falta: %(campos)s.",
                     campos=", ".join(faltan)))
 
+    @api.constrains("cliente_latitud", "cliente_longitud",
+                    "nap_latitud", "nap_longitud")
+    def _check_pin_cliente_distinto_nap(self):
+        """El pin del cliente y el de la caja NAP no pueden ser el mismo punto
+        (señal de que se tomó uno y se copió en el otro). Solo salta al
+        escribir un pin: las órdenes antiguas con pines iguales se pueden
+        seguir editando mientras no se toquen los pines."""
+        for v in self:
+            if not (v.cliente_latitud or v.cliente_longitud) \
+                    or not (v.nap_latitud or v.nap_longitud):
+                continue
+            if round(v.cliente_latitud, 7) == round(v.nap_latitud, 7) \
+                    and round(v.cliente_longitud, 7) == round(v.nap_longitud, 7):
+                raise ValidationError(self.env._(
+                    "La ubicación del cliente y la de la caja NAP no pueden ser "
+                    "el mismo punto: toma cada pin en su sitio."))
+
     # --------------------------------------------------------------
     # Autocompletado cliente <-> cédula / nombre
     # --------------------------------------------------------------
