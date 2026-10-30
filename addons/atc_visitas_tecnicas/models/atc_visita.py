@@ -3,6 +3,7 @@ from datetime import timedelta
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
+from .atc_visita_garantia import formato_duracion
 from .ubicacion import url_mapa
 
 # Estados que solo tienen sentido en instalaciones (se ocultan del kanban de
@@ -86,6 +87,9 @@ class AtcVisita(models.Model):
         copy=False,
         help="La puso en garantía el sistema (ruptura de la ONU): se cierra "
              "sola si el cliente se recupera.")
+    garantia_tiempo = fields.Char(
+        string="Tiempo en garantía", compute="_compute_garantia_tiempo",
+        help="Cuánto lleva la orden en visita por garantía.")
     garantia_ids = fields.One2many(
         "atc.visita.garantia", "visita_id", string="Historial de garantías")
     tecnico_asignado_ids = fields.Many2many(
@@ -214,6 +218,14 @@ class AtcVisita(models.Model):
         for v in self:
             v.garantia_hasta = v.fecha_instalacion + timedelta(days=dias) \
                 if v.tipo_orden == "instalacion" and v.fecha_instalacion else False
+
+    @api.depends("estado", "garantia_desde")
+    def _compute_garantia_tiempo(self):
+        ahora = fields.Datetime.now()
+        for v in self:
+            v.garantia_tiempo = formato_duracion(
+                (ahora - v.garantia_desde).total_seconds()) \
+                if v.estado == "garantia" and v.garantia_desde else False
 
     @api.model
     def _dominio_en_garantia(self):

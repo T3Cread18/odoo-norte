@@ -27,6 +27,7 @@
                     <div class="alert alert-danger" role="alert" invisible="estado != 'garantia'">
                         <b>Visita por garantía</b> desde <field name="garantia_desde" readonly="1" class="d-inline"/>:
                         <field name="garantia_motivo" readonly="1" class="d-inline"/>
+                        <div>Lleva <b><field name="garantia_tiempo" class="d-inline"/></b> en garantía.</div>
                     </div>
                     <div class="oe_title">
                         <h1><field name="name" placeholder="Referencia (puedes editarla)"/></h1>
@@ -112,14 +113,15 @@
                         <field name="fecha_no_realizada" invisible="not fecha_no_realizada"/>
                     </group>
                     <separator string="Historial de garantías" invisible="not garantia_ids"/>
-                    <field name="garantia_ids" readonly="1" invisible="not garantia_ids">
+                    <field name="garantia_ids" readonly="1" invisible="not garantia_ids"
+                           context="{'form_view_ref': 'atc_visitas_tecnicas.view_atc_visita_garantia_form'}">
                         <list>
                             <field name="fecha_inicio"/>
                             <field name="motivo"/>
                             <field name="contratista_id" optional="hide"/>
                             <field name="fecha_cierre"/>
                             <field name="cerrada_por_id" widget="many2one_avatar_user"/>
-                            <field name="duracion_horas"/>
+                            <field name="tiempo_abierta"/>
                             <field name="resultado" widget="badge"
                                    decoration-danger="resultado == 'abierta'"
                                    decoration-success="resultado in ('atendida', 'recuperada')"/>

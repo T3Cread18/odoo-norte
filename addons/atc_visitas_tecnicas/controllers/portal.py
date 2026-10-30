@@ -192,6 +192,23 @@ class AtcInstalacionPortal(CustomerPortal):
         })
         return request.render("atc_visitas_tecnicas.portal_my_garantias", values)
 
+    @http.route(["/my/garantias/<int:garantia_id>"],
+                type="http", auth="user", website=True)
+    def portal_my_garantia(self, garantia_id, **kw):
+        contratistas = request.env["atc.contratista"].sudo().search(
+            [("user_ids", "in", request.env.user.ids)])
+        garantia = request.env["atc.visita.garantia"].sudo().browse(
+            garantia_id).exists()
+        if not garantia or garantia.contratista_id not in contratistas:
+            return request.redirect("/my/garantias")
+        values = self._prepare_portal_layout_values()
+        values.update({
+            "g": garantia,
+            "contratistas": contratistas,
+            "page_name": "garantia",
+        })
+        return request.render("atc_visitas_tecnicas.portal_my_garantia", values)
+
     def _instalacion_check(self, orden_id):
         orden_sudo = self._document_check_access("atc.visita", orden_id)
         if orden_sudo.tipo_orden != "instalacion":

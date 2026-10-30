@@ -43,6 +43,10 @@
                 <a href="/my/instalaciones">Instalaciones</a>
             </li>
             <li t-if="page_name == 'garantias'" class="breadcrumb-item">Historial de garantías</li>
+            <li t-if="page_name == 'garantia'" class="breadcrumb-item">
+                <a href="/my/garantias">Historial de garantías</a>
+            </li>
+            <li t-if="page_name == 'garantia'" class="breadcrumb-item" t-out="g.nombre"/>
         </xpath>
     </template>
 
@@ -111,7 +115,8 @@
                             </div>
                             <div t-if="orden.estado == 'garantia'" class="small text-danger">
                                 <i class="fa fa-wrench me-1"/>Garantía<t t-if="orden.garantia_motivo">: <t t-out="orden.garantia_motivo"/></t>
-                                <t t-if="orden.garantia_desde"> · desde <span t-field="orden.garantia_desde" t-options="{'widget': 'date'}"/></t>
+                                <t t-if="orden.garantia_desde"> · desde <span t-field="orden.garantia_desde" t-options="{'widget': 'date'}"/>
+                                    (hace <t t-out="orden.garantia_tiempo"/>)</t>
                             </div>
                         </td>
                         <td class="d-none d-md-table-cell" t-out="orden.tipo_servicio_id.name"/>
@@ -144,15 +149,14 @@
                         <th class="d-none d-md-table-cell">Motivo</th>
                         <th>Abierta el</th>
                         <th class="d-none d-md-table-cell">Cerrada el</th>
+                        <th>Tiempo</th>
                         <th class="text-end">Resultado</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr t-foreach="garantias" t-as="g">
                         <td>
-                            <a t-if="g.visita_id.contratista_id in contratistas"
-                               t-att-href="g.visita_id.access_url" class="fw-bold" t-out="g.nombre"/>
-                            <span t-else="" class="fw-bold" t-out="g.nombre"/>
+                            <a t-attf-href="/my/garantias/#{g.id}" class="fw-bold" t-out="g.nombre"/>
                             <div class="small text-muted">CI <t t-out="g.cedula"/></div>
                             <div class="small text-muted d-md-none" t-out="g.motivo"/>
                         </td>
@@ -160,9 +164,9 @@
                         <td class="small"><span t-field="g.fecha_inicio"/></td>
                         <td class="d-none d-md-table-cell small">
                             <span t-if="g.fecha_cierre" t-field="g.fecha_cierre"/>
-                            <div t-if="g.fecha_cierre" class="text-muted">
-                                <t t-out="'%.1f' % g.duracion_horas"/> h
-                            </div>
+                        </td>
+                        <td class="small">
+                            <span t-attf-class="#{'text-danger fw-bold' if g.resultado == 'abierta' else ''}" t-out="g.tiempo_abierta"/>
                         </td>
                         <td class="text-end">
                             <span t-attf-class="badge rounded-pill #{
@@ -173,6 +177,87 @@
                     </tr>
                 </tbody>
             </t>
+        </t>
+    </template>
+
+    <template id="portal_my_garantia" name="Visita por garantía">
+        <t t-call="portal.portal_layout">
+            <div class="card mt-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0"><i class="fa fa-shield me-2"/><t t-out="g.nombre"/></h4>
+                    <span t-attf-class="badge rounded-pill #{
+                        'text-bg-danger' if g.resultado == 'abierta' else
+                        'text-bg-success' if g.resultado in ('atendida', 'recuperada') else
+                        'text-bg-secondary'}" t-field="g.resultado"/>
+                </div>
+                <div class="card-body">
+                    <div t-attf-class="alert #{'alert-danger' if g.resultado == 'abierta' else 'alert-light border'}" role="status">
+                        <div class="fs-5">
+                            <t t-if="g.resultado == 'abierta'">Lleva <b t-out="g.tiempo_abierta"/> en garantía</t>
+                            <t t-else="">Estuvo <b t-out="g.tiempo_abierta"/> en garantía</t>
+                        </div>
+                        <div class="mt-1" t-out="g.motivo"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Garantía</h5>
+                            <dl class="row small">
+                                <dt class="col-5">Abierta el</dt><dd class="col-7"><span t-field="g.fecha_inicio"/></dd>
+                                <t t-if="g.fecha_cierre">
+                                    <dt class="col-5">Cerrada el</dt><dd class="col-7"><span t-field="g.fecha_cierre"/></dd>
+                                    <dt class="col-5">Cerrada por</dt><dd class="col-7" t-out="g.cerrada_por_id.name"/>
+                                </t>
+                                <dt class="col-5">Origen</dt>
+                                <dd class="col-7"><t t-if="g.automatica">Automática (ruptura de la ONU)</t><t t-else="">Manual (ATC)</t></dd>
+                                <dt class="col-5">Instalada el</dt><dd class="col-7"><span t-field="g.fecha_instalacion"/></dd>
+                                <dt class="col-5">Garantía hasta</dt>
+                                <dd class="col-7">
+                                    <span t-field="g.garantia_hasta"/>
+                                    <t t-if="g.garantia_hasta">
+                                        <span t-if="g.dias_restantes &gt;= 0" t-attf-class="badge #{'text-bg-warning' if g.dias_restantes &lt;= 5 else 'text-bg-light'}">
+                                            quedan <t t-out="g.dias_restantes"/> días
+                                        </span>
+                                        <span t-else="" class="badge text-bg-secondary">vencida</span>
+                                    </t>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Cliente</h5>
+                            <dl class="row small">
+                                <dt class="col-5">Cédula</dt><dd class="col-7" t-out="g.cedula"/>
+                                <dt class="col-5">Dirección</dt><dd class="col-7" t-out="g.direccion"/>
+                                <dt class="col-5">Teléfono</dt>
+                                <dd class="col-7">
+                                    <a t-if="g.telefono_movil" t-attf-href="tel:#{g.telefono_movil}" t-out="g.telefono_movil"/>
+                                    <t t-if="g.telefono_movil and g.telefono_fijo"> · </t>
+                                    <a t-if="g.telefono_fijo" t-attf-href="tel:#{g.telefono_fijo}" t-out="g.telefono_fijo"/>
+                                </dd>
+                                <dt class="col-5">Servicio</dt><dd class="col-7" t-out="g.tipo_servicio_id.name"/>
+                                <dt class="col-5">Ubicación</dt>
+                                <dd class="col-7">
+                                    <a t-if="g.cliente_mapa_url" t-att-href="g.cliente_mapa_url" target="_blank">Cliente</a>
+                                    <t t-if="g.cliente_mapa_url and g.nap_mapa_url"> · </t>
+                                    <a t-if="g.nap_mapa_url" t-att-href="g.nap_mapa_url" target="_blank">Caja NAP</a>
+                                </dd>
+                            </dl>
+                            <h5>Instalación</h5>
+                            <dl class="row small">
+                                <dt class="col-5">Técnico</dt><dd class="col-7" t-out="g.tecnico_contratista"/>
+                                <dt class="col-5">Serial ONU</dt><dd class="col-7" t-out="g.serial_onu"/>
+                                <dt class="col-5">Precinto</dt><dd class="col-7" t-out="g.precinto"/>
+                                <dt class="col-5">Potencia RX</dt><dd class="col-7"><t t-if="g.potencia_rx" t-out="'%.2f dBm' % g.potencia_rx"/></dd>
+                                <dt class="col-5">Caja / puerto NAP</dt>
+                                <dd class="col-7"><t t-out="g.caja_nap"/><t t-if="g.puerto_nap"> / <t t-out="g.puerto_nap"/></t></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <a t-if="g.visita_id.contratista_id in contratistas"
+                       t-att-href="g.visita_id.access_url" class="btn btn-primary">
+                        <i class="fa fa-external-link me-1"/>Abrir la instalación
+                    </a>
+                </div>
+            </div>
         </t>
     </template>
 
@@ -192,6 +277,7 @@
                     <div t-if="orden.estado == 'garantia'" class="alert alert-danger" role="alert">
                         <h5 class="alert-heading"><i class="fa fa-shield me-1"/>Visita por garantía</h5>
                         <div t-out="orden.garantia_motivo"/>
+                        <div t-if="orden.garantia_tiempo" class="mt-1">Lleva <b t-out="orden.garantia_tiempo"/> en garantía.</div>
                         <div class="small mt-1">
                             Instalada el <span t-field="orden.fecha_instalacion"/>; garantía hasta el <span t-field="orden.garantia_hasta"/>.
                             Revisa la instalación y, cuando quede resuelta, pulsa <b>Garantía atendida</b>.
