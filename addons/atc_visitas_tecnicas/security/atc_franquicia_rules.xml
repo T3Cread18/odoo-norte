@@ -10,4 +10,12 @@
         <field name="groups" eval="[(4, ref('group_atc_visitas_user')), (4, ref('noc_guardias.group_noc_user'))]"/>
         <field name="domain_force">[('franquicia_id', 'in', user.atc_franquicia_todas_ids.ids)] if user.atc_franquicia_ids else [(1, '=', 1)]</field>
     </record>
+
+    <!-- Historial de garantías: se ve lo mismo que de las órdenes (el 'any'
+         aplica las reglas de atc.visita: franquicias, LOS por definir...). -->
+    <record id="rule_atc_visita_garantia_visible" model="ir.rule">
+        <field name="name">Historial de garantías: solo de órdenes visibles</field>
+        <field name="model_id" ref="model_atc_visita_garantia"/>
+        <field name="domain_force">[('visita_id', 'any', [])]</field>
+    </record>
 </odoo>

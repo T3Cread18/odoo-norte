@@ -39,6 +39,10 @@
                 <a href="/my/instalaciones">Instalaciones</a>
             </li>
             <li t-if="page_name == 'instalacion'" class="breadcrumb-item" t-out="orden.nombre"/>
+            <li t-if="page_name == 'garantias'" class="breadcrumb-item">
+                <a href="/my/instalaciones">Instalaciones</a>
+            </li>
+            <li t-if="page_name == 'garantias'" class="breadcrumb-item">Historial de garantías</li>
         </xpath>
     </template>
 
@@ -59,7 +63,7 @@
             </t>
             <div class="row g-2 mt-3">
                 <div class="col-md-6">
-                    <a href="/my/instalaciones?filterby=realizadas_mes"
+                    <a href="/my/instalaciones?filterby=realizadas_mes" role="status"
                        class="alert alert-success d-flex align-items-center justify-content-between text-decoration-none h-100 mb-0">
                         <span>
                             <i class="fa fa-check-circle me-2"/>Instalaciones realizadas en
@@ -69,7 +73,7 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="/my/instalaciones?filterby=garantia"
+                    <a href="/my/instalaciones?filterby=garantia" role="status"
                        t-attf-class="alert #{'alert-danger' if garantias else 'alert-light border'} d-flex align-items-center justify-content-between text-decoration-none h-100 mb-0">
                         <span>
                             <i class="fa fa-wrench me-2"/>Visitas por garantía pendientes
@@ -78,7 +82,9 @@
                     </a>
                 </div>
             </div>
-            <div class="mb-3"/>
+            <div class="text-end small mt-1 mb-3">
+                <a href="/my/garantias"><i class="fa fa-history me-1"/>Ver historial de garantías</a>
+            </div>
             <div t-if="not instalaciones" class="alert alert-info">
                 No hay instalaciones en esta vista.
             </div>
@@ -115,6 +121,55 @@
                                   t-out="orden.dias_pendiente"/>
                         </td>
                         <td class="text-end"><t t-call="atc_visitas_tecnicas.instalacion_estado_badge"/></td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <!-- HISTORIAL DE GARANTÍAS -->
+    <template id="portal_my_garantias" name="Historial de garantías">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Historial de garantías</t>
+            </t>
+            <div t-if="not garantias" class="alert alert-info mt-3" role="status">
+                No hay visitas por garantía en esta vista.
+            </div>
+            <t t-if="garantias" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Cliente</th>
+                        <th class="d-none d-md-table-cell">Motivo</th>
+                        <th>Abierta el</th>
+                        <th class="d-none d-md-table-cell">Cerrada el</th>
+                        <th class="text-end">Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="garantias" t-as="g">
+                        <td>
+                            <a t-if="g.visita_id.contratista_id in contratistas"
+                               t-att-href="g.visita_id.access_url" class="fw-bold" t-out="g.nombre"/>
+                            <span t-else="" class="fw-bold" t-out="g.nombre"/>
+                            <div class="small text-muted">CI <t t-out="g.cedula"/></div>
+                            <div class="small text-muted d-md-none" t-out="g.motivo"/>
+                        </td>
+                        <td class="d-none d-md-table-cell small" t-out="g.motivo"/>
+                        <td class="small"><span t-field="g.fecha_inicio"/></td>
+                        <td class="d-none d-md-table-cell small">
+                            <span t-if="g.fecha_cierre" t-field="g.fecha_cierre"/>
+                            <div t-if="g.fecha_cierre" class="text-muted">
+                                <t t-out="'%.1f' % g.duracion_horas"/> h
+                            </div>
+                        </td>
+                        <td class="text-end">
+                            <span t-attf-class="badge rounded-pill #{
+                                'text-bg-danger' if g.resultado == 'abierta' else
+                                'text-bg-success' if g.resultado in ('atendida', 'recuperada') else
+                                'text-bg-secondary'}" t-field="g.resultado"/>
+                        </td>
                     </tr>
                 </tbody>
             </t>

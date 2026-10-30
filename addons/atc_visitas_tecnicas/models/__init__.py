@@ -8,5 +8,6 @@ from . import atc_visita_tag
 from . import atc_motivo_no_realizada
 from . import res_partner
 from . import atc_visita
+from . import atc_visita_garantia
 from . import atc_visita_asignar
 from . import res_users

@@ -111,6 +111,20 @@
                                required="estado == 'no_realizada'"/>
                         <field name="fecha_no_realizada" invisible="not fecha_no_realizada"/>
                     </group>
+                    <separator string="Historial de garantías" invisible="not garantia_ids"/>
+                    <field name="garantia_ids" readonly="1" invisible="not garantia_ids">
+                        <list>
+                            <field name="fecha_inicio"/>
+                            <field name="motivo"/>
+                            <field name="contratista_id" optional="hide"/>
+                            <field name="fecha_cierre"/>
+                            <field name="cerrada_por_id" widget="many2one_avatar_user"/>
+                            <field name="duracion_horas"/>
+                            <field name="resultado" widget="badge"
+                                   decoration-danger="resultado == 'abierta'"
+                                   decoration-success="resultado in ('atendida', 'recuperada')"/>
+                        </list>
+                    </field>
                     <separator string="Descripción"/>
                     <field name="descripcion" widget="html"
                            placeholder="Detalle de la orden: observaciones, trabajo realizado, materiales, etc."/>

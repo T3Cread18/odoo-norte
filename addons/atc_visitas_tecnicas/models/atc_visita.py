@@ -86,6 +86,8 @@ class AtcVisita(models.Model):
         copy=False,
         help="La puso en garantía el sistema (ruptura de la ONU): se cierra "
              "sola si el cliente se recupera.")
+    garantia_ids = fields.One2many(
+        "atc.visita.garantia", "visita_id", string="Historial de garantías")
     tecnico_asignado_ids = fields.Many2many(
         "hr.employee", "atc_visita_tecnico_rel", "visita_id", "employee_id",
         string="Asignado a", tracking=True,
@@ -235,6 +237,28 @@ class AtcVisita(models.Model):
 
     def action_garantia_atendida(self):
         self.write({"estado": "realizada"})
+
+    def _abrir_historial_garantia(self):
+        self.env["atc.visita.garantia"].sudo().create([{
+            "visita_id": v.id,
+            "contratista_id": v.contratista_id.id,
+            "fecha_inicio": v.garantia_desde or fields.Datetime.now(),
+            "motivo": v.garantia_motivo,
+            "automatica": v.garantia_automatica,
+        } for v in self])
+
+    def _cerrar_historial_garantia(self, estado_nuevo):
+        if estado_nuevo != "realizada":
+            resultado = "cambio_estado"
+        elif self.env.context.get("atc_cierre_automatico"):
+            resultado = "recuperada"
+        else:
+            resultado = "atendida"
+        self.env["atc.visita.garantia"].sudo().search([
+            ("visita_id", "in", self.ids), ("resultado", "=", "abierta"),
+        ]).write({"resultado": resultado,
+                  "fecha_cierre": fields.Datetime.now(),
+                  "cerrada_por_id": self.env.user.id})
 
     @api.model
     def _group_expand_estado(self, estados, domain):
@@ -485,6 +509,7 @@ class AtcVisita(models.Model):
                 vals.setdefault("fecha_asignacion",
                                 fields.Date.context_today(self))
         visitas = super().create(vals_list)
+        visitas.filtered(lambda v: v.estado == "garantia")._abrir_historial_garantia()
         visitas._autoenlazar_vgt_zona()
         visitas._aprender_franquicia_cliente()
         return visitas
@@ -499,8 +524,15 @@ class AtcVisita(models.Model):
         por_asignar = self.browse()
         if vals.get("contratista_id") and "estado" not in vals:
             por_asignar = self.filtered(lambda v: v.estado == "pendiente")
+        # Historial de garantías (atc.visita.garantia): se abre al entrar y
+        # se cierra al salir, antes de que se borren los campos garantia_*.
+        entran = salen = self.browse()
+        if vals.get("estado") == "garantia":
+            entran = self.filtered(lambda v: v.estado != "garantia")
+        elif vals.get("estado"):
+            salen = self.filtered(lambda v: v.estado == "garantia")
         if vals.get("estado") and vals["estado"] != "garantia":
-            # Sale de garantía: queda el historial en el chatter
+            # Sale de garantía: queda en el chatter y en atc.visita.garantia
             vals = dict(vals, garantia_desde=False, garantia_motivo=False,
                         garantia_automatica=False)
         if vals.get("estado") == "no_realizada":
@@ -522,6 +554,10 @@ class AtcVisita(models.Model):
             super(AtcVisita, por_fechar).write({"fecha_instalacion": hoy})
         if "vgt_id" in vals or "zona_id" in vals:
             self._autoenlazar_vgt_zona()
+        if entran:
+            entran._abrir_historial_garantia()
+        if salen:
+            salen._cerrar_historial_garantia(vals["estado"])
         return res
 
     # --------------------------------------------------------------

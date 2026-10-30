@@ -154,6 +154,44 @@ class AtcInstalacionPortal(CustomerPortal):
         return request.render(
             "atc_visitas_tecnicas.portal_my_instalaciones", values)
 
+    @http.route(["/my/garantias", "/my/garantias/page/<int:page>"],
+                type="http", auth="user", website=True)
+    def portal_my_garantias(self, page=1, filterby=None, **kw):
+        """Historial de visitas por garantía del contratista. El portal no
+        lee atc.visita.garantia: se filtra aquí por sus contratistas (el que
+        tenía la instalación cuando se abrió la garantía)."""
+        _ = request.env._
+        contratistas = request.env["atc.contratista"].sudo().search(
+            [("user_ids", "in", request.env.user.ids)])
+        if not contratistas:
+            return request.redirect("/my")
+        searchbar_filters = {
+            "todas": {"label": _("Todas"), "domain": []},
+            "abiertas": {"label": _("Pendientes"),
+                         "domain": [("resultado", "=", "abierta")]},
+            "cerradas": {"label": _("Cerradas"),
+                         "domain": [("resultado", "!=", "abierta")]},
+        }
+        filterby = filterby if filterby in searchbar_filters else "todas"
+        Garantia = request.env["atc.visita.garantia"].sudo()
+        domain = [("contratista_id", "in", contratistas.ids)] \
+            + searchbar_filters[filterby]["domain"]
+        pager = portal_pager(
+            url="/my/garantias", url_args={"filterby": filterby},
+            total=Garantia.search_count(domain), page=page, step=PASO)
+        values = self._prepare_portal_layout_values()
+        values.update({
+            "garantias": Garantia.search(domain, limit=PASO,
+                                         offset=pager["offset"]),
+            "contratistas": contratistas,
+            "page_name": "garantias",
+            "default_url": "/my/garantias",
+            "pager": pager,
+            "searchbar_filters": searchbar_filters,
+            "filterby": filterby,
+        })
+        return request.render("atc_visitas_tecnicas.portal_my_garantias", values)
+
     def _instalacion_check(self, orden_id):
         orden_sudo = self._document_check_access("atc.visita", orden_id)
         if orden_sudo.tipo_orden != "instalacion":

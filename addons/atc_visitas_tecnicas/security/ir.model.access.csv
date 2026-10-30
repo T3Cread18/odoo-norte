@@ -51,3 +51,6 @@ access_atc_vendedor_manager,atc.vendedor.manager,model_atc_vendedor,base.group_s
 access_atc_cliente_franquicia_atc,atc.cliente.franquicia.atc,model_atc_cliente_franquicia,group_atc_visitas_user,1,0,0,0
 access_atc_cliente_franquicia_menus,atc.cliente.franquicia.menus,model_atc_cliente_franquicia,group_menus_completos,1,1,1,1
 access_atc_cliente_franquicia_manager,atc.cliente.franquicia.manager,model_atc_cliente_franquicia,base.group_system,1,1,1,1
+access_atc_visita_garantia_atc,atc.visita.garantia.atc,model_atc_visita_garantia,group_atc_visitas_user,1,0,0,0
+access_atc_visita_garantia_staff,atc.visita.garantia.staff,model_atc_visita_garantia,group_menus_completos,1,0,0,0
+access_atc_visita_garantia_manager,atc.visita.garantia.manager,model_atc_visita_garantia,base.group_system,1,1,1,1

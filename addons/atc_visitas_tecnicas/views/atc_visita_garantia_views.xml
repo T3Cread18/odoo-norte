@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Historial de visitas por garantía (solo lectura: lo llenan los
+         cambios de estado de las instalaciones) -->
+    <record id="view_atc_visita_garantia_list" model="ir.ui.view">
+        <field name="name">atc.visita.garantia.list</field>
+        <field name="model">atc.visita.garantia</field>
+        <field name="arch" type="xml">
+            <list string="Historial de garantías" create="false" edit="false" delete="false"
+                  decoration-danger="resultado == 'abierta'"
+                  decoration-muted="resultado == 'cambio_estado'">
+                <field name="fecha_inicio"/>
+                <field name="visita_id"/>
+                <field name="cedula" optional="hide"/>
+                <field name="contratista_id"/>
+                <field name="fecha_instalacion" optional="show"/>
+                <field name="motivo"/>
+                <field name="automatica" optional="hide"/>
+                <field name="fecha_cierre"/>
+                <field name="cerrada_por_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="duracion_horas" sum="Total" optional="show"/>
+                <field name="resultado" widget="badge"
+                       decoration-danger="resultado == 'abierta'"
+                       decoration-success="resultado in ('atendida', 'recuperada')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_visita_garantia_search" model="ir.ui.view">
+        <field name="name">atc.visita.garantia.search</field>
+        <field name="model">atc.visita.garantia</field>
+        <field name="arch" type="xml">
+            <search string="Historial de garantías">
+                <field name="visita_id"/>
+                <field name="cedula"/>
+                <field name="contratista_id"/>
+                <field name="motivo"/>
+                <filter string="Abiertas" name="f_abiertas" domain="[('resultado', '=', 'abierta')]"/>
+                <filter string="Atendidas" name="f_atendidas" domain="[('resultado', '=', 'atendida')]"/>
+                <filter string="Cliente recuperado" name="f_recuperadas" domain="[('resultado', '=', 'recuperada')]"/>
+                <separator/>
+                <filter string="Automáticas" name="f_automaticas" domain="[('automatica', '=', True)]"/>
+                <separator/>
+                <filter string="Abierta el" name="f_fecha_inicio" date="fecha_inicio"/>
+                <group>
+                    <filter string="Contratista" name="g_contratista" context="{'group_by': 'contratista_id'}"/>
+                    <filter string="Resultado" name="g_resultado" context="{'group_by': 'resultado'}"/>
+                    <filter string="Mes" name="g_mes" context="{'group_by': 'fecha_inicio:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_atc_visita_garantia" model="ir.actions.act_window">
+        <field name="name">Historial de garantías</field>
+        <field name="res_model">atc.visita.garantia</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="view_atc_visita_garantia_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Aún no hay visitas por garantía</p>
+            <p>Cada vez que una instalación pasa a "Visita por garantía" queda aquí,
+               con su motivo, cuándo se cerró y quién la atendió.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_atc_visita_garantia" name="Historial de garantías"
+              parent="menu_atc_root"
+              action="action_atc_visita_garantia" sequence="21"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+</odoo>
