@@ -4,7 +4,7 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from .atc_visita_garantia import formato_duracion
-from .ubicacion import url_mapa
+from .ubicacion import distancia_m, url_mapa
 
 # Estados que solo tienen sentido en instalaciones (se ocultan del kanban de
 # visitas) y estados que solo tienen sentido en visitas (se ocultan del de
@@ -14,6 +14,9 @@ ESTADOS_SOLO_INSTALACION = ("no_realizada", "garantia")
 ESTADOS_ABIERTOS_PORTAL = ("pendiente", "asignada", "garantia")
 # Días de garantía de una instalación desde su fecha de instalación
 PARAM_GARANTIA_DIAS = "atc_visitas_tecnicas.garantia_dias"
+# Distancia máxima (m) entre el pin del cliente y el de su caja NAP
+PARAM_DISTANCIA_MAX_NAP = "atc_visitas_tecnicas.distancia_max_nap_m"
+DISTANCIA_MAX_NAP_DEFECTO = 1000
 # Obligatorios para cerrar una instalación como realizada
 CAMPOS_REALIZADA = ("serial_onu", "tecnico_contratista", "precinto")
 ESTADOS_SOLO_VISITA = ("en_los",)
@@ -413,6 +416,61 @@ class AtcVisita(models.Model):
                     "La ubicación del cliente y la de la caja NAP no pueden ser "
                     "el mismo punto: toma cada pin en su sitio."))
 
+    @api.constrains("cliente_latitud", "cliente_longitud")
+    def _check_pin_cliente_repetido(self):
+        """El pin del cliente no puede ser el de otra instalación de otro
+        cliente (otra cédula): suele ser la ubicación del técnico o un pin
+        copiado. Compara a 6 decimales (~10 cm), así que dos lecturas reales
+        de GPS no coinciden. Solo salta al escribir el pin del cliente."""
+        Visita = self.sudo().with_context(active_test=False)
+        for v in self:
+            if v.tipo_orden != "instalacion" \
+                    or not (v.cliente_latitud or v.cliente_longitud):
+                continue
+            lat, lng = round(v.cliente_latitud, 6), round(v.cliente_longitud, 6)
+            otras = Visita.search([
+                ("id", "!=", v.id),
+                ("tipo_orden", "=", "instalacion"),
+                ("cliente_latitud", ">=", lat - 5e-7),
+                ("cliente_latitud", "<", lat + 5e-7),
+                ("cliente_longitud", ">=", lng - 5e-7),
+                ("cliente_longitud", "<", lng + 5e-7),
+            ])
+            if any((o.cedula or "") != (v.cedula or "") or not v.cedula
+                   for o in otras):
+                raise ValidationError(self.env._(
+                    "La ubicación del cliente ya está registrada en la "
+                    "instalación de otro cliente. Toma el pin en la casa de "
+                    "este cliente (no uses tu ubicación ni copies otro pin)."))
+
+    def _distancia_max_nap(self):
+        try:
+            return float(self.env["ir.config_parameter"].sudo().get_param(
+                PARAM_DISTANCIA_MAX_NAP) or DISTANCIA_MAX_NAP_DEFECTO)
+        except ValueError:
+            return DISTANCIA_MAX_NAP_DEFECTO
+
+    @api.constrains("cliente_latitud", "cliente_longitud",
+                    "nap_latitud", "nap_longitud")
+    def _check_pin_cliente_cerca_nap(self):
+        """El cliente no puede estar a más de N metros de su caja NAP
+        (parámetro atc_visitas_tecnicas.distancia_max_nap_m, 1000 por
+        defecto; 0 lo desactiva). Solo salta al escribir un pin."""
+        maximo = self._distancia_max_nap()
+        if maximo <= 0:
+            return
+        for v in self:
+            if not (v.cliente_latitud or v.cliente_longitud) \
+                    or not (v.nap_latitud or v.nap_longitud):
+                continue
+            d = distancia_m(v.cliente_latitud, v.cliente_longitud,
+                            v.nap_latitud, v.nap_longitud)
+            if d > maximo:
+                raise ValidationError(self.env._(
+                    "La ubicación del cliente está a %(d)s m de la caja NAP "
+                    "(máximo %(max)s m). Revisa los dos pines.",
+                    d=round(d), max=round(maximo)))
+
     # --------------------------------------------------------------
     # Autocompletado cliente <-> cédula / nombre
     # --------------------------------------------------------------
@@ -590,6 +648,15 @@ class AtcVisita(models.Model):
                 "Esta instalación ya está cerrada; pide a ATC que la reabra "
                 "si necesitas corregir algo."))
         datos = {k: v for k, v in vals.items() if k in CAMPOS_PORTAL}
+        # El formulario reenvía siempre los pines: los que no cambian no se
+        # escriben, así una orden antigua con pines dudosos se puede seguir
+        # guardando sin que salten las restricciones de ubicación.
+        for campo_lat, campo_lng in (("cliente_latitud", "cliente_longitud"),
+                                     ("nap_latitud", "nap_longitud")):
+            if campo_lat in datos and campo_lng in datos \
+                    and round(datos[campo_lat] or 0.0, 7) == round(self[campo_lat], 7) \
+                    and round(datos[campo_lng] or 0.0, 7) == round(self[campo_lng], 7):
+                del datos[campo_lat], datos[campo_lng]
         if self.estado == "garantia" and accion in ("realizada", "no_realizada"):
             raise ValidationError(self.env._(
                 "Esta orden es una visita por garantía: usa \"Garantía atendida\"."))
