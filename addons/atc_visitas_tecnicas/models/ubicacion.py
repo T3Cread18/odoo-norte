@@ -22,7 +22,10 @@ _ENLACE_CORTO = re.compile(
 
 
 def _buscar_coordenadas(texto):
-    texto = unquote(unquote(texto))
+    # En las URL el espacio llega como "+" (p. ej. Google Maps resuelve un
+    # pin a ".../maps/search/9.58,+-69.23"); sin esto no se reconoce el par
+    # y se acababa tomando otra coordenada del HTML de la página.
+    texto = unquote(unquote(texto)).replace("+", " ")
     for patron in _PATRONES:
         m = re.search(patron, texto)
         if m:
