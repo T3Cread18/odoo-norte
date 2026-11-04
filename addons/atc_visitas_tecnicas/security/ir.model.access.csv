@@ -54,3 +54,15 @@ access_atc_cliente_franquicia_manager,atc.cliente.franquicia.manager,model_atc_c
 access_atc_visita_garantia_atc,atc.visita.garantia.atc,model_atc_visita_garantia,group_atc_visitas_user,1,0,0,0
 access_atc_visita_garantia_staff,atc.visita.garantia.staff,model_atc_visita_garantia,group_menus_completos,1,0,0,0
 access_atc_visita_garantia_manager,atc.visita.garantia.manager,model_atc_visita_garantia,base.group_system,1,1,1,1
+access_atc_zona_sector_atc,atc.zona_sector.atc,model_atc_zona_sector,group_atc_visitas_user,1,1,1,1
+access_atc_zona_sector_staff,atc.zona_sector.staff,model_atc_zona_sector,group_menus_completos,1,1,1,1
+access_atc_asignacion_lote_atc,atc.asignacion_lote.atc,model_atc_asignacion_lote,group_atc_visitas_user,1,1,1,1
+access_atc_asignacion_lote_staff,atc.asignacion_lote.staff,model_atc_asignacion_lote,group_menus_completos,1,1,1,1
+access_atc_asignacion_linea_atc,atc.asignacion_linea.atc,model_atc_asignacion_linea,group_atc_visitas_user,1,1,1,1
+access_atc_asignacion_linea_staff,atc.asignacion_linea.staff,model_atc_asignacion_linea,group_menus_completos,1,1,1,1
+access_atc_asignacion_sector_atc,atc.asignacion_sector.atc,model_atc_asignacion_sector,group_atc_visitas_user,1,1,1,1
+access_atc_asignacion_sector_staff,atc.asignacion_sector.staff,model_atc_asignacion_sector,group_menus_completos,1,1,1,1
+access_atc_asignacion_zona_atc,atc.asignacion_zona.atc,model_atc_asignacion_zona,group_atc_visitas_user,1,1,1,1
+access_atc_asignacion_zona_staff,atc.asignacion_zona.staff,model_atc_asignacion_zona,group_menus_completos,1,1,1,1
+access_atc_asignacion_contratista_atc,atc.asignacion_contratista.atc,model_atc_asignacion_contratista,group_atc_visitas_user,1,1,1,1
+access_atc_asignacion_contratista_staff,atc.asignacion_contratista.staff,model_atc_asignacion_contratista,group_menus_completos,1,1,1,1

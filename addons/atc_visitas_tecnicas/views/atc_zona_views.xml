@@ -23,6 +23,7 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="franquicia_id"/>
+                        <field name="contratista_sugerido_id" options="{'no_create': True}"/>
                         <field name="active"/>
                     </group>
                     <group string="VGT / Proyectos autorizados de esta zona">

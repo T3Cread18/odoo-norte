@@ -11,6 +11,22 @@
         <field name="domain_force">[('franquicia_id', 'in', user.atc_franquicia_todas_ids.ids)] if user.atc_franquicia_ids else [(1, '=', 1)]</field>
     </record>
 
+    <!-- Asignación: un usuario limitado por franquicia solo ve sus lotes, que
+         solo traen filas de sus franquicias (los lotes de otros pueden traer
+         clientes de cualquiera). -->
+    <record id="rule_atc_asignacion_lote_franquicia" model="ir.rule">
+        <field name="name">Lotes de asignación: limitados por franquicia, solo los suyos</field>
+        <field name="model_id" ref="model_atc_asignacion_lote"/>
+        <field name="groups" eval="[(4, ref('group_atc_visitas_user'))]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)] if user.atc_franquicia_ids else [(1, '=', 1)]</field>
+    </record>
+    <record id="rule_atc_asignacion_linea_franquicia" model="ir.rule">
+        <field name="name">Líneas de asignación: limitados por franquicia, solo las suyas</field>
+        <field name="model_id" ref="model_atc_asignacion_linea"/>
+        <field name="groups" eval="[(4, ref('group_atc_visitas_user'))]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)] if user.atc_franquicia_ids else [(1, '=', 1)]</field>
+    </record>
+
     <!-- Historial de garantías: se ve lo mismo que de las órdenes (el 'any'
          aplica las reglas de atc.visita: franquicias, LOS por definir...). -->
     <record id="rule_atc_visita_garantia_visible" model="ir.rule">

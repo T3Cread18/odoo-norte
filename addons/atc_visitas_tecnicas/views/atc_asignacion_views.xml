@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_atc_asignacion_lote_list" model="ir.ui.view">
+        <field name="name">atc.asignacion.lote.list</field>
+        <field name="model">atc.asignacion.lote</field>
+        <field name="arch" type="xml">
+            <list string="Lotes de asignación">
+                <field name="name"/>
+                <field name="nombre_archivo"/>
+                <field name="fecha_reporte"/>
+                <field name="por_asignar_count" string="Órdenes"/>
+                <field name="sin_totalnet_count"/>
+                <field name="create_uid" string="Creado por"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'confirmado'"
+                       decoration-info="state != 'confirmado'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_asignacion_lote_form" model="ir.ui.view">
+        <field name="name">atc.asignacion.lote.form</field>
+        <field name="model">atc.asignacion.lote</field>
+        <field name="arch" type="xml">
+            <form string="Asignar instalaciones">
+                <header>
+                    <button name="action_analizar" type="object" string="Analizar archivo"
+                            class="btn-primary" invisible="state != 'archivo'"/>
+                    <button name="action_agrupar" type="object" string="Agrupar en zonas"
+                            class="btn-primary" invisible="state != 'sectores'"/>
+                    <button name="action_editar_sectores" type="object" string="Editar varios a la vez"
+                            invisible="state != 'sectores'"/>
+                    <button name="action_volver_archivo" type="object" string="Cambiar archivo"
+                            invisible="state != 'sectores'"/>
+                    <button name="action_generar_plan" type="object" string="Generar plan"
+                            class="btn-primary" invisible="state != 'zonas'"/>
+                    <button name="action_editar_zonas" type="object" string="Editar varias a la vez"
+                            invisible="state != 'zonas'"/>
+                    <button name="action_volver_sectores" type="object" string="Volver a sectores"
+                            invisible="state != 'zonas'"/>
+                    <button name="action_confirmar" type="object" string="Confirmar asignación"
+                            class="btn-primary" invisible="state != 'plan'"
+                            confirm="Se crearán o actualizarán las órdenes en Odoo y los contratistas las verán en su portal. La asignación en TotalNet se registra después, a mano. ¿Confirmar?"/>
+                    <button name="action_recalcular" type="object" string="Recalcular"
+                            invisible="state != 'plan'"
+                            help="Vuelve a repartir respetando los cambios manuales."/>
+                    <button name="action_recalcular_desde_cero" type="object"
+                            string="Recalcular sin cambios manuales" invisible="state != 'plan'"
+                            confirm="Se perderán los cambios manuales del plan. ¿Continuar?"/>
+                    <button name="action_volver_zonas" type="object" string="Volver a zonas"
+                            invisible="state != 'plan'"/>
+                    <button name="action_ver_por_contratista" type="object"
+                            string="Ver por contratista"
+                            invisible="state not in ('plan', 'confirmado')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="archivo,sectores,zonas,plan,confirmado"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="state == 'confirmado'"/></h1>
+                    </div>
+
+                    <!-- Paso 1 -->
+                    <div class="alert alert-info" role="alert" invisible="state != 'archivo'">
+                        Sube el export de <b>contratos por asignar</b> de TotalNet. Nada se
+                        asigna hasta que confirmes el plan, y la asignación queda en Odoo:
+                        después se registra a mano en TotalNet. Las órdenes sin fecha de pago
+                        quedan fuera del plan.
+                    </div>
+                    <group invisible="state != 'archivo'">
+                        <field name="archivo" filename="nombre_archivo" widget="binary"
+                               required="state == 'archivo'"/>
+                        <field name="nombre_archivo" invisible="1"/>
+                        <field name="fecha_reporte"/>
+                    </group>
+
+                    <group invisible="state == 'archivo'">
+                        <group>
+                            <field name="nombre_archivo" readonly="1"/>
+                            <field name="fecha_reporte" readonly="1"/>
+                        </group>
+                        <group invisible="state != 'confirmado'">
+                            <field name="confirmado_por_id"/>
+                            <field name="fecha_confirmado"/>
+                        </group>
+                    </group>
+                    <field name="resumen" nolabel="1" readonly="1" invisible="state == 'archivo'"/>
+
+                    <!-- Paso 3 y plan: criterios -->
+                    <group string="Criterios" invisible="state not in ('zonas', 'plan')">
+                        <group>
+                            <field name="equidad" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="respetar_propias"/>
+                            <field name="dividir_zonas" invisible="equidad == 'no'"/>
+                        </group>
+                    </group>
+
+                    <field name="resultado" nolabel="1" readonly="1"
+                           invisible="state != 'confirmado'"/>
+
+                    <notebook invisible="state == 'archivo'">
+                        <page string="Sectores" name="sectores" invisible="state != 'sectores'">
+                            <p class="text-muted">
+                                Indica la zona de cada sector; escribe un nombre nuevo para crear
+                                una zona. Con «Editar varios a la vez» marcas varios sectores y les
+                                pones la misma zona. Lo que elijas se recuerda en los próximos
+                                archivos. Los sectores sin zona se agrupan solo con los de nombre
+                                parecido.
+                            </p>
+                            <field name="sector_ids" nolabel="1">
+                                <list editable="bottom" create="0" delete="0"
+                                      decoration-warning="origen == 'sugerida'"
+                                      decoration-danger="origen == 'sin_zona'">
+                                    <field name="franquicia_id"/>
+                                    <field name="clave"/>
+                                    <field name="ordenes" sum="Total"/>
+                                    <field name="zona_id"/>
+                                    <field name="origen" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Zonas" name="zonas" invisible="state != 'zonas'">
+                            <p class="text-muted">
+                                Elige contratista por zona o déjalo vacío para que se reparta según
+                                la equidad. El contratista que aparece ya elegido es solo una
+                                sugerencia: quedó con esa zona la última vez y puedes cambiarlo.
+                            </p>
+                            <field name="zona_ids" nolabel="1">
+                                <list editable="bottom" create="0" delete="0">
+                                    <field name="nombre"/>
+                                    <field name="franquicias"/>
+                                    <field name="sectores" optional="show"/>
+                                    <field name="ordenes" sum="Total"/>
+                                    <field name="propias" sum="Total" optional="show"/>
+                                    <field name="antiguedad_max"/>
+                                    <field name="contratista_id" options="{'no_create': True}"/>
+                                    <field name="sugerido" optional="show"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Plan" name="plan" invisible="state not in ('plan', 'confirmado')">
+                            <p class="text-muted" invisible="state != 'plan'">
+                                Cambia el contratista de la orden que quieras: «Recalcular»
+                                respeta esos cambios.
+                            </p>
+                            <p class="text-muted" invisible="state != 'confirmado'">
+                                Marca <b>En TotalNet</b> a medida que registres cada orden allí.
+                                Para reasignar después, cambia el contratista en la orden.
+                            </p>
+                            <field name="linea_ids" nolabel="1">
+                                <list editable="bottom" create="0" delete="0"
+                                      decoration-danger="not contratista_id">
+                                    <field name="lote_state" column_invisible="1"/>
+                                    <field name="contratista_id" options="{'no_create': True}"
+                                           readonly="lote_state != 'plan'"/>
+                                    <field name="motivo" widget="badge"/>
+                                    <field name="grupo_nombre"/>
+                                    <field name="sector" optional="hide"/>
+                                    <field name="franquicia_nombre"/>
+                                    <field name="nro_orden" optional="show"/>
+                                    <field name="cedula"/>
+                                    <field name="nombre"/>
+                                    <field name="vendedor" optional="show"/>
+                                    <field name="antiguedad"/>
+                                    <field name="fecha_pago" optional="hide"/>
+                                    <field name="direccion" optional="hide"/>
+                                    <field name="visita_id" column_invisible="parent.state != 'confirmado'"/>
+                                    <field name="resultado" column_invisible="parent.state != 'confirmado'"/>
+                                    <field name="resultado_detalle" optional="hide"
+                                           column_invisible="parent.state != 'confirmado'"/>
+                                    <field name="en_totalnet" widget="boolean_toggle"
+                                           column_invisible="parent.state != 'confirmado'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Contratistas" name="contratistas"
+                              invisible="state not in ('zonas', 'plan', 'confirmado')">
+                            <field name="contratista_ids" nolabel="1"
+                                   readonly="state == 'confirmado'">
+                                <list editable="bottom" create="0" delete="0">
+                                    <field name="participa" widget="boolean_toggle"/>
+                                    <field name="contratista_id"/>
+                                    <field name="abiertas" sum="Total"/>
+                                    <field name="propias" sum="Total"/>
+                                    <field name="en_lote" sum="Total"/>
+                                    <field name="carga_total" sum="Total"/>
+                                    <field name="zonas"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Fuera del plan" name="fuera">
+                            <field name="excluida_ids" nolabel="1" readonly="1">
+                                <list create="0" delete="0">
+                                    <field name="fila"/>
+                                    <field name="exclusion" widget="badge"/>
+                                    <field name="exclusion_detalle"/>
+                                    <field name="nro_orden" optional="show"/>
+                                    <field name="cedula"/>
+                                    <field name="nombre"/>
+                                    <field name="sector"/>
+                                    <field name="vendedor" optional="show"/>
+                                    <field name="antiguedad"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_atc_asignacion_linea_plan_list" model="ir.ui.view">
+        <field name="name">atc.asignacion.linea.plan.list</field>
+        <field name="model">atc.asignacion.linea</field>
+        <field name="arch" type="xml">
+            <list string="Órdenes por contratista" editable="bottom" create="0" delete="0"
+                  decoration-danger="not contratista_id">
+                <field name="lote_state" column_invisible="1"/>
+                <field name="contratista_id" options="{'no_create': True}"
+                       readonly="lote_state != 'plan'"/>
+                <field name="motivo" widget="badge"/>
+                <field name="grupo_nombre"/>
+                <field name="franquicia_nombre"/>
+                <field name="nro_orden"/>
+                <field name="cedula"/>
+                <field name="nombre"/>
+                <field name="telefono_movil" optional="hide"/>
+                <field name="vendedor" optional="show"/>
+                <field name="antiguedad"/>
+                <field name="direccion" optional="hide"/>
+                <field name="visita_id" optional="show"/>
+                <field name="resultado" optional="show"/>
+                <field name="en_totalnet" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_asignacion_sector_list" model="ir.ui.view">
+        <field name="name">atc.asignacion.sector.list</field>
+        <field name="model">atc.asignacion.sector</field>
+        <field name="arch" type="xml">
+            <list string="Sectores" create="0" delete="0" multi_edit="1"
+                  decoration-warning="origen == 'sugerida'"
+                  decoration-danger="origen == 'sin_zona'">
+                <field name="franquicia_id"/>
+                <field name="clave"/>
+                <field name="ordenes" sum="Total"/>
+                <field name="zona_id"/>
+                <field name="origen" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_asignacion_zona_list" model="ir.ui.view">
+        <field name="name">atc.asignacion.zona.list</field>
+        <field name="model">atc.asignacion.zona</field>
+        <field name="arch" type="xml">
+            <list string="Zonas" create="0" delete="0" multi_edit="1">
+                <field name="nombre"/>
+                <field name="franquicias"/>
+                <field name="sectores" optional="show"/>
+                <field name="ordenes" sum="Total"/>
+                <field name="propias" sum="Total" optional="show"/>
+                <field name="antiguedad_max"/>
+                <field name="contratista_id" options="{'no_create': True}"/>
+                <field name="sugerido" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_asignacion_linea_search" model="ir.ui.view">
+        <field name="name">atc.asignacion.linea.search</field>
+        <field name="model">atc.asignacion.linea</field>
+        <field name="arch" type="xml">
+            <search string="Órdenes del lote">
+                <field name="nombre"/>
+                <field name="cedula"/>
+                <field name="nro_orden"/>
+                <field name="contratista_id"/>
+                <field name="grupo_nombre"/>
+                <field name="vendedor"/>
+                <filter name="falta_totalnet" string="Falta en TotalNet"
+                        domain="[('en_totalnet', '=', False), ('contratista_id', '!=', False)]"/>
+                <filter name="sin_contratista" string="Sin contratista"
+                        domain="[('contratista_id', '=', False)]"/>
+                <group>
+                    <filter name="por_contratista" string="Contratista"
+                            context="{'group_by': 'contratista_id'}"/>
+                    <filter name="por_zona" string="Zona"
+                            context="{'group_by': 'grupo_nombre'}"/>
+                    <filter name="por_motivo" string="Por qué"
+                            context="{'group_by': 'motivo'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_atc_asignacion_lote" model="ir.actions.act_window">
+        <field name="name">Asignar instalaciones</field>
+        <field name="res_model">atc.asignacion.lote</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Crea un lote y sube el export de TotalNet</p>
+            <p>El asistente agrupa los sectores en zonas y propone a qué contratista
+               va cada orden. Nada se asigna hasta que lo confirmes.</p>
+        </field>
+    </record>
+
+    <!-- Diccionario de sectores -->
+    <record id="view_atc_zona_sector_list" model="ir.ui.view">
+        <field name="name">atc.zona.sector.list</field>
+        <field name="model">atc.zona.sector</field>
+        <field name="arch" type="xml">
+            <list string="Sectores por zona" editable="bottom" multi_edit="1">
+                <field name="clave"/>
+                <field name="franquicia_id"/>
+                <field name="zona_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_atc_zona_sector_search" model="ir.ui.view">
+        <field name="name">atc.zona.sector.search</field>
+        <field name="model">atc.zona.sector</field>
+        <field name="arch" type="xml">
+            <search string="Sectores por zona">
+                <field name="clave"/>
+                <field name="zona_id"/>
+                <field name="franquicia_id"/>
+                <group>
+                    <filter name="por_zona" string="Zona" context="{'group_by': 'zona_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_atc_zona_sector" model="ir.actions.act_window">
+        <field name="name">Sectores por zona</field>
+        <field name="res_model">atc.zona.sector</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

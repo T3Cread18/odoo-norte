@@ -29,6 +29,11 @@
               action="action_atc_instalacion_import" sequence="24"
               groups="group_atc_visitas_user,group_menus_completos"/>
 
+    <menuitem id="menu_atc_asignacion" name="Asignar instalaciones"
+              parent="menu_atc_root"
+              action="action_atc_asignacion_lote" sequence="25"
+              groups="group_atc_visitas_user,group_menus_completos"/>
+
     <menuitem id="menu_atc_config" name="Configuración"
               parent="menu_atc_root" sequence="90"
               groups="group_menus_completos"/>
@@ -46,6 +51,11 @@
     <menuitem id="menu_atc_zonas" name="Zonas"
               parent="menu_atc_config"
               action="action_atc_zona" sequence="10"
+              groups="group_menus_completos"/>
+
+    <menuitem id="menu_atc_zona_sectores" name="Sectores por zona"
+              parent="menu_atc_config"
+              action="action_atc_zona_sector" sequence="12"
               groups="group_menus_completos"/>
 
     <menuitem id="menu_atc_vgt" name="VGT / Proyectos autorizados"

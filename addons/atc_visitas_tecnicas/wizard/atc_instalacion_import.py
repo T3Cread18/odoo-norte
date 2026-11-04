@@ -422,7 +422,7 @@ class AtcInstalacionImport(models.TransientModel):
             return fila["fecha_asignacion"]
         return self.fecha_reporte - timedelta(days=fila["antiguedad"] or 0)
 
-    def _revisar(self, mapeo, filas):
+    def _revisar(self, mapeo, filas, avisar_sin_contratista=True):
         """Problemas del archivo antes de importar.
 
         Devuelve ({nº fila: [errores]}, [avisos]). Una fila con error no se
@@ -511,7 +511,7 @@ class AtcInstalacionImport(models.TransientModel):
                 "portal hasta que se les cree un usuario): %s.",
                 "; ".join("%s (%s)" % (v, len(nums))
                           for v, nums in nuevos_v.items())))
-        if sin_contratista:
+        if sin_contratista and avisar_sin_contratista:
             avisos.append(_("Sin contratista, quedarán pendientes de asignar: "
                             "filas %s.", filas_txt(sin_contratista)))
         if sin_cedula:

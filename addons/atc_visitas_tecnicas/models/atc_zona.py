@@ -18,6 +18,10 @@ class AtcZona(models.Model):
         help="Proyectos VGT que pertenecen a esta zona.")
     vgt_count = fields.Integer(
         string="N° VGT", compute="_compute_vgt_count")
+    contratista_sugerido_id = fields.Many2one(
+        "atc.contratista", string="Contratista sugerido", ondelete="set null",
+        help="Con quien quedó la zona en la última asignación. Es solo una "
+             "sugerencia: ATC la puede cambiar en cada lote.")
     active = fields.Boolean(default=True)
 
     def write(self, vals):

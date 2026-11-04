@@ -11,3 +11,4 @@ from . import atc_visita
 from . import atc_visita_garantia
 from . import atc_visita_asignar
 from . import res_users
+from . import atc_asignacion
