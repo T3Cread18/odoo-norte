@@ -276,6 +276,7 @@
                 <filter string="Atendidas por mí" name="f_mias" domain="[('tecnico_id','=',uid)]"/>
                 <separator/>
                 <group>
+                    <filter string="Mes de la visita" name="g_fecha" context="{'group_by':'fecha:month'}"/>
                     <filter string="Tipo de orden" name="g_tipo" context="{'group_by':'tipo_orden'}"/>
                     <filter string="Estado" name="g_estado" context="{'group_by':'estado'}"/>
                     <filter string="Contratista" name="g_contratista" context="{'group_by':'contratista_id'}"/>
@@ -294,11 +295,36 @@
         </field>
     </record>
 
+    <!-- GRÁFICO de visitas técnicas -->
+    <record id="view_atc_visita_graph" model="ir.ui.view">
+        <field name="name">atc.visita.graph</field>
+        <field name="model">atc.visita</field>
+        <field name="arch" type="xml">
+            <graph string="Visitas por mes y estado" type="bar" stacked="1" sample="1">
+                <field name="fecha" interval="month"/>
+                <field name="estado"/>
+                <!-- Medidas que no aplican a visitas o no tienen sentido sumadas -->
+                <field name="dias_instalacion" invisible="1"/>
+                <field name="metros_fibra" invisible="1"/>
+                <field name="potencia_rx" invisible="1"/>
+                <field name="cliente_latitud" invisible="1"/>
+                <field name="cliente_longitud" invisible="1"/>
+                <field name="nap_latitud" invisible="1"/>
+                <field name="nap_longitud" invisible="1"/>
+            </graph>
+        </field>
+    </record>
+
     <!-- ACCIÓN: Visitas Técnicas -->
     <record id="action_atc_visita" model="ir.actions.act_window">
         <field name="name">Visitas Técnicas</field>
         <field name="res_model">atc.visita</field>
-        <field name="view_mode">list,kanban,form</field>
+        <field name="view_mode">kanban,list,form,graph</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_atc_visita_kanban')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_atc_visita_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_atc_visita_form')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('view_atc_visita_graph')})]"/>
         <field name="search_view_id" ref="view_atc_visita_search"/>
         <field name="domain">[('tipo_orden', '=', 'visita')]</field>
         <field name="context">{'default_tipo_orden': 'visita'}</field>
